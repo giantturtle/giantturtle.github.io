@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Dev Portfolio | [Your Name]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --android-green: #3DDC84;
+            --dark-blue: #073042;
+            --bg-light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .badge {
+            background-color: var(--android-green);
+            color: var(--dark-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .support-btn {
+            display: inline-block;
+            background: #ff813f; /* Buy Me A Coffee Orange */
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hi, I'm [Your Name] 👋</h1>
+    <p>Mobile Software Developer | Android Specialist</p>
+    <div class="social-links">
+        <a href="https://github.com/[your-username]"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/[your-profile]"><i class="fab fa-linkedin"></i></a>
+    </div>
+</header>
+
+<div class="container">
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I build robust, scalable Android applications using <b>Kotlin</b> and <b>Jetpack Compose</b>. Passionate about clean architecture, MVVM, and creating seamless user experiences.</p>
+        <span class="badge">Kotlin</span> <span class="badge">Android SDK</span> <span class="badge">Firebase</span> <span class="badge">Coroutines</span>
+    </section>
+
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        
+        <div class="project-card">
+            <h3>🚀 App Name One</h3>
+            <p>A high-performance Android app that handles [Core Functionality]. Built with Hilt for DI and Room for local storage.</p>
+            <a href="#">View on GitHub</a>
+        </div>
+
+        <div class="project-card">
+            <h3>📱 App Name Two</h3>
+            <p>An open-source utility for [specific purpose]. Leverages Material 3 and Retrofit for API interactions.</p>
+            <a href="#">View on GitHub</a>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="support" style="text-align: center;">
+        <h2>Support My Work</h2>
+        <p>If my open-source projects have helped you, consider supporting my work!</p>
+        <a href="https://www.buymeacoffee.com/[your-handle]" class="support-btn">
+            <i class="fas fa-coffee"></i> Buy Me a Coffee
+        </a>
+        <p><small>Or sponsor me via <a href="https://github.com/sponsors/[your-username]">GitHub Sponsors</a></small></p>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 [Your Name]. Built with 💚 and Android in mind.</p>
+</footer>
+
+</body>
+</html>
