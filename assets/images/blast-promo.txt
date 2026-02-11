@@ -1,0 +1,1 @@
+Fun game where pop the tiles of the same color. Inspired by the "Same Game" mechanics.

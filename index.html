@@ -1,141 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GiantTurtle Software</title>
+    <title>GiantTurtle | Premium Mobile Studio</title>
+
+    <!-- SEO & Metadata -->
+    <meta name="description"
+        content="GiantTurtle Studio - Premium mobile software and games focusing on performance, privacy, and user experience.">
+    <meta name="keywords" content="Android, Mobile Apps, Games, Privacy, Productivity, GiantTurtle">
+    <meta name="author" content="GiantTurtle Studio">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://giantturtle.github.io/">
+    <meta property="og:title" content="GiantTurtle | Premium Mobile Studio">
+    <meta property="og:description"
+        content="Premium mobile software and games focusing on performance, privacy, and user experience.">
+    <meta property="og:image" content="https://giantturtle.github.io/assets/images/unnamed.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://giantturtle.github.io/">
+    <meta property="twitter:title" content="GiantTurtle | Premium Mobile Studio">
+    <meta property="twitter:description"
+        content="Premium mobile software and games focusing on performance, privacy, and user experience.">
+    <meta property="twitter:image" content="https://giantturtle.github.io/assets/images/unnamed.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/unnamed.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --android-green: #3DDC84;
-            --dark-blue: #073042;
-            --bg-light: #f4f7f6;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: #333;
-            background-color: var(--bg-light);
-        }
-
-        header {
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 2rem;
-        }
-
-        .badge {
-            background-color: var(--android-green);
-            color: var(--dark-blue);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        section {
-            margin-bottom: 3rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .support-btn {
-            display: inline-block;
-            background: #ff813f; /* Buy Me A Coffee Orange */
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            color: #777;
-        }
-
-        .social-links a {
-            margin: 0 10px;
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<header>
-    <h1>Carefully crafted  apps and games</h1>
-    <p>Mobile Software and Games Development</p>
-    <div class="social-links">
-        <a href="https://github.com/[your-username]"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/[your-profile]"><i class="fab fa-linkedin"></i></a>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/images/giantturtle-logo.png" alt="GiantTurtle Logo">
+                <span>GiantTurtle</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Carefully crafted apps.</h1>
+            <p>Premium mobile software and games development focusing on performance, privacy, and user
+                experience.</p>
+            <!-- social links removed from header and moved to contact/support area -->
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section id="about" style="text-align: center; margin-bottom: 5rem;">
+            <h2 style="margin-bottom: 1.5rem;">We build:</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">Robust, scalable mobile
+                applications using native technologies to create seamless user experiences. Our mission is to push the
+                boundaries of what's possible on mobile devices.</p>
+        </section>
+
+        <section id="projects">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Featured</h2>
+
+            <div class="featured-grid">
+                <!-- Blast -->
+                <div class="app-card">
+                    <img src="assets/images/blast-promo1.png" alt="Blast" class="app-image">
+                    <h3>Blast</h3>
+                    <p class="app-description">Classic tile-popping fun with a modern twist. Blast through levels by
+                        matching colors in this addictively simple yet challenging puzzle game. Master your strategy to
+                        clear the board and achieve high scores.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.blast"
+                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
+                        <!-- <a href="https://apps.apple.com/app/blast/id123456789" class="store-btn btn-appstore"><i
+                                class="fab fa-apple"></i> App Store</a> -->
+                    </div>
+                    <a href="blast-landing.html" class="more-btn">See More</a>
+                </div>
+
+                <!-- Dextop -->
+                <div class="app-card">
+                    <img src="assets/images/dextop-promo2.png" alt="Dextop" class="app-image">
+                    <h3>Dextop</h3>
+                    <p class="app-description">Transform your phone into a productivity powerhouse. Dextop provides a
+                        native landscape interface with separate shortcuts, giving you a true
+                        desktop experience on your Android device.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.dextop"
+                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
+                        <!-- <a href="https://apps.apple.com/app/dextop/id111111111" class="store-btn btn-appstore"><i
+                                class="fab fa-apple"></i> App Store</a> -->
+                    </div>
+                    <a href="dextop.html" class="more-btn">See More</a>
+                </div>
+
+                <!-- Macro Spotlight -->
+                <div class="app-card">
+                    <img src="assets/images/spotlight-promo.png" alt="Macro Spotlight" class="app-image">
+                    <h3>Macro Spotlight</h3>
+                    <p class="app-description">The fastest, most private search for your Android device. Find apps,
+                        contacts, and files instantly with zero internet permissions. Desktop-class search with widgets
+                        and quick settings integration.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/apps/details?id=com.gianturtle.localsearch"
+                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
+                        <!-- <a href="https://apps.apple.com/app/macro-spotlight/id222222222"
+                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a> -->
+                    </div>
+                    <a href="macro-spotlight.html" class="more-btn">See More</a>
+                </div>
+
+                <!-- Volume Buttons Extended -->
+                <div class="app-card">
+                    <img src="assets/images/volume-promo2.png" alt="Volume Buttons Extended" class="app-image">
+                    <h3>Volume Buttons Extended</h3>
+                    <p class="app-description">Use volume buttons to control your phone. Map them to various functions
+                        like showing notifications, have a physical back button, and more with high customization.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.volumebuttons"
+                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
+                        <!-- <a href="https://apps.apple.com/app/volume-buttons-extended/id333333333"
+                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a> -->
+                    </div>
+                    <a href="volume-buttons-extended.html" class="more-btn">See More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" style="text-align: center; margin-top: 6rem; margin-bottom: 4rem;">
+            <h2 style="margin-bottom: 2rem;">Get in Touch</h2>
+            <div class="contact-grid">
+                <a href="mailto:contact@giantturtle.studio" class="contact-card">
+                    <div class="icon-box">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>giant2turtle@gmail.com</p>
+                </a>
+                <!-- <a href="tel:+12345678900" class="contact-card">
+                    <div class="icon-box">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>+1 234 567 8900</p>
+                </a> -->
+            </div>
+        </section>
+
+        <!-- Place store & profile links between contact and support -->
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="https://play.google.com/store/apps/dev?id=6972914289887334381" class="store-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--primary); color: #0a0000; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; margin-right: 0.5rem; text-decoration: none;">
+                <i class="fab fa-google-play"></i>
+                <span>Play Store</span>
+            </a>
+            <!-- <a href="https://github.com/giantturtle" class="store-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--primary); color: #090000; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; text-decoration: none;">
+                <i class="fab fa-apple"></i>
+                <span>AppStore</span>
+            </a> -->
+        </div>
+
+        <section id="support"
+            style="text-align: center; margin-top: 6rem; background: var(--bg-card); padding: 4rem 2rem; border-radius: 20px; border: 1px solid var(--glass-border);">
+            <h2>Support Our open source contributions</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Help us keep building high-quality,
+                 niche tools and games.</p>
+            <!-- <a href="https://www.buymeacoffee.com/giantturtle" class="store-btn"
+                style="display: inline-flex; width: auto; background: #ff813f; padding: 1rem 2rem; font-size: 1rem;">
+                <i class="fas fa-coffee"></i> Support on Buy Me A Coffee
+            </a> -->
+            <a href="https://extensions.gnome.org/accounts/profile/markomisk" class="store-btn" style="display: inline-flex; width: auto; margin-left: 1rem; background: #24292e; color: #fff; padding: 1rem 1.25rem; font-size: 1rem; text-decoration: none;">
+                <i class="fab fa-desktop" style="margin-right: 0.5rem;"></i>View on GNOME shell extensions
+            </a>
+
+            <a href="https://github.com/giantturtle" class="store-btn" style="display: inline-flex; width: auto; margin-left: 1rem; background: #24292e; color: #fff; padding: 1rem 1.25rem; font-size: 1rem; text-decoration: none;">
+                <i class="fab fa-github" style="margin-right: 0.5rem;"></i> View on GitHub 
+            </a>
+        </section>
+
     </div>
-</header>
 
-<div class="container">
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Robust, scalable mobile applications using native mobile technologies to create seamless user experiences.</p>
-        <span class="badge">Kotlin</span> <span class="badge">Android SDK</span> <span class="badge">Firebase</span> <span class="badge">Coroutines</span>
-    </section>
-
-    <section id="projects">
-        <h2>Featured</h2>
-        
-        <div class="project-card">
-            <h3>🚀 App Name One</h3>
-            <p>A high-performance Android app that handles [Core Functionality]. Built with Hilt for DI and Room for local storage.</p>
-            <a href="#">View on GitHub</a>
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> GiantTurtle Studio. Built with passion for the mobile ecosystem.</p>
         </div>
+    </footer>
 
-        <div class="project-card">
-            <h3>📱 App Name Two</h3>
-            <p>An open-source utility for [specific purpose]. Leverages Material 3 and Retrofit for API interactions.</p>
-            <a href="#">View on GitHub</a>
-        </div>
-    </section>
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
-    <hr>
+    <script>
+        // Dynamic Year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-    <section id="support" style="text-align: center;">
-        <h2>Support My Work</h2>
-        <p>If my open-source projects have helped you, consider supporting my work!</p>
-        <a href="https://www.buymeacoffee.com/[your-handle]" class="support-btn">
-            <i class="fas fa-coffee"></i> Buy Me a Coffee
-        </a>
-        <p><small>Or sponsor me via <a href="https://github.com/sponsors/[your-username]">GitHub Sponsors</a></small></p>
-    </section>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
 
-</div>
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
 
-<footer>
-    <p>&copy; 2026 GiantTurtle. Built with 💚 and Android in mind.</p>
-</footer>
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
 </body>
+
 </html>
