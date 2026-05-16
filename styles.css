@@ -72,7 +72,7 @@ header {
 }
 
 .nav-logo img {
-    height: 22px;
+    height: 46px; /* increased by 30% (22px * 1.3 = 28.6px) */
     width: auto;
 }
 
