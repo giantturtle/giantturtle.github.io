@@ -72,7 +72,7 @@
 
             <div class="featured-grid">
                 <!-- Paste Box -->
-                <div class="app-card">
+                <div class="app-card" data-href="paste-box.html">
                     <img src="assets/images/all-copies_2880_1800.png" alt="Paste Box" class="app-image">
                     <h3>Paste Box</h3>
                     <p class="app-description">Minimalist, persistent scratchpad and clipboard history manager for macOS.</p>
@@ -82,7 +82,7 @@
                     <a href="paste-box.html" class="more-btn">See More</a>
                 </div>
                 <!-- Blast -->
-                <div class="app-card">
+                <div class="app-card" data-href="blast-landing.html">
                     <img src="assets/images/promo-play.png" alt="Blast" class="app-image">
                     <h3>Blast</h3>
                     <p class="app-description">Classic tile-popping fun with a modern twist. Blast through levels by
@@ -98,7 +98,7 @@
                 </div>
 
                 <!-- Dextop Core -->
-                <div class="app-card">
+                <div class="app-card" data-href="dextop-core.html">
                     <img src="assets/images/dextop-core-feature.png" alt="Dextop Core" class="app-image">
                     <h3>Dextop Core</h3>
                     <p class="app-description">A lightweight version of Dextop with native landscape mode and no launcher capabilities, built for devices with manufacturer restrictions.</p>
@@ -110,7 +110,7 @@
                 </div>
 
                 <!-- Dextop -->
-                <div class="app-card">
+                <div class="app-card" data-href="dextop.html">
                     <img src="assets/images/dextop-promo2.png" alt="Dextop" class="app-image">
                     <h3>Dextop</h3>
                     <p class="app-description">Transform your phone into a productivity powerhouse. Dextop provides a
@@ -126,7 +126,7 @@
                 </div>
 
                 <!-- Macro Spotlight -->
-                <div class="app-card">
+                <div class="app-card" data-href="macro-spotlight.html">
                     <img src="assets/images/spotlight-promo.png" alt="Macro Spotlight" class="app-image">
                     <h3>Macro Spotlight</h3>
                     <p class="app-description">The fastest, most private search for your Android device. Find apps,
@@ -142,7 +142,7 @@
                 </div>
 
                 <!-- Volume Buttons Extended -->
-                <div class="app-card">
+                <div class="app-card" data-href="volume-buttons-extended.html">
                     <img src="assets/images/volume-promo2.png" alt="Volume Buttons Extended" class="app-image">
                     <h3>Volume Buttons Extended</h3>
                     <p class="app-description">Use volume buttons to control your phone. Map them to various functions
@@ -158,7 +158,7 @@
                 </div>
 
                 <!-- Swipe Stop -->
-                <div class="app-card">
+                <div class="app-card" data-href="swipe-stop.html">
                     <img src="assets/images/swipe-stop-promo2.png" alt="Swipe Stop" class="app-image">
                     <h3>Swipe Stop</h3>
                     <p class="app-description">Protect your privacy with Swipe Stop.
@@ -175,7 +175,7 @@
                 </div>
 
                 <!-- App Stopper -->
-                <div class="app-card">
+                <div class="app-card" data-href="app-stopper.html">
                     <img src="assets/images/app-stopper-pomo.png" alt="App Stopper" class="app-image">
                     <h3>App Stopper</h3>
                     <p class="app-description">App Stopper is the easiest way to stop apps from running in the background and consuming resources, saving battery and improving performance. Perfect for quickly stopping misbehaving apps or just keeping your phone running smoothly.
@@ -262,6 +262,18 @@
     <script>
         // Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Make project cards clickable while keeping internal links working
+        document.querySelectorAll('.app-card[data-href]').forEach((card) => {
+            card.addEventListener('click', (event) => {
+                const interactiveElement = event.target.closest('a, button, input, select, textarea, [role="button"]');
+                if (interactiveElement) {
+                    return;
+                }
+
+                window.location.href = card.dataset.href;
+            });
+        });
 
         // Back to Top Button
         const backToTopButton = document.getElementById('backToTop');

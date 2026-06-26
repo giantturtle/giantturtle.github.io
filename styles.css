@@ -202,22 +202,14 @@ header {
 }
 
 .more-btn {
-    display: block;
+    display: inline-block;
+    position: relative;
     text-align: center;
     color: var(--primary);
     text-decoration: none;
     font-weight: 600;
     padding-top: 1rem;
     border-top: 1px solid var(--glass-border);
-}
-
-.more-btn::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     z-index: 1;
 }
 
@@ -240,6 +232,13 @@ header {
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     margin-bottom: 3rem;
+}
+
+.landing-title,
+.landing-subtitle {
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
 }
 
 .gallery {
