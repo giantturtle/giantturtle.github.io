@@ -195,6 +195,7 @@ header {
 .btn-appstore {
     background: #fff;
     color: #000;
+    border: 1px solid #fff;
 }
 
 .store-btn:hover {
