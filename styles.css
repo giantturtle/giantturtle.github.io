@@ -157,6 +157,20 @@ header {
     color: var(--primary);
 }
 
+.install-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(61, 220, 132, 0.15);
+    color: var(--primary);
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(61, 220, 132, 0.3);
+    width: fit-content;
+}
+
 .app-description {
     color: var(--text-muted);
     margin-bottom: 1.5rem;
