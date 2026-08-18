@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceIndicators — See Your Spaces at a Glance</title>
+    <meta name="description" content="SpaceIndicators is a sleek macOS menu bar utility that shows your active Spaces at a glance. Click to switch. Customisable styles. Lightweight and native.">
+    <link rel="icon" type="image/png" href="landing-assets/app-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --clr-bg: #0b0b1a;
+            --clr-surface: #12122a;
+            --clr-surface-raised: #1a1a3a;
+            --clr-primary: #7c6aef;
+            --clr-primary-light: #a78bfa;
+            --clr-primary-glow: rgba(124, 106, 239, 0.35);
+            --clr-accent: #06d6a0;
+            --clr-text: #e8e6f0;
+            --clr-text-muted: #9892b5;
+            --clr-text-dim: #6b6590;
+            --clr-border: rgba(255, 255, 255, 0.06);
+            --clr-glass: rgba(18, 18, 42, 0.65);
+            --clr-glass-border: rgba(255, 255, 255, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== AMBIENT BACKGROUND ========== */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: ambientFloat 20s ease-in-out infinite;
+        }
+
+        .ambient-bg::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(6, 214, 160, 0.12) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: ambientFloat 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes ambientFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.1); }
+            66% { transform: translate(-30px, 50px) scale(0.95); }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth);
+        }
+
+        .nav.scrolled {
+            background: var(--clr-glass);
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            border-bottom: 1px solid var(--clr-glass-border);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--clr-text);
+        }
+
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .nav-brand span {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--clr-text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--clr-text);
+        }
+
+        /* ========== SECTION SHARED ========== */
+        section {
+            padding: 120px 32px;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--clr-primary-light);
+            margin-bottom: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--clr-primary);
+            border-radius: 1px;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--clr-text-muted);
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.6rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.08;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 .gradient-text {
+            background: linear-gradient(135deg, var(--clr-primary-light), var(--clr-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--clr-text-muted);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--clr-primary), #5b4acf);
+            color: #fff;
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--clr-primary-glow);
+        }
+
+        .btn-primary:hover::after {
+            opacity: 1;
+        }
+
+        .btn-primary.coming-soon {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .btn-primary.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 28px;
+            background: transparent;
+            color: var(--clr-text-muted);
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: color 0.3s, border-color 0.3s, background 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            color: var(--clr-text);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--clr-accent);
+            margin-bottom: 24px;
+            padding: 6px 16px;
+            border-radius: 99px;
+            background: rgba(6, 214, 160, 0.08);
+            border: 1px solid rgba(6, 214, 160, 0.15);
+        }
+
+        .hero-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--clr-accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            max-width: 520px;
+            border-radius: var(--radius-lg);
+            box-shadow:
+                0 24px 80px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-visual:hover img {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .hero-visual .glow-ring {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, var(--clr-primary-glow) 0%, transparent 60%);
+            z-index: -1;
+            filter: blur(40px);
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        /* ========== FEATURES ========== */
+        .features {
+            background: linear-gradient(180deg, var(--clr-bg) 0%, var(--clr-surface) 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .feature-card {
+            padding: 36px 32px;
+            border-radius: var(--radius-md);
+            background: var(--clr-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--clr-glass-border);
+            transition: transform var(--transition-smooth), border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(124, 106, 239, 0.2);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(124, 106, 239, 0.12), rgba(124, 106, 239, 0.04));
+            border: 1px solid rgba(124, 106, 239, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========== STYLES SHOWCASE ========== */
+        .showcase {
+            background: var(--clr-surface);
+        }
+
+        .showcase .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .showcase-visual {
+            position: relative;
+        }
+
+        .showcase-visual img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+        }
+
+        .style-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .style-pill {
+            padding: 8px 18px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: rgba(124, 106, 239, 0.08);
+            border: 1px solid rgba(124, 106, 239, 0.15);
+            color: var(--clr-primary-light);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .style-pill:hover {
+            background: rgba(124, 106, 239, 0.15);
+            transform: translateY(-1px);
+        }
+
+        /* ========== PREFERENCES SECTION ========== */
+        .prefs {
+            background: linear-gradient(180deg, var(--clr-surface) 0%, var(--clr-bg) 100%);
+        }
+
+        .prefs .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .prefs-visual {
+            order: -1;
+        }
+
+        .prefs-visual img {
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+        }
+
+        .check-list {
+            list-style: none;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1rem;
+            color: var(--clr-text-muted);
+        }
+
+        .check-list li .check-icon {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: rgba(6, 214, 160, 0.1);
+            border: 1px solid rgba(6, 214, 160, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--clr-accent);
+            margin-top: 2px;
+        }
+
+        /* ========== CTA ========== */
+        .cta {
+            text-align: center;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(60px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .cta h2 {
+            max-width: 600px;
+            margin: 0 auto 16px;
+        }
+
+        .cta .section-desc {
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            padding: 48px 32px;
+            border-top: 1px solid var(--clr-border);
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+
+        .footer-brand span {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--clr-text-dim);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--clr-text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--clr-text-muted);
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 48px;
+            }
+
+            .hero-tagline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-badge {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .showcase .container,
+            .prefs .container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .prefs-visual {
+                order: 0;
+            }
+
+            .section-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .style-pills {
+                justify-content: center;
+            }
+
+            .check-list {
+                align-items: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 80px 20px;
+            }
+
+            .nav {
+                padding: 12px 20px;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 14px 24px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ========== MACOS BADGE ========== */
+        .macos-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--clr-text-dim);
+            margin-top: 16px;
+        }
+
+        .macos-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--clr-text-dim);
+        }
+
+        /* ========== COMING SOON TOOLTIP ========== */
+        .coming-soon-wrap {
+            position: relative;
+        }
+
+        .coming-soon-tag {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            padding: 3px 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #fff;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            border-radius: 99px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand" id="nav-brand">
+                <img src="landing-assets/app-icon.png" alt="SpaceIndicators icon" width="36" height="36">
+                <span>SpaceIndicators</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features" id="nav-features">Features</a></li>
+                <li><a href="#styles" id="nav-styles">Styles</a></li>
+                <li><a href="#preferences" id="nav-prefs">Preferences</a></li>
+                <li><a href="#download" id="nav-download">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-text">
+                <div class="hero-badge reveal">
+                    <span class="pulse-dot"></span>
+                    macOS Menu Bar Utility
+                </div>
+                <h1 class="reveal reveal-delay-1">
+                    See your Spaces<br><span class="gradient-text">at a glance.</span>
+                </h1>
+                <p class="hero-tagline reveal reveal-delay-2">
+                    A lightweight macOS utility that lives in your menu bar. Always know which Space you're on—and switch between them with a single click.
+                </p>
+                <div class="hero-actions reveal reveal-delay-3">
+                    <div class="coming-soon-wrap">
+                        <span class="coming-soon-tag">Coming Soon</span>
+                        <a href="#download" class="btn-primary coming-soon" id="hero-cta-download">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download for macOS
+                        </a>
+                    </div>
+                    <a href="https://github.com/Jaysce/Spaceman" class="btn-secondary" id="hero-cta-github" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <div class="macos-badge reveal reveal-delay-4">
+                    <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Requires macOS 11.0 or later
+                </div>
+            </div>
+            <div class="hero-visual reveal reveal-delay-2">
+                <div class="glow-ring"></div>
+                <img src="landing-assets/spaceman-example.png" alt="SpaceIndicators showing desktop Spaces in the macOS menu bar" width="520" height="auto" loading="eager" fetchpriority="high">
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-label reveal">Why SpaceIndicators</div>
+            <h2 class="reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</h2>
+            <p class="section-desc reveal reveal-delay-2">SpaceIndicators stays out of your way while keeping you oriented across all your virtual desktops.</p>
+
+            <div class="features-grid">
+                <div class="feature-card reveal reveal-delay-1" id="feature-glance">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Always Visible</h3>
+                    <p>A persistent indicator in your menu bar shows exactly which Space you're on—no need to swipe or open Mission Control.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2" id="feature-click">
+                    <div class="feature-icon">🖱️</div>
+                    <h3>Click to Switch</h3>
+                    <p>Switch to any Space with a single click on the menu bar indicator. Works across multiple displays with smooth native transitions.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-3" id="feature-styles">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Multiple Styles</h3>
+                    <p>Choose from rectangles, numbers, numbered rectangles, or opened-app indicators. Pick the style that fits your workflow.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1" id="feature-native">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Native & Lightweight</h3>
+                    <p>Built with Swift and SwiftUI. Uses minimal resources—no Electron, no background daemons, no performance overhead.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2" id="feature-multi">
+                    <div class="feature-icon">🖥️</div>
+                    <h3>Multi-Display</h3>
+                    <p>Full support for multi-monitor setups. See Spaces for every connected display, each tracked independently.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-3" id="feature-launch">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Launch at Login</h3>
+                    <p>Set it once and forget it. SpaceIndicators starts silently when you log in, ready whenever you need it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STYLES SHOWCASE -->
+    <section class="showcase" id="styles">
+        <div class="container">
+            <div class="showcase-visual reveal">
+                <img src="landing-assets/spaceman-example.png" alt="Four display styles for SpaceIndicators: rectangles, numbers, numbered rectangles, and opened apps" width="600" loading="lazy">
+            </div>
+            <div>
+                <div class="section-label reveal">Display Styles</div>
+                <h2 class="reveal reveal-delay-1">Your spaces,<br>your style.</h2>
+                <p class="section-desc reveal reveal-delay-2">Four carefully crafted display modes so the indicator blends perfectly with how you work.</p>
+                <div class="style-pills reveal reveal-delay-3">
+                    <span class="style-pill">Rectangles</span>
+                    <span class="style-pill">Numbers</span>
+                    <span class="style-pill">Rectangles + Numbers</span>
+                    <span class="style-pill">Opened Apps</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREFERENCES -->
+    <section class="prefs" id="preferences">
+        <div class="container">
+            <div>
+                <div class="section-label reveal">Fully Configurable</div>
+                <h2 class="reveal reveal-delay-1">Make it yours.</h2>
+                <p class="section-desc reveal reveal-delay-2">A clean preferences panel gives you full control without complexity.</p>
+                <ul class="check-list reveal reveal-delay-3">
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Choose from multiple indicator styles</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Toggle pronounced border outlines</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Launch automatically at login</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>14-day free trial, then one-time purchase</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="prefs-visual reveal reveal-delay-2">
+                <img src="landing-assets/preferences.png" alt="SpaceIndicators preferences window showing style picker, launch at login, and keyboard shortcut settings" width="480" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="download">
+        <div class="container">
+            <div class="section-label reveal">Get Started</div>
+            <h2 class="reveal reveal-delay-1">Ready to navigate<br>your Spaces smarter?</h2>
+            <p class="section-desc reveal reveal-delay-2">SpaceIndicators is free to try for 14 days. Runs natively on macOS 11 and later.</p>
+            <div class="cta-actions reveal reveal-delay-3">
+                <div class="coming-soon-wrap">
+                    <span class="coming-soon-tag">Coming Soon</span>
+                    <a href="#" class="btn-primary coming-soon" id="cta-download">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download for macOS
+                    </a>
+                </div>
+                <a href="https://github.com/Jaysce/Spaceman" class="btn-secondary" id="cta-github" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    View Source on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="landing-assets/app-icon.png" alt="SpaceIndicators" width="28" height="28">
+                <span>SpaceIndicators</span>
+            </div>
+            <span class="footer-copy">&copy; 2026 Sasindu Jayasinghe. All rights reserved.</span>
+            <ul class="footer-links">
+                <li><a href="https://github.com/Jaysce/Spaceman" target="_blank" rel="noopener" id="footer-github">GitHub</a></li>
+                <li><a href="https://giantturtle.github.io" target="_blank" rel="noopener" id="footer-website">Website</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // ── Navbar scroll effect ──
+        const nav = document.getElementById('main-nav');
+        const onScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // ── Scroll reveal (IntersectionObserver) ──
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+        revealElements.forEach(el => observer.observe(el));
+
+        // ── Smooth anchor scroll ──
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
