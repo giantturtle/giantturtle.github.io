@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpaceIndicators — See Your Spaces at a Glance</title>
-    <meta name="description" content="SpaceIndicators is a sleek macOS menu bar utility that shows your active Spaces at a glance. Click to switch. Customisable styles. Lightweight and native.">
+    <meta name="description"
+        content="SpaceIndicators is a sleek macOS menu bar utility that shows your active Spaces at a glance. Click to switch. Customisable styles. Lightweight and native.">
     <link rel="icon" type="image/png" href="landing-assets/app-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         /* ========== RESET & BASE ========== */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         :root {
             --clr-bg: #0b0b1a;
@@ -82,9 +91,19 @@
         }
 
         @keyframes ambientFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(60px, -40px) scale(1.1); }
-            66% { transform: translate(-30px, 50px) scale(0.95); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(60px, -40px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-30px, 50px) scale(0.95);
+            }
         }
 
         /* ========== NAVIGATION ========== */
@@ -265,7 +284,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -335,8 +354,17 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
         }
 
         .hero-visual {
@@ -372,8 +400,17 @@
         }
 
         @keyframes glowPulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.05); }
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
         }
 
         /* ========== FEATURES ========== */
@@ -625,7 +662,7 @@
             opacity: 0;
             transform: translateY(32px);
             transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .reveal.visible {
@@ -633,10 +670,21 @@
             transform: translateY(0);
         }
 
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 900px) {
@@ -719,7 +767,8 @@
                 font-size: 2.2rem;
             }
 
-            .btn-primary, .btn-secondary {
+            .btn-primary,
+            .btn-secondary {
                 padding: 14px 24px;
                 font-size: 0.95rem;
             }
@@ -763,6 +812,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="ambient-bg"></div>
 
@@ -794,29 +844,37 @@
                     See your Spaces<br><span class="gradient-text">at a glance.</span>
                 </h1>
                 <p class="hero-tagline reveal reveal-delay-2">
-                    A lightweight macOS utility that lives in your menu bar. Always know which Space you're on—and switch between them with a single click.
+                    A lightweight macOS utility that lives in your menu bar. Always know which Space you're on—and
+                    switch between them with a single click.
                 </p>
                 <div class="hero-actions reveal reveal-delay-3">
                     <div class="coming-soon-wrap">
-                        <span class="coming-soon-tag">Coming Soon</span>
+                        <span class="coming-soon-tag">Demo app</span>
                         <a href="#download" class="btn-primary coming-soon" id="hero-cta-download">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
                             Download for macOS
                         </a>
                     </div>
-                    <a href="https://github.com/Jaysce/Spaceman" class="btn-secondary" id="hero-cta-github" target="_blank" rel="noopener">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                        View on GitHub
-                    </a>
+
                 </div>
                 <div class="macos-badge reveal reveal-delay-4">
-                    <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                    </svg>
                     Requires macOS 11.0 or later
                 </div>
             </div>
             <div class="hero-visual reveal reveal-delay-2">
                 <div class="glow-ring"></div>
-                <img src="landing-assets/spaceman-example.png" alt="SpaceIndicators showing desktop Spaces in the macOS menu bar" width="520" height="auto" loading="eager" fetchpriority="high">
+                <img src="landing-assets/spaceman-example.png"
+                    alt="SpaceIndicators showing desktop Spaces in the macOS menu bar" width="520" height="auto"
+                    loading="eager" fetchpriority="high">
             </div>
         </div>
     </section>
@@ -826,38 +884,40 @@
         <div class="container">
             <div class="section-label reveal">Why SpaceIndicators</div>
             <h2 class="reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</h2>
-            <p class="section-desc reveal reveal-delay-2">SpaceIndicators stays out of your way while keeping you oriented across all your virtual desktops.</p>
+            <p class="section-desc reveal reveal-delay-2">SpaceIndicators stays out of your way while keeping you
+                oriented across all your virtual desktops.</p>
 
             <div class="features-grid">
                 <div class="feature-card reveal reveal-delay-1" id="feature-glance">
                     <div class="feature-icon">👁️</div>
                     <h3>Always Visible</h3>
-                    <p>A persistent indicator in your menu bar shows exactly which Space you're on—no need to swipe or open Mission Control.</p>
+                    <p>A persistent indicator in your menu bar shows exactly which Space you're on—no need to swipe or
+                        open Mission Control.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-2" id="feature-click">
                     <div class="feature-icon">🖱️</div>
                     <h3>Click to Switch</h3>
-                    <p>Switch to any Space with a single click on the menu bar indicator. Works across multiple displays with smooth native transitions.</p>
+                    <p>Switch to any Space with a single click on the menu bar indicator. Works across multiple displays
+                        with smooth native transitions.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-3" id="feature-styles">
                     <div class="feature-icon">🎨</div>
                     <h3>Multiple Styles</h3>
-                    <p>Choose from rectangles, numbers, numbered rectangles, or opened-app indicators. Pick the style that fits your workflow.</p>
+                    <p>Choose from rectangles, numbers, numbered rectangles, or opened-app indicators. Pick the style
+                        that fits your workflow.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-1" id="feature-native">
                     <div class="feature-icon">⚡</div>
                     <h3>Native & Lightweight</h3>
-                    <p>Built with Swift and SwiftUI. Uses minimal resources—no Electron, no background daemons, no performance overhead.</p>
+                    <p>Built with Swift and SwiftUI. Uses minimal resources—no Electron, no background daemons, no
+                        performance overhead.</p>
                 </div>
-                <div class="feature-card reveal reveal-delay-2" id="feature-multi">
-                    <div class="feature-icon">🖥️</div>
-                    <h3>Multi-Display</h3>
-                    <p>Full support for multi-monitor setups. See Spaces for every connected display, each tracked independently.</p>
-                </div>
+
                 <div class="feature-card reveal reveal-delay-3" id="feature-launch">
                     <div class="feature-icon">🚀</div>
                     <h3>Launch at Login</h3>
-                    <p>Set it once and forget it. SpaceIndicators starts silently when you log in, ready whenever you need it.</p>
+                    <p>Set it once and forget it. SpaceIndicators starts silently when you log in, ready whenever you
+                        need it.</p>
                 </div>
             </div>
         </div>
@@ -867,12 +927,15 @@
     <section class="showcase" id="styles">
         <div class="container">
             <div class="showcase-visual reveal">
-                <img src="landing-assets/spaceman-example.png" alt="Four display styles for SpaceIndicators: rectangles, numbers, numbered rectangles, and opened apps" width="600" loading="lazy">
+                <img src="landing-assets/spaceman-example.png"
+                    alt="Four display styles for SpaceIndicators: rectangles, numbers, numbered rectangles, and opened apps"
+                    width="600" loading="lazy">
             </div>
             <div>
                 <div class="section-label reveal">Display Styles</div>
                 <h2 class="reveal reveal-delay-1">Your spaces,<br>your style.</h2>
-                <p class="section-desc reveal reveal-delay-2">Four carefully crafted display modes so the indicator blends perfectly with how you work.</p>
+                <p class="section-desc reveal reveal-delay-2">Four carefully crafted display modes so the indicator
+                    blends perfectly with how you work.</p>
                 <div class="style-pills reveal reveal-delay-3">
                     <span class="style-pill">Rectangles</span>
                     <span class="style-pill">Numbers</span>
@@ -889,7 +952,8 @@
             <div>
                 <div class="section-label reveal">Fully Configurable</div>
                 <h2 class="reveal reveal-delay-1">Make it yours.</h2>
-                <p class="section-desc reveal reveal-delay-2">A clean preferences panel gives you full control without complexity.</p>
+                <p class="section-desc reveal reveal-delay-2">A clean preferences panel gives you full control without
+                    complexity.</p>
                 <ul class="check-list reveal reveal-delay-3">
                     <li>
                         <span class="check-icon">✓</span>
@@ -910,7 +974,9 @@
                 </ul>
             </div>
             <div class="prefs-visual reveal reveal-delay-2">
-                <img src="landing-assets/preferences.png" alt="SpaceIndicators preferences window showing style picker, launch at login, and keyboard shortcut settings" width="480" loading="lazy">
+                <img src="landing-assets/preferences.png"
+                    alt="SpaceIndicators preferences window showing style picker, launch at login, and keyboard shortcut settings"
+                    width="480" loading="lazy">
             </div>
         </div>
     </section>
@@ -920,19 +986,22 @@
         <div class="container">
             <div class="section-label reveal">Get Started</div>
             <h2 class="reveal reveal-delay-1">Ready to navigate<br>your Spaces smarter?</h2>
-            <p class="section-desc reveal reveal-delay-2">SpaceIndicators is free to try for 14 days. Runs natively on macOS 11 and later.</p>
+            <p class="section-desc reveal reveal-delay-2">SpaceIndicators is free to try for 14 days. Runs natively on
+                macOS 11 and later.</p>
             <div class="cta-actions reveal reveal-delay-3">
                 <div class="coming-soon-wrap">
-                    <span class="coming-soon-tag">Coming Soon</span>
+                    <span class="coming-soon-tag">Demo app</span>
                     <a href="#" class="btn-primary coming-soon" id="cta-download">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
                         Download for macOS
                     </a>
                 </div>
-                <a href="https://github.com/Jaysce/Spaceman" class="btn-secondary" id="cta-github" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                    View Source on GitHub
-                </a>
+
             </div>
         </div>
     </section>
@@ -944,10 +1013,11 @@
                 <img src="landing-assets/app-icon.png" alt="SpaceIndicators" width="28" height="28">
                 <span>SpaceIndicators</span>
             </div>
-            <span class="footer-copy">&copy; 2026 Sasindu Jayasinghe. All rights reserved.</span>
+            <span class="footer-copy">&copy; 2026 GiantTurtle Software. All rights reserved.</span>
             <ul class="footer-links">
-                <li><a href="https://github.com/Jaysce/Spaceman" target="_blank" rel="noopener" id="footer-github">GitHub</a></li>
-                <li><a href="https://giantturtle.github.io" target="_blank" rel="noopener" id="footer-website">Website</a></li>
+
+                <li><a href="https://giantturtle.github.io" target="_blank" rel="noopener"
+                        id="footer-website">Website</a></li>
             </ul>
         </div>
     </footer>
@@ -988,4 +1058,5 @@
         });
     </script>
 </body>
+
 </html>
