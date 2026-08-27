@@ -171,6 +171,22 @@
             color: var(--clr-text);
         }
 
+        .nav-links a.nav-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--clr-border);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            color: var(--clr-text-muted);
+            transition: all 0.3s;
+        }
+
+        .nav-links a.nav-btn:hover {
+            color: var(--clr-text);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-1px);
+        }
+
         /* ========== SECTION SHARED ========== */
         section {
             padding: 120px 32px;
@@ -837,6 +853,7 @@
                 <li><a href="#features" id="nav-features">Features</a></li>
                 <li><a href="#preferences" id="nav-prefs">Preferences</a></li>
                 <li><a href="#download" id="nav-download">Download</a></li>
+                <li><a href="index.html" class="nav-btn">More Apps</a></li>
             </ul>
         </div>
     </nav>
