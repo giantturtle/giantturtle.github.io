@@ -418,6 +418,13 @@
             background: linear-gradient(180deg, var(--clr-bg) 0%, var(--clr-surface) 100%);
         }
 
+        .features-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -715,6 +722,7 @@
                 margin-right: auto;
             }
 
+            .features-header,
             .showcase .container,
             .prefs .container {
                 grid-template-columns: 1fr;
@@ -882,11 +890,18 @@
     <!-- FEATURES -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-label reveal">Why SpaceIndicators</div>
-            <h2 class="reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</h2>
-            <p class="section-desc reveal reveal-delay-2">SpaceIndicators stays out of your way while keeping you
-                oriented across all your virtual desktops. You always know which Space you're on, and what is on next
-                and previous screen. Makes it easier to multitask without using external displays.</p>
+            <div class="features-header">
+                <div>
+                    <div class="section-label reveal">Why SpaceIndicators</div>
+                    <h2 class="reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</h2>
+                    <p class="section-desc reveal reveal-delay-2">SpaceIndicators stays out of your way while keeping you
+                        oriented across all your virtual desktops. You always know which Space you're on, and what is on next
+                        and previous screen. Makes it easier to multitask without using external displays.</p>
+                </div>
+                <div class="hero-visual reveal reveal-delay-3">
+                    <video src="landing-assets/preview-video.webm" style="width: 100%; border-radius: var(--radius-lg); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);" autoplay loop muted playsinline></video>
+                </div>
+            </div>
 
             <div class="features-grid">
                 <div class="feature-card reveal reveal-delay-1" id="feature-glance">
@@ -928,7 +943,6 @@
     <section class="showcase" id="styles">
         <div class="container">
             <div class="showcase-visual reveal">
-                <video src="landing-assets/preview-video.webm" width="600" autoplay loop muted playsinline></video>
             </div>
             <div>
                 <div class="section-label reveal">Display Styles</div>
