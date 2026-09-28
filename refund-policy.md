@@ -1,53 +1,60 @@
 # Refund Policy
 
-**Last Updated:** [Insert Date]
+**Last Updated:** September 28, 2026
 
-At **GiantTurtle Software**, we strive to ensure that our customers are completely satisfied with their purchases. If you are not entirely satisfied with your purchase, we're here to help. This Refund Policy outlines the conditions under which refunds are provided for our software and services.
+At **GiantTurtle Software**, we stand behind the quality of our applications and want you to be completely satisfied with your purchase. This Refund Policy explains the terms and process for requesting a refund for our software products, including **Desktops**.
 
-## 1. General Refund Terms
+---
 
-We offer a **[Insert Number]-day money-back guarantee** on all our software products. If you are not satisfied with your purchase within [Insert Number] days of the original purchase date, you may request a full refund.
+## 1. 14-Day Free Trial
+
+To help you determine whether our software meets your needs before spending any money, **Desktops** offers a **14-day free trial** with all features completely unlocked and no payment information required upfront. We strongly encourage you to take advantage of this trial to test performance, compatibility, and display styles on your macOS system.
+
+## 2. 14-Day Money-Back Guarantee
+
+If you decide to purchase a license and are not satisfied with the software, we offer a **14-day money-back guarantee** starting from the date of your original purchase.
 
 To be eligible for a refund, you must:
 
-*   Submit your request within the [Insert Number]-day refund period.
-*   Provide a valid proof of purchase (e.g., order number, receipt, or email address used for the transaction).
-*   Uninstall and cease using the software upon receiving the refund.
+* Submit your refund request within **14 calendar days** of the original purchase date.
+* Provide a valid proof of purchase (such as your order number, license key, or the email address used at checkout).
+* Uninstall the software and cease use upon receiving the refund. Once processed, the associated license key will be deactivated.
 
-## 2. Non-Refundable Items and Circumstances
+## 3. Circumstances Not Covered
 
-Please note that refunds **will not** be issued in the following situations:
+Refunds will generally not be granted in the following cases:
 
-*   **After the Refund Period:** Requests made after the [Insert Number]-day period has expired.
-*   **Change of Mind:** If you simply changed your mind or no longer need the software after the refund period.
-*   **System Incompatibility:** If your system does not meet the minimum technical requirements stated on our product page prior to purchase. (We encourage you to use our free trial, if available, to test compatibility).
-*   **Violation of Terms:** If your account or license has been suspended or terminated due to a violation of our Terms of Service or End User License Agreement (EULA).
+* **Expired Window:** Requests submitted after the 14-day refund period has elapsed.
+* **Mac App Store Purchases:** If you purchased through Apple's Mac App Store, your purchase is governed by Apple's Terms of Sale. In accordance with Apple's policies, developers cannot issue refunds directly; please request a refund through [reportaproblem.apple.com](https://reportaproblem.apple.com).
+* **Terms Violation:** Any license suspended or revoked due to unauthorized distribution, piracy, or violation of our license terms.
 
-## 3. How to Request a Refund
+## 4. How to Request a Refund
 
-To request a refund, please follow these steps:
+To request a refund for a direct purchase, follow these steps:
 
-1.  Contact our support team at **[Insert Contact Email]**.
-2.  Include the subject line: **"Refund Request - [Your Order Number]"**.
-3.  Provide a brief explanation of why you are requesting a refund. Your feedback is valuable and helps us improve our products.
+1. Send an email to our support team at **[giant2turtle@gmail.com](mailto:giant2turtle@gmail.com)**.
+2. Use the subject line: **`Refund Request - [Your Order Number]`**.
+3. Include your order number or license key, and briefly let us know the reason for your refund request. While not strictly required, your feedback is deeply appreciated and helps us improve our software.
 
-## 4. Processing Your Refund
+## 5. Refund Processing
 
-Once your refund request is received and reviewed, we will send you an email to notify you of the approval or rejection of your refund.
+Once your request is received, we will review it and confirm the status via email:
 
-If your refund is approved, it will be processed, and a credit will automatically be applied to your original method of payment within **[Insert Number of Days, e.g., 5-10 business days]**. The time it takes for the credit to appear in your account may vary depending on your card issuer's policies.
+* If approved, the refund will be initiated immediately through our payment processor.
+* The credit will automatically be applied to your original payment method, typically within **5 to 10 business days**, depending on your card issuer or bank.
 
-## 5. Late or Missing Refunds
+## 6. Late or Missing Refunds
 
-If you haven't received an approved refund yet:
+If your refund has been approved but has not appeared after 10 business days:
 
-1.  First, check your bank account again.
-2.  Then contact your credit card company or bank, as it may take some time before your refund is officially posted.
-3.  If you’ve done all of this and you still have not received your refund, please contact us at **[Insert Contact Email]**.
+1. Check your bank or credit card account again to ensure the credit has not posted under our payment processor's name.
+2. Contact your financial institution, as processing times may vary.
+3. If you still have not received your funds, please contact us at **[giant2turtle@gmail.com](mailto:giant2turtle@gmail.com)** with your refund confirmation details.
 
-## 6. Contact Us
+## 7. Contact Us
 
-If you have any questions about our Refund Policy, please contact us:
+If you have any questions or require assistance regarding this policy, please reach out to us:
 
-*   **Email:** [Insert Contact Email]
-*   **Website:** [Insert Website URL]
+* **Email:** [giant2turtle@gmail.com](mailto:giant2turtle@gmail.com)
+* **Website:** [https://giantturtle.github.io](https://giantturtle.github.io)
+* **Developer:** GiantTurtle Software
