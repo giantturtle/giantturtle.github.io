@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy for Desktops / DesktopPlus | GiantTurtle Software</title>
+    <meta name="description"
+        content="Privacy Policy for the Desktops / DesktopPlus macOS apps. We do not collect, track, or share your data. Everything runs locally on your Mac.">
+    <link rel="canonical" href="https://giant-turtle.com/privacy-policy.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://giant-turtle.com/privacy-policy.html">
+    <meta property="og:title" content="Privacy Policy | DesktopPlus by GiantTurtle Software">
+    <meta property="og:description" content="We do not collect, track, or share your data. Everything runs locally on your Mac.">
+    <meta property="og:image" content="https://giant-turtle.com/landing-assets/app-icon.png">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="/landing-assets/app-icon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0b0b1a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --clr-bg: #0b0b1a;
+            --clr-surface: #12122a;
+            --clr-primary: #7c6aef;
+            --clr-primary-light: #a78bfa;
+            --clr-primary-glow: rgba(124, 106, 239, 0.35);
+            --clr-accent: #06d6a0;
+            --clr-text: #e8e6f0;
+            --clr-text-muted: #9892b5;
+            --clr-text-dim: #6b6590;
+            --clr-glass: rgba(18, 18, 42, 0.65);
+            --clr-glass-border: rgba(255, 255, 255, 0.08);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .ambient-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+        .ambient-bg::before, .ambient-bg::after { content: ''; position: absolute; border-radius: 50%; }
+        .ambient-bg::before {
+            width: 800px; height: 800px; top: -250px; right: -250px;
+            background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+        }
+        .ambient-bg::after {
+            width: 600px; height: 600px; bottom: -200px; left: -200px;
+            background: radial-gradient(circle, rgba(6, 214, 160, 0.10) 0%, transparent 70%);
+        }
+
+        .topbar {
+            max-width: 860px; margin: 0 auto; padding: 1.5rem 1.5rem 0;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--clr-text); text-decoration: none; font-weight: 700; }
+        .brand img { width: 32px; height: 32px; border-radius: 8px; }
+        .back-link { color: var(--clr-text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--clr-primary-light); }
+
+        main {
+            max-width: 860px; margin: 2rem auto 3rem; padding: 3rem;
+            background: var(--clr-glass);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--clr-primary-light) 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .last-updated { color: var(--clr-text-dim); font-size: 0.9rem; margin: 0.5rem 0 2rem; }
+        .lead { font-size: 1.05rem; color: var(--clr-text-muted); margin-bottom: 1rem; }
+        .highlight {
+            margin: 1.5rem 0 0; padding: 1rem 1.25rem; border-radius: 12px;
+            background: rgba(6, 214, 160, 0.08); border: 1px solid rgba(6, 214, 160, 0.25); color: var(--clr-text);
+        }
+
+        h2 {
+            font-size: 1.3rem; font-weight: 700; color: var(--clr-text);
+            margin: 2.5rem 0 0.9rem; padding-top: 2rem; border-top: 1px solid var(--clr-glass-border);
+        }
+        h2 span { color: var(--clr-primary-light); margin-right: 0.4rem; }
+        p, li { color: var(--clr-text-muted); }
+        p + ul, p + ol { margin-top: 0.75rem; }
+        ul, ol { padding-left: 1.4rem; display: grid; gap: 0.55rem; }
+        li::marker { color: var(--clr-primary); }
+        strong { color: var(--clr-text); font-weight: 600; }
+        a { color: var(--clr-primary-light); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        footer { text-align: center; color: var(--clr-text-dim); font-size: 0.85rem; padding: 0 1.5rem 2.5rem; }
+        footer a { color: var(--clr-text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 640px) { main { padding: 1.75rem 1.25rem; margin: 1.25rem 0.75rem 2rem; border-radius: 18px; } }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-bg" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a href="/spaceman-landing.html" class="brand" id="brand-link">
+            <img src="/landing-assets/app-icon.png" alt="DesktopPlus app icon" width="32" height="32">
+            <span>DesktopPlus</span>
+        </a>
+        <a href="/spaceman-landing.html" class="back-link" id="back-link">&larr; Back to DesktopPlus</a>
+    </header>
+
+    <main>
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last Updated: September 28, 2026</p>
+
+        <p class="lead">Welcome to <strong>GiantTurtle Software</strong> ("we," "our," or "us"). We are committed to
+            protecting your privacy. This Privacy Policy applies to our macOS applications, including
+            <strong>Desktops</strong>, as well as our website (<a href="https://giant-turtle.com/">https://giant-turtle.com</a>).</p>
+        <p class="highlight">Our core philosophy is simple: <strong>we do not collect, track, or share your data.</strong></p>
+
+        <h2><span>1.</span>Zero Data Collection</h2>
+        <ul>
+            <li><strong>No Personal Data:</strong> We do not collect, store, or require any personal information (such
+                as your name, email address, physical address, or phone number) to use Desktops.</li>
+            <li><strong>No Telemetry or Usage Data:</strong> Desktops does not collect analytics, diagnostic
+                information, usage statistics, crash logs, or behavioral data.</li>
+            <li><strong>No Accounts or Tracking:</strong> You do not need to create an account to use the application,
+                and we do not track your activity across sessions, apps, or websites.</li>
+        </ul>
+
+        <h2><span>2.</span>On-Device Processing &amp; Local Storage</h2>
+        <ul>
+            <li><strong>100% Local Execution:</strong> All core features of Desktops—including active desktop
+                monitoring, workspace switching, task and app management, memory indicators, and customizable display
+                styles—run completely locally on your Mac.</li>
+            <li><strong>Local Preferences:</strong> Any configuration choices or custom preferences you set are saved
+                directly on your local device (in macOS user defaults or local application support folders) and are
+                never transmitted to our servers or any third parties.</li>
+        </ul>
+
+        <h2><span>3.</span>macOS System Permissions</h2>
+        <p>Desktops may request specific macOS permissions (such as Accessibility or Screen &amp; System Window
+            management) strictly to enable its core utility features (e.g., detecting active desktop spaces, displaying
+            running apps, and facilitating quick space switching).</p>
+        <ul>
+            <li>These permissions are utilized strictly in real time on your machine.</li>
+            <li>No screen content, window titles, or keystrokes are recorded, stored, or transmitted anywhere.</li>
+        </ul>
+
+        <h2><span>4.</span>Third-Party Services &amp; SDKs</h2>
+        <ul>
+            <li><strong>No Third-Party Trackers:</strong> Desktops does not bundle any third-party tracking,
+                advertising, or analytics SDKs (such as Google Analytics, Firebase, or Facebook SDK).</li>
+            <li><strong>Payment Processing:</strong> If you purchase a license for Desktops, payment is handled by
+                secure third-party payment processors. We do not store or have access to your full credit card or
+                banking details.</li>
+        </ul>
+
+        <h2><span>5.</span>Network Activity</h2>
+        <p>Desktops operates entirely offline for its regular day-to-day functionality. Network connections may only be
+            used for:</p>
+        <ul>
+            <li><strong>License Verification:</strong> Securely validating a purchase or license key if applicable.</li>
+            <li><strong>Update Checks:</strong> Checking whether a newer version of the software is available, without
+                sending personal information.</li>
+        </ul>
+
+        <h2><span>6.</span>Children's Privacy</h2>
+        <p>Because our applications do not collect any personal data, they do not knowingly collect or solicit
+            information from anyone, including children under the age of 13.</p>
+
+        <h2><span>7.</span>Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws.
+            Any updates will be published on this page with an updated "Last Updated" date.</p>
+
+        <h2><span>8.</span>Contact Us</h2>
+        <p>If you have any questions or feedback about this Privacy Policy or our software, please contact us:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:giant2turtle@gmail.com">giant2turtle@gmail.com</a></li>
+            <li><strong>Website:</strong> <a href="https://giant-turtle.com/">https://giant-turtle.com</a></li>
+            <li><strong>Developer:</strong> GiantTurtle Software</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GiantTurtle Software. All rights reserved.</p>
+        <p>
+            <a href="/refund-policy.html" id="footer-refund">Refund Policy</a>
+            <a href="/" id="footer-website">GiantTurtle Studio</a>
+        </p>
+    </footer>
+</body>
+
+</html>

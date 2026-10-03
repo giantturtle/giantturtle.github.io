@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Policy for Desktops / DesktopPlus | GiantTurtle Software</title>
+    <meta name="description"
+        content="Refund Policy for the Desktops / DesktopPlus macOS apps. 14-day free trial and a 14-day money-back guarantee on direct purchases.">
+    <link rel="canonical" href="https://giant-turtle.com/refund-policy.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://giant-turtle.com/refund-policy.html">
+    <meta property="og:title" content="Refund Policy | DesktopPlus by GiantTurtle Software">
+    <meta property="og:description" content="14-day free trial and a 14-day money-back guarantee on direct purchases.">
+    <meta property="og:image" content="https://giant-turtle.com/landing-assets/app-icon.png">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="/landing-assets/app-icon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0b0b1a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --clr-bg: #0b0b1a;
+            --clr-surface: #12122a;
+            --clr-primary: #7c6aef;
+            --clr-primary-light: #a78bfa;
+            --clr-primary-glow: rgba(124, 106, 239, 0.35);
+            --clr-accent: #06d6a0;
+            --clr-text: #e8e6f0;
+            --clr-text-muted: #9892b5;
+            --clr-text-dim: #6b6590;
+            --clr-glass: rgba(18, 18, 42, 0.65);
+            --clr-glass-border: rgba(255, 255, 255, 0.08);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .ambient-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+        .ambient-bg::before, .ambient-bg::after { content: ''; position: absolute; border-radius: 50%; }
+        .ambient-bg::before {
+            width: 800px; height: 800px; top: -250px; right: -250px;
+            background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+        }
+        .ambient-bg::after {
+            width: 600px; height: 600px; bottom: -200px; left: -200px;
+            background: radial-gradient(circle, rgba(6, 214, 160, 0.10) 0%, transparent 70%);
+        }
+
+        .topbar {
+            max-width: 860px; margin: 0 auto; padding: 1.5rem 1.5rem 0;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--clr-text); text-decoration: none; font-weight: 700; }
+        .brand img { width: 32px; height: 32px; border-radius: 8px; }
+        .back-link { color: var(--clr-text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--clr-primary-light); }
+
+        main {
+            max-width: 860px; margin: 2rem auto 3rem; padding: 3rem;
+            background: var(--clr-glass);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--clr-primary-light) 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .last-updated { color: var(--clr-text-dim); font-size: 0.9rem; margin: 0.5rem 0 2rem; }
+        .lead { font-size: 1.05rem; color: var(--clr-text-muted); margin-bottom: 1rem; }
+
+        h2 {
+            font-size: 1.3rem; font-weight: 700; color: var(--clr-text);
+            margin: 2.5rem 0 0.9rem; padding-top: 2rem; border-top: 1px solid var(--clr-glass-border);
+        }
+        h2 span { color: var(--clr-primary-light); margin-right: 0.4rem; }
+        p, li { color: var(--clr-text-muted); }
+        p + p { margin-top: 0.75rem; }
+        p + ul, p + ol { margin-top: 0.75rem; }
+        ul, ol { padding-left: 1.4rem; display: grid; gap: 0.55rem; }
+        li::marker { color: var(--clr-primary); }
+        strong { color: var(--clr-text); font-weight: 600; }
+        a { color: var(--clr-primary-light); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; color: var(--clr-accent);
+            background: rgba(6, 214, 160, 0.08); padding: 0.1rem 0.4rem; border-radius: 6px;
+        }
+
+        footer { text-align: center; color: var(--clr-text-dim); font-size: 0.85rem; padding: 0 1.5rem 2.5rem; }
+        footer a { color: var(--clr-text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 640px) { main { padding: 1.75rem 1.25rem; margin: 1.25rem 0.75rem 2rem; border-radius: 18px; } }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-bg" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a href="/spaceman-landing.html" class="brand" id="brand-link">
+            <img src="/landing-assets/app-icon.png" alt="DesktopPlus app icon" width="32" height="32">
+            <span>DesktopPlus</span>
+        </a>
+        <a href="/spaceman-landing.html" class="back-link" id="back-link">&larr; Back to DesktopPlus</a>
+    </header>
+
+    <main>
+        <h1>Refund Policy</h1>
+        <p class="last-updated">Last Updated: September 28, 2026</p>
+
+        <p class="lead">At <strong>GiantTurtle Software</strong>, we stand behind the quality of our applications and
+            want you to be completely satisfied with your purchase. This Refund Policy explains the terms and process
+            for requesting a refund for our software products, including <strong>Desktops</strong>.</p>
+
+        <h2><span>1.</span>14-Day Free Trial</h2>
+        <p>To help you determine whether our software meets your needs before spending any money,
+            <strong>Desktops</strong> offers a <strong>14-day free trial</strong> with all features completely unlocked
+            and no payment information required upfront. We strongly encourage you to take advantage of this trial to
+            test performance, compatibility, and display styles on your macOS system.</p>
+
+        <h2><span>2.</span>14-Day Money-Back Guarantee</h2>
+        <p>If you decide to purchase a license and are not satisfied with the software, we offer a <strong>14-day
+                money-back guarantee</strong> starting from the date of your original purchase.</p>
+        <p>To be eligible for a refund, you must:</p>
+        <ul>
+            <li>Submit your refund request within <strong>14 calendar days</strong> of the original purchase date.</li>
+            <li>Provide a valid proof of purchase (such as your order number, license key, or the email address used at
+                checkout).</li>
+            <li>Uninstall the software and cease use upon receiving the refund. Once processed, the associated license
+                key will be deactivated.</li>
+        </ul>
+
+        <h2><span>3.</span>Circumstances Not Covered</h2>
+        <p>Refunds will generally not be granted in the following cases:</p>
+        <ul>
+            <li><strong>Expired Window:</strong> Requests submitted after the 14-day refund period has elapsed.</li>
+            <li><strong>Mac App Store Purchases:</strong> If you purchased through Apple's Mac App Store, your purchase
+                is governed by Apple's Terms of Sale. In accordance with Apple's policies, developers cannot issue
+                refunds directly; please request a refund through
+                <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</li>
+            <li><strong>Terms Violation:</strong> Any license suspended or revoked due to unauthorized distribution,
+                piracy, or violation of our license terms.</li>
+        </ul>
+
+        <h2><span>4.</span>How to Request a Refund</h2>
+        <p>To request a refund for a direct purchase, follow these steps:</p>
+        <ol>
+            <li>Send an email to our support team at
+                <strong><a href="mailto:giant2turtle@gmail.com">giant2turtle@gmail.com</a></strong>.</li>
+            <li>Use the subject line: <code>Refund Request - [Your Order Number]</code>.</li>
+            <li>Include your order number or license key, and briefly let us know the reason for your refund request.
+                While not strictly required, your feedback is deeply appreciated and helps us improve our software.</li>
+        </ol>
+
+        <h2><span>5.</span>Refund Processing</h2>
+        <p>Once your request is received, we will review it and confirm the status via email:</p>
+        <ul>
+            <li>If approved, the refund will be initiated immediately through our payment processor.</li>
+            <li>The credit will automatically be applied to your original payment method, typically within <strong>5 to
+                    10 business days</strong>, depending on your card issuer or bank.</li>
+        </ul>
+
+        <h2><span>6.</span>Late or Missing Refunds</h2>
+        <p>If your refund has been approved but has not appeared after 10 business days:</p>
+        <ol>
+            <li>Check your bank or credit card account again to ensure the credit has not posted under our payment
+                processor's name.</li>
+            <li>Contact your financial institution, as processing times may vary.</li>
+            <li>If you still have not received your funds, please contact us at
+                <strong><a href="mailto:giant2turtle@gmail.com">giant2turtle@gmail.com</a></strong> with your refund
+                confirmation details.</li>
+        </ol>
+
+        <h2><span>7.</span>Contact Us</h2>
+        <p>If you have any questions or require assistance regarding this policy, please reach out to us:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:giant2turtle@gmail.com">giant2turtle@gmail.com</a></li>
+            <li><strong>Website:</strong> <a href="https://giant-turtle.com/">https://giant-turtle.com</a></li>
+            <li><strong>Developer:</strong> GiantTurtle Software</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GiantTurtle Software. All rights reserved.</p>
+        <p>
+            <a href="/privacy-policy.html" id="footer-privacy">Privacy Policy</a>
+            <a href="/" id="footer-website">GiantTurtle Studio</a>
+        </p>
+    </footer>
+</body>
+
+</html>
