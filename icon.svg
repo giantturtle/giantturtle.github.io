@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <filter id="subtle-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <g filter="url(#subtle-shadow)">
+    <!-- Back Flipper -->
+    <polygon points="105,285 70,305 105,325 125,300" fill="#2dd4bf" />
+    <polygon points="105,325 125,300 145,310 115,330" fill="#0f766e" />
+
+    <!-- Main Shell Bottom Shadow & Rim -->
+    <polygon points="120,290 230,340 300,310 250,290 160,265" fill="#1e293b" />
+    <polygon points="140,295 240,335 270,315 200,285" fill="#1e3a8a" />
+
+    <!-- Shell Upper Facets (Origami / Geometric) -->
+    <!-- Top Gold/Yellow Ridge -->
+    <polygon points="280,165 345,185 365,245 315,225" fill="#f59e0b" />
+    <polygon points="280,165 315,225 245,210" fill="#fbbf24" />
+    <polygon points="215,160 280,165 245,210" fill="#84cc16" />
+
+    <!-- Shell Central Emerald & Turquoise -->
+    <polygon points="215,160 245,210 165,225 130,265 170,200" fill="#10b981" />
+    <polygon points="245,210 315,225 275,280 210,270" fill="#06b6d4" />
+    <polygon points="165,225 245,210 210,270 150,275" fill="#0d9488" />
+    <polygon points="315,225 365,245 350,285 275,280" fill="#0284c7" />
+
+    <!-- Shell Lower facets -->
+    <polygon points="130,265 150,275 210,270 170,290" fill="#047857" />
+    <polygon points="210,270 275,280 250,305 185,295" fill="#0369a1" />
+
+    <!-- Neck & Head Connection -->
+    <polygon points="325,235 365,245 385,220 345,210" fill="#14b8a6" />
+    <polygon points="345,210 385,220 375,190 325,185" fill="#f59e0b" />
+
+    <!-- Head Facets -->
+    <polygon points="375,190 440,210 405,245 385,220" fill="#10b981" />
+    <polygon points="440,210 465,240 435,270 405,245" fill="#2dd4bf" />
+    <polygon points="435,270 465,240 470,280 435,295" fill="#facc15" />
+    <polygon points="405,245 435,270 410,310 385,275" fill="#eab308" />
+    <polygon points="435,295 470,280 460,305 425,310" fill="#2563eb" />
+    <polygon points="385,275 410,310 370,305 355,270" fill="#0f766e" />
+
+    <!-- Eye -->
+    <circle cx="415" cy="245" r="7" fill="#0a0e14" />
+
+    <!-- Front Left Flipper (Large) -->
+    <polygon points="250,290 280,280 255,360 215,385" fill="#059669" />
+    <polygon points="255,360 215,385 175,410 210,365" fill="#2563eb" />
+    <polygon points="280,280 305,315 270,365 255,360" fill="#eab308" />
+    <polygon points="305,315 295,355 270,365" fill="#ca8a04" />
+
+    <!-- Front Right Flipper (Small, under neck) -->
+    <polygon points="340,310 370,325 355,360 330,345" fill="#0d9488" />
+    <polygon points="355,360 375,340 370,325" fill="#06b6d4" />
+  </g>
+</svg>
