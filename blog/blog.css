@@ -88,6 +88,18 @@
     color: #06d6a0;
 }
 
+.article-category-badge.ai {
+    background: rgba(236, 72, 153, 0.14);
+    border-color: rgba(236, 72, 153, 0.38);
+    color: #f472b6;
+}
+
+.article-category-badge.hardware {
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(245, 158, 11, 0.38);
+    color: #fbbf24;
+}
+
 .article-title {
     font-size: clamp(2rem, 4vw, 2.75rem);
     line-height: 1.25;
@@ -404,6 +416,11 @@
 .app-cta-banner.macos-banner {
     background: linear-gradient(135deg, rgba(124, 106, 239, 0.16) 0%, rgba(18, 18, 42, 0.9) 100%);
     border-color: rgba(124, 106, 239, 0.4);
+}
+
+.app-cta-banner.ai-banner {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.16) 0%, rgba(18, 18, 42, 0.9) 100%);
+    border-color: rgba(236, 72, 153, 0.4);
 }
 
 .app-cta-icon {
