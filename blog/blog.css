@@ -239,14 +239,14 @@
     font-weight: 600;
 }
 
-.article-content a {
+.article-content a:not(.btn-primary-cta):not(.btn-secondary-cta):not(.store-btn):not(.action-badge):not(.install-badge) {
     color: var(--primary);
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: var(--transition);
 }
 
-.article-content a:hover {
+.article-content a:not(.btn-primary-cta):not(.btn-secondary-cta):not(.store-btn):not(.action-badge):not(.install-badge):hover {
     color: #ffffff;
 }
 
@@ -439,46 +439,56 @@
     flex-wrap: wrap;
 }
 
-.btn-primary-cta {
+.btn-primary-cta,
+.article-content .btn-primary-cta,
+.app-cta-banner .btn-primary-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     padding: 0.75rem 1.4rem;
     background: var(--primary);
-    color: #0a0e14;
+    color: #0a0e14 !important;
     font-weight: 700;
     font-size: 0.95rem;
     border-radius: 8px;
-    text-decoration: none;
+    text-decoration: none !important;
     transition: var(--transition);
 }
 
-.btn-primary-cta:hover {
+.btn-primary-cta:hover,
+.article-content .btn-primary-cta:hover,
+.app-cta-banner .btn-primary-cta:hover {
     background: var(--primary-dark);
-    color: #000;
+    color: #000000 !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(61, 220, 132, 0.3);
+    text-decoration: none !important;
 }
 
-.btn-secondary-cta {
+.btn-secondary-cta,
+.article-content .btn-secondary-cta,
+.app-cta-banner .btn-secondary-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     padding: 0.75rem 1.4rem;
     background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+    color: #ffffff !important;
     font-weight: 600;
     font-size: 0.95rem;
     border-radius: 8px;
-    text-decoration: none;
+    text-decoration: none !important;
     border: 1px solid var(--glass-border);
     transition: var(--transition);
 }
 
-.btn-secondary-cta:hover {
+.btn-secondary-cta:hover,
+.article-content .btn-secondary-cta:hover,
+.app-cta-banner .btn-secondary-cta:hover {
     background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    color: #ffffff !important;
     transform: translateY(-2px);
+    text-decoration: none !important;
 }
 
 /* FAQ Accordion / Cards */
