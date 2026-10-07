@@ -436,3 +436,120 @@ html {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(61, 220, 132, 0.3);
 }
+
+/* Optimized Internal Link & SEO Styles */
+.card-title-link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.card-title-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.app-card-img-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.landing-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.landing-nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.landing-nav a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.landing-nav .nav-right-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.related-guide-box {
+    margin: 4rem auto 2rem;
+    max-width: 800px;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    text-align: left;
+    backdrop-filter: blur(10px);
+}
+
+.related-guide-box h3 {
+    color: var(--primary);
+    margin-bottom: 0.6rem;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.related-guide-box p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
+.related-guide-box .guide-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.related-guide-box .guide-link-btn:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+}
