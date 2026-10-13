@@ -54,6 +54,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* ========== RESET & BASE ========== */
         *,
@@ -673,6 +674,52 @@
             flex-wrap: wrap;
         }
 
+        /* ========== RELATED GUIDE BOX ========== */
+        .related-guide-box {
+            margin: 4.5rem auto 0;
+            max-width: 800px;
+            padding: 2rem;
+            background: var(--clr-glass);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: var(--radius-md);
+            text-align: left;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .related-guide-box h3 {
+            color: var(--clr-primary-light);
+            margin-bottom: 0.6rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .related-guide-box p {
+            color: var(--clr-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .related-guide-box .guide-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--clr-primary-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .related-guide-box .guide-link-btn:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
         /* ========== FOOTER ========== */
         footer {
             padding: 48px 32px;
@@ -854,6 +901,11 @@
             .btn-secondary {
                 padding: 14px 24px;
                 font-size: 0.95rem;
+            }
+
+            .related-guide-box {
+                padding: 1.5rem 1.25rem;
+                margin-top: 3rem;
             }
         }
 
@@ -1103,6 +1155,14 @@
                         <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
                     Free download for macOS
+                </a>
+            </div>
+
+            <div class="related-guide-box reveal reveal-delay-4">
+                <h3><i class="fas fa-book-reader"></i> In-Depth macOS Spaces Guide</h3>
+                <p>Learn how to show your active Spaces in the menu bar and switch virtual desktops effortlessly with our complete walkthrough:</p>
+                <a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="guide-link-btn">
+                    Read: How to See &amp; Switch macOS Virtual Desktops from the Menu Bar &rarr;
                 </a>
             </div>
         </div>
