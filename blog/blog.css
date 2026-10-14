@@ -282,7 +282,7 @@ figure {
 
 /* In-Article Figures */
 .article-figure-portrait {
-    max-width: 480px;
+    max-width: 640px;
     margin: 2.5rem auto;
     text-align: center;
 }
@@ -290,7 +290,7 @@ figure {
 .article-figure-portrait img {
     width: 100%;
     height: auto;
-    aspect-ratio: 1000 / 1300;
+    object-fit: cover;
     border-radius: 16px;
     border: 1px solid var(--glass-border);
     background: rgba(0, 0, 0, 0.35);
@@ -308,6 +308,8 @@ figure {
 .article-figure-landscape img {
     width: 100%;
     height: auto;
+    aspect-ratio: 1400 / 781;
+    object-fit: cover;
     border-radius: 16px;
     border: 1px solid var(--glass-border);
     background: rgba(0, 0, 0, 0.35);
@@ -316,12 +318,10 @@ figure {
     margin: 0 auto;
 }
 
-.article-figure-landscape img.open-clamshell {
-    aspect-ratio: 1500 / 920;
-}
-
+.article-figure-landscape img.closed-portrait,
+.article-figure-landscape img.open-clamshell,
 .article-figure-landscape img.desk-workstation {
-    aspect-ratio: 1600 / 900;
+    aspect-ratio: 1400 / 781;
 }
 
 .img-caption {
