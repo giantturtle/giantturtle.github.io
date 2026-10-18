@@ -322,9 +322,11 @@
 
         .btn-primary {
             display: inline-flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
+            justify-content: center;
+            gap: 4px;
+            padding: 14px 28px;
             background: linear-gradient(135deg, var(--clr-primary), #5b4acf);
             color: #fff;
             font-family: var(--font);
@@ -337,6 +339,46 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
+            text-align: center;
+        }
+
+        .btn-primary .btn-main-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .btn-primary .btn-verified-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.2;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-primary .btn-verified-text .apple-icon {
+            width: 12px;
+            height: 12px;
+            fill: #ffffff;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+
+        .btn-primary .btn-verified-text .check-icon {
+            width: 12px;
+            height: 12px;
+            color: var(--clr-accent);
+            stroke-width: 3;
+            flex-shrink: 0;
+            display: inline-block;
         }
 
         .btn-primary::after {
@@ -472,6 +514,141 @@
                 opacity: 0.7;
                 transform: scale(1.05);
             }
+        }
+
+        /* ========== WHAT'S NEW SECTION ========== */
+        .whats-new {
+            padding: 96px 32px;
+            background: var(--clr-bg);
+            position: relative;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .whats-new-header {
+            max-width: 640px;
+            margin-bottom: 40px;
+        }
+
+        .release-timeline {
+            max-width: 840px;
+        }
+
+        .release-card {
+            background: var(--clr-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: var(--radius-md);
+            padding: 32px 36px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+            transition: transform var(--transition-smooth), border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .release-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(124, 106, 239, 0.28);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+        }
+
+        .release-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--clr-border);
+            margin-bottom: 24px;
+        }
+
+        .release-version-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .version-tag {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--clr-text);
+            letter-spacing: -0.02em;
+        }
+
+        .release-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .release-badge.latest {
+            background: rgba(6, 214, 160, 0.12);
+            border: 1px solid rgba(6, 214, 160, 0.3);
+            color: var(--clr-accent);
+        }
+
+        .release-date {
+            font-size: 0.85rem;
+            color: var(--clr-text-dim);
+            font-weight: 500;
+        }
+
+        .release-changelog-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .changelog-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .change-tag {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 2px;
+        }
+
+        .change-tag.tag-feature {
+            background: rgba(124, 106, 239, 0.15);
+            color: var(--clr-primary-light);
+            border: 1px solid rgba(124, 106, 239, 0.3);
+        }
+
+        .change-tag.tag-improvement {
+            background: rgba(6, 214, 160, 0.12);
+            color: var(--clr-accent);
+            border: 1px solid rgba(6, 214, 160, 0.25);
+        }
+
+        .change-content strong {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--clr-text);
+            margin-bottom: 4px;
+        }
+
+        .change-content p {
+            font-size: 0.95rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
         }
 
         /* ========== FEATURES ========== */
@@ -870,6 +1047,17 @@
                 display: flex;
                 gap: 18px;
             }
+
+            .whats-new-header {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .release-timeline {
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -906,6 +1094,21 @@
             .related-guide-box {
                 padding: 1.5rem 1.25rem;
                 margin-top: 3rem;
+            }
+
+            .release-card {
+                padding: 24px 20px;
+            }
+
+            .release-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .changelog-item {
+                flex-direction: column;
+                gap: 8px;
             }
         }
 
@@ -959,6 +1162,7 @@
                 <span>DesktopPlus</span>
             </a>
             <ul class="nav-links">
+                <li><a href="#whats-new">What's New</a></li>
                 <li><a href="index.html#projects">Apps</a></li>
                 <li><a href="blog/blog_main.html">Blog</a></li>
                 <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
@@ -983,13 +1187,26 @@
                 </p>
                 <div class="hero-actions reveal reveal-delay-3">
                     <a href="landing-assets/DesktopPlus.dmg" download class="btn-primary" id="hero-cta-download">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                        Free download for macOS
+                        <span class="btn-main-text">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Free download for macOS
+                        </span>
+                        <span class="btn-verified-text">
+                            <svg class="apple-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                            </svg>
+                            Verified by Apple
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </span>
                     </a>
                 </div>
                 <div class="macos-badge reveal reveal-delay-4">
@@ -1005,6 +1222,52 @@
                 <div class="glow-ring"></div>
                 <video src="landing-assets/preview-video.webm"
                     autoplay loop muted playsinline></video>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT'S NEW -->
+    <section class="whats-new" id="whats-new">
+        <div class="container">
+            <div class="whats-new-header">
+                <div class="section-label reveal">Changelog</div>
+                <h2 class="reveal reveal-delay-1">What's New</h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Latest release notes, updates, and improvements for DesktopPlus.
+                </p>
+            </div>
+
+            <div class="release-timeline reveal reveal-delay-3">
+                <!-- Release Card: DesktopPlus v1.0.5 -->
+                <article class="release-card">
+                    <div class="release-card-header">
+                        <div class="release-version-badge">
+                            <span class="version-tag">DesktopPlus v1.0.5</span>
+                            <span class="release-badge latest">Latest Release</span>
+                        </div>
+                        <time class="release-date">October 2026</time>
+                    </div>
+
+                    <div class="release-card-body">
+                        <ul class="release-changelog-list">
+                            <li class="changelog-item">
+                                <span class="change-tag tag-feature">New Feature</span>
+                                <div class="change-content">
+                                    <strong>Workspace App Presets &amp; Quick Launch</strong>
+                                    <p>Added the ability to save custom snapshots of currently open applications into reusable presets, allowing you to instantly restore and launch complete multi-app workflows with a single click.</p>
+                                </div>
+                            </li>
+                            <li class="changelog-item">
+                                <span class="change-tag tag-improvement">Improvement</span>
+                                <div class="change-content">
+                                    <strong>Refined User Interface &amp; Visual Aesthetics</strong>
+                                    <p>Polished menu bar indicators with smoother animations, for elevated native feel.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+                <!-- To add a new release in the future, duplicate the .release-card block above -->
             </div>
         </div>
     </section>
@@ -1148,13 +1411,26 @@
                 macOS 15 and later.</p>
             <div class="cta-actions reveal reveal-delay-3">
                 <a href="landing-assets/DesktopPlus.dmg" download class="btn-primary" id="cta-download">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    Free download for macOS
+                    <span class="btn-main-text">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Free download for macOS
+                    </span>
+                    <span class="btn-verified-text">
+                        <svg class="apple-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                        </svg>
+                        Verified by Apple
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </span>
                 </a>
             </div>
 
@@ -1178,6 +1454,7 @@
             <span class="footer-copy">&copy; 2026 GiantTurtle Software. All rights reserved.</span>
             <ul class="footer-links">
                 <li><a href="index.html" id="footer-website">Studio Home</a></li>
+                <li><a href="#whats-new">What's New</a></li>
                 <li><a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html">Spaces Guide</a></li>
                 <li><a href="desktops-privacy-policy.html" id="footer-desktop-privacy">DesktopPlus Privacy</a></li>
                 <li><a href="privacy-policy.html" id="footer-privacy">Privacy Policy</a></li>
