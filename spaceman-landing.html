@@ -476,7 +476,8 @@
         }
 
         .hero-visual img,
-        .hero-visual video {
+        .hero-visual video,
+        .hero-video-wrapper {
             width: 100%;
             max-width: 520px;
             border-radius: var(--radius-lg);
@@ -487,8 +488,22 @@
         }
 
         .hero-visual:hover img,
-        .hero-visual:hover video {
+        .hero-visual:hover video,
+        .hero-visual:hover .hero-video-wrapper {
             transform: translateY(-8px) scale(1.02);
+        }
+
+        .hero-video-wrapper {
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .hero-video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
 
         .hero-visual .glow-ring {
@@ -1220,8 +1235,16 @@
             </div>
             <div class="hero-visual reveal reveal-delay-2">
                 <div class="glow-ring"></div>
-                <video src="landing-assets/preview-video.webm"
-                    autoplay loop muted playsinline></video>
+                <div class="hero-video-wrapper">
+                    <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/sDSxIqpuL6A?si=HsB70_pO2iDveYKG&autoplay=1&mute=1"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
