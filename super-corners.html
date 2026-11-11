@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperCorners | Supercharge Your Mac's Corners &amp; Screen Edge Zones</title>
+    <meta name="description"
+        content="Supercharge your Mac with custom Hot Corners and Edge Zones. Launch apps, simulate hotkeys, run shortcuts and AppleScripts, and configure per-app action sets with SuperCorners for macOS.">
+    <link rel="canonical" href="https://giant-turtle.com/super-corners.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://giant-turtle.com/super-corners.html">
+    <meta property="og:title" content="SuperCorners | Supercharge Your Mac's Corners &amp; Screen Edge Zones">
+    <meta property="og:description"
+        content="Supercharge your Mac with custom Hot Corners and Edge Zones. Launch apps, simulate hotkeys, run shortcuts, and configure per-app action sets.">
+    <meta property="og:image" content="https://giant-turtle.com/assets/images/supercorners-hero.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://giant-turtle.com/super-corners.html">
+    <meta name="twitter:title" content="SuperCorners | Supercharge Your Mac's Corners &amp; Screen Edge Zones">
+    <meta name="twitter:description"
+        content="Supercharge your Mac with custom Hot Corners and Edge Zones. Launch apps, simulate hotkeys, run shortcuts, and configure per-app action sets.">
+    <meta name="twitter:image" content="https://giant-turtle.com/assets/images/supercorners-hero.png">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0a0e14">
+
+    <!-- Structured Data (SoftwareApplication) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SuperCorners",
+      "operatingSystem": "macOS 13.0+",
+      "applicationCategory": "UtilitiesApplication",
+      "description": "Supercharge your Mac's corners and edge zones with customizable hot corners, per-app action sets, shortcuts, simulated hotkeys, and gestures.",
+      "url": "https://giant-turtle.com/super-corners.html",
+      "downloadUrl": "https://github.com/daniyalmaster693/SuperCorners/releases/latest",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GiantTurtle Studio",
+        "url": "https://giant-turtle.com/"
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3.5rem 0;
+        }
+
+        .screenshot-card {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(61, 220, 132, 0.4);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid var(--glass-border);
+            background: #ffffff;
+        }
+
+        .screenshot-info {
+            padding: 1.25rem 1.25rem 1.5rem;
+            text-align: left;
+        }
+
+        .screenshot-info h4 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .screenshot-info h4 i {
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .screenshot-info p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .install-box {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: left;
+        }
+
+        .terminal-block {
+            background: #05070a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+            font-size: 0.92rem;
+            color: #3DDC84;
+            overflow-x: auto;
+            position: relative;
+            margin: 1.25rem 0;
+            line-height: 1.6;
+        }
+
+        .terminal-block code {
+            color: inherit;
+            background: none;
+            padding: 0;
+        }
+
+        .badge-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .hero-banner {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+            background: #ffffff;
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="landing-nav">
+            <a href="index.html" class="landing-back-link">&larr; GiantTurtle Apps</a>
+            <div class="nav-right-links">
+                <a href="index.html#projects">Apps</a>
+                <a href="blog/blog_main.html">Blog</a>
+                <a href="mailto:giant2turtle@gmail.com">Contact</a>
+            </div>
+        </nav>
+
+        <header class="app-hero">
+            <h1 class="landing-title" style="font-size: 4rem; margin-bottom: 0.8rem;">SuperCorners</h1>
+            <p class="landing-subtitle" style="font-size: 1.45rem; color: var(--primary); margin-bottom: 1.8rem;">
+                Supercharge your Mac's Corners &amp; Screen Edge Zones
+            </p>
+
+            <div class="badge-row">
+                <div class="install-badge"><i class="fab fa-apple"></i> macOS 13.0+ (Ventura, Sonoma, Sequoia)</div>
+                <div class="install-badge"><i class="fas fa-bolt"></i> Native Swift &amp; SwiftUI</div>
+                <div class="install-badge"><i class="fab fa-osi"></i> Open Source (GPLv3)</div>
+            </div>
+
+            <div class="hero-banner">
+                <img src="assets/images/supercorners-hero.png" alt="SuperCorners macOS Hero Interface">
+            </div>
+
+            <div class="app-links" style="justify-content: center; margin-top: 1.5rem; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://github.com/daniyalmaster693/SuperCorners/releases/latest" class="store-btn btn-appstore"
+                    style="max-width: 260px;" target="_blank" rel="noopener">
+                    <i class="fab fa-apple"></i> Download SuperCorners.dmg
+                </a>
+                <a href="#installation" class="store-btn"
+                    style="max-width: 220px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--glass-border); color: var(--text-main);">
+                    <i class="fas fa-terminal" style="color: var(--primary); margin-right: 0.5rem;"></i> Install via Homebrew
+                </a>
+                <a href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html" class="store-btn"
+                    style="max-width: 220px; background: transparent; border: 1px solid var(--glass-border); color: var(--text-muted);">
+                    <i class="fas fa-book-open" style="margin-right: 0.5rem;"></i> Read Setup Guide
+                </a>
+            </div>
+        </header>
+
+        <section class="full-description">
+            <h2>macOS Hot Corners, Reimagined for Power Users</h2>
+            <p>
+                Native macOS Hot Corners are limited to just four corners and a handful of static system actions.
+                <strong>SuperCorners</strong> unlocks your entire screen perimeter: adding 4 new middle-edge zones,
+                context-aware per-app action sets, modifier-key guards, and the power to trigger any app, shortcut,
+                script, or hotkey instantly.
+            </p>
+
+            <div class="featured-grid" style="margin-top: 2.5rem; text-align: left;">
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-expand-arrows-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>8 Screen Trigger Zones</h3>
+                    <p class="app-description">Use the 4 traditional screen corners plus 4 middle edge zones (top, bottom, left, right) to double your trigger points.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-layer-group" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Per-App Action Sets</h3>
+                    <p class="app-description">Configure unique gestures for individual apps like Safari, Xcode, or Slack, alongside global system-wide defaults.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-keyboard" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Simulate Hotkeys</h3>
+                    <p class="app-description">Trigger complex keyboard shortcuts effortlessly by simply bumping an edge or corner with your cursor.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-magic" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Run macOS Shortcuts</h3>
+                    <p class="app-description">Execute any Apple Shortcut directly from a screen corner, turning edge gestures into custom multi-step automations.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Modifier Key Protection</h3>
+                    <p class="app-description">Eliminate accidental activations by requiring ⌘ Command, ⌥ Option, ⌃ Control, or ⇧ Shift when entering zones.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-bell" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Visual Feedback &amp; Overlays</h3>
+                    <p class="app-description">Get immediate feedback with subtle toast notifications or sleek on-screen visual overlays confirming your action.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-terminal" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Commands &amp; AppleScripts</h3>
+                    <p class="app-description">Launch terminal commands, run custom AppleScripts, open specific files, folders, or web URLs with one swift gesture.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-sliders-h" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Fine-Grained Sensitivity</h3>
+                    <p class="app-description">Customize trigger delays, separate sensitivity curves for corners vs. zones, and edge-height activation thresholds.</p>
+                </div>
+
+                <div class="app-card" style="padding: 1.5rem;">
+                    <i class="fas fa-feather-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Lightweight &amp; Native</h3>
+                    <p class="app-description">Crafted with pure Swift and SwiftUI for zero battery drain, instant responsiveness, and a clean macOS Tahoe design.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Showcase with Short Descriptions -->
+        <section style="margin-top: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2.2rem;">Visual Feature Tour</h2>
+            <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem;">
+                Explore how SuperCorners enhances your daily macOS workflow with customizable zones, templates, and contextual sets.
+            </p>
+
+            <div class="gallery-grid">
+                <!-- Screenshot 1 -->
+                <div class="screenshot-card">
+                    <img src="assets/images/supercorners-zones.png" alt="SuperCorners Screen Corners and Edge Zones Configuration">
+                    <div class="screenshot-info">
+                        <h4><i class="fas fa-arrows-to-dot"></i> 8 Edge &amp; Corner Zones</h4>
+                        <p>Configure actions for top-left, top-right, bottom-left, bottom-right corners and the middle edge zones along each screen border.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot 2 -->
+                <div class="screenshot-card">
+                    <img src="assets/images/supercorners-actions.png" alt="SuperCorners Universal Action Picker Modal">
+                    <div class="screenshot-info">
+                        <h4><i class="fas fa-list-check"></i> Universal Action Picker</h4>
+                        <p>Assign native system commands, simulated hotkeys, app launchers, file openings, AppleScripts, and macOS Shortcuts in seconds.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot 3 -->
+                <div class="screenshot-card">
+                    <img src="assets/images/supercorners-action-sets.png" alt="SuperCorners Per-App Action Sets Management">
+                    <div class="screenshot-info">
+                        <h4><i class="fas fa-layer-group"></i> Per-App Action Sets</h4>
+                        <p>Create dedicated gesture profiles for specific applications or maintain global fallback actions that work everywhere.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot 4 -->
+                <div class="screenshot-card">
+                    <img src="assets/images/supercorners-activation.png" alt="SuperCorners Modifier Key Activation and Delay Settings">
+                    <div class="screenshot-info">
+                        <h4><i class="fas fa-hand-pointer"></i> Modifier Keys &amp; Delays</h4>
+                        <p>Prevent accidental triggers with modifier key requirements (⌘, ⌥, ⌃, ⇧), click-to-activate options, and adjustable sensitivity sliders.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot 5 -->
+                <div class="screenshot-card">
+                    <img src="assets/images/supercorners-feedback.png" alt="SuperCorners Visual Feedback and Screen Overlay">
+                    <div class="screenshot-info">
+                        <h4><i class="fas fa-eye"></i> Visual Feedback &amp; Overlays</h4>
+                        <p>Enjoy subtle, unobtrusive toast messages or sleek corner indicators so you always know when and what action was triggered.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="install-box">
+            <h2 style="margin-bottom: 0.75rem; font-size: 2rem;">Installation</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                SuperCorners requires <strong>macOS 13.0 (Ventura) or later</strong>. Choose your preferred installation method below:
+            </p>
+
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main);">
+                <i class="fas fa-mug-hot" style="color: #ffaa00; margin-right: 0.5rem;"></i> Option 1: Install via Homebrew (Recommended)
+            </h3>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">
+                Run the following commands in your Terminal to tap the cask, install SuperCorners, and clear quarantine flags:
+            </p>
+
+            <div class="terminal-block">
+                <code>brew tap daniyalmaster693/casks<br>
+brew trust --cask daniyalmaster693/casks/supercorners<br>
+brew install --cask supercorners<br>
+xattr -dr com.apple.quarantine /Applications/SuperCorners.app</code>
+            </div>
+
+            <h3 style="font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--text-main);">
+                <i class="fab fa-apple" style="color: var(--primary); margin-right: 0.5rem;"></i> Option 2: Manual DMG Download
+            </h3>
+            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
+                1. Download <a href="https://github.com/daniyalmaster693/SuperCorners/releases/latest" target="_blank" rel="noopener" style="color: var(--primary);">SuperCorners.dmg</a> from GitHub Releases.<br>
+                2. Open the <code>.dmg</code> file and drag <strong>SuperCorners</strong> into your <strong>Applications</strong> folder.<br>
+                3. On first launch, macOS may show an unverified developer prompt. Navigate to <strong>System Settings &rarr; Privacy &amp; Security</strong>, scroll down, and click <strong>Open Anyway</strong>.<br>
+                4. Grant <strong>Accessibility Permissions</strong> in System Settings so SuperCorners can simulate hotkeys and system actions reliably.
+            </p>
+        </section>
+
+        <!-- Related Guide Box -->
+        <div class="related-guide-box">
+            <h3><i class="fas fa-book-reader"></i> Related macOS Productivity Guides</h3>
+            <p>Supercharge your multitasking with deep dives from the GiantTurtle engineering team:</p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <a href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html" class="guide-link-btn">
+                    &bull; How to Supercharge macOS Hot Corners: Custom Actions, Edge Zones &amp; Per-App Triggers (Full Guide) &rarr;
+                </a>
+                <a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="guide-link-btn">
+                    &bull; How to See &amp; Switch Virtual Desktops from the macOS Menu Bar &rarr;
+                </a>
+                <a href="blog/best-clipboard-manager-scratchpad-macos.html" class="guide-link-btn">
+                    &bull; Best Clipboard Manager &amp; Persistent Scratchpad for macOS &rarr;
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.</p>
+            <div class="footer-links">
+                <a href="index.html">All Apps</a> &bull;
+                <a href="blog/blog_main.html">Guides &amp; Blog</a> &bull;
+                <a href="super-corners.html">SuperCorners</a> &bull;
+                <a href="privacy-policy.html">Privacy Policy</a> &bull;
+                <a href="refund-policy.html">Refund Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
