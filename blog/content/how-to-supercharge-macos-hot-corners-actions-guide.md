@@ -1,8 +1,8 @@
-# How to Supercharge macOS Hot Corners: Custom Actions, Edge Zones & Per-App Triggers
+# How to Supercharge macOS Hot Corners: Custom Actions, Edge Zones & Power Tools
 
-> **Target Keywords:** macos hot corners, supercharge mac hot corners, macos edge zones, custom hot corners mac, trigger shortcuts hot corners mac, hot corners accidental trigger modifier key, best hot corners app mac, SuperCorners macos  
-> **Target Audience:** Mac power users, developers, designers, and multitaskers seeking faster navigation without keyboard gymnastics or accidental gesture triggers.  
-> **Target Product:** [SuperCorners](https://giant-turtle.com/super-corners.html)  
+> **Target Keywords:** macos hot corners, supercharge mac hot corners, macos edge zones, custom hot corners mac, trigger shortcuts hot corners mac, hot corners delay ignored apps, best hot corners app mac, Zones&Corners macos  
+> **Target Audience:** Mac power users, developers, designers, and multitaskers seeking faster navigation, built-in tools, and fewer accidental triggers.  
+> **Target Product:** [Zones&Corners](https://giant-turtle.com/zones-and-corners.html)  
 
 ---
 
@@ -11,102 +11,101 @@ Apple introduced Hot Corners in macOS decades ago as an effortless way to access
 
 In practice, however, default macOS Hot Corners have remained virtually unchanged and suffer from three critical flaws:
 
-1. **Only 4 Fixed Corners:** Modern displays—from 14-inch Liquid Retina MacBook screens to 32-inch 4K Studio Displays—offer immense perimeter space, yet Apple restricts you to only four corner triggers.
-2. **Severely Limited Action Catalog:** Apple only allows a handful of preset actions (Mission Control, Show Desktop, Notification Center, Launchpad, Quick Note, Lock Screen, Display Sleep). You cannot launch an app, trigger a custom keyboard shortcut, run an Apple Shortcut, or execute a script.
-3. **The Accidental Trigger Tax:** Moving your cursor to click the Apple logo, close a tab in Safari, or access the macOS menu bar frequently triggers corner actions by mistake, interrupting your train of thought and causing visual disorientation.
+1. **Only 4 Fixed Corners:** Modern displays—from 14-inch Liquid Retina MacBook screens to large external monitors—offer immense perimeter space, yet Apple restricts you to only four corner triggers.
+2. **Severely Limited Action Catalog:** Apple only allows a handful of preset actions (Mission Control, Show Desktop, Notification Center, Launchpad, Quick Note, Lock Screen, Display Sleep). You cannot launch an app, trigger a custom keyboard shortcut, run an Apple Shortcut, extract on-screen text, or execute a script.
+3. **No Delay Timer or App Exclusions:** Moving your cursor toward the Apple logo, menu bar, or browser close button can trigger corners immediately on hover unless you hold a modifier key every single time—and Apple offers no built-in way to automatically disable hot corners while specific apps or games are open.
 
 ---
 
-## 2. The Solution: SuperCorners for macOS
-To solve these limitations, **[SuperCorners](https://giant-turtle.com/super-corners.html)** completely re-architects macOS corner and edge interaction. Written natively in Swift and SwiftUI, SuperCorners turns your entire screen perimeter into a precision automation launchpad.
+## 2. The Solution: Zones&Corners for macOS
+To solve these limitations, **[Zones&Corners](https://giant-turtle.com/zones-and-corners.html)** expands macOS corner interaction into a complete screen-perimeter utility. Built natively in Swift and SwiftUI for **macOS 13.0 (Ventura) or later**, Zones&Corners runs quietly in your menu bar with zero Dock clutter and includes a **14-day free trial** with all triggers unlocked.
 
 ### Key Highlights:
-- **8 Trigger Zones:** 4 corners plus 4 middle screen edge zones (top, bottom, left, right).
-- **Per-App Action Sets:** Context-aware actions that switch automatically depending on whether you are in Xcode, Safari, Final Cut Pro, or Slack.
-- **Accidental Trigger Safeguards:** Require modifier keys (⌘, ⌥, ⌃, ⇧) or click activation to ensure triggers are 100% intentional.
-- **Limitless Action Flexibility:** Launch any app, simulate complex hotkeys, run macOS Shortcuts, execute shell commands, open folders/URLs, and run AppleScripts.
-- **Visual & Toast Overlays:** Subtle, non-intrusive on-screen notifications to confirm your trigger in real time.
-- **100% Native & Private:** Offline, lightweight (< 20 MB RAM), and open source under GPLv3.
+- **8 Trigger Zones:** 4 screen corners plus 4 middle edge zones (top, bottom, left, right), with automatic conflict detection for existing macOS System Hot Corners.
+- **76 Built-In Actions across 7 Categories + Favorites:** Browse System, App, Template, Tool, Capture, Media, and Window actions, and star Favorites for instant launching from the menu bar.
+- **Built-In Power Tools:** Includes a visual **App Switcher** grouped by macOS Spaces with live RAM monitoring and **Clean RAM** residual process cleanup, **Text Extractor (OCR)** with recent history, **Color Picker** (Hex/RGB/RGBA/HSL/HSLA + swatch history), and **Clipboard Text Count**.
+- **Custom Automation Templates:** Launch applications, open websites, files, or folders, simulate keyboard hotkeys, run Apple Shortcuts, execute AppleScripts, and run Terminal commands.
+- **Trigger Delay, Sensitivity & Ignored Applications:** Set a `0–5.0s` Trigger Delay Timer, tune corner vs. edge sensitivity separately, and pause triggers automatically inside selected Ignored Applications.
+- **Visual Overlays & Sound Feedback:** Confirm actions with customizable 8-color on-screen visual overlays and 14 macOS system sound options.
 
 ---
 
 ## 3. Screen Edge Zones: Beyond Just the 4 Corners
-Fitts's Law applies not only to the corners of your screen, but to the borders as well. SuperCorners introduces **Edge Zones** located at the midpoint of each screen border:
-- **Top Edge Zone:** Ideal for quick-look utilities, menu bar shortcuts, or notification triggers.
-- **Bottom Edge Zone:** Perfect for toggling a dropdown terminal, showing the macOS Dock, or launching persistent scratchpads like Paste Box.
-- **Left Edge Zone:** Flick left to toggle code sidebars, project explorers, or browser tab overviews.
-- **Right Edge Zone:** Flick right to pop open communication hubs (Slack, Discord) or music playback controls.
+Fitts's Law applies not only to the corners of your screen, but to the borders as well. Zones&Corners introduces **Edge Zones** located along each side of your display:
+- **Top Edge Zone:** Great for triggering Spotlight Search, App Switcher, Control Center, or launching an everyday utility app.
+- **Bottom Edge Zone:** Ideal for toggling Notification Center, Maximize / Toggle Dock & Maximize Window, or launching notes and scratchpads such as [Paste Box](https://giant-turtle.com/paste-box.html).
+- **Left Edge Zone:** Switch to the previous Space (`Previous Desktop`), reveal the desktop, or run an Apple Shortcut.
+- **Right Edge Zone:** Jump to the next Space (`Next Desktop`), trigger OCR Text Extraction, sample a screen color, or open your browser Reader Mode.
 
 ---
 
-## 4. Eliminating Accidental Triggers with Modifier Keys
-One of the most requested features by macOS power users is modifier key gating. With SuperCorners, you can configure any corner or zone to require holding a modifier key:
-- Hold **⌥ Option** + flick Top-Right &rarr; Run Deployment Shortcut.
-- Hold **⌘ Command** + flick Bottom-Left &rarr; Toggle Terminal Window.
-- Normal mouse moves without the modifier key pass through harmlessly, completely eliminating accidental misfires.
+## 4. Preventing Accidental Triggers & Avoiding System Conflicts
+Accidental triggers happen when your cursor brushes near the menu bar or a window corner while working normally. Zones&Corners handles this directly in Preferences without requiring constant keyboard gymnastics:
+- **Trigger Delay Timer (`0–5.0s`):** Require the cursor to linger in a corner or edge zone briefly before firing, so normal sweeping movements toward browser tabs or the Apple menu pass harmlessly.
+- **Separate Corner & Edge Sensitivity Sliders:** Tune how tight or generous corner targets and middle-edge zones feel independently (`3–10` for corners, `3–8` for edge zones).
+- **Ignored Applications:** Add full-screen apps, games, video editors, or IDEs to your **Ignored Applications** list so triggers suspend automatically whenever those apps are in the foreground.
+- **System Hot Corner Conflict Detection:** Zones&Corners inspects your existing macOS System Hot Corners, highlights any occupied corners so you don't accidentally clash with macOS defaults, and guides you through onboarding if you want to switch them over.
+
+> **Pro-Tip:** Star your most-used actions in the **Actions** tab to pin them into the **Favorites** submenu right inside the Zones&Corners menu bar icon for one-click access anytime.
 
 ---
 
-## 5. Context-Aware Power: Per-App Action Sets
-Why should your screen corners perform the same action in every application?
-With SuperCorners, you can define **Action Sets** mapped to specific apps:
-- **When inside Xcode / VS Code:** Flicking Top-Right triggers *Build & Run* (<kbd>⌘ + R</kbd>), while Bottom-Right triggers *Open Terminal*.
-- **When inside Safari / Chrome:** Flicking Top-Right opens a *New Private Window*, while Left Edge jumps back in browsing history.
-- **When inside Figma / Photoshop:** Flicking corners zooms to 100% or toggles interface rulers.
-- **Global Fallback:** When outside configured apps, your default global action set seamlessly takes over.
+## 5. Built-In Power Tools Beyond Simple Triggers
+Instead of stopping at basic OS shortcuts, Zones&Corners ships rich visual utilities that trigger directly from any corner, edge zone, or menu bar favorite:
+- **Visual App Switcher & Clean RAM:** Displays open apps grouped by **macOS Spaces/Desktops** in Most Recently Used (MRU) order, lets you switch or close individual apps or click **Close All**, monitors per-app memory usage with a system memory pressure bar, and offers one-click **Clean RAM** to clear residual background processes.
+- **Text Extractor (Apple Vision OCR):** Drag across unselectable text in images, PDFs, or videos to copy it to your clipboard, with an optional floating **Recent Extractions** panel holding up to 20 items.
+- **Screen Color Picker:** Grab colors from anywhere on screen in **Hex, RGB, RGBA, HSL, or HSLA**, paired with a floating **Recent Colors** history panel holding up to 20 swatches.
+- **Clipboard Text Count & Window Controls:** Inspect clipboard word, character, sentence, and paragraph counts alongside reading and speaking time estimates, or bind window tiling commands like `Toggle Dock and Maximize Window`, `Return to Previous Size`, and `Close Window with Confirmation`.
 
 ---
 
 ## 6. Step-by-Step Setup Tutorial
 
-### Option 1: Install via Homebrew
-Open Terminal and run:
-```bash
-brew tap daniyalmaster693/casks
-brew trust --cask daniyalmaster693/casks/supercorners
-brew install --cask supercorners
-xattr -dr com.apple.quarantine /Applications/SuperCorners.app
-```
+### 1. Download & Install the Notarized DMG
+1. Download `ZonesCorners.dmg` from the [Zones&Corners page](https://giant-turtle.com/zones-and-corners.html).
+2. Open the `.dmg` disk image and drag **Zones&Corners** into `/Applications`.
+3. Launch **Zones&Corners** directly — it is Apple Developer ID signed and notarized, so no Terminal commands or Gatekeeper workarounds are required. Your **14-day free trial** begins immediately with all triggers unlocked.
 
-### Option 2: Manual DMG Download
-1. Download `SuperCorners.dmg` from the [GitHub Releases](https://github.com/daniyalmaster693/SuperCorners/releases/latest).
-2. Drag `SuperCorners.app` to `/Applications`.
-3. Open **System Settings > Privacy & Security > Accessibility** and grant permissions so SuperCorners can simulate hotkeys and system events.
-4. Launch SuperCorners, open the **Corners** or **Zones** tab, select an action, and set your preferred sensitivity and modifier keys.
+### 2. Complete Onboarding & Grant Permissions
+1. Follow the brief welcome tour and grant **Accessibility** permissions in **System Settings > Privacy & Security > Accessibility** so Zones&Corners can monitor screen corners/edges, control windows, and simulate hotkeys.
+2. If you assign screenshot, OCR Text Extractor, Color Picker, or AppleScript/app-control actions, approve the standard macOS **Screen Recording** or **Automation** prompts when requested.
+
+### 3. Assign Actions & Customize Feedback
+1. Open the **Corners** or **Zones** tab from the menu bar icon and click any of the 8 screen slots to choose from 76 built-in actions or templates (Apps, Websites, Shortcuts, Hotkeys, AppleScripts, Terminal commands).
+2. Tune **Corner Trigger Sensitivity**, **Zone Trigger Sensitivity**, **Trigger Delay Timer**, and **Ignored Applications** in **Settings**.
+3. Pick your preferred **Visual Overlay** color (8 choices + duration) and **Sound** effect (14 macOS system sounds).
 
 ---
 
-## 7. Feature Comparison: Apple Hot Corners vs. SuperCorners
+## 7. Feature Comparison: Apple Hot Corners vs. Zones&Corners
 
-| Capability | Apple Native Hot Corners | SuperCorners Utility |
+| Capability | Apple Native Hot Corners | Zones&Corners Utility |
 | :--- | :--- | :--- |
-| **Trigger Locations** | 4 Corners only | 8 Zones (4 Corners + 4 Screen Edges) |
-| **Launch Applications** | ❌ No | ✅ Yes (Any application) |
-| **Simulate Hotkeys** | ❌ No | ✅ Yes (Any key combination) |
-| **Run macOS Shortcuts** | ❌ No (Quick Note only) | ✅ Yes (Full Shortcuts library) |
-| **Execute Shell / AppleScript** | ❌ No | ✅ Yes |
-| **Per-App Action Sets** | ❌ No (Global only) | ✅ Yes (Context-aware per app) |
-| **Modifier Key Protection** | ⚠️ Limited modifier option | ✅ Flexible (⌘, ⌥, ⌃, ⇧, or Click) |
-| **Visual Overlays & Toasts** | ❌ No | ✅ Subtle on-screen feedback |
-| **Privacy & Resource Usage** | Built into macOS | ✅ Native Swift, < 20MB RAM, 100% offline |
+| **Trigger Locations** | 4 Corners only | ✅ 8 Zones (4 Corners + 4 Screen Edges) |
+| **Built-In Actions** | Handful of system presets | ✅ 76 actions across 7 categories + Favorites |
+| **Apps, Shortcuts & Scripts** | ❌ No (Quick Note only) | ✅ Apps, URLs, Apple Shortcuts, Hotkeys, AppleScript & Terminal |
+| **Built-In Power Tools** | ❌ No | ✅ Spaces App Switcher + Clean RAM, OCR, Color Picker, Clipboard Count |
+| **Accidental Trigger Controls** | Manual modifier hold only | ✅ Trigger Delay Timer (0–5s), separate sensitivity sliders & Ignored Apps |
+| **Conflict Detection** | N/A | ✅ Detects & protects existing macOS System Hot Corners |
+| **Visual & Audio Feedback** | ❌ No | ✅ 8-color on-screen Visual Overlay & 14 system sounds |
+| **Licensing & Availability** | Built into macOS | ✅ 14-day free trial + optional one-time license (macOS 13+) |
 
 ---
 
 ## 8. Frequently Asked Questions
 
-### Can you trigger macOS Shortcuts from Hot Corners?
-Yes. SuperCorners includes native integration with the Apple Shortcuts framework, allowing any corner or edge zone to execute automated workflows with one mouse bump.
+### Can you trigger macOS Shortcuts and AppleScripts from Hot Corners?
+Yes. Zones&Corners includes configurable Template actions for running Apple Shortcuts, AppleScripts, Terminal commands, simulated key combinations, launching apps, and opening folders, files, or websites.
 
 ### How do you prevent accidental Hot Corner triggers on Mac?
-In SuperCorners, you can configure triggers to require holding a modifier key (such as ⌘ Command or ⌥ Option), increase trigger activation delay, or set the trigger mode to require a click when the cursor reaches the edge.
+In **Settings**, you can set a **Trigger Delay Timer** (from 0 to 5.0 seconds) so brief cursor brush-pasts do not activate, tune separate sensitivity sliders for corners and edge zones, and add specific apps to **Ignored Applications** so triggers pause whenever those apps are active.
 
-### Can you assign different Hot Corners for different apps?
-Yes. SuperCorners supports Per-App Action Sets. You can create custom profiles for your code editor, browser, video editor, and design software that activate automatically when those apps come to the foreground.
+### Will Zones&Corners conflict with Apple's built-in Hot Corners?
+No. Zones&Corners automatically checks for existing macOS System Hot Corners, prevents accidental conflicts in the configuration grid, and helps you review them during onboarding.
 
-### Does SuperCorners require disabling System Integrity Protection (SIP)?
-No. SuperCorners operates entirely within user space using standard macOS Accessibility APIs. It does not tamper with system files or kernel extensions.
+### Does Zones&Corners require disabling System Integrity Protection (SIP)?
+No. Zones&Corners runs entirely in user space using standard macOS Accessibility APIs (and standard Screen Recording or Automation prompts only when you trigger capture/OCR/color or scripting actions). It never disables SIP or installs kernel extensions.
 
 ---
 
-**Download SuperCorners for macOS:** [https://giant-turtle.com/super-corners.html](https://giant-turtle.com/super-corners.html)  
-Direct GitHub Releases: [https://github.com/daniyalmaster693/SuperCorners/releases/latest](https://github.com/daniyalmaster693/SuperCorners/releases/latest)
+**Download Zones&Corners for macOS (14-Day Free Trial):** [https://giant-turtle.com/zones-and-corners.html](https://giant-turtle.com/zones-and-corners.html)
