@@ -144,6 +144,60 @@
       ]
     }
     </script>
+
+    <style>
+        .app-cta-banner .btn-primary-cta.btn-download-verified {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+        }
+
+        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-main-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-main-text svg {
+            flex-shrink: 0;
+        }
+
+        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-verified-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: rgba(10, 14, 20, 0.85);
+            line-height: 1.2;
+            letter-spacing: 0.01em;
+        }
+
+        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-verified-text .apple-icon {
+            width: 12px;
+            height: 12px;
+            fill: #0a0e14;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+
+        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-verified-text .check-icon {
+            width: 12px;
+            height: 12px;
+            color: #052e16;
+            stroke-width: 3;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
@@ -263,10 +317,29 @@
             <div class="app-cta-banner macos-banner">
                 <div class="app-cta-content" style="width: 100%;">
                     <h3>Zones&amp;Corners for macOS</h3>
-                    <p>Unlock 8 screen zones, 76 built-in actions, Spaces App Switcher with Clean RAM, OCR, Color Picker, and Trigger Delays. Free 14-day trial, no card required.</p>
+                    <p>Unlock 8 screen zones, 76 built-in actions, Spaces App Switcher with Clean RAM, OCR, Color Picker, and Trigger Delays. Free demo, no card required.</p>
                     <div class="app-cta-buttons">
-                        <a href="../landing-assets/ZonesCorners.dmg" download class="btn-primary-cta">
-                            <i class="fab fa-apple"></i> Download ZonesCorners.dmg (14-Day Trial)
+                        <a href="../assets/apps/Zones%26Corners-demo.zip" download="Zones&amp;Corners-demo.zip" class="btn-primary-cta btn-download-verified">
+                            <span class="btn-main-text">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download Zones&amp;Corners for Free
+                            </span>
+                            <span class="btn-verified-text">
+                                <svg class="apple-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                </svg>
+                                Verified by Apple
+                                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            </span>
                         </a>
                         <a href="../zones-and-corners.html" class="btn-secondary-cta">
                             View App Landing Page &rarr;
@@ -324,7 +397,7 @@
                 <div class="step-badge">1</div>
                 <h4>Download &amp; Install the Notarized DMG</h4>
                 <p>
-                    Download <a href="../landing-assets/ZonesCorners.dmg" download>ZonesCorners.dmg</a>, open the disk image, and drag <strong>Zones&amp;Corners</strong> into your <code>/Applications</code> folder. Because the app is signed and notarized with an Apple Developer ID, no Terminal commands or Gatekeeper bypasses are needed. Your <strong>14-day free trial</strong> starts automatically with all triggers unlocked.
+                    Download <a href="../landing-assets/ZonesCorners.dmg" download>ZonesCorners.dmg</a>, open the disk image, and drag <strong>Zones&amp;Corners</strong> into your <code>/Applications</code> folder. Because the app is signed and notarized with an Apple Developer ID, no Terminal commands or Gatekeeper bypasses are needed. Launch the <strong>free demo</strong> right away—no payment info required.
                 </p>
             </div>
 
@@ -393,9 +466,9 @@
                             <td><span class="badge-good"><i class="fas fa-check"></i> 8-color on-screen overlay &amp; 14 system sound effects</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Availability &amp; Licensing</strong></td>
+                            <td><strong>Availability</strong></td>
                             <td>Integrated in macOS</td>
-                            <td><span class="badge-good">14-day free trial + one-time license (macOS 13+)</span></td>
+                            <td><span class="badge-good">Free demo (macOS 13+)</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -461,10 +534,29 @@
             <div class="app-cta-banner macos-banner" style="margin-top: 2.5rem;">
                 <div class="app-cta-content" style="width: 100%;">
                     <h3>Try Zones&amp;Corners for macOS</h3>
-                    <p>14-day free trial with all triggers unlocked, no payment info required — then an optional one-time license. Compatible with macOS 13.0 (Ventura) or later.</p>
+                    <p>Free demo with no payment info required. Compatible with macOS 13.0 (Ventura) or later.</p>
                     <div class="app-cta-buttons">
-                        <a href="../landing-assets/ZonesCorners.dmg" download class="btn-primary-cta">
-                            <i class="fab fa-apple"></i> Download ZonesCorners.dmg
+                        <a href="../assets/apps/Zones%26Corners-demo.zip" download="Zones&amp;Corners-demo.zip" class="btn-primary-cta btn-download-verified">
+                            <span class="btn-main-text">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download Zones&amp;Corners for Free
+                            </span>
+                            <span class="btn-verified-text">
+                                <svg class="apple-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                </svg>
+                                Verified by Apple
+                                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            </span>
                         </a>
                         <a href="../zones-and-corners.html" class="btn-secondary-cta">
                             Visit Landing Page &rarr;
