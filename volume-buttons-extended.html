@@ -69,8 +69,8 @@
         </nav>
 
         <header class="app-hero">
-            <h1 class="landing-title" style="font-size: 4rem; margin-bottom: 1rem;">Volume Buttons Extended</h1>
-            <p class="landing-subtitle" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 3rem;">Hardware Buttons, Infinite
+            <h1 class="landing-title">Volume Buttons Extended</h1>
+            <p class="landing-subtitle">Hardware Buttons, Infinite
                 Possibilities.</p>
             <img src="assets/images/volume-promo2.png" alt="Volume Buttons Extended Hero">
         </header>
@@ -81,7 +81,7 @@
                 physical back button etc.</p>
 
             <div class="featured-grid"
-                style="margin-top: 4rem; text-align: left; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                style="margin-top: 4rem; text-align: left; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));">
                 <div class="app-card" style="padding: 1.5rem;">
                     <i class="fas fa-sliders-h"
                         style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
@@ -102,7 +102,7 @@
             </div>
 
             <div
-                style="margin-top: 4rem; padding: 2rem; background: rgba(255,165,0,0.1); border-left: 4px solid #ff813f; border-radius: 8px; text-align: left;">
+                style="margin-top: 4rem; padding: clamp(1.25rem, 4vw, 2rem); background: rgba(255,165,0,0.1); border-left: 4px solid #ff813f; border-radius: 8px; text-align: left;">
                 <h3 style="color: #ff813f; margin-bottom: 1rem;">Accessibility Service Disclosure</h3>
                 <p style="font-size: 0.95rem; color: var(--text-main);">This app uses the AccessibilityService API. The
                     AccessibilityService permission is required to map volume buttons to various phone functions like

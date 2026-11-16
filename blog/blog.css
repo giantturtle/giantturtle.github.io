@@ -229,6 +229,24 @@ figure {
     font-size: 1.1rem;
     line-height: 1.8;
     color: #d1d5db;
+    overflow-wrap: break-word;
+}
+
+.article-content code {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.article-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.step-card,
+.callout,
+.faq-card,
+.toc-box {
+    overflow-wrap: break-word;
 }
 
 .article-content p {
@@ -756,8 +774,14 @@ figure {
 .related-grid,
 .related-posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 1.5rem;
+}
+
+.related-grid > *,
+.related-posts-grid > *,
+.blog-grid > * {
+    min-width: 0;
 }
 
 .related-card {
@@ -833,7 +857,7 @@ figure {
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -891,6 +915,8 @@ figure {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding-top: 1rem;
     font-size: 0.85rem;
@@ -909,11 +935,44 @@ figure {
 @media (max-width: 768px) {
     .article-container,
     .blog-container {
-        padding-top: 5.5rem;
+        padding: 5.5rem 1.25rem 3.5rem;
     }
 
     .article-title {
-        font-size: 1.85rem;
+        font-size: clamp(1.65rem, 6vw, 2rem);
+    }
+
+    .article-lead,
+    .blog-hero p {
+        font-size: 1.05rem;
+    }
+
+    .article-content {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .article-content h2 {
+        font-size: 1.45rem;
+        margin-top: 2.5rem;
+    }
+
+    .article-content h3 {
+        font-size: 1.2rem;
+        margin-top: 1.8rem;
+    }
+
+    .toc-box,
+    .step-card,
+    .faq-card,
+    .author-card {
+        padding: 1.25rem;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 0.75rem 0.9rem;
+        font-size: 0.88rem;
     }
 
     .app-cta-banner {
@@ -929,5 +988,39 @@ figure {
     .author-card {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-container,
+    .blog-container {
+        padding: 4.75rem 1rem 3rem;
+    }
+
+    .blog-card-body {
+        padding: 1.25rem;
+    }
+
+    .blog-card-title {
+        font-size: 1.15rem;
+    }
+
+    .callout {
+        padding: 1rem 1.15rem;
+    }
+
+    .app-cta-banner {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .btn-primary-cta,
+    .article-content .btn-primary-cta,
+    .app-cta-banner .btn-primary-cta,
+    .btn-secondary-cta,
+    .article-content .btn-secondary-cta,
+    .app-cta-banner .btn-secondary-cta {
+        width: 100%;
+        justify-content: center;
     }
 }

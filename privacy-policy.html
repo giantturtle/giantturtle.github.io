@@ -50,6 +50,8 @@
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         .ambient-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
@@ -65,7 +67,7 @@
 
         .topbar {
             max-width: 860px; margin: 0 auto; padding: 1.5rem 1.5rem 0;
-            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem 1rem;
         }
         .brand { display: flex; align-items: center; gap: 0.6rem; color: var(--clr-text); text-decoration: none; font-weight: 700; }
         .brand img { width: 32px; height: 32px; border-radius: 8px; }
@@ -79,6 +81,7 @@
             border-radius: 24px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            overflow-wrap: break-word;
         }
 
         h1 {
@@ -103,13 +106,16 @@
         ul, ol { padding-left: 1.4rem; display: grid; gap: 0.55rem; }
         li::marker { color: var(--clr-primary); }
         strong { color: var(--clr-text); font-weight: 600; }
-        a { color: var(--clr-primary-light); text-decoration: none; }
+        a { color: var(--clr-primary-light); text-decoration: none; overflow-wrap: anywhere; }
         a:hover { text-decoration: underline; }
 
-        footer { text-align: center; color: var(--clr-text-dim); font-size: 0.85rem; padding: 0 1.5rem 2.5rem; }
+        footer { text-align: center; color: var(--clr-text-dim); font-size: 0.85rem; padding: 0 1.5rem 2.5rem; line-height: 1.8; }
         footer a { color: var(--clr-text-muted); margin: 0 0.5rem; }
 
-        @media (max-width: 640px) { main { padding: 1.75rem 1.25rem; margin: 1.25rem 0.75rem 2rem; border-radius: 18px; } }
+        @media (max-width: 640px) {
+            .topbar { padding: 1.25rem 1rem 0; }
+            main { padding: 1.75rem 1.25rem; margin: 1.25rem 0.75rem 2rem; border-radius: 18px; }
+        }
     </style>
 </head>
 

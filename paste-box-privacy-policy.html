@@ -52,9 +52,21 @@
         a {
             color: #4a9eff;
             text-decoration: none;
+            overflow-wrap: anywhere;
         }
         a:hover {
             text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .container {
+                padding: 24px 18px;
+            }
+            h1 {
+                font-size: 1.65rem;
+            }
         }
     </style>
 </head>
