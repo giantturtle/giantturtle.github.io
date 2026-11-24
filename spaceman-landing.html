@@ -73,17 +73,17 @@
             --clr-primary-light: #a78bfa;
             --clr-primary-glow: rgba(124, 106, 239, 0.35);
             --clr-accent: #06d6a0;
-            --clr-text: #e8e6f0;
-            --clr-text-muted: #9892b5;
-            --clr-text-dim: #6b6590;
-            --clr-border: rgba(255, 255, 255, 0.06);
-            --clr-glass: rgba(18, 18, 42, 0.65);
-            --clr-glass-border: rgba(255, 255, 255, 0.08);
+            --clr-text: #edeaf6;
+            --clr-text-muted: #a29cbf;
+            --clr-text-dim: #736d96;
+            --clr-border: rgba(255, 255, 255, 0.07);
+            --clr-glass: rgba(18, 18, 42, 0.68);
+            --clr-glass-border: rgba(255, 255, 255, 0.09);
             --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
             --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-smooth: 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         html {
@@ -101,6 +101,17 @@
             overflow-x: hidden;
             overflow-x: clip;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--clr-primary-light);
+            outline-offset: 3px;
+        }
+
+        section[id] {
+            scroll-margin-top: 84px;
         }
 
         /* ========== AMBIENT BACKGROUND ========== */
@@ -110,29 +121,33 @@
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
+            background-image: radial-gradient(rgba(167, 139, 250, 0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, #000 25%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 25%, #000 25%, transparent 100%);
         }
 
         .ambient-bg::before {
             content: '';
             position: absolute;
-            width: 800px;
-            height: 800px;
+            width: 820px;
+            height: 820px;
             border-radius: 50%;
             background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
-            top: -200px;
-            right: -200px;
+            top: -220px;
+            right: -180px;
             animation: ambientFloat 20s ease-in-out infinite;
         }
 
         .ambient-bg::after {
             content: '';
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 640px;
+            height: 640px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(6, 214, 160, 0.12) 0%, transparent 70%);
-            bottom: -150px;
-            left: -150px;
+            background: radial-gradient(circle, rgba(6, 214, 160, 0.13) 0%, transparent 70%);
+            bottom: -160px;
+            left: -160px;
             animation: ambientFloat 25s ease-in-out infinite reverse;
         }
 
@@ -144,11 +159,11 @@
             }
 
             33% {
-                transform: translate(60px, -40px) scale(1.1);
+                transform: translate(60px, -40px) scale(1.08);
             }
 
             66% {
-                transform: translate(-30px, 50px) scale(0.95);
+                transform: translate(-30px, 50px) scale(0.96);
             }
         }
 
@@ -160,14 +175,16 @@
             right: 0;
             z-index: 100;
             padding: 16px 32px;
-            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth);
+            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+            border-bottom: 1px solid transparent;
         }
 
         .nav.scrolled {
-            background: var(--clr-glass);
+            background: rgba(11, 11, 26, 0.78);
             backdrop-filter: blur(24px) saturate(1.5);
             -webkit-backdrop-filter: blur(24px) saturate(1.5);
-            border-bottom: 1px solid var(--clr-glass-border);
+            border-bottom-color: var(--clr-glass-border);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
         }
 
         .nav-inner {
@@ -190,7 +207,8 @@
         .nav-brand img {
             width: 36px;
             height: 36px;
-            border-radius: 8px;
+            border-radius: 9px;
+            box-shadow: 0 4px 14px rgba(124, 106, 239, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         .nav-brand span {
@@ -202,7 +220,7 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 8px;
             list-style: none;
         }
 
@@ -211,33 +229,20 @@
             color: var(--clr-text-muted);
             font-size: 0.9rem;
             font-weight: 500;
-            transition: color 0.3s;
+            padding: 8px 14px;
+            border-radius: 99px;
+            transition: color 0.25s, background 0.25s;
             white-space: nowrap;
         }
 
         .nav-links a:hover {
             color: var(--clr-text);
-        }
-
-        .nav-links a.nav-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--clr-border);
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            color: var(--clr-text-muted);
-            transition: all 0.3s;
-        }
-
-        .nav-links a.nav-btn:hover {
-            color: var(--clr-text);
-            border-color: rgba(255, 255, 255, 0.15);
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* ========== SECTION SHARED ========== */
         section {
-            padding: 120px 32px;
+            padding: 112px 32px;
         }
 
         .container {
@@ -261,70 +266,132 @@
             content: '';
             width: 20px;
             height: 2px;
-            background: var(--clr-primary);
-            border-radius: 1px;
+            background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+            border-radius: 2px;
         }
 
         h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-size: clamp(2rem, 4vw, 2.75rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.15;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .section-desc {
-            font-size: 1.1rem;
+            font-size: 1.08rem;
             color: var(--clr-text-muted);
             max-width: 540px;
             line-height: 1.7;
         }
 
+        /* ========== MEDIA FRAME (SCREENSHOT STAGE) ========== */
+        .media-stage {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .media-stage::before {
+            content: '';
+            position: absolute;
+            width: 82%;
+            height: 82%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 106, 239, 0.22) 0%, rgba(6, 214, 160, 0.06) 45%, transparent 72%);
+            filter: blur(36px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .media-frame {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            border-radius: calc(var(--radius-lg) + 4px);
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.015));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 28px 70px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.09);
+            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.35s, box-shadow 0.45s;
+            max-width: 100%;
+        }
+
+        .media-frame:hover {
+            transform: translateY(-6px);
+            border-color: rgba(124, 106, 239, 0.3);
+            box-shadow:
+                0 34px 82px rgba(0, 0, 0, 0.58),
+                0 0 0 1px rgba(124, 106, 239, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .media-frame img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            border-radius: calc(var(--radius-lg) - 6px);
+        }
+
+        .media-frame--portrait img {
+            max-height: 450px;
+        }
+
+        .media-frame--landscape img {
+            max-width: min(460px, 100%);
+        }
+
         /* ========== HERO ========== */
         .hero {
-            min-height: 100vh;
+            min-height: min(94vh, 860px);
             display: flex;
             align-items: center;
-            padding-top: 100px;
+            padding-top: 112px;
+            padding-bottom: 84px;
             overflow-x: hidden;
             overflow-x: clip;
         }
 
         .hero .container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.05fr 0.95fr;
             gap: 64px;
             align-items: center;
         }
 
         .hero .container > *,
         .features-header > *,
-        .showcase .container > *,
-        .prefs .container > * {
+        .showcase-row > * {
             min-width: 0;
         }
 
         .hero-text h1 {
-            font-size: clamp(2.6rem, 5vw, 3.8rem);
+            font-size: clamp(2.65rem, 5vw, 3.85rem);
             font-weight: 800;
             letter-spacing: -0.04em;
-            line-height: 1.08;
+            line-height: 1.06;
             margin-bottom: 24px;
         }
 
         .hero-text h1 .gradient-text {
-            background: linear-gradient(135deg, var(--clr-primary-light), var(--clr-accent));
+            background: linear-gradient(135deg, var(--clr-primary-light) 0%, var(--clr-accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-tagline {
-            font-size: 1.2rem;
+            font-size: 1.16rem;
             color: var(--clr-text-muted);
-            line-height: 1.7;
-            margin-bottom: 40px;
-            max-width: 480px;
+            line-height: 1.72;
+            margin-bottom: 36px;
+            max-width: 500px;
         }
 
         .hero-actions {
@@ -339,21 +406,24 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--clr-primary), #5b4acf);
+            gap: 5px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #8775f5 0%, var(--clr-primary) 45%, #5b4acf 100%);
             color: #fff;
             font-family: var(--font);
             font-size: 1rem;
             font-weight: 600;
-            border: none;
-            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 14px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
+            transition: transform 0.25s, box-shadow 0.3s, filter 0.25s;
             text-decoration: none;
             position: relative;
             overflow: hidden;
             text-align: center;
+            box-shadow:
+                0 10px 28px rgba(124, 106, 239, 0.32),
+                inset 0 1px 0 rgba(255, 255, 255, 0.28);
         }
 
         .btn-primary .btn-main-text {
@@ -361,7 +431,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-size: 1rem;
+            font-size: 1.02rem;
             font-weight: 600;
             line-height: 1.25;
         }
@@ -373,7 +443,7 @@
             gap: 6px;
             font-size: 0.74rem;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.88);
             line-height: 1.2;
             letter-spacing: 0.01em;
         }
@@ -399,28 +469,21 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 60%);
             opacity: 0;
             transition: opacity 0.3s;
+            pointer-events: none;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px var(--clr-primary-glow);
+            box-shadow:
+                0 14px 36px rgba(124, 106, 239, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.34);
         }
 
         .btn-primary:hover::after {
             opacity: 1;
-        }
-
-        .btn-primary.coming-soon {
-            cursor: default;
-            opacity: 0.85;
-        }
-
-        .btn-primary.coming-soon:hover {
-            transform: none;
-            box-shadow: none;
         }
 
         .btn-secondary {
@@ -428,13 +491,13 @@
             align-items: center;
             gap: 8px;
             padding: 16px 28px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.03);
             color: var(--clr-text-muted);
             font-family: var(--font);
             font-size: 1rem;
             font-weight: 500;
             border: 1px solid var(--clr-border);
-            border-radius: var(--radius-sm);
+            border-radius: 14px;
             cursor: pointer;
             transition: color 0.3s, border-color 0.3s, background 0.3s;
             text-decoration: none;
@@ -442,8 +505,8 @@
 
         .btn-secondary:hover {
             color: var(--clr-text);
-            border-color: rgba(255, 255, 255, 0.15);
-            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .hero-badge {
@@ -451,13 +514,14 @@
             align-items: center;
             gap: 8px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--clr-accent);
             margin-bottom: 24px;
-            padding: 6px 16px;
+            padding: 7px 16px;
             border-radius: 99px;
             background: rgba(6, 214, 160, 0.08);
-            border: 1px solid rgba(6, 214, 160, 0.15);
+            border: 1px solid rgba(6, 214, 160, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
         .hero-badge .pulse-dot {
@@ -465,6 +529,7 @@
             height: 8px;
             border-radius: 50%;
             background: var(--clr-accent);
+            box-shadow: 0 0 10px rgba(6, 214, 160, 0.7);
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -489,94 +554,126 @@
             align-items: center;
         }
 
-        .hero-visual img,
-        .hero-visual video,
         .hero-video-wrapper {
             width: 100%;
-            max-width: 520px;
-            border-radius: var(--radius-lg);
-            box-shadow:
-                0 24px 80px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .hero-visual:hover img,
-        .hero-visual:hover video,
-        .hero-visual:hover .hero-video-wrapper {
-            transform: translateY(-8px) scale(1.02);
-        }
-
-        .hero-video-wrapper {
+            max-width: 540px;
             aspect-ratio: 16 / 9;
+            padding: 8px;
+            border-radius: calc(var(--radius-lg) + 4px);
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            box-shadow:
+                0 28px 80px rgba(0, 0, 0, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
             transform: translateZ(0);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.35s;
+        }
+
+        .hero-visual:hover .hero-video-wrapper {
+            transform: translateY(-6px) scale(1.015);
+            border-color: rgba(124, 106, 239, 0.32);
         }
 
         .hero-video-wrapper iframe {
             width: 100%;
             height: 100%;
             border: none;
+            border-radius: calc(var(--radius-lg) - 6px);
             display: block;
+            background: #070712;
         }
 
         .hero-visual .glow-ring {
             position: absolute;
-            width: 110%;
-            height: 110%;
+            width: 112%;
+            height: 112%;
             border-radius: 50%;
-            background: radial-gradient(ellipse, var(--clr-primary-glow) 0%, transparent 60%);
+            background: radial-gradient(ellipse, var(--clr-primary-glow) 0%, rgba(6, 214, 160, 0.09) 42%, transparent 66%);
             z-index: -1;
-            filter: blur(40px);
-            animation: glowPulse 4s ease-in-out infinite;
+            filter: blur(42px);
+            animation: glowPulse 4.5s ease-in-out infinite;
         }
 
         @keyframes glowPulse {
 
             0%,
             100% {
-                opacity: 0.4;
+                opacity: 0.45;
                 transform: scale(1);
             }
 
             50% {
-                opacity: 0.7;
+                opacity: 0.78;
                 transform: scale(1.05);
             }
         }
 
+        /* ========== MACOS BADGE ========== */
+        .macos-badge {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            color: var(--clr-text-dim);
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid var(--clr-border);
+            max-width: 480px;
+        }
+
+        .macos-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--clr-text-muted);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
         /* ========== WHAT'S NEW SECTION ========== */
         .whats-new {
-            padding: 96px 32px;
-            background: var(--clr-bg);
+            padding: 88px 32px;
+            background: linear-gradient(180deg, rgba(18, 18, 42, 0.35) 0%, var(--clr-bg) 100%);
             position: relative;
+            border-top: 1px solid var(--clr-border);
             border-bottom: 1px solid var(--clr-border);
         }
 
         .whats-new-header {
-            max-width: 640px;
-            margin-bottom: 40px;
+            max-width: 620px;
+            margin: 0 auto 44px;
+            text-align: center;
+        }
+
+        .whats-new-header .section-desc {
+            margin: 0 auto;
         }
 
         .release-timeline {
-            max-width: 840px;
+            max-width: 960px;
+            margin: 0 auto;
         }
 
         .release-card {
-            background: var(--clr-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--clr-glass-border);
-            border-radius: var(--radius-md);
+            background: linear-gradient(165deg, rgba(26, 26, 58, 0.72), rgba(18, 18, 42, 0.72));
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(124, 106, 239, 0.2);
+            border-radius: var(--radius-lg);
             padding: 32px 36px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+            box-shadow:
+                0 20px 54px rgba(0, 0, 0, 0.34),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
             transition: transform var(--transition-smooth), border-color 0.3s, box-shadow 0.3s;
         }
 
         .release-card:hover {
             transform: translateY(-2px);
-            border-color: rgba(124, 106, 239, 0.28);
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+            border-color: rgba(124, 106, 239, 0.34);
+            box-shadow:
+                0 26px 64px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .release-card-header {
@@ -585,7 +682,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
-            padding-bottom: 20px;
+            padding-bottom: 22px;
             border-bottom: 1px solid var(--clr-border);
             margin-bottom: 24px;
         }
@@ -618,27 +715,42 @@
 
         .release-badge.latest {
             background: rgba(6, 214, 160, 0.12);
-            border: 1px solid rgba(6, 214, 160, 0.3);
+            border: 1px solid rgba(6, 214, 160, 0.32);
             color: var(--clr-accent);
         }
 
         .release-date {
             font-size: 0.85rem;
-            color: var(--clr-text-dim);
+            color: var(--clr-text-muted);
             font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--clr-border);
         }
 
         .release-changelog-list {
             list-style: none;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
         .changelog-item {
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+            gap: 12px;
+            padding: 22px 24px;
+            border-radius: var(--radius-md);
+            background: rgba(11, 11, 26, 0.48);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+        .changelog-item:hover {
+            border-color: rgba(124, 106, 239, 0.25);
+            background: rgba(18, 18, 42, 0.65);
         }
 
         .change-tag {
@@ -647,17 +759,16 @@
             align-items: center;
             padding: 4px 10px;
             border-radius: 6px;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 2px;
+            letter-spacing: 0.06em;
         }
 
         .change-tag.tag-feature {
-            background: rgba(124, 106, 239, 0.15);
+            background: rgba(124, 106, 239, 0.16);
             color: var(--clr-primary-light);
-            border: 1px solid rgba(124, 106, 239, 0.3);
+            border: 1px solid rgba(124, 106, 239, 0.32);
         }
 
         .change-tag.tag-improvement {
@@ -668,39 +779,43 @@
 
         .change-content strong {
             display: block;
-            font-size: 1rem;
+            font-size: 1.04rem;
             font-weight: 600;
             color: var(--clr-text);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
         }
 
         .change-content p {
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             color: var(--clr-text-muted);
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
-        /* ========== FEATURES ========== */
+        /* ========== FEATURES INTRO ========== */
         .features {
             background: linear-gradient(180deg, var(--clr-bg) 0%, var(--clr-surface) 100%);
-            padding-bottom: 60px;
+            padding-top: 104px;
+            padding-bottom: 84px;
         }
 
         .features-header {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 72px;
             align-items: center;
         }
 
+        /* ========== FEATURE CARDS ========== */
         .features-cards {
-            background: var(--clr-bg);
-            padding: 60px 32px 80px;
+            background: linear-gradient(180deg, var(--clr-bg) 0%, rgba(18, 18, 42, 0.42) 50%, var(--clr-bg) 100%);
+            padding: 84px 32px 72px;
+            border-top: 1px solid var(--clr-border);
         }
 
         .features-cards-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 44px;
         }
 
         .features-grid {
@@ -710,13 +825,22 @@
         }
 
         .feature-card {
-            padding: 36px 32px;
+            padding: 32px 30px;
             border-radius: var(--radius-md);
-            background: var(--clr-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: linear-gradient(165deg, rgba(26, 26, 58, 0.56), rgba(18, 18, 42, 0.68));
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--clr-glass-border);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
             transition: transform var(--transition-smooth), border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(124, 106, 239, 0.34);
+            box-shadow:
+                0 20px 52px rgba(0, 0, 0, 0.36),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .feature-card--wide {
@@ -724,72 +848,101 @@
             display: flex;
             align-items: center;
             gap: 28px;
+            padding: 34px 36px;
+            background: linear-gradient(135deg, rgba(124, 106, 239, 0.14) 0%, rgba(6, 214, 160, 0.05) 55%, rgba(18, 18, 42, 0.78) 100%);
+            border-color: rgba(124, 106, 239, 0.28);
         }
 
         .feature-card--wide .feature-icon {
             flex-shrink: 0;
             margin-bottom: 0;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(124, 106, 239, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            width: 58px;
+            height: 58px;
+            background: linear-gradient(135deg, rgba(124, 106, 239, 0.24), rgba(6, 214, 160, 0.14));
+            border-color: rgba(124, 106, 239, 0.36);
+            color: var(--clr-accent);
         }
 
         .feature-icon {
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, rgba(124, 106, 239, 0.12), rgba(124, 106, 239, 0.04));
-            border: 1px solid rgba(124, 106, 239, 0.15);
+            color: var(--clr-primary-light);
+            background: linear-gradient(135deg, rgba(124, 106, 239, 0.18), rgba(124, 106, 239, 0.05));
+            border: 1px solid rgba(124, 106, 239, 0.24);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, color 0.3s, border-color 0.3s, background 0.3s;
+        }
+
+        .feature-icon svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.06);
+            color: var(--clr-accent);
+            border-color: rgba(6, 214, 160, 0.32);
+            background: linear-gradient(135deg, rgba(124, 106, 239, 0.22), rgba(6, 214, 160, 0.12));
         }
 
         .feature-card h3 {
-            font-size: 1.15rem;
+            font-size: 1.14rem;
             font-weight: 700;
             margin-bottom: 10px;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.015em;
+            color: var(--clr-text);
         }
 
         .feature-card p {
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             color: var(--clr-text-muted);
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
-        /* ========== STYLES SHOWCASE ========== */
-        .showcase {
-            background: var(--clr-surface);
+        /* ========== PREFERENCES / FEATURE SHOWCASE ROWS ========== */
+        .prefs {
+            background: linear-gradient(180deg, var(--clr-surface) 0%, var(--clr-bg) 100%);
+            padding-top: 72px;
+            padding-bottom: 112px;
         }
 
-        .showcase .container {
+        .showcase-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 88px;
+        }
+
+        .showcase-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 72px;
             align-items: center;
         }
 
-        .showcase-visual {
-            position: relative;
+        .showcase-row + .showcase-row {
+            padding-top: 84px;
+            border-top: 1px solid rgba(255, 255, 255, 0.055);
         }
 
-        .showcase-visual img {
-            width: 100%;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+        .showcase-row--visual-left .showcase-visual {
+            order: -1;
+        }
+
+        .showcase-copy h2 {
+            font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+            margin-bottom: 16px;
         }
 
         .style-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 28px;
+            margin-top: 26px;
         }
 
         .style-pill {
@@ -797,45 +950,23 @@
             border-radius: 99px;
             font-size: 0.85rem;
             font-weight: 500;
-            background: rgba(124, 106, 239, 0.08);
-            border: 1px solid rgba(124, 106, 239, 0.15);
+            background: rgba(124, 106, 239, 0.1);
+            border: 1px solid rgba(124, 106, 239, 0.22);
             color: var(--clr-primary-light);
-            transition: background 0.3s, transform 0.2s;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: background 0.25s, border-color 0.25s, transform 0.2s, color 0.25s;
         }
 
         .style-pill:hover {
-            background: rgba(124, 106, 239, 0.15);
+            background: rgba(124, 106, 239, 0.18);
+            border-color: rgba(124, 106, 239, 0.38);
+            color: #ffffff;
             transform: translateY(-1px);
-        }
-
-        /* ========== PREFERENCES SECTION ========== */
-        .prefs {
-            background: linear-gradient(180deg, var(--clr-surface) 0%, var(--clr-bg) 100%);
-            padding-top: 60px;
-        }
-
-        .prefs .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .prefs-visual {
-            order: -1;
-        }
-
-        .prefs-visual img {
-            width: 100%;
-            max-width: 480px;
-            height: auto;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
 
         .check-list {
             list-style: none;
-            margin-top: 24px;
+            margin-top: 26px;
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -845,23 +976,27 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            font-size: 1rem;
+            font-size: 0.98rem;
             color: var(--clr-text-muted);
         }
 
         .check-list li .check-icon {
             flex-shrink: 0;
-            width: 22px;
-            height: 22px;
-            border-radius: 6px;
-            background: rgba(6, 214, 160, 0.1);
-            border: 1px solid rgba(6, 214, 160, 0.2);
+            width: 24px;
+            height: 24px;
+            border-radius: 7px;
+            background: rgba(6, 214, 160, 0.12);
+            border: 1px solid rgba(6, 214, 160, 0.26);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
             color: var(--clr-accent);
-            margin-top: 2px;
+            margin-top: 1px;
+        }
+
+        .check-list li .check-icon svg {
+            width: 13px;
+            height: 13px;
         }
 
         /* ========== CTA ========== */
@@ -869,20 +1004,34 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            padding-top: 64px;
+            padding-bottom: 112px;
         }
 
-        .cta::before {
+        .cta-panel {
+            position: relative;
+            z-index: 1;
+            padding: 72px 44px;
+            border-radius: 28px;
+            background:
+                radial-gradient(ellipse 75% 65% at 50% 0%, rgba(124, 106, 239, 0.2), transparent 72%),
+                linear-gradient(180deg, rgba(22, 22, 50, 0.78) 0%, rgba(15, 15, 36, 0.84) 100%);
+            border: 1px solid rgba(124, 106, 239, 0.24);
+            box-shadow:
+                0 28px 80px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .cta-panel::after {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 420px;
+            height: 420px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: blur(60px);
-            opacity: 0.3;
+            background: radial-gradient(circle, rgba(6, 214, 160, 0.1) 0%, transparent 70%);
+            bottom: -220px;
+            right: -120px;
             pointer-events: none;
         }
 
@@ -892,7 +1041,7 @@
         }
 
         .cta .section-desc {
-            margin: 0 auto 40px;
+            margin: 0 auto 38px;
             text-align: center;
         }
 
@@ -905,54 +1054,64 @@
 
         /* ========== RELATED GUIDE BOX ========== */
         .related-guide-box {
-            margin: 4.5rem auto 0;
-            max-width: 800px;
-            padding: 2rem;
-            background: var(--clr-glass);
+            margin: 3.25rem auto 0;
+            max-width: 820px;
+            padding: 28px 32px;
+            background: linear-gradient(160deg, rgba(26, 26, 58, 0.6), rgba(18, 18, 42, 0.72));
             border: 1px solid var(--clr-glass-border);
             border-radius: var(--radius-md);
             text-align: left;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: relative;
             z-index: 2;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .related-guide-box:hover {
+            border-color: rgba(124, 106, 239, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .related-guide-box h3 {
             color: var(--clr-primary-light);
             margin-bottom: 0.6rem;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.65rem;
         }
 
         .related-guide-box p {
             color: var(--clr-text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-            line-height: 1.6;
+            margin-bottom: 1.15rem;
+            line-height: 1.65;
         }
 
         .related-guide-box .guide-link-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--clr-primary-light);
+            color: var(--clr-accent);
             font-weight: 600;
             font-size: 0.95rem;
             text-decoration: none;
-            transition: color 0.3s ease, transform 0.2s ease;
+            transition: color 0.25s ease, transform 0.2s ease;
         }
 
         .related-guide-box .guide-link-btn:hover {
             color: #ffffff;
-            text-decoration: underline;
+            transform: translateX(3px);
         }
 
         /* ========== FOOTER ========== */
         footer {
-            padding: 48px 32px;
+            padding: 44px 32px;
             border-top: 1px solid var(--clr-border);
+            background: rgba(8, 8, 20, 0.55);
         }
 
         .footer-inner {
@@ -961,6 +1120,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
         }
 
         .footer-brand {
@@ -972,7 +1132,7 @@
         .footer-brand img {
             width: 28px;
             height: 28px;
-            border-radius: 6px;
+            border-radius: 7px;
         }
 
         .footer-brand span {
@@ -987,7 +1147,7 @@
 
         .footer-links {
             display: flex;
-            gap: 24px;
+            gap: 22px;
             flex-wrap: wrap;
             justify-content: center;
             list-style: none;
@@ -997,19 +1157,19 @@
             font-size: 0.85rem;
             color: var(--clr-text-dim);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.25s;
         }
 
         .footer-links a:hover {
-            color: var(--clr-text-muted);
+            color: var(--clr-text);
         }
 
         /* ========== SCROLL ANIMATIONS ========== */
         .reveal {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(28px);
+            transition: opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .reveal.visible {
@@ -1018,23 +1178,42 @@
         }
 
         .reveal-delay-1 {
-            transition-delay: 0.1s;
+            transition-delay: 0.08s;
         }
 
         .reveal-delay-2 {
-            transition-delay: 0.2s;
+            transition-delay: 0.16s;
         }
 
         .reveal-delay-3 {
-            transition-delay: 0.3s;
+            transition-delay: 0.24s;
         }
 
         .reveal-delay-4 {
-            transition-delay: 0.4s;
+            transition-delay: 0.32s;
         }
 
         .reveal-delay-5 {
-            transition-delay: 0.5s;
+            transition-delay: 0.4s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .ambient-bg::before,
+            .ambient-bg::after,
+            .hero-badge .pulse-dot,
+            .hero-visual .glow-ring {
+                animation: none;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
         }
 
         /* ========== RESPONSIVE ========== */
@@ -1042,7 +1221,8 @@
             .hero {
                 min-height: auto;
                 align-items: flex-start;
-                padding-top: 96px;
+                padding-top: 100px;
+                padding-bottom: 72px;
             }
 
             .hero .container {
@@ -1065,9 +1245,19 @@
                 margin-right: auto;
             }
 
+            .macos-badge {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
+            }
+
+            .release-changelog-list {
+                grid-template-columns: 1fr;
+            }
+
             .features-grid {
                 grid-template-columns: 1fr;
-                max-width: 480px;
+                max-width: 520px;
                 margin-left: auto;
                 margin-right: auto;
             }
@@ -1077,6 +1267,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0;
+                padding: 32px 30px;
             }
 
             .feature-card--wide .feature-icon {
@@ -1084,20 +1275,26 @@
             }
 
             .features-header,
-            .showcase .container,
-            .prefs .container {
+            .showcase-row {
                 grid-template-columns: 1fr;
-                gap: 48px;
+                gap: 40px;
                 text-align: center;
             }
 
-            .prefs-visual {
-                order: 0;
-                align-items: center;
+            .showcase-stack {
+                gap: 56px;
             }
 
-            .prefs-visual img {
-                margin: 0 auto;
+            .showcase-row + .showcase-row {
+                padding-top: 56px;
+            }
+
+            .showcase-row--visual-left .showcase-visual {
+                order: 0;
+            }
+
+            .media-frame--portrait img {
+                max-height: 420px;
             }
 
             .section-desc {
@@ -1119,6 +1316,10 @@
                 width: 100%;
             }
 
+            .cta-panel {
+                padding: 56px 28px;
+            }
+
             .footer-inner {
                 flex-direction: column;
                 gap: 16px;
@@ -1130,26 +1331,18 @@
             }
 
             .nav-links {
-                display: flex;
-                gap: 18px;
+                gap: 4px;
             }
 
-            .whats-new-header {
-                text-align: center;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .release-timeline {
-                margin-left: auto;
-                margin-right: auto;
+            .nav-links a {
+                padding: 6px 10px;
             }
         }
 
         @media (max-width: 560px) {
             .nav {
                 padding: 12px 16px;
-                background: rgba(11, 11, 26, 0.85);
+                background: rgba(11, 11, 26, 0.88);
                 backdrop-filter: blur(20px) saturate(1.4);
                 -webkit-backdrop-filter: blur(20px) saturate(1.4);
                 border-bottom: 1px solid var(--clr-glass-border);
@@ -1163,7 +1356,7 @@
             .nav-links {
                 width: 100%;
                 justify-content: space-between;
-                gap: 10px;
+                gap: 4px;
             }
 
             .hero {
@@ -1181,11 +1374,12 @@
             }
 
             .features-cards {
-                padding: 48px 20px 64px;
+                padding: 56px 20px 64px;
             }
 
             .nav-links a {
-                font-size: 0.85rem;
+                font-size: 0.84rem;
+                padding: 6px 8px;
             }
 
             .hero-text h1 {
@@ -1193,7 +1387,7 @@
             }
 
             .hero-tagline {
-                font-size: 1.05rem;
+                font-size: 1.04rem;
             }
 
             .btn-primary,
@@ -1203,13 +1397,31 @@
                 max-width: 100%;
             }
 
+            .media-frame {
+                padding: 8px;
+                border-radius: 20px;
+            }
+
+            .media-frame img {
+                border-radius: 14px;
+            }
+
+            .cta-panel {
+                padding: 44px 20px;
+                border-radius: 22px;
+            }
+
             .related-guide-box {
-                padding: 1.5rem 1.25rem;
-                margin-top: 3rem;
+                padding: 22px 20px;
+                margin-top: 2.5rem;
             }
 
             .release-card {
                 padding: 24px 20px;
+            }
+
+            .changelog-item {
+                padding: 18px 18px;
             }
 
             .release-card-header {
@@ -1217,48 +1429,6 @@
                 align-items: flex-start;
                 gap: 8px;
             }
-
-            .changelog-item {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-
-        /* ========== MACOS BADGE ========== */
-        .macos-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: var(--clr-text-dim);
-            margin-top: 16px;
-        }
-
-        .macos-badge svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--clr-text-dim);
-        }
-
-        /* ========== COMING SOON TOOLTIP ========== */
-        .coming-soon-wrap {
-            position: relative;
-        }
-
-        .coming-soon-tag {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            padding: 3px 10px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #fff;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            border-radius: 99px;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-            z-index: 1;
         }
     </style>
 </head>
@@ -1358,14 +1528,14 @@
             </div>
 
             <div class="release-timeline reveal reveal-delay-3">
-                <!-- Release Card: DesktopPlus v1.0.5 -->
+                <!-- Release Card: DesktopPlus v1.0.8 -->
                 <article class="release-card">
                     <div class="release-card-header">
                         <div class="release-version-badge">
                             <span class="version-tag">DesktopPlus v1.0.8</span>
                             <span class="release-badge latest">Latest Release</span>
                         </div>
-                        <time class="release-date">November 2026</time>
+                        <time class="release-date" datetime="2026-11">November 2026</time>
                     </div>
 
                     <div class="release-card-body">
@@ -1406,86 +1576,148 @@
                         next
                         and previous screen. Makes it easier to multitask without using external displays.</p>
                 </div>
-                <div class="hero-visual reveal reveal-delay-3">
-                    <img src="landing-assets/spaceman-example.jpg" alt="DesktopPlus showing desktops in the macOS menu bar"
-                        width="520" height="auto" loading="lazy">
+                <div class="media-stage reveal reveal-delay-3">
+                    <div class="media-frame media-frame--portrait">
+                        <img src="landing-assets/spaceman-example.jpg"
+                            alt="DesktopPlus showing desktops in the macOS menu bar" width="810" height="1102"
+                            loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PREFERENCES -->
+    <!-- PREFERENCES & FEATURE SHOWCASE -->
     <section class="prefs" id="preferences">
         <div class="container">
-            <div>
-                <div class="section-label reveal">Fully Configurable</div>
-                <h2 class="reveal reveal-delay-1">Make it yours.</h2>
-                <p class="section-desc reveal reveal-delay-2">A clean preferences panel gives you full control without
-                    complexity.</p>
-                <ul class="check-list reveal reveal-delay-3">
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <span>Choose from multiple indicator styles</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <span>Toggle pronounced border outlines</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <span>Launch automatically at login</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <span>14-day free trial, then one-time purchase</span>
-                    </li>
-                </ul>
-
-                <div style="margin-top: 48px;">
-                    <div class="section-label reveal">Display Styles</div>
-                    <h2 class="reveal reveal-delay-1" style="font-size: clamp(1.55rem, 5vw, 2rem);">Your desktops,<br>your style.</h2>
-                    <p class="section-desc reveal reveal-delay-2">Four carefully crafted display modes so the indicator
-                        blends perfectly with how you work.</p>
-                    <div class="style-pills reveal reveal-delay-3">
-                        <span class="style-pill">Rectangles</span>
-                        <span class="style-pill">Numbers</span>
-                        <span class="style-pill">Rectangles + Numbers</span>
-                        <span class="style-pill">Opened Apps</span>
+            <div class="showcase-stack">
+                <!-- Row 1: Preferences -->
+                <div class="showcase-row showcase-row--visual-left">
+                    <div class="showcase-copy">
+                        <div class="section-label reveal">Fully Configurable</div>
+                        <h2 class="reveal reveal-delay-1">Make it yours.</h2>
+                        <p class="section-desc reveal reveal-delay-2">A clean preferences panel gives you full control without
+                            complexity.</p>
+                        <ul class="check-list reveal reveal-delay-3">
+                            <li>
+                                <span class="check-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </span>
+                                <span>Choose from multiple indicator styles</span>
+                            </li>
+                            <li>
+                                <span class="check-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </span>
+                                <span>Toggle pronounced border outlines</span>
+                            </li>
+                            <li>
+                                <span class="check-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </span>
+                                <span>Launch automatically at login</span>
+                            </li>
+                            <li>
+                                <span class="check-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </span>
+                                <span>14-day free trial, then one-time purchase</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="showcase-visual media-stage reveal reveal-delay-2">
+                        <div class="media-frame media-frame--portrait">
+                            <img src="landing-assets/preferences.jpg"
+                                alt="DesktopPlus preferences window showing style picker, launch at login, and appearance settings"
+                                width="924" height="1102" loading="lazy">
+                        </div>
                     </div>
                 </div>
 
-                <div style="margin-top: 48px;">
-                    <div class="section-label reveal">Integrated Task Manager</div>
-                    <h2 class="reveal reveal-delay-1" style="font-size: clamp(1.55rem, 5vw, 2rem);">Manage tasks<br>from anywhere.</h2>
-                    <p class="section-desc reveal reveal-delay-2">Keep track of your active apps and tasks seamlessly
-                        from your menu bar with our integrated app manager, with the ability to quickly close unneeded
-                        apps, monitor memory usage, and more.</p>
+                <!-- Row 2: Display Styles -->
+                <div class="showcase-row">
+                    <div class="showcase-copy">
+                        <div class="section-label reveal">Display Styles</div>
+                        <h2 class="reveal reveal-delay-1">Your desktops,<br>your style.</h2>
+                        <p class="section-desc reveal reveal-delay-2">Four carefully crafted display modes so the indicator
+                            blends perfectly with how you work.</p>
+                        <div class="style-pills reveal reveal-delay-3">
+                            <span class="style-pill">Rectangles</span>
+                            <span class="style-pill">Numbers</span>
+                            <span class="style-pill">Rectangles + Numbers</span>
+                            <span class="style-pill">Opened Apps</span>
+                        </div>
+                    </div>
+                    <div class="showcase-visual media-stage reveal reveal-delay-2">
+                        <div class="media-frame media-frame--landscape">
+                            <img src="landing-assets/different-styles.jpg" alt="Different display styles" width="581"
+                                height="433" loading="lazy">
+                        </div>
+                    </div>
                 </div>
 
-                <div style="margin-top: 48px;">
-                    <div class="section-label reveal">Workspace Presets</div>
-                    <h2 class="reveal reveal-delay-1" style="font-size: clamp(1.55rem, 5vw, 2rem);">Workspace App Presets<br>&amp; Quick Launch</h2>
-                    <p class="section-desc reveal reveal-delay-2">Save custom snapshots of currently open applications into reusable presets, allowing you to instantly restore and launch complete multi-app workflows with a single click.</p>
+                <!-- Row 3: Integrated Task Manager -->
+                <div class="showcase-row showcase-row--visual-left">
+                    <div class="showcase-copy">
+                        <div class="section-label reveal">Integrated Task Manager</div>
+                        <h2 class="reveal reveal-delay-1">Manage tasks<br>from anywhere.</h2>
+                        <p class="section-desc reveal reveal-delay-2">Keep track of your active apps and tasks seamlessly
+                            from your menu bar with our integrated app manager, with the ability to quickly close unneeded
+                            apps, monitor memory usage, and more.</p>
+                    </div>
+                    <div class="showcase-visual media-stage reveal reveal-delay-2">
+                        <div class="media-frame media-frame--portrait">
+                            <img src="landing-assets/task-app-manager.jpg" alt="Integrated task and app manager"
+                                width="810" height="1102" loading="lazy">
+                        </div>
+                    </div>
                 </div>
 
-                <div style="margin-top: 48px;">
-                    <div class="section-label reveal">Residual Processes</div>
-                    <h2 class="reveal reveal-delay-1" style="font-size: clamp(1.55rem, 5vw, 2rem);">Clean residual processes.<br>Free up RAM instantly.</h2>
-                    <p class="section-desc reveal reveal-delay-2">Detect and clean lingering background processes left behind by closed apps. Reclaim memory with a single click to keep your Mac running snappy and smooth.</p>
+                <!-- Row 4: Workspace Presets -->
+                <div class="showcase-row">
+                    <div class="showcase-copy">
+                        <div class="section-label reveal">Workspace Presets</div>
+                        <h2 class="reveal reveal-delay-1">Workspace App Presets<br>&amp; Quick Launch</h2>
+                        <p class="section-desc reveal reveal-delay-2">Save custom snapshots of currently open applications
+                            into reusable presets, allowing you to instantly restore and launch complete multi-app workflows
+                            with a single click.</p>
+                    </div>
+                    <div class="showcase-visual media-stage reveal reveal-delay-2">
+                        <div class="media-frame media-frame--landscape">
+                            <img src="landing-assets/presets.jpg" alt="Workspace App Presets and Quick Launch menu"
+                                width="706" height="564" loading="lazy">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="prefs-visual reveal reveal-delay-2" style="display: flex; flex-direction: column; gap: 48px;">
-                <img src="landing-assets/preferences.jpg"
-                    alt="DesktopPlus preferences window showing style picker, launch at login, and keyboard shortcut settings"
-                    width="480" loading="lazy">
-                <img src="landing-assets/different-styles.jpg" alt="Different display styles" width="480" loading="lazy"
-                    class="reveal reveal-delay-3">
-                <img src="landing-assets/task-app-manager.jpg" alt="Integrated task and app manager" width="480"
-                    loading="lazy" class="reveal reveal-delay-4">
-                <img src="landing-assets/presets.jpg" alt="Workspace App Presets and Quick Launch menu" width="480"
-                    height="383" loading="lazy" class="reveal reveal-delay-4">
-                <img src="landing-assets/clean-ram.jpg" alt="Clean residual processes and free RAM" width="480"
-                    loading="lazy" class="reveal reveal-delay-5">
+
+                <!-- Row 5: Residual Processes -->
+                <div class="showcase-row showcase-row--visual-left">
+                    <div class="showcase-copy">
+                        <div class="section-label reveal">Residual Processes</div>
+                        <h2 class="reveal reveal-delay-1">Clean residual processes.<br>Free up RAM instantly.</h2>
+                        <p class="section-desc reveal reveal-delay-2">Detect and clean lingering background processes left
+                            behind by closed apps. Reclaim memory with a single click to keep your Mac running snappy and
+                            smooth.</p>
+                    </div>
+                    <div class="showcase-visual media-stage reveal reveal-delay-2">
+                        <div class="media-frame media-frame--landscape">
+                            <img src="landing-assets/clean-ram.jpg" alt="Clean residual processes and free RAM"
+                                width="622" height="313" loading="lazy">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1498,43 +1730,91 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card reveal reveal-delay-1" id="feature-manage">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                            <path d="M14 17.5h7" />
+                            <path d="M17.5 14v7" />
+                        </svg>
+                    </div>
                     <h3>Manage Apps</h3>
                     <p>View opened apps, monitor system memory usage, and close background applications directly from
                         the menu bar.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-2" id="feature-glance">
-                    <div class="feature-icon">👁️</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </div>
                     <h3>Always Visible</h3>
                     <p>A persistent indicator in your menu bar shows exactly which desktop you're on, no need to swipe
                         or
                         open Mission Control.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-3" id="feature-click">
-                    <div class="feature-icon">🖱️</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4l7.07 17 2.51-7.39L21 11.07z" />
+                            <path d="M13.5 13.5 19 19" />
+                        </svg>
+                    </div>
                     <h3>Click to Switch</h3>
                     <p>Switch to any desktop with a single click on the menu bar indicator.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-1" id="feature-styles">
-                    <div class="feature-icon">🎨</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="6" rx="2" />
+                            <rect x="3" y="14" width="8" height="6" rx="2" />
+                            <rect x="14" y="14" width="7" height="6" rx="2" />
+                        </svg>
+                    </div>
                     <h3>Multiple Styles</h3>
                     <p>Choose from rectangles, numbers, numbered rectangles, or opened-app indicators. Pick the style
                         that fits your workflow.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-2" id="feature-native">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
                     <h3>Native &amp; Lightweight</h3>
                     <p>Built with Swift and SwiftUI. Uses minimal resources, no Electron, no background daemons, no
                         performance overhead.</p>
                 </div>
                 <div class="feature-card reveal reveal-delay-3" id="feature-launch">
-                    <div class="feature-icon">🚀</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z" />
+                            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z" />
+                            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                        </svg>
+                    </div>
                     <h3>Launch at Login</h3>
                     <p>Set it once and forget it. DesktopPlus starts silently when you log in, ready whenever you
                         need it.</p>
                 </div>
                 <div class="feature-card feature-card--wide reveal reveal-delay-1" id="feature-presets">
-                    <div class="feature-icon">🗂️</div>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 12 12 17 22 12" />
+                            <polyline points="2 17 12 22 22 17" />
+                        </svg>
+                    </div>
                     <div>
                         <h3>Workspace App Presets &amp; Quick Launch</h3>
                         <p>Save custom snapshots of currently open applications into reusable presets, allowing you to instantly restore and launch complete multi-app workflows with a single click.</p>
@@ -1547,34 +1827,36 @@
     <!-- CTA -->
     <section class="cta" id="download">
         <div class="container">
-            <div class="section-label reveal">Get Started</div>
-            <h2 class="reveal reveal-delay-1">Ready to navigate<br>your desktops smarter?</h2>
-            <p class="section-desc reveal reveal-delay-2">DesktopPlus is free to try for 14 days, all unlocked, no payment
-                info. Runs natively on
-                macOS 15 and later.</p>
-            <div class="cta-actions reveal reveal-delay-3">
-                <a href="landing-assets/DesktopPlus.dmg" download class="btn-primary" id="cta-download">
-                    <span class="btn-main-text">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                        Free download for macOS
-                    </span>
-                    <span class="btn-verified-text">
-                        <svg class="apple-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                        </svg>
-                        Verified by Apple
-                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                    </span>
-                </a>
+            <div class="cta-panel">
+                <div class="section-label reveal">Get Started</div>
+                <h2 class="reveal reveal-delay-1">Ready to navigate<br>your desktops smarter?</h2>
+                <p class="section-desc reveal reveal-delay-2">DesktopPlus is free to try for 14 days, all unlocked, no payment
+                    info. Runs natively on
+                    macOS 15 and later.</p>
+                <div class="cta-actions reveal reveal-delay-3">
+                    <a href="landing-assets/DesktopPlus.dmg" download class="btn-primary" id="cta-download">
+                        <span class="btn-main-text">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Free download for macOS
+                        </span>
+                        <span class="btn-verified-text">
+                            <svg class="apple-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                            </svg>
+                            Verified by Apple
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
             </div>
 
             <div class="related-guide-box reveal reveal-delay-4">
@@ -1626,7 +1908,7 @@
                     }
                 });
             },
-            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+            { threshold: 0.1, rootMargin: '0px 0px -24px 0px' }
         );
         revealElements.forEach(el => observer.observe(el));
 
