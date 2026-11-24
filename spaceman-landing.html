@@ -693,11 +693,20 @@
             align-items: center;
         }
 
+        .features-cards {
+            background: var(--clr-bg);
+            padding: 60px 32px 80px;
+        }
+
+        .features-cards-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-top: 56px;
         }
 
         .feature-card {
@@ -708,6 +717,18 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--clr-glass-border);
             transition: transform var(--transition-smooth), border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card--wide {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .feature-card--wide .feature-icon {
+            flex-shrink: 0;
+            margin-bottom: 0;
         }
 
         .feature-card:hover {
@@ -807,6 +828,7 @@
         .prefs-visual img {
             width: 100%;
             max-width: 480px;
+            height: auto;
             border-radius: var(--radius-lg);
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
@@ -1050,6 +1072,17 @@
                 margin-right: auto;
             }
 
+            .feature-card--wide {
+                grid-column: auto;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+            }
+
+            .feature-card--wide .feature-icon {
+                margin-bottom: 20px;
+            }
+
             .features-header,
             .showcase .container,
             .prefs .container {
@@ -1145,6 +1178,10 @@
 
             .whats-new {
                 padding: 64px 20px;
+            }
+
+            .features-cards {
+                padding: 48px 20px 64px;
             }
 
             .nav-links a {
@@ -1325,7 +1362,7 @@
                 <article class="release-card">
                     <div class="release-card-header">
                         <div class="release-version-badge">
-                            <span class="version-tag">DesktopPlus v1.0.6</span>
+                            <span class="version-tag">DesktopPlus v1.0.8</span>
                             <span class="release-badge latest">Latest Release</span>
                         </div>
                         <time class="release-date">November 2026</time>
@@ -1341,10 +1378,10 @@
                                 </div>
                             </li>
                             <li class="changelog-item">
-                                <span class="change-tag tag-improvement">Improvement</span>
+                                <span class="change-tag tag-feature">New Feature</span>
                                 <div class="change-content">
-                                    <strong>Refined User Interface &amp; Visual Aesthetics</strong>
-                                    <p>Polished menu bar indicators with smoother animations, for elevated native feel.</p>
+                                    <strong>Recent apps</strong>
+                                    <p>List of your most recently closed apps in hot zone popover, so you can always revisit them easily.</p>
                                 </div>
                             </li>
                         </ul>
@@ -1372,45 +1409,6 @@
                 <div class="hero-visual reveal reveal-delay-3">
                     <img src="landing-assets/spaceman-example.jpg" alt="DesktopPlus showing desktops in the macOS menu bar"
                         width="520" height="auto" loading="lazy">
-                </div>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card reveal reveal-delay-1" id="feature-manage">
-                    <div class="feature-icon">📊</div>
-                    <h3>Manage Apps</h3>
-                    <p>View opened apps, monitor system memory usage, and close background applications directly from
-                        the menu bar.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-2" id="feature-glance">
-                    <div class="feature-icon">👁️</div>
-                    <h3>Always Visible</h3>
-                    <p>A persistent indicator in your menu bar shows exactly which desktop you're on, no need to swipe
-                        or
-                        open Mission Control.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-3" id="feature-click">
-                    <div class="feature-icon">🖱️</div>
-                    <h3>Click to Switch</h3>
-                    <p>Switch to any desktop with a single click on the menu bar indicator.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-1" id="feature-styles">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Multiple Styles</h3>
-                    <p>Choose from rectangles, numbers, numbered rectangles, or opened-app indicators. Pick the style
-                        that fits your workflow.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-2" id="feature-native">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Native & Lightweight</h3>
-                    <p>Built with Swift and SwiftUI. Uses minimal resources, no Electron, no background daemons, no
-                        performance overhead.</p>
-                </div>
-                <div class="feature-card reveal reveal-delay-3" id="feature-launch">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Launch at Login</h3>
-                    <p>Set it once and forget it. DesktopPlus starts silently when you log in, ready whenever you
-                        need it.</p>
                 </div>
             </div>
         </div>
@@ -1465,6 +1463,12 @@
                 </div>
 
                 <div style="margin-top: 48px;">
+                    <div class="section-label reveal">Workspace Presets</div>
+                    <h2 class="reveal reveal-delay-1" style="font-size: clamp(1.55rem, 5vw, 2rem);">Workspace App Presets<br>&amp; Quick Launch</h2>
+                    <p class="section-desc reveal reveal-delay-2">Save custom snapshots of currently open applications into reusable presets, allowing you to instantly restore and launch complete multi-app workflows with a single click.</p>
+                </div>
+
+                <div style="margin-top: 48px;">
                     <div class="section-label reveal">Residual Processes</div>
                     <h2 class="reveal reveal-delay-1" style="font-size: clamp(1.55rem, 5vw, 2rem);">Clean residual processes.<br>Free up RAM instantly.</h2>
                     <p class="section-desc reveal reveal-delay-2">Detect and clean lingering background processes left behind by closed apps. Reclaim memory with a single click to keep your Mac running snappy and smooth.</p>
@@ -1478,8 +1482,64 @@
                     class="reveal reveal-delay-3">
                 <img src="landing-assets/task-app-manager.jpg" alt="Integrated task and app manager" width="480"
                     loading="lazy" class="reveal reveal-delay-4">
+                <img src="landing-assets/presets.jpg" alt="Workspace App Presets and Quick Launch menu" width="480"
+                    height="383" loading="lazy" class="reveal reveal-delay-4">
                 <img src="landing-assets/clean-ram.jpg" alt="Clean residual processes and free RAM" width="480"
                     loading="lazy" class="reveal reveal-delay-5">
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE CARDS -->
+    <section class="features-cards" id="feature-highlights">
+        <div class="container">
+            <div class="features-cards-header">
+                <div class="section-label reveal">Key Features</div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal reveal-delay-1" id="feature-manage">
+                    <div class="feature-icon">📊</div>
+                    <h3>Manage Apps</h3>
+                    <p>View opened apps, monitor system memory usage, and close background applications directly from
+                        the menu bar.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2" id="feature-glance">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Always Visible</h3>
+                    <p>A persistent indicator in your menu bar shows exactly which desktop you're on, no need to swipe
+                        or
+                        open Mission Control.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-3" id="feature-click">
+                    <div class="feature-icon">🖱️</div>
+                    <h3>Click to Switch</h3>
+                    <p>Switch to any desktop with a single click on the menu bar indicator.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1" id="feature-styles">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Multiple Styles</h3>
+                    <p>Choose from rectangles, numbers, numbered rectangles, or opened-app indicators. Pick the style
+                        that fits your workflow.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2" id="feature-native">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Native &amp; Lightweight</h3>
+                    <p>Built with Swift and SwiftUI. Uses minimal resources, no Electron, no background daemons, no
+                        performance overhead.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-3" id="feature-launch">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Launch at Login</h3>
+                    <p>Set it once and forget it. DesktopPlus starts silently when you log in, ready whenever you
+                        need it.</p>
+                </div>
+                <div class="feature-card feature-card--wide reveal reveal-delay-1" id="feature-presets">
+                    <div class="feature-icon">🗂️</div>
+                    <div>
+                        <h3>Workspace App Presets &amp; Quick Launch</h3>
+                        <p>Save custom snapshots of currently open applications into reusable presets, allowing you to instantly restore and launch complete multi-app workflows with a single click.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
