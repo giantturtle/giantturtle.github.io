@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blast - Liquid Logic Puzzle Game | GiantTurtle Studio</title>
     <meta name="description"
-        content="Pop the tiles and master the strategy in Blast Liquid Logic, the satisfying mobile puzzle game from GiantTurtle Studio.">
+        content="Pop the tiles and master the strategy in Blast: Liquid Logic, the satisfying offline mobile puzzle game for iOS and Android from GiantTurtle Studio.">
     <link rel="canonical" href="https://giant-turtle.com/blast-landing.html">
 
     <!-- Open Graph / Facebook -->
@@ -32,7 +32,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#0b0816">
 
     <!-- Structured Data (VideoGame) -->
     <script type="application/ld+json">
@@ -45,6 +45,11 @@
       "genre": "Puzzle",
       "description": "Pop, splash, and solve! Clear the liquid blocks in this addictive puzzle game from GiantTurtle Studio.",
       "url": "https://giant-turtle.com/blast-landing.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "publisher": {
         "@type": "Organization",
         "name": "GiantTurtle Studio",
@@ -53,109 +58,1620 @@
     }
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ========== RESET & TOKENS ========== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --clr-bg: #0b0816;
+            --clr-surface: #140f24;
+            --clr-surface-raised: #1d1633;
+
+            /* Blast Brand Accents (Magenta Splash, Jelly Violet, Golden Jelly) */
+            --clr-magenta: #ec4899;
+            --clr-pink-light: #f472b6;
+            --clr-violet: #a855f7;
+            --clr-violet-light: #c084fc;
+            --clr-gold: #facc15;
+            --clr-magenta-glow: rgba(236, 72, 153, 0.25);
+            --clr-violet-glow: rgba(168, 85, 247, 0.26);
+
+            /* High-Contrast Store CTAs (matching Blast blogpost) */
+            --clr-play: #3DDC84;
+            --clr-play-hover: #2ebc6f;
+            --clr-play-ink: #07130c;
+            --clr-play-glow: rgba(61, 220, 132, 0.36);
+
+            --clr-apple: #0ea5e9;
+            --clr-apple-deep: #0284c7;
+            --clr-apple-glow: rgba(14, 165, 233, 0.36);
+
+            --clr-text: #f5f2fb;
+            --clr-text-muted: #b8aed0;
+            --clr-text-dim: #857aa1;
+            --clr-border: rgba(236, 226, 255, 0.09);
+            --clr-glass-border: rgba(236, 226, 255, 0.13);
+
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-display: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-smooth: 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            letter-spacing: -0.025em;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--clr-play);
+            outline-offset: 3px;
+        }
+
+        section[id] {
+            scroll-margin-top: 88px;
+        }
+
+        /* ========== AMBIENT BACKGROUND ========== */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(192, 132, 252, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+            -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 22%, #000 22%, transparent 100%);
+            mask-image: radial-gradient(ellipse 85% 70% at 50% 22%, #000 22%, transparent 100%);
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            width: 820px;
+            height: 820px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--clr-violet-glow) 0%, var(--clr-magenta-glow) 36%, transparent 68%);
+            top: -260px;
+            right: -180px;
+            animation: ambientFloat 22s ease-in-out infinite;
+        }
+
+        .ambient-bg::after {
+            content: '';
+            position: absolute;
+            width: 660px;
+            height: 660px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.11) 0%, rgba(14, 165, 233, 0.09) 42%, transparent 70%);
+            bottom: -200px;
+            left: -180px;
+            animation: ambientFloat 26s ease-in-out infinite reverse;
+        }
+
+        @keyframes ambientFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(48px, -32px) scale(1.06);
+            }
+
+            66% {
+                transform: translate(-28px, 42px) scale(0.96);
+            }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 14px 28px;
+            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(11, 8, 22, 0.84);
+            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            backdrop-filter: blur(22px) saturate(1.4);
+            border-bottom-color: var(--clr-glass-border);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--clr-text);
+            flex-shrink: 0;
+        }
+
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.14);
+            display: block;
+        }
+
+        .nav-brand span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.08rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--clr-text-dim);
+            text-decoration: none;
+            padding: 5px 11px;
+            border-radius: 99px;
+            border: 1px solid var(--clr-border);
+            background: rgba(255, 255, 255, 0.025);
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-back:hover {
+            color: var(--clr-pink-light);
+            border-color: rgba(236, 72, 153, 0.4);
+            background: rgba(236, 72, 153, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--clr-text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 13px;
+            border-radius: 99px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--clr-text);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-links .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--clr-play);
+            color: var(--clr-play-ink);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            margin-left: 6px;
+            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.25);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-links .nav-cta:hover {
+            background: var(--clr-play-hover);
+            color: #000000;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(61, 220, 132, 0.4);
+        }
+
+        /* ========== SHARED LAYOUT ========== */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 88px 28px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--clr-pink-light);
+            margin-bottom: 14px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--clr-magenta), var(--clr-gold));
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-size: clamp(1.85rem, 3.8vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.18;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--clr-text-muted);
+            max-width: 610px;
+            line-height: 1.7;
+        }
+
+        /* ========== DUAL PRONOUNCED STORE CTA BUTTONS ========== */
+        .btn-store-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 24px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            border-radius: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.22s ease, box-shadow 0.25s ease, filter 0.22s ease;
+        }
+
+        .btn-store-cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.26) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .btn-store-cta:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.04);
+        }
+
+        .btn-store-cta:hover::after {
+            opacity: 1;
+        }
+
+        .btn-store-cta:active {
+            transform: translateY(0);
+        }
+
+        .btn-store-cta .store-icon {
+            font-size: 1.45rem;
+            flex-shrink: 0;
+        }
+
+        .btn-store-cta .btn-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.15;
+            text-align: left;
+        }
+
+        .btn-store-cta .btn-kicker {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.84;
+        }
+
+        .btn-store-cta .btn-label {
+            font-family: var(--font-display);
+            font-size: 1.02rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        /* Google Play — High-Contrast Android Green */
+        .btn-playstore-cta {
+            background: linear-gradient(180deg, #4ce591 0%, var(--clr-play) 55%, #30c874 100%);
+            color: var(--clr-play-ink);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow:
+                0 12px 30px var(--clr-play-glow),
+                0 2px 6px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45);
+        }
+
+        .btn-playstore-cta:hover {
+            color: #000000;
+            box-shadow:
+                0 16px 38px rgba(61, 220, 132, 0.5),
+                0 4px 12px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55);
+        }
+
+        /* Apple App Store — High-Contrast Ocean Blue (matching Blast blogpost) */
+        .btn-appstore-cta {
+            background: linear-gradient(180deg, #38bdf8 0%, var(--clr-apple) 48%, var(--clr-apple-deep) 100%);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            box-shadow:
+                0 12px 30px var(--clr-apple-glow),
+                0 2px 6px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.38);
+        }
+
+        .btn-appstore-cta:hover {
+            color: #ffffff;
+            box-shadow:
+                0 16px 38px rgba(14, 165, 233, 0.52),
+                0 4px 12px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 14px 22px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--clr-text);
+            font-family: var(--font-body);
+            font-size: 0.94rem;
+            font-weight: 600;
+            border: 1px solid var(--clr-glass-border);
+            border-radius: 14px;
+            text-decoration: none;
+            transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+        }
+
+        .btn-secondary-cta:hover {
+            background: rgba(236, 72, 153, 0.14);
+            border-color: rgba(236, 72, 153, 0.45);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            padding-top: 124px;
+            padding-bottom: 84px;
+            position: relative;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1.06fr 0.94fr;
+            gap: 52px;
+            align-items: center;
+        }
+
+        .hero .container > * {
+            min-width: 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--clr-pink-light);
+            margin-bottom: 22px;
+            padding: 7px 15px;
+            border-radius: 99px;
+            background: rgba(236, 72, 153, 0.12);
+            border: 1px solid rgba(236, 72, 153, 0.32);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--clr-gold);
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.85);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.78);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.35rem, 4.7vw, 3.55rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, var(--clr-pink-light) 0%, #fb923c 50%, var(--clr-gold) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.08rem;
+            color: var(--clr-text-muted);
+            line-height: 1.72;
+            margin-bottom: 30px;
+            max-width: 530px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-trust-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--clr-border);
+            font-size: 0.85rem;
+            color: var(--clr-text-muted);
+        }
+
+        .hero-trust-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .hero-trust-item i {
+            color: var(--clr-gold);
+            font-size: 0.85rem;
+        }
+
+        /* Hero Video Stage */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-visual .glow-ring {
+            position: absolute;
+            width: 108%;
+            height: 108%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(168, 85, 247, 0.34) 0%, rgba(236, 72, 153, 0.2) 42%, transparent 68%);
+            z-index: -1;
+            filter: blur(46px);
+            pointer-events: none;
+        }
+
+        .video-frame {
+            width: 100%;
+            max-width: 540px;
+            padding: 10px;
+            border-radius: calc(var(--radius-lg) + 2px);
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.09), rgba(236, 72, 153, 0.09));
+            border: 1px solid rgba(192, 132, 252, 0.28);
+            box-shadow:
+                0 28px 72px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            transition: transform 0.4s var(--transition-smooth), border-color 0.3s;
+        }
+
+        .video-frame:hover {
+            transform: translateY(-4px);
+            border-color: rgba(236, 72, 153, 0.52);
+        }
+
+        .video-ratio {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: calc(var(--radius-lg) - 8px);
+            overflow: hidden;
+            background: #070510;
+        }
+
+        .video-ratio iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .video-caption {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            max-width: 540px;
+            margin-top: 12px;
+            padding: 0 6px;
+            font-size: 0.84rem;
+            color: var(--clr-text-dim);
+        }
+
+        .video-caption a {
+            color: var(--clr-pink-light);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .video-caption a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* ========== OVERVIEW / GAMEPLAY STORY ========== */
+        .overview-section {
+            border-top: 1px solid var(--clr-border);
+            border-bottom: 1px solid var(--clr-border);
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.06) 0%, rgba(11, 8, 22, 0) 100%);
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .overview-grid > * {
+            min-width: 0;
+        }
+
+        .promo-card {
+            background: linear-gradient(155deg, rgba(168, 85, 247, 0.18), rgba(20, 15, 36, 0.94));
+            border: 1px solid rgba(192, 132, 252, 0.28);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .promo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: calc(var(--radius-lg) - 10px);
+        }
+
+        .promo-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 2px 4px 4px;
+        }
+
+        .promo-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--clr-border);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--clr-text-muted);
+        }
+
+        .promo-pill i {
+            color: var(--clr-gold);
+            font-size: 0.78rem;
+        }
+
+        .overview-copy p {
+            color: var(--clr-text-muted);
+            font-size: 1.02rem;
+            margin-bottom: 18px;
+        }
+
+        .checklist-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 12px;
+        }
+
+        .checklist-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+
+        .checklist-card h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--clr-pink-light);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 0.91rem;
+            color: var(--clr-text-muted);
+            line-height: 1.48;
+        }
+
+        .checklist li i {
+            color: var(--clr-play);
+            font-size: 0.82rem;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* ========== CORE FEATURES GRID ========== */
+        .section-header-center {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 48px;
+        }
+
+        .section-header-center .section-desc {
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .features-grid > * {
+            min-width: 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(180deg, rgba(29, 22, 51, 0.78) 0%, rgba(20, 15, 36, 0.92) 100%);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 26px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(236, 72, 153, 0.45);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(236, 72, 153, 0.14);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.24rem;
+            color: var(--clr-gold);
+            background: linear-gradient(145deg, rgba(236, 72, 153, 0.18), rgba(168, 85, 247, 0.18));
+            border: 1px solid rgba(244, 114, 182, 0.32);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            font-size: 0.93rem;
+            color: var(--clr-text-muted);
+            line-height: 1.62;
+        }
+
+        /* ========== SCREENSHOTS GALLERY ========== */
+        .screenshots-section {
+            padding-top: 24px;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .screenshots-grid > * {
+            min-width: 0;
+        }
+
+        .screenshot-card {
+            background: var(--clr-surface);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(192, 132, 252, 0.45);
+            box-shadow: 0 24px 52px rgba(0, 0, 0, 0.56);
+        }
+
+        .screenshot-stage {
+            height: 450px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(168, 85, 247, 0.2) 0%, transparent 65%),
+                radial-gradient(circle at 50% 85%, rgba(236, 72, 153, 0.12) 0%, transparent 60%),
+                #0d0919;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .screenshot-stage img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+            display: block;
+            transition: transform 0.4s var(--transition-smooth);
+        }
+
+        .screenshot-card:hover .screenshot-stage img {
+            transform: scale(1.025);
+        }
+
+        .screenshot-caption {
+            padding: 20px 22px 22px;
+        }
+
+        .screenshot-caption h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .screenshot-caption p {
+            font-size: 0.91rem;
+            color: var(--clr-text-muted);
+            line-height: 1.55;
+        }
+
+        /* ========== BLOGPOST-STYLE CTA BANNER ========== */
+        .cta-section {
+            padding-top: 32px;
+            padding-bottom: 84px;
+        }
+
+        .app-cta-banner {
+            background:
+                radial-gradient(circle at top left, rgba(61, 220, 132, 0.15) 0%, transparent 48%),
+                radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.2) 0%, transparent 54%),
+                linear-gradient(135deg, rgba(28, 20, 48, 0.96) 0%, rgba(16, 12, 30, 0.98) 100%);
+            border: 1px solid rgba(61, 220, 132, 0.36);
+            border-radius: var(--radius-lg);
+            padding: 40px 42px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.58),
+                0 0 0 1px rgba(61, 220, 132, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .app-cta-icon {
+            width: 108px;
+            height: 108px;
+            border-radius: 24px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow:
+                0 14px 32px rgba(236, 72, 153, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
+        }
+
+        .app-cta-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-cta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--clr-play);
+            margin-bottom: 8px;
+        }
+
+        .app-cta-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 10px;
+        }
+
+        .app-cta-content p {
+            color: var(--clr-text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 22px;
+            max-width: 660px;
+        }
+
+        .app-cta-buttons {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== RELATED GUIDE BOX ========== */
+        .related-guide-box {
+            margin-top: 32px;
+            padding: 28px 32px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .related-guide-copy {
+            flex: 1;
+            min-width: min(260px, 100%);
+        }
+
+        .related-guide-box h3 {
+            color: var(--clr-pink-light);
+            font-size: 1.12rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .related-guide-box p {
+            color: var(--clr-text-muted);
+            font-size: 0.94rem;
+            line-height: 1.55;
+        }
+
+        .guide-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(236, 72, 153, 0.12);
+            border: 1px solid rgba(236, 72, 153, 0.35);
+            color: var(--clr-pink-light);
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .guide-link-btn:hover {
+            background: var(--clr-magenta);
+            border-color: var(--clr-magenta);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid var(--clr-border);
+            padding: 40px 28px 48px;
+            background: rgba(0, 0, 0, 0.28);
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .footer-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .footer-copy {
+            color: var(--clr-text-dim);
+            font-size: 0.88rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px 18px;
+            flex-wrap: wrap;
+            list-style: none;
+            font-size: 0.88rem;
+        }
+
+        .footer-links a {
+            color: var(--clr-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--clr-pink-light);
+        }
+
+        /* ========== PROGRESSIVE REVEAL ========== */
+        .js-reveal .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .js-reveal .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .js-reveal .reveal-delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .js-reveal .reveal-delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .js-reveal .reveal-delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 960px) {
+            .hero .container,
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                padding-top: 108px;
+                padding-bottom: 64px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-tagline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions,
+            .hero-trust-row {
+                justify-content: center;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .screenshots-grid .screenshot-card:last-child {
+                grid-column: 1 / -1;
+                max-width: 440px;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 720px) {
+            section {
+                padding: 64px 20px;
+            }
+
+            .nav {
+                padding: 12px 18px;
+            }
+
+            .nav-back {
+                display: none;
+            }
+
+            .nav-links li.nav-hide-mobile {
+                display: none;
+            }
+
+            .checklist-group,
+            .features-grid,
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots-grid .screenshot-card:last-child {
+                grid-column: auto;
+                max-width: none;
+            }
+
+            .app-cta-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 22px;
+                gap: 20px;
+            }
+
+            .app-cta-tag {
+                justify-content: center;
+            }
+
+            .app-cta-buttons {
+                justify-content: center;
+            }
+
+            .related-guide-box {
+                padding: 22px 20px;
+            }
+
+            .guide-link-btn {
+                width: 100%;
+                justify-content: center;
+                white-space: normal;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions .btn-store-cta,
+            .app-cta-buttons .btn-store-cta,
+            .app-cta-buttons .btn-secondary-cta {
+                width: 100%;
+            }
+
+            .screenshot-stage {
+                height: 390px;
+                padding: 16px;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 13px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .ambient-bg::before,
+            .ambient-bg::after,
+            .hero-badge .pulse-dot {
+                animation: none;
+            }
+
+            .js-reveal .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('js-reveal');
+        }
+    </script>
 </head>
 
 <body>
-    <div class="container">
-        <nav class="landing-nav">
-            <a href="index.html" class="landing-back-link">&larr; GiantTurtle Apps</a>
-            <div class="nav-right-links">
-                <a href="index.html#projects">Apps</a>
-                <a href="blog/blog_main.html">Blog</a>
-                <a href="mailto:giant2turtle@gmail.com">Contact</a>
+    <div class="ambient-bg" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="#top" class="nav-brand">
+                    <img src="assets/images/blast-promo1.jpg" alt="Blast Liquid Logic game icon" width="36" height="36">
+                    <span>Blast</span>
+                </a>
+                <a href="index.html" class="nav-back">&larr; GiantTurtle Apps</a>
             </div>
-        </nav>
 
-        <header class="app-hero">
-            <h1 class="landing-title">Blast</h1>
-            <p class="landing-subtitle">Pop the
-                Tiles. Master the
-                Strategy.</p>
-            <img src="assets/images/promo-play.jpg" alt="Blast Hero">
-        </header>
-
-        <section class="gallery">
-            <img src="assets/images/blast-promo2.jpg" alt="Blast Screenshot 1">
-            <img src="assets/images/blast-promo3.jpg" alt="Blast Screenshot 2">
-            <img src="assets/images/blast-promo4.jpg" alt="Blast Screenshot 3">
-        </section>
-
-        <section class="full-description">
-            <h2>Pop, splash, and solve! Clear the liquid blocks in this addictive puzzle game.</h2>
-            <p>Blast Liquid Logic<br>
-
-                Ready to make a splash? Dive into the colorful world of Blast Liquid Logic, the puzzle game that
-                combines satisfying gameplay with brain-teasing strategy!
-                <br>
-                Your goal is simple: Tap groups of matching liquid blocks to pop them and clear the screen. But don't be
-                fooled by the colorful slime - you’ll need to think ahead to make sure you don't run out of moves!
-                <br>
-                Why you’ll love Blast Liquid Logic:<br>
-
-                Satisfying Popping Action: Tap matching colors and watch them splash away!<br>
-
-                Brain-Teasing Levels: clear the tiles strategically to advance to the next stage.<br>
-
-                Helpful Power-Ups: Stuck on a tricky block? Use the Extra Shot to break any single block!<br>
-
-                Vibrant Graphics: Enjoy high-quality, gooey graphics and smooth animations.<br> <br>
-
-                ✨ Key Features:<br> <br>
-
-                🧩 Addictive Puzzles: Simple to learn, challenging to master.<br>
-
-                🎨 Colorful Liquid Theme: Bright, vibrant slime and goo aesthetics.<br>
-
-                🎯 Targeted Power-ups: Use the target booster to clear specific tiles.<br>
-
-                🏆 Level Progression: Track your tiles and level up.<br>
-
-                <br>
-                Puzzle, Pop, Blast, Match, Slime, Logic, Brain Teaser, Casual, Tap Game, Cube, Block Puzzle.
-            </p>
-            <p style="margin-top: 1.5rem;">The more tiles you pop at once, the higher your score. With vibrant colors
-                and smooth animations, Blast offers a relaxing yet intellectually stimulating experience for puzzle
-                lovers of all ages.</p>
-
-            <div class="app-links" style="justify-content: center; margin-top: 3rem; flex-wrap: wrap;">
-                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.liquidlogic"
-                    class="store-btn btn-playstore" style="max-width: 250px;"><i class="fab fa-google-play"></i>
-                    Get it on Play Store</a>
-                <a href="https://apps.apple.com/us/app/the-blast/id6785248553" class="store-btn btn-appstore"
-                    style="max-width: 250px;"><i class="fab fa-apple"></i>
-                    Download on App Store</a>
-                <a href="blast-privacy-policy.html" class="store-btn"
-                    style="max-width: 250px; background: transparent; border: 1px solid var(--glass-border); color: var(--text-main);"><i class="fas fa-shield-alt"></i>
-                    Blast Privacy Policy</a>
-            </div>
-        </section>
-
-        <div class="related-guide-box">
-            <h3><i class="fas fa-book-reader"></i> In-Depth Puzzle Strategy Guide</h3>
-            <p>Master tile-collapse physics, SameGame mechanics, and high-score cluster strategies with our engineering teardown:</p>
-            <a href="blog/how-to-master-tile-popping-puzzles-blast-liquid-logic.html" class="guide-link-btn">
-                Read: How to Master Tile-Popping Puzzles: Strategy &amp; High-Score Tactics in Blast &rarr;
-            </a>
+            <ul class="nav-links">
+                <li class="nav-hide-mobile"><a href="#features">Features</a></li>
+                <li class="nav-hide-mobile"><a href="#screenshots">Screenshots</a></li>
+                <li class="nav-hide-mobile"><a href="blog/blog_main.html">Blog</a></li>
+                <li class="nav-hide-mobile"><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li>
+                    <a href="#download" class="nav-cta">
+                        <i class="fas fa-download" aria-hidden="true"></i> Play Free
+                    </a>
+                </li>
+            </ul>
         </div>
+    </nav>
 
-    </div>
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-text">
+                    <div class="hero-badge reveal">
+                        <span class="pulse-dot" aria-hidden="true"></span>
+                        iOS &amp; Android Puzzle Game &bull; Free &amp; Offline
+                    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.</p>
-            <div class="footer-links">
-                <a href="index.html">All Apps</a> &bull;
-                <a href="blog/blog_main.html">Guides &amp; Blog</a> &bull;
-                <a href="blog/how-to-master-tile-popping-puzzles-blast-liquid-logic.html">Blast Strategy Guide</a> &bull;
-                <a href="blast-privacy-policy.html">Blast Privacy Policy</a> &bull;
-                <a href="privacy-policy.html">Privacy Policy</a> &bull;
-                <a href="refund-policy.html">Refund Policy</a>
+                    <h1 class="hero-title reveal reveal-delay-1">
+                        Blast: Liquid Logic.<br>
+                        <span class="gradient-text">Pop the Tiles. Master the Strategy.</span>
+                    </h1>
+
+                    <p class="hero-tagline reveal reveal-delay-2">
+                        Dive into a vibrant world of juicy liquid blocks and brain-teasing SameGame strategy. Tap
+                        matching clusters to trigger massive chain pops, clear the board, and chase higher scores.
+                    </p>
+
+                    <div class="hero-actions reveal reveal-delay-3">
+                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.liquidlogic"
+                            target="_blank" rel="noopener noreferrer" class="btn-store-cta btn-playstore-cta"
+                            id="hero-playstore-cta">
+                            <i class="fab fa-google-play store-icon" aria-hidden="true"></i>
+                            <span class="btn-copy">
+                                <span class="btn-kicker">Free on Android</span>
+                                <span class="btn-label">Get on Google Play</span>
+                            </span>
+                        </a>
+
+                        <a href="https://apps.apple.com/us/app/the-blast/id6785248553"
+                            target="_blank" rel="noopener noreferrer" class="btn-store-cta btn-appstore-cta"
+                            id="hero-appstore-cta">
+                            <i class="fab fa-apple store-icon" aria-hidden="true"></i>
+                            <span class="btn-copy">
+                                <span class="btn-kicker">Free on iOS</span>
+                                <span class="btn-label">Download on App Store</span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="hero-trust-row reveal reveal-delay-3">
+                        <span class="hero-trust-item">
+                            <i class="fas fa-gift" aria-hidden="true"></i> Free to Play
+                        </span>
+                        <span class="hero-trust-item">
+                            <i class="fas fa-plane" aria-hidden="true"></i> 100% Offline Playable
+                        </span>
+                        <span class="hero-trust-item">
+                            <i class="fas fa-mobile-alt" aria-hidden="true"></i> iPhone, iPad &amp; Android
+                        </span>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal reveal-delay-2" id="demo">
+                    <div class="glow-ring" aria-hidden="true"></div>
+                    <div class="video-frame">
+                        <div class="video-ratio">
+                            <iframe
+                                src="https://www.youtube.com/embed/k9Krlw17KEk?rel=0"
+                                title="Blast: Liquid Logic Gameplay Video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="video-caption">
+                        <span><i class="fas fa-play-circle" aria-hidden="true"></i> Watch Blast gameplay in action</span>
+                        <a href="https://youtu.be/k9Krlw17KEk" target="_blank" rel="noopener noreferrer">
+                            Open on YouTube <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- OVERVIEW & GAMEPLAY -->
+        <section class="overview-section" id="overview">
+            <div class="container">
+                <div class="overview-grid">
+                    <div class="promo-card reveal">
+                        <img src="assets/images/promo-play.jpg"
+                            alt="Blast: Liquid Logic glossy purple and gold liquid puzzle tiles"
+                            width="1024" height="500" loading="lazy" decoding="async">
+                        <div class="promo-pill-row">
+                            <span class="promo-pill"><i class="fas fa-layer-group" aria-hidden="true"></i> SameGame Logic</span>
+                            <span class="promo-pill"><i class="fas fa-tint" aria-hidden="true"></i> Juicy Slime Physics</span>
+                            <span class="promo-pill"><i class="fas fa-bullseye" aria-hidden="true"></i> Target Booster</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-copy reveal reveal-delay-1">
+                        <div class="section-label">Pop, Splash &amp; Solve</div>
+                        <h2>Clear the liquid blocks in this addictive puzzle game</h2>
+                        <p>
+                            Your goal is simple: tap groups of matching liquid blocks to pop them and clear the screen.
+                            Don't be fooled by the colorful jellies &mdash; the more tiles you combine and pop at once,
+                            the higher your score climbs, so thinking ahead is the key to beating every stage!
+                        </p>
+
+                        <div class="checklist-group">
+                            <div class="checklist-card">
+                                <h3><i class="fas fa-heart" aria-hidden="true"></i> Why You'll Love It</h3>
+                                <ul class="checklist">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Satisfying popping &amp; splash action</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Brain-teasing strategic stages</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Relaxing yet deeply rewarding flow</li>
+                                </ul>
+                            </div>
+
+                            <div class="checklist-card">
+                                <h3><i class="fas fa-star" aria-hidden="true"></i> Highlights</h3>
+                                <ul class="checklist">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Extra Shot breaks any single block</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> High-quality gooey graphics &amp; physics</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Track tiles cleared &amp; level up</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE FEATURES -->
+        <section id="features">
+            <div class="container">
+                <div class="section-header-center reveal">
+                    <div class="section-label">Key Features</div>
+                    <h2>Simple to Learn, Challenging to Master</h2>
+                    <p class="section-desc">
+                        Every tap reshapes the board. Build mega clusters, unleash precision power-ups, and enjoy smooth
+                        liquid animations made for puzzle lovers of all ages.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <article class="feature-card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h3>Addictive Puzzles</h3>
+                        <p>
+                            Instant one-tap controls paired with deep SameGame foresight &mdash; bigger combos mean
+                            exponentially bigger scores.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal reveal-delay-1">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Colorful Liquid Theme</h3>
+                        <p>
+                            Vibrant, glossy jelly and slime aesthetics with fluid splashes and crisp animations on every
+                            tap.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal reveal-delay-2">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Targeted Power-Ups</h3>
+                        <p>
+                            Stuck on a stubborn single block? Use the Extra Shot target booster to blast specific tiles
+                            and rescue your board.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal reveal-delay-3">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Level Progression</h3>
+                        <p>
+                            Track your remaining tiles, advance through increasingly clever boards, and chase personal
+                            best scores.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREENSHOTS -->
+        <section class="screenshots-section" id="screenshots">
+            <div class="container">
+                <div class="section-header-center reveal">
+                    <div class="section-label">Inside the Game</div>
+                    <h2>Juicy Combos on Every Screen</h2>
+                    <p class="section-desc">
+                        Meet the jellies, chain huge tile collapses, and blast through tricky boards with targeted power-ups.
+                    </p>
+                </div>
+
+                <div class="screenshots-grid">
+                    <figure class="screenshot-card reveal">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/blast-promo2.jpg"
+                                alt="Meet the Jellies - match and pop cute liquid blocks in Blast"
+                                width="647" height="1400" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>Meet the Jellies</h3>
+                            <p>Match and pop expressive, glossy liquid blocks in colorful bursts across vibrant boards.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="screenshot-card reveal reveal-delay-1">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/blast-promo3.jpg"
+                                alt="Logic is Key - chain massive combos and score high in Blast"
+                                width="647" height="1400" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>Logic Is Key</h3>
+                            <p>Plan tile drops and column collapses to build massive clusters and rack up huge combo scores.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="screenshot-card reveal reveal-delay-2">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/blast-promo4.jpg"
+                                alt="Master Power-Ups - clear boards with special abilities in Blast"
+                                width="647" height="1400" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>Master Power-Ups</h3>
+                            <p>Fire the Extra Shot booster to break isolated blocks and unlock game-saving chain reactions.</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOGPOST-STYLE PROMINENT CTA BANNER + RELATED GUIDE -->
+        <section class="cta-section" id="download">
+            <div class="container">
+                <div class="app-cta-banner reveal">
+                    <img src="assets/images/blast-promo1.jpg" alt="Blast: Liquid Logic Game Icon" class="app-cta-icon"
+                        width="108" height="108" loading="lazy" decoding="async">
+                    <div class="app-cta-content">
+                        <div class="app-cta-tag">
+                            <i class="fas fa-gamepad" aria-hidden="true"></i> Free on iOS &amp; Android
+                        </div>
+                        <h2>Get Blast: Liquid Logic Today</h2>
+                        <p>
+                            Free to play and 100% offline-ready. Available worldwide on Android smartphones, tablets,
+                            iPhones, and iPads.
+                        </p>
+                        <div class="app-cta-buttons">
+                            <a href="https://play.google.com/store/apps/details?id=com.giantturtle.liquidlogic"
+                                target="_blank" rel="noopener noreferrer" class="btn-store-cta btn-playstore-cta"
+                                id="bottom-playstore-cta">
+                                <i class="fab fa-google-play store-icon" aria-hidden="true"></i>
+                                <span class="btn-copy">
+                                    <span class="btn-kicker">Android</span>
+                                    <span class="btn-label">Get on Google Play</span>
+                                </span>
+                            </a>
+
+                            <a href="https://apps.apple.com/us/app/the-blast/id6785248553"
+                                target="_blank" rel="noopener noreferrer" class="btn-store-cta btn-appstore-cta"
+                                id="bottom-appstore-cta">
+                                <i class="fab fa-apple store-icon" aria-hidden="true"></i>
+                                <span class="btn-copy">
+                                    <span class="btn-kicker">iOS</span>
+                                    <span class="btn-label">Download on App Store</span>
+                                </span>
+                            </a>
+
+                            <a href="blast-privacy-policy.html" class="btn-secondary-cta">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i> Blast Privacy Policy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="related-guide-box reveal reveal-delay-1">
+                    <div class="related-guide-copy">
+                        <h3><i class="fas fa-book-reader" aria-hidden="true"></i> In-Depth Puzzle Strategy Guide</h3>
+                        <p>
+                            Master tile-collapse physics, SameGame mechanics, and high-score cluster strategies with our
+                            full engineering teardown.
+                        </p>
+                    </div>
+                    <a href="blog/how-to-master-tile-popping-puzzles-blast-liquid-logic.html" class="guide-link-btn">
+                        Read Strategy &amp; High-Score Tactics Guide &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/images/blast-promo1.jpg" alt="Blast" width="28" height="28" loading="lazy">
+                <span>Blast: Liquid Logic &bull; GiantTurtle Studio</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.</p>
+            <ul class="footer-links">
+                <li><a href="index.html">All Apps</a></li>
+                <li><a href="blog/blog_main.html">Guides &amp; Blog</a></li>
+                <li><a href="blog/how-to-master-tile-popping-puzzles-blast-liquid-logic.html">Blast Strategy Guide</a></li>
+                <li><a href="blast-privacy-policy.html">Blast Privacy Policy</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
+    <script>
+        // Navbar scroll backdrop
+        const nav = document.getElementById('main-nav');
+        const updateNav = () => nav.classList.toggle('scrolled', window.scrollY > 32);
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+
+        // Progressive scroll reveal
+        if (document.documentElement.classList.contains('js-reveal') && 'IntersectionObserver' in window) {
+            const revealEls = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+            );
+            revealEls.forEach((el) => observer.observe(el));
+        } else {
+            document.documentElement.classList.remove('js-reveal');
+        }
+    </script>
 </body>
 
 </html>
