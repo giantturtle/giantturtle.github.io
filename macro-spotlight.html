@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Macro Spotlight | GiantTurtle Studio</title>
     <meta name="description"
-        content="Macro Spotlight: Find Anything. Instantly. Privately. Fast on-device search utility for Android and desktop.">
+        content="Macro Spotlight: Find Anything. Instantly. Privately. Fast on-device search utility for Android with zero internet permissions, home widget, and Quick Settings tile.">
     <link rel="canonical" href="https://giant-turtle.com/macro-spotlight.html">
 
     <!-- Open Graph / Facebook -->
@@ -32,7 +32,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#090b16">
 
     <!-- Structured Data (SoftwareApplication) -->
     <script type="application/ld+json">
@@ -40,9 +40,16 @@
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Macro Spotlight",
+      "operatingSystem": "Android",
       "applicationCategory": "UtilitiesApplication",
       "description": "Macro Spotlight: Find Anything. Instantly. Privately. Fast on-device search utility for Android and desktop.",
       "url": "https://giant-turtle.com/macro-spotlight.html",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.gianturtle.localsearch",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "publisher": {
         "@type": "Organization",
         "name": "GiantTurtle Studio",
@@ -51,95 +58,1571 @@
     }
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ========== RESET & TOKENS ========== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --clr-bg: #090b16;
+            --clr-surface: #111528;
+            --clr-surface-raised: #181e38;
+
+            /* Macro Spotlight Cobalt-Indigo & Electric-Cyan Accents */
+            --clr-indigo: #6366f1;
+            --clr-indigo-light: #818cf8;
+            --clr-cyan: #22d3ee;
+            --clr-cyan-light: #67e8f9;
+            --clr-indigo-glow: rgba(99, 102, 241, 0.28);
+            --clr-cyan-glow: rgba(34, 211, 238, 0.22);
+
+            /* High-Contrast Play Store CTA Green (matching Spotlight blogpost) */
+            --clr-cta: #3DDC84;
+            --clr-cta-hover: #2ebc6f;
+            --clr-cta-ink: #07130c;
+            --clr-cta-glow: rgba(61, 220, 132, 0.36);
+
+            --clr-text: #eef2fb;
+            --clr-text-muted: #a6b2cc;
+            --clr-text-dim: #7683a3;
+            --clr-border: rgba(224, 234, 255, 0.08);
+            --clr-glass-border: rgba(224, 234, 255, 0.12);
+
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-display: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-smooth: 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            letter-spacing: -0.025em;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--clr-cta);
+            outline-offset: 3px;
+        }
+
+        section[id] {
+            scroll-margin-top: 88px;
+        }
+
+        /* ========== AMBIENT BACKGROUND ========== */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(103, 232, 249, 0.07) 1px, transparent 1px);
+            background-size: 32px 32px;
+            -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 22%, #000 22%, transparent 100%);
+            mask-image: radial-gradient(ellipse 85% 70% at 50% 22%, #000 22%, transparent 100%);
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            width: 820px;
+            height: 820px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--clr-indigo-glow) 0%, var(--clr-cyan-glow) 36%, transparent 68%);
+            top: -260px;
+            right: -180px;
+            animation: ambientFloat 22s ease-in-out infinite;
+        }
+
+        .ambient-bg::after {
+            content: '';
+            position: absolute;
+            width: 660px;
+            height: 660px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.13) 0%, rgba(61, 220, 132, 0.08) 45%, transparent 70%);
+            bottom: -200px;
+            left: -180px;
+            animation: ambientFloat 26s ease-in-out infinite reverse;
+        }
+
+        @keyframes ambientFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(48px, -32px) scale(1.06);
+            }
+
+            66% {
+                transform: translate(-28px, 42px) scale(0.96);
+            }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 14px 28px;
+            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(9, 11, 22, 0.84);
+            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            backdrop-filter: blur(22px) saturate(1.4);
+            border-bottom-color: var(--clr-glass-border);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--clr-text);
+            flex-shrink: 0;
+        }
+
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 14px rgba(34, 211, 238, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.14);
+            display: block;
+        }
+
+        .nav-brand span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.08rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--clr-text-dim);
+            text-decoration: none;
+            padding: 5px 11px;
+            border-radius: 99px;
+            border: 1px solid var(--clr-border);
+            background: rgba(255, 255, 255, 0.025);
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-back:hover {
+            color: var(--clr-cyan-light);
+            border-color: rgba(34, 211, 238, 0.4);
+            background: rgba(34, 211, 238, 0.09);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--clr-text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 13px;
+            border-radius: 99px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--clr-text);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-links .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--clr-cta);
+            color: var(--clr-cta-ink);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            margin-left: 6px;
+            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.25);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-links .nav-cta:hover {
+            background: var(--clr-cta-hover);
+            color: #000000;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(61, 220, 132, 0.4);
+        }
+
+        /* ========== SHARED LAYOUT ========== */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 88px 28px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--clr-cyan-light);
+            margin-bottom: 14px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--clr-cyan), var(--clr-indigo-light));
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-size: clamp(1.85rem, 3.8vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.18;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--clr-text-muted);
+            max-width: 610px;
+            line-height: 1.7;
+        }
+
+        /* ========== CTA BUTTONS (PRONOUNCED BLOGPOST STYLE) ========== */
+        .btn-playstore-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            padding: 15px 28px;
+            background: linear-gradient(180deg, #4ce591 0%, var(--clr-cta) 55%, #30c874 100%);
+            color: var(--clr-cta-ink);
+            font-family: var(--font-body);
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 12px 30px var(--clr-cta-glow),
+                0 2px 6px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            transition: transform 0.22s ease, box-shadow 0.25s ease, filter 0.22s ease;
+        }
+
+        .btn-playstore-cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.28) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .btn-playstore-cta:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            color: #000000;
+            box-shadow:
+                0 16px 38px rgba(61, 220, 132, 0.48),
+                0 4px 12px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55);
+        }
+
+        .btn-playstore-cta:hover::after {
+            opacity: 1;
+        }
+
+        .btn-playstore-cta:active {
+            transform: translateY(0);
+        }
+
+        .btn-playstore-cta .play-icon {
+            font-size: 1.45rem;
+            flex-shrink: 0;
+        }
+
+        .btn-playstore-cta .btn-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.15;
+            text-align: left;
+        }
+
+        .btn-playstore-cta .btn-kicker {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.8;
+        }
+
+        .btn-playstore-cta .btn-label {
+            font-family: var(--font-display);
+            font-size: 1.06rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-secondary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 15px 24px;
+            background: rgba(255, 255, 255, 0.045);
+            color: var(--clr-text);
+            font-family: var(--font-body);
+            font-size: 0.96rem;
+            font-weight: 600;
+            border: 1px solid var(--clr-glass-border);
+            border-radius: 14px;
+            text-decoration: none;
+            transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+        }
+
+        .btn-secondary-cta:hover {
+            background: rgba(34, 211, 238, 0.12);
+            border-color: rgba(34, 211, 238, 0.42);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            padding-top: 124px;
+            padding-bottom: 84px;
+            position: relative;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .hero .container > * {
+            min-width: 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--clr-cyan-light);
+            margin-bottom: 22px;
+            padding: 7px 15px;
+            border-radius: 99px;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.28);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--clr-cyan);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.85);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.78);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.35rem, 4.7vw, 3.55rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--clr-cyan-light) 48%, var(--clr-indigo-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.08rem;
+            color: var(--clr-text-muted);
+            line-height: 1.72;
+            margin-bottom: 32px;
+            max-width: 525px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: stretch;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .hero-trust-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--clr-border);
+            font-size: 0.85rem;
+            color: var(--clr-text-muted);
+        }
+
+        .hero-trust-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .hero-trust-item i {
+            color: var(--clr-cta);
+            font-size: 0.85rem;
+        }
+
+        /* Hero Video Stage */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-visual .glow-ring {
+            position: absolute;
+            width: 108%;
+            height: 108%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(99, 102, 241, 0.34) 0%, rgba(34, 211, 238, 0.16) 44%, transparent 68%);
+            z-index: -1;
+            filter: blur(44px);
+            pointer-events: none;
+        }
+
+        .video-frame {
+            width: 100%;
+            max-width: 540px;
+            padding: 10px;
+            border-radius: calc(var(--radius-lg) + 2px);
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.09), rgba(34, 211, 238, 0.08));
+            border: 1px solid rgba(103, 232, 249, 0.26);
+            box-shadow:
+                0 28px 72px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            transition: transform 0.4s var(--transition-smooth), border-color 0.3s;
+        }
+
+        .video-frame:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 211, 238, 0.5);
+        }
+
+        .video-ratio {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: calc(var(--radius-lg) - 8px);
+            overflow: hidden;
+            background: #060812;
+        }
+
+        .video-ratio iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .video-caption {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            max-width: 540px;
+            margin-top: 12px;
+            padding: 0 6px;
+            font-size: 0.84rem;
+            color: var(--clr-text-dim);
+        }
+
+        .video-caption a {
+            color: var(--clr-cyan-light);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .video-caption a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* ========== OVERVIEW / SEARCH SCOPE ========== */
+        .overview-section {
+            border-top: 1px solid var(--clr-border);
+            border-bottom: 1px solid var(--clr-border);
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.055) 0%, rgba(9, 11, 22, 0) 100%);
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .overview-grid > * {
+            min-width: 0;
+        }
+
+        .promo-card {
+            background: linear-gradient(155deg, rgba(99, 102, 241, 0.16), rgba(17, 21, 40, 0.94));
+            border: 1px solid rgba(129, 140, 248, 0.28);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .promo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: calc(var(--radius-lg) - 10px);
+        }
+
+        .promo-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 2px 4px 4px;
+        }
+
+        .promo-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--clr-border);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--clr-text-muted);
+        }
+
+        .promo-pill i {
+            color: var(--clr-cyan-light);
+            font-size: 0.78rem;
+        }
+
+        .overview-copy p {
+            color: var(--clr-text-muted);
+            font-size: 1.02rem;
+            margin-bottom: 20px;
+        }
+
+        .checklist-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .checklist-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+
+        .checklist-card h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--clr-cyan-light);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 0.91rem;
+            color: var(--clr-text-muted);
+            line-height: 1.48;
+        }
+
+        .checklist li i {
+            color: var(--clr-cta);
+            font-size: 0.82rem;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* ========== CORE FEATURES GRID ========== */
+        .section-header-center {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 48px;
+        }
+
+        .section-header-center .section-desc {
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .features-grid > * {
+            min-width: 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(180deg, rgba(24, 30, 56, 0.78) 0%, rgba(17, 21, 40, 0.92) 100%);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(34, 211, 238, 0.45);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 211, 238, 0.14);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.24rem;
+            color: var(--clr-cyan-light);
+            background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(99, 102, 241, 0.18));
+            border: 1px solid rgba(103, 232, 249, 0.3);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card h3 {
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--clr-text-muted);
+            line-height: 1.65;
+        }
+
+        /* ========== SCREENSHOTS GALLERY ========== */
+        .screenshots-section {
+            padding-top: 24px;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .screenshots-grid > * {
+            min-width: 0;
+        }
+
+        .screenshot-card {
+            background: var(--clr-surface);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(129, 140, 248, 0.45);
+            box-shadow: 0 22px 48px rgba(0, 0, 0, 0.54);
+        }
+
+        .screenshot-stage {
+            height: 360px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 50% 15%, rgba(99, 102, 241, 0.18) 0%, transparent 65%),
+                radial-gradient(circle at 50% 85%, rgba(34, 211, 238, 0.1) 0%, transparent 60%),
+                #0b0e1c;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .screenshot-stage img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.52);
+            display: block;
+            transition: transform 0.4s var(--transition-smooth);
+        }
+
+        .screenshot-card:hover .screenshot-stage img {
+            transform: scale(1.03);
+        }
+
+        .screenshot-caption {
+            padding: 18px 20px 20px;
+        }
+
+        .screenshot-caption h3 {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .screenshot-caption p {
+            font-size: 0.88rem;
+            color: var(--clr-text-muted);
+            line-height: 1.55;
+        }
+
+        /* ========== BLOGPOST-STYLE CTA BANNER ========== */
+        .cta-section {
+            padding-top: 32px;
+            padding-bottom: 84px;
+        }
+
+        .app-cta-banner {
+            background:
+                radial-gradient(circle at top left, rgba(61, 220, 132, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at bottom right, rgba(99, 102, 241, 0.22) 0%, transparent 55%),
+                linear-gradient(135deg, rgba(20, 25, 48, 0.96) 0%, rgba(12, 15, 30, 0.98) 100%);
+            border: 1px solid rgba(61, 220, 132, 0.38);
+            border-radius: var(--radius-lg);
+            padding: 40px 42px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.56),
+                0 0 0 1px rgba(61, 220, 132, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.09);
+        }
+
+        .app-cta-icon {
+            width: 104px;
+            height: 104px;
+            border-radius: 24px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow:
+                0 14px 32px rgba(34, 211, 238, 0.26),
+                0 0 0 1px rgba(255, 255, 255, 0.16);
+        }
+
+        .app-cta-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-cta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--clr-cta);
+            margin-bottom: 8px;
+        }
+
+        .app-cta-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 10px;
+        }
+
+        .app-cta-content p {
+            color: var(--clr-text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 22px;
+            max-width: 640px;
+        }
+
+        .app-cta-buttons {
+            display: flex;
+            align-items: stretch;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== RELATED GUIDE BOX ========== */
+        .related-guide-box {
+            margin-top: 32px;
+            padding: 28px 32px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .related-guide-copy {
+            flex: 1;
+            min-width: min(260px, 100%);
+        }
+
+        .related-guide-box h3 {
+            color: var(--clr-cyan-light);
+            font-size: 1.12rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .related-guide-box p {
+            color: var(--clr-text-muted);
+            font-size: 0.94rem;
+            line-height: 1.55;
+        }
+
+        .guide-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            color: var(--clr-cyan-light);
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .guide-link-btn:hover {
+            background: var(--clr-cyan);
+            border-color: var(--clr-cyan);
+            color: #06131c;
+            transform: translateY(-2px);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid var(--clr-border);
+            padding: 40px 28px 48px;
+            background: rgba(0, 0, 0, 0.28);
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .footer-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .footer-copy {
+            color: var(--clr-text-dim);
+            font-size: 0.88rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px 18px;
+            flex-wrap: wrap;
+            list-style: none;
+            font-size: 0.88rem;
+        }
+
+        .footer-links a {
+            color: var(--clr-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--clr-cyan-light);
+        }
+
+        /* ========== PROGRESSIVE REVEAL ========== */
+        .js-reveal .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .js-reveal .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .js-reveal .reveal-delay-1 {
+            transition-delay: 0.08s;
+        }
+
+        .js-reveal .reveal-delay-2 {
+            transition-delay: 0.16s;
+        }
+
+        .js-reveal .reveal-delay-3 {
+            transition-delay: 0.24s;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 960px) {
+            .hero .container,
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                padding-top: 108px;
+                padding-bottom: 64px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-tagline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions,
+            .hero-trust-row {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid .feature-card:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 720px) {
+            section {
+                padding: 64px 20px;
+            }
+
+            .nav {
+                padding: 12px 18px;
+            }
+
+            .nav-back {
+                display: none;
+            }
+
+            .nav-links li.nav-hide-mobile {
+                display: none;
+            }
+
+            .checklist-group,
+            .features-grid,
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid .feature-card:last-child {
+                grid-column: auto;
+            }
+
+            .app-cta-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 22px;
+                gap: 20px;
+            }
+
+            .app-cta-tag {
+                justify-content: center;
+            }
+
+            .app-cta-buttons {
+                justify-content: center;
+            }
+
+            .related-guide-box {
+                padding: 22px 20px;
+            }
+
+            .guide-link-btn {
+                width: 100%;
+                justify-content: center;
+                white-space: normal;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions .btn-playstore-cta,
+            .hero-actions .btn-secondary-cta,
+            .app-cta-buttons .btn-playstore-cta,
+            .app-cta-buttons .btn-secondary-cta {
+                width: 100%;
+            }
+
+            .screenshot-stage {
+                height: 320px;
+                padding: 14px;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 13px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .ambient-bg::before,
+            .ambient-bg::after,
+            .hero-badge .pulse-dot {
+                animation: none;
+            }
+
+            .js-reveal .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('js-reveal');
+        }
+    </script>
 </head>
 
 <body>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <div class="container">
-        <nav class="landing-nav">
-            <a href="index.html" class="landing-back-link">&larr; GiantTurtle Apps</a>
-            <div class="nav-right-links">
-                <a href="index.html#projects">Apps</a>
-                <a href="blog/blog_main.html">Blog</a>
-                <a href="mailto:giant2turtle@gmail.com">Contact</a>
-            </div>
-        </nav>
-
-        <header class="app-hero">
-            <h1 class="landing-title">Macro Spotlight</h1>
-            <p class="landing-subtitle">Find Anything. Instantly.
-                Privately.</p>
-            <img src="assets/images/spotlight-promo.png" alt="Macro Spotlight Hero">
-        </header>
-
-        <section class="full-description">
-            <h2>Desktop-Class Search for Android</h2>
-            <p>Macro Spotlight brings the power of instant search to your mobile device, inspired by the best of GNOME
-                and iOS. Stop scrolling through app drawers and cluttered menus—find what you need with a few
-                keystrokes.</p>
-
-            <div class="featured-grid" style="margin-top: 4rem; text-align: left;">
-                <div class="app-card" style="padding: 1.5rem;">
-                    <i class="fas fa-shield-alt"
-                        style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>Total Privacy</h3>
-                    <p>No internet permissions. Your search history and data never leave your device.</p>
-                </div>
-                <div class="app-card" style="padding: 1.5rem;">
-                    <i class="fas fa-bolt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>Lightning Fast</h3>
-                    <p>Built for speed. Find apps, contacts, and files with near-zero latency.</p>
-                </div>
-                <div class="app-card" style="padding: 1.5rem;">
-                    <i class="fas fa-calculator"
-                        style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>Utility Tools</h3>
-                    <p>Quick calculations, unit conversions, and currency on the fly—entirely offline.</p>
-                </div>
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <a href="#top" class="nav-brand">
+                    <img src="assets/icons/spotlight.png" alt="Macro Spotlight app icon" width="36" height="36">
+                    <span>Macro Spotlight</span>
+                </a>
+                <a href="index.html" class="nav-back">&larr; GiantTurtle Apps</a>
             </div>
 
-            <p style="margin-top: 3rem;">Available via Home Screen Widget and Quick Settings Tile. Search even while
-                you're inside other apps.</p>
-
-            <div class="app-links" style="justify-content: center; margin-top: 3rem;">
-                <a href="https://play.google.com/store/apps/details?id=com.gianturtle.localsearch"
-                    class="store-btn btn-playstore" style="max-width: 250px;"><i class="fab fa-google-play"></i>
-                    Get it on Play Store</a>
-            </div>
-        </section>
-
-        <section class="gallery">
-            <img src="assets/images/spotlight-promo2.png" alt="Spotlight Screenshot 1">
-            <img src="assets/images/spotlight-promo3.png" alt="Spotlight Screenshot 2">
-            <img src="assets/images/spotlight-promo4.png" alt="Spotlight Screenshot 3">
-            <img src="assets/images/spotlight-promo5.png" alt="Spotlight Screenshot 4">
-        </section>
-
-        <div class="related-guide-box">
-            <h3><i class="fas fa-book-reader"></i> In-Depth Engineering Guide</h3>
-            <p>Want to understand how Macro Spotlight indexes contacts, files, and applications locally without cloud telemetry or battery drain?</p>
-            <a href="blog/fastest-private-offline-spotlight-search-android.html" class="guide-link-btn">
-                Read: Fastest Private Offline Spotlight Search for Android &rarr;
-            </a>
+            <ul class="nav-links">
+                <li class="nav-hide-mobile"><a href="#features">Features</a></li>
+                <li class="nav-hide-mobile"><a href="#screenshots">Screenshots</a></li>
+                <li class="nav-hide-mobile"><a href="blog/blog_main.html">Blog</a></li>
+                <li class="nav-hide-mobile"><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li>
+                    <a href="https://play.google.com/store/apps/details?id=com.gianturtle.localsearch"
+                        target="_blank" rel="noopener noreferrer" class="nav-cta">
+                        <i class="fab fa-google-play" aria-hidden="true"></i> Get App
+                    </a>
+                </li>
+            </ul>
         </div>
+    </nav>
 
-    </div>
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-text">
+                    <div class="hero-badge reveal">
+                        <span class="pulse-dot" aria-hidden="true"></span>
+                        Android Instant Search &bull; Zero Internet Permissions
+                    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.</p>
-            <div class="footer-links">
-                <a href="index.html">All Apps</a> &bull;
-                <a href="blog/blog_main.html">Guides &amp; Blog</a> &bull;
-                <a href="blog/fastest-private-offline-spotlight-search-android.html">Spotlight Guide</a> &bull;
-                <a href="privacy-policy.html">Privacy Policy</a> &bull;
-                <a href="refund-policy.html">Refund Policy</a>
+                    <h1 class="hero-title reveal reveal-delay-1">
+                        Macro Spotlight.<br>
+                        <span class="gradient-text">Find Anything. Instantly. Privately.</span>
+                    </h1>
+
+                    <p class="hero-tagline reveal reveal-delay-2">
+                        Desktop-class on-device search for Android, inspired by the best of GNOME and iOS Spotlight.
+                        Find apps, contacts, files, documents, and calculations in a few keystrokes &mdash; with zero ads
+                        and zero cloud tracking.
+                    </p>
+
+                    <div class="hero-actions reveal reveal-delay-3">
+                        <a href="https://play.google.com/store/apps/details?id=com.gianturtle.localsearch"
+                            target="_blank" rel="noopener noreferrer" class="btn-playstore-cta" id="hero-playstore-cta">
+                            <i class="fab fa-google-play play-icon" aria-hidden="true"></i>
+                            <span class="btn-copy">
+                                <span class="btn-kicker">Free on Android</span>
+                                <span class="btn-label">Get on Google Play</span>
+                            </span>
+                        </a>
+
+                        <a href="blog/fastest-private-offline-spotlight-search-android.html" class="btn-secondary-cta">
+                            <i class="fas fa-book-open" aria-hidden="true"></i>
+                            Read Privacy Guide
+                        </a>
+                    </div>
+
+                    <div class="hero-trust-row reveal reveal-delay-3">
+                        <span class="hero-trust-item">
+                            <i class="fas fa-lock" aria-hidden="true"></i> No Internet Permission
+                        </span>
+                        <span class="hero-trust-item">
+                            <i class="fas fa-bolt" aria-hidden="true"></i> Near-Zero Latency
+                        </span>
+                        <span class="hero-trust-item">
+                            <i class="fas fa-th-large" aria-hidden="true"></i> Widget &amp; Quick Settings Tile
+                        </span>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal reveal-delay-2" id="demo">
+                    <div class="glow-ring" aria-hidden="true"></div>
+                    <div class="video-frame">
+                        <div class="video-ratio">
+                            <iframe
+                                src="https://www.youtube.com/embed/IZfCaVmnFik?rel=0"
+                                title="Macro Spotlight - Private Offline Android Search Demo"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="video-caption">
+                        <span><i class="fas fa-play-circle" aria-hidden="true"></i> Watch Macro Spotlight in action</span>
+                        <a href="https://youtu.be/IZfCaVmnFik" target="_blank" rel="noopener noreferrer">
+                            Open on YouTube <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- OVERVIEW & CAPABILITIES -->
+        <section class="overview-section" id="overview">
+            <div class="container">
+                <div class="overview-grid">
+                    <div class="promo-card reveal">
+                        <img src="assets/images/spotlight-promo.png"
+                            alt="Macro Spotlight instant private search interface on Android"
+                            width="512" height="250" loading="lazy" decoding="async">
+                        <div class="promo-pill-row">
+                            <span class="promo-pill"><i class="fas fa-search" aria-hidden="true"></i> Apps, Contacts &amp; Files</span>
+                            <span class="promo-pill"><i class="fas fa-sliders-h" aria-hidden="true"></i> Quick Settings Tile</span>
+                            <span class="promo-pill"><i class="fas fa-calculator" aria-hidden="true"></i> Offline Math &amp; Units</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-copy reveal reveal-delay-1">
+                        <div class="section-label">GNOME &amp; iOS Speed on Android</div>
+                        <h2>Desktop-Class Search for Android</h2>
+                        <p>
+                            Stop scrolling through sprawling app drawers and cluttered menus. Macro Spotlight indexes
+                            your phone locally so you can launch apps, reach contacts, open documents, or run quick
+                            conversions even while you're inside other apps.
+                        </p>
+
+                        <div class="checklist-group">
+                            <div class="checklist-card">
+                                <h3><i class="fas fa-folder-open" aria-hidden="true"></i> Find Instantly</h3>
+                                <ul class="checklist">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Apps, settings &amp; shortcuts</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Contacts for 1-tap call/SMS</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Documents, files, music &amp; videos</li>
+                                </ul>
+                            </div>
+
+                            <div class="checklist-card">
+                                <h3><i class="fas fa-compass" aria-hidden="true"></i> Access &amp; Control</h3>
+                                <ul class="checklist">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Clean Home Screen search widget</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Quick Settings tile from any app</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Optional web handoff &mdash; or 100% local</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE FEATURES -->
+        <section id="features">
+            <div class="container">
+                <div class="section-header-center reveal">
+                    <div class="section-label">Built for Speed &amp; Sovereignty</div>
+                    <h2>Zero Ads. Zero Cloud. Zero Waiting.</h2>
+                    <p class="section-desc">
+                        Every keystroke stays on your hardware. No sponsored suggestions, no background telemetry, and
+                        instant local results every time you search.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <article class="feature-card reveal">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Total Privacy</h3>
+                        <p>
+                            No internet permissions requested. Your search history, contacts, and file queries never
+                            leave your device.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal reveal-delay-1">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Lightning Fast</h3>
+                        <p>
+                            Built for speed. Find apps, contacts, settings, and local files with near-zero latency as
+                            you type.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal reveal-delay-2">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Utility Tools</h3>
+                        <p>
+                            Quick calculations, unit conversions, and currency conversions directly in the search bar
+                            &mdash; completely offline.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREENSHOTS -->
+        <section class="screenshots-section" id="screenshots">
+            <div class="container">
+                <div class="section-header-center reveal">
+                    <div class="section-label">Inside the App</div>
+                    <h2>Minimalist, Private &amp; Always Within Reach</h2>
+                    <p class="section-desc">
+                        Launch from your home screen or notification shade in light or dark mode &mdash; with verifiable
+                        zero-internet permissions.
+                    </p>
+                </div>
+
+                <div class="screenshots-grid">
+                    <figure class="screenshot-card reveal">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/spotlight-promo2.png"
+                                alt="Macro Spotlight searching screenshots, files, and apps privately"
+                                width="236" height="512" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>Search Everything</h3>
+                            <p>Instant results across apps, screenshots, audio, and files with quick recent-query chips.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="screenshot-card reveal reveal-delay-1">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/spotlight-promo3.png"
+                                alt="Android permissions screen proving Macro Spotlight requests no internet permission"
+                                width="288" height="512" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>No Internet Permissions</h3>
+                            <p>100% offline by architecture &mdash; verifiable directly in your Android app permissions.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="screenshot-card reveal reveal-delay-2">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/spotlight-promo4.png"
+                                alt="Macro Spotlight minimal home screen search widget and Quick Settings tile"
+                                width="288" height="512" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>Widget &amp; Quick Tile</h3>
+                            <p>Minimalist home screen widget plus a Quick Settings tile to search from inside any app.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="screenshot-card reveal reveal-delay-3">
+                        <div class="screenshot-stage">
+                            <img src="assets/images/spotlight-promo5.png"
+                                alt="Macro Spotlight light mode list results showing settings, apps, shortcuts, and media"
+                                width="368" height="512" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption class="screenshot-caption">
+                            <h3>Light &amp; Dark Themes</h3>
+                            <p>Clean list and grid views across apps, system settings, shortcuts, and local media files.</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOGPOST-STYLE PROMINENT CTA BANNER + RELATED GUIDE -->
+        <section class="cta-section" id="download">
+            <div class="container">
+                <div class="app-cta-banner reveal">
+                    <img src="assets/icons/spotlight.png" alt="Macro Spotlight Icon" class="app-cta-icon"
+                        width="104" height="104" loading="lazy" decoding="async">
+                    <div class="app-cta-content">
+                        <div class="app-cta-tag">
+                            <i class="fab fa-android" aria-hidden="true"></i> Available on Google Play
+                        </div>
+                        <h2>Get Macro Spotlight on Google Play</h2>
+                        <p>
+                            Desktop-class instant search for apps, contacts, files, and calculations. Zero internet
+                            permissions, zero ads, and near-zero latency &mdash; with Home Widget and Quick Settings tile.
+                        </p>
+                        <div class="app-cta-buttons">
+                            <a href="https://play.google.com/store/apps/details?id=com.gianturtle.localsearch"
+                                target="_blank" rel="noopener noreferrer" class="btn-playstore-cta" id="bottom-playstore-cta">
+                                <i class="fab fa-google-play play-icon" aria-hidden="true"></i>
+                                <span class="btn-copy">
+                                    <span class="btn-kicker">Install Free</span>
+                                    <span class="btn-label">Install from Play Store</span>
+                                </span>
+                            </a>
+                            <a href="index.html#projects" class="btn-secondary-cta">
+                                Explore More GiantTurtle Apps &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="related-guide-box reveal reveal-delay-1">
+                    <div class="related-guide-copy">
+                        <h3><i class="fas fa-book-reader" aria-hidden="true"></i> In-Depth Engineering Guide</h3>
+                        <p>
+                            Want to understand how Macro Spotlight indexes contacts, files, and applications locally
+                            without cloud telemetry or battery drain?
+                        </p>
+                    </div>
+                    <a href="blog/fastest-private-offline-spotlight-search-android.html" class="guide-link-btn">
+                        Read: Fastest Private Offline Spotlight Search for Android &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/icons/spotlight.png" alt="Macro Spotlight" width="28" height="28" loading="lazy">
+                <span>Macro Spotlight &bull; GiantTurtle Studio</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.</p>
+            <ul class="footer-links">
+                <li><a href="index.html">All Apps</a></li>
+                <li><a href="blog/blog_main.html">Guides &amp; Blog</a></li>
+                <li><a href="blog/fastest-private-offline-spotlight-search-android.html">Spotlight Guide</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
+    <script>
+        // Navbar scroll backdrop
+        const nav = document.getElementById('main-nav');
+        const updateNav = () => nav.classList.toggle('scrolled', window.scrollY > 32);
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+
+        // Progressive scroll reveal
+        if (document.documentElement.classList.contains('js-reveal') && 'IntersectionObserver' in window) {
+            const revealEls = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+            );
+            revealEls.forEach((el) => observer.observe(el));
+        } else {
+            document.documentElement.classList.remove('js-reveal');
+        }
+    </script>
 </body>
 
 </html>
