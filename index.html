@@ -1130,26 +1130,61 @@
         }
 
         @media (max-width: 480px) {
+            .nav {
+                padding: 10px 12px;
+            }
+
+            .nav-inner {
+                gap: 8px;
+            }
+
+            .nav-brand {
+                gap: 7px;
+            }
+
             .nav-logo-pill {
-                height: 34px;
+                height: 30px;
+                padding: 2px 5px;
+                border-radius: 8px;
             }
 
             .nav-logo-pill img {
-                height: 26px;
+                height: 24px;
             }
 
             .nav-brand span {
-                font-size: 1rem;
+                font-size: 0.92rem;
+            }
+
+            .nav-links {
+                gap: 2px;
+            }
+
+            .nav-links a {
+                padding: 6px 8px;
+                font-size: 0.82rem;
             }
 
             .nav-links .nav-cta {
-                padding: 7px 13px;
-                font-size: 0.8rem;
+                padding: 6px 10px;
+                font-size: 0.78rem;
+                gap: 5px;
+                margin-left: 2px;
             }
 
             .hero-metrics {
                 padding: 14px 16px;
                 gap: 10px 18px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .nav-brand span {
+                font-size: 0.86rem;
+            }
+
+            .nav-links .nav-cta i {
+                display: none;
             }
         }
 
@@ -1197,7 +1232,7 @@
                 <li><a href="blog/blog_main.html">Blog</a></li>
                 <li>
                     <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="nav-cta">
-                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Contact
                     </a>
                 </li>
             </ul>
