@@ -9,7 +9,8 @@
     <!-- SEO & Metadata -->
     <meta name="description"
         content="Expert tutorials, productivity teardowns, and optimization guides for macOS virtual desktops, Android background battery management, and mobile computing.">
-    <meta name="keywords" content="macOS tips, Android optimization, virtual desktops mac, stop background apps android, android desktop mode, modern communicator, nokia e91 android, GiantTurtle blog">
+    <meta name="keywords"
+        content="macOS tips, Android optimization, virtual desktops mac, stop background apps android, android desktop mode, modern communicator, nokia e91 android, GiantTurtle blog">
     <meta name="author" content="GiantTurtle Studio">
     <link rel="canonical" href="https://giant-turtle.com/blog/blog_main.html">
 
@@ -35,15 +36,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#070b10">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="blog.css">
 
     <!-- Structured Data (CollectionPage) -->
     <script type="application/ld+json">
@@ -131,328 +131,1257 @@
       ]
     }
     </script>
+
+    <style>
+        /* ========== RESET & TOKENS ========== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --clr-bg: #070b10;
+            --clr-surface: #0e151f;
+            --clr-surface-raised: #15202e;
+
+            /* GiantTurtle Signature Emerald & Ocean-Teal Palette */
+            --clr-primary: #3DDC84;
+            --clr-primary-hover: #2ebc6f;
+            --clr-primary-ink: #06140c;
+            --clr-primary-glow: rgba(61, 220, 132, 0.28);
+            --clr-teal: #2dd4bf;
+            --clr-cyan: #38bdf8;
+
+            --clr-text: #eef4f8;
+            --clr-text-muted: #9eb0c3;
+            --clr-text-dim: #6e8094;
+            --clr-border: rgba(226, 240, 255, 0.08);
+            --clr-glass-border: rgba(226, 240, 255, 0.13);
+
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-display: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            letter-spacing: -0.025em;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--clr-primary);
+            outline-offset: 2px;
+        }
+
+        /* ========== AMBIENT BACKGROUND ========== */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(61, 220, 132, 0.07) 1px, transparent 1px);
+            background-size: 32px 32px;
+            -webkit-mask-image: radial-gradient(ellipse 88% 72% at 50% 18%, #000 22%, transparent 100%);
+            mask-image: radial-gradient(ellipse 88% 72% at 50% 18%, #000 22%, transparent 100%);
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            width: 840px;
+            height: 840px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(61, 220, 132, 0.16) 0%, rgba(45, 212, 191, 0.08) 40%, transparent 70%);
+            top: -320px;
+            right: -180px;
+            animation: ambientFloat 24s ease-in-out infinite;
+        }
+
+        .ambient-bg::after {
+            content: '';
+            position: absolute;
+            width: 680px;
+            height: 680px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.13) 0%, rgba(167, 139, 250, 0.07) 42%, transparent 70%);
+            bottom: -240px;
+            left: -200px;
+            animation: ambientFloat 28s ease-in-out infinite reverse;
+        }
+
+        @keyframes ambientFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(45px, -30px) scale(1.06);
+            }
+
+            66% {
+                transform: translate(-30px, 40px) scale(0.96);
+            }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 14px 28px;
+            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(7, 11, 16, 0.86);
+            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            backdrop-filter: blur(22px) saturate(1.4);
+            border-bottom-color: var(--clr-glass-border);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+        }
+
+        .nav-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .nav-logo-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 3px 6px;
+            height: 38px;
+            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-logo-pill img {
+            height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-brand span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.12rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--clr-text-muted);
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 99px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-links a.nav-active {
+            color: var(--clr-primary);
+            background: rgba(61, 220, 132, 0.1);
+        }
+
+        .nav-links .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--clr-primary);
+            color: var(--clr-primary-ink);
+            font-weight: 700;
+            font-size: 0.86rem;
+            padding: 8px 16px;
+            margin-left: 6px;
+            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.26);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-links .nav-cta:hover {
+            background: var(--clr-primary-hover);
+            color: #000000;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(61, 220, 132, 0.42);
+        }
+
+        /* ========== MAIN CONTAINER & HERO ========== */
+        .blog-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 126px 28px 64px;
+        }
+
+        .blog-hero {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 38px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--clr-primary);
+            padding: 7px 15px;
+            border-radius: 99px;
+            background: rgba(61, 220, 132, 0.1);
+            border: 1px solid rgba(61, 220, 132, 0.28);
+            margin-bottom: 20px;
+        }
+
+        .hero-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--clr-primary);
+            box-shadow: 0 0 10px rgba(61, 220, 132, 0.85);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.78);
+            }
+        }
+
+        .blog-hero h1 {
+            font-size: clamp(2.25rem, 5vw, 3.6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .blog-hero h1 .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--clr-teal) 45%, var(--clr-primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-hero p {
+            font-size: clamp(1.02rem, 2vw, 1.16rem);
+            color: var(--clr-text-muted);
+            line-height: 1.68;
+        }
+
+        /* ========== SEARCH & FILTER BAR ========== */
+        .blog-controls {
+            background: linear-gradient(155deg, rgba(21, 32, 46, 0.72) 0%, rgba(14, 21, 31, 0.9) 100%);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: var(--radius-lg);
+            padding: 22px 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+        }
+
+        .search-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1 1 320px;
+            max-width: 520px;
+        }
+
+        .search-box .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--clr-text-dim);
+            font-size: 0.95rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 42px 12px 44px;
+            border-radius: 12px;
+            border: 1px solid var(--clr-glass-border);
+            background: rgba(7, 11, 16, 0.72);
+            color: var(--clr-text);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: var(--clr-text-dim);
+        }
+
+        .search-input:focus {
+            border-color: var(--clr-primary);
+            background: rgba(7, 11, 16, 0.92);
+            box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.16);
+            outline: none;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--clr-text-muted);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .search-clear.visible {
+            display: inline-flex;
+        }
+
+        .search-clear:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+        }
+
+        .results-status {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--clr-text-muted);
+            white-space: nowrap;
+        }
+
+        .results-status strong {
+            color: var(--clr-primary);
+        }
+
+        .filter-pills {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 15px;
+            border-radius: 99px;
+            border: 1px solid var(--clr-glass-border);
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--clr-text-muted);
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .filter-btn:hover {
+            color: #ffffff;
+            border-color: rgba(61, 220, 132, 0.4);
+            background: rgba(61, 220, 132, 0.09);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: var(--clr-primary);
+            border-color: var(--clr-primary);
+            color: var(--clr-primary-ink);
+            box-shadow: 0 6px 18px rgba(61, 220, 132, 0.28);
+        }
+
+        .filter-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 99px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            color: inherit;
+        }
+
+        .filter-btn.active .filter-count {
+            background: rgba(6, 20, 12, 0.16);
+        }
+
+        /* ========== BLOG POSTS GRID ========== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+            gap: 24px;
+        }
+
+        .blog-grid > * {
+            min-width: 0;
+        }
+
+        .blog-post-card {
+            background: linear-gradient(180deg, rgba(21, 32, 46, 0.72) 0%, rgba(14, 21, 31, 0.94) 100%);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+
+        .blog-post-card.is-hidden {
+            display: none;
+        }
+
+        .blog-post-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(61, 220, 132, 0.45);
+            box-shadow: 0 22px 48px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(61, 220, 132, 0.12);
+        }
+
+        .blog-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .blog-thumb-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #0a1019;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .blog-card-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s var(--transition-smooth);
+        }
+
+        .blog-post-card:hover .blog-card-thumb {
+            transform: scale(1.04);
+        }
+
+        .blog-card-body {
+            padding: 22px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 11px;
+            border-radius: 99px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            width: fit-content;
+            margin-bottom: 12px;
+            background: rgba(61, 220, 132, 0.12);
+            border: 1px solid rgba(61, 220, 132, 0.32);
+            color: #3DDC84;
+        }
+
+        .category-badge.macos {
+            background: rgba(167, 139, 250, 0.15);
+            border-color: rgba(167, 139, 250, 0.36);
+            color: #c4b5fd;
+        }
+
+        .category-badge.desktop {
+            background: rgba(45, 212, 191, 0.14);
+            border-color: rgba(45, 212, 191, 0.36);
+            color: #5eead4;
+        }
+
+        .category-badge.ai {
+            background: rgba(236, 72, 153, 0.15);
+            border-color: rgba(236, 72, 153, 0.36);
+            color: #f9a8d4;
+        }
+
+        .category-badge.hardware {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.38);
+            color: #fcd34d;
+        }
+
+        .category-badge.game {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.38);
+            color: #7dd3fc;
+        }
+
+        .category-badge.energy {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.38);
+            color: #34d399;
+        }
+
+        .blog-card-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            line-height: 1.38;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        .blog-post-card:hover .blog-card-title {
+            color: var(--clr-primary);
+        }
+
+        .blog-card-excerpt {
+            color: var(--clr-text-muted);
+            font-size: 0.93rem;
+            line-height: 1.62;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-top: 1px solid var(--clr-border);
+            padding-top: 14px;
+            font-size: 0.85rem;
+            color: var(--clr-text-dim);
+        }
+
+        .blog-card-cta {
+            color: var(--clr-teal);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .blog-card-cta i {
+            font-size: 0.8rem;
+            transition: transform 0.22s ease;
+        }
+
+        .blog-post-card:hover .blog-card-cta {
+            color: var(--clr-primary);
+        }
+
+        .blog-post-card:hover .blog-card-cta i {
+            transform: translateX(4px);
+        }
+
+        /* ========== EMPTY STATE ========== */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 56px 24px;
+            border-radius: var(--radius-lg);
+            background: rgba(14, 21, 31, 0.78);
+            border: 1px dashed var(--clr-glass-border);
+            margin-top: 12px;
+        }
+
+        .empty-state.visible {
+            display: block;
+        }
+
+        .empty-state i {
+            font-size: 2rem;
+            color: var(--clr-teal);
+            margin-bottom: 14px;
+        }
+
+        .empty-state h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--clr-text-muted);
+            margin-bottom: 20px;
+            font-size: 0.96rem;
+        }
+
+        /* ========== COMMUNITY CTA BANNER ========== */
+        .community-banner {
+            margin-top: 68px;
+            background:
+                radial-gradient(circle at top left, rgba(61, 220, 132, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
+                linear-gradient(135deg, rgba(21, 32, 46, 0.92) 0%, rgba(11, 17, 26, 0.96) 100%);
+            border: 1px solid rgba(61, 220, 132, 0.34);
+            border-radius: var(--radius-lg);
+            padding: clamp(32px, 5vw, 48px) clamp(22px, 4vw, 40px);
+            text-align: center;
+            box-shadow: 0 22px 54px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .community-banner h2 {
+            font-size: clamp(1.5rem, 3.2vw, 2.05rem);
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .community-banner p {
+            color: var(--clr-text-muted);
+            max-width: 600px;
+            margin: 0 auto 24px;
+            font-size: 1rem;
+        }
+
+        .btn-primary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(180deg, #4ce591 0%, var(--clr-primary) 55%, #30c874 100%);
+            color: var(--clr-primary-ink);
+            font-family: var(--font-body);
+            font-size: 0.96rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow:
+                0 12px 30px var(--clr-primary-glow),
+                0 2px 6px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            transition: transform 0.22s ease, box-shadow 0.25s ease, filter 0.22s ease;
+        }
+
+        .btn-primary-cta:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            color: #000000;
+            box-shadow:
+                0 16px 38px rgba(61, 220, 132, 0.46),
+                0 4px 12px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid var(--clr-border);
+            padding: 40px 28px 48px;
+            background: rgba(0, 0, 0, 0.26);
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .footer-copy {
+            color: var(--clr-text-dim);
+            font-size: 0.88rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px 18px;
+            flex-wrap: wrap;
+            list-style: none;
+            font-size: 0.88rem;
+        }
+
+        .footer-links a {
+            color: var(--clr-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--clr-primary);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 720px) {
+            .nav {
+                padding: 12px 18px;
+            }
+
+            .nav-links li.nav-hide-mobile {
+                display: none;
+            }
+
+            .blog-container {
+                padding: 104px 18px 48px;
+            }
+
+            .blog-controls {
+                padding: 18px 16px;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-logo-pill {
+                height: 34px;
+            }
+
+            .nav-logo-pill img {
+                height: 26px;
+            }
+
+            .nav-brand span {
+                font-size: 1rem;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 13px;
+                font-size: 0.8rem;
+            }
+
+            .blog-card-body {
+                padding: 18px 18px 20px;
+            }
+
+            .filter-btn {
+                font-size: 0.82rem;
+                padding: 7px 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .ambient-bg::before,
+            .ambient-bg::after,
+            .hero-badge .pulse-dot {
+                animation: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="../index.html" class="nav-logo">
-                <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo">
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="nav-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo" width="38" height="30">
+                </span>
                 <span>GiantTurtle</span>
             </a>
+
             <ul class="nav-links">
-                <li><a href="../index.html#projects">Apps</a></li>
-                <li><a href="blog_main.html" style="color: var(--primary);">Blog</a></li>
-                <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li><a href="blog_main.html" class="nav-active" aria-current="page">Blog</a></li>
+                <li class="nav-hide-mobile"><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li>
+                    <a href="../index.html#projects" class="nav-cta">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i> All Apps
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <main class="blog-container">
 
+        <!-- HERO -->
         <header class="blog-hero">
-            <h1>Guides, Insights &amp; Tutorials</h1>
+            <div class="hero-badge">
+                <span class="pulse-dot" aria-hidden="true"></span>
+                GiantTurtle Engineering Blog &bull; 13 Guides
+            </div>
+            <h1>Guides, Insights <span class="gradient-text">&amp; Tutorials</span></h1>
             <p>
-                In-depth articles from the engineers at GiantTurtle Studio. Learn how to optimize your operating systems, unlock hidden hardware capabilities, and streamline your digital workflow.
+                In-depth articles from the engineers at GiantTurtle Studio. Learn how to optimize your operating
+                systems, unlock hidden hardware capabilities, and streamline your digital workflow.
             </p>
         </header>
 
-        <!-- Category Filter Buttons -->
-        <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
-            <button class="action-badge active" style="background: var(--primary); color: #0a0e14; border: none; cursor: pointer; padding: 0.5rem 1.2rem; font-weight: 600; border-radius: 999px;">All Guides</button>
-            <span class="install-badge" style="font-size: 0.95rem; padding: 0.5rem 1.2rem; cursor: pointer;"><i class="fas fa-brain"></i> AI &amp; Local Tech</span>
-            <span class="install-badge" style="font-size: 0.95rem; padding: 0.5rem 1.2rem; cursor: pointer;"><i class="fab fa-apple"></i> macOS</span>
-            <span class="install-badge" style="font-size: 0.95rem; padding: 0.5rem 1.2rem; cursor: pointer;"><i class="fab fa-android"></i> Android</span>
-            <span class="install-badge" style="font-size: 0.95rem; padding: 0.5rem 1.2rem; cursor: pointer;"><i class="fas fa-desktop"></i> Desktop Computing</span>
-            <span class="install-badge" style="font-size: 0.95rem; padding: 0.5rem 1.2rem; cursor: pointer;"><i class="fas fa-keyboard"></i> Hardware</span>
-            <span class="install-badge" style="font-size: 0.95rem; padding: 0.5rem 1.2rem; cursor: pointer;"><i class="fas fa-gamepad"></i> Mobile Gaming</span>
-        </div>
+        <!-- SEARCH & CATEGORY FILTER CONTROLS -->
+        <section class="blog-controls" aria-label="Filter and search articles">
+            <div class="search-row">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="search" id="blog-search" class="search-input"
+                        placeholder="Search guides (e.g. macOS, Android, AI, DeX, privacy)..."
+                        aria-label="Search blog guides" autocomplete="off">
+                    <button type="button" id="search-clear" class="search-clear" aria-label="Clear search">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div id="results-status" class="results-status" aria-live="polite">
+                    Showing <strong>13</strong> of 13 guides
+                </div>
+            </div>
 
-        <!-- Blog Posts Grid -->
-        <section class="blog-grid">
+            <div class="filter-pills" role="group" aria-label="Filter guides by category">
+                <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">
+                    All Guides <span class="filter-count" data-count-for="all">13</span>
+                </button>
+                <button type="button" class="filter-btn" data-filter="ai" aria-pressed="false">
+                    <i class="fas fa-brain" aria-hidden="true"></i> AI &amp; Local Tech
+                    <span class="filter-count" data-count-for="ai">2</span>
+                </button>
+                <button type="button" class="filter-btn" data-filter="macos" aria-pressed="false">
+                    <i class="fab fa-apple" aria-hidden="true"></i> macOS
+                    <span class="filter-count" data-count-for="macos">5</span>
+                </button>
+                <button type="button" class="filter-btn" data-filter="android" aria-pressed="false">
+                    <i class="fab fa-android" aria-hidden="true"></i> Android
+                    <span class="filter-count" data-count-for="android">7</span>
+                </button>
+                <button type="button" class="filter-btn" data-filter="desktop" aria-pressed="false">
+                    <i class="fas fa-desktop" aria-hidden="true"></i> Desktop Computing
+                    <span class="filter-count" data-count-for="desktop">4</span>
+                </button>
+                <button type="button" class="filter-btn" data-filter="hardware" aria-pressed="false">
+                    <i class="fas fa-keyboard" aria-hidden="true"></i> Hardware &amp; Energy
+                    <span class="filter-count" data-count-for="hardware">2</span>
+                </button>
+                <button type="button" class="filter-btn" data-filter="game" aria-pressed="false">
+                    <i class="fas fa-gamepad" aria-hidden="true"></i> Mobile Gaming
+                    <span class="filter-count" data-count-for="game">1</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- BLOG POSTS GRID -->
+        <section class="blog-grid" id="blog-grid" aria-label="Blog articles">
 
             <!-- Card: Supercharge macOS Hot Corners -->
-            <article class="blog-post-card">
-                <a href="how-to-supercharge-macos-hot-corners-actions-guide.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/supercorners-blog-cover.jpg" alt="Supercharge macOS Hot Corners with Zones&amp;Corners Edge Zones" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="macos desktop">
+                <a href="how-to-supercharge-macos-hot-corners-actions-guide.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/supercorners-blog-cover.jpg"
+                            alt="Supercharge macOS Hot Corners with Zones&amp;Corners Edge Zones"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge macos" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-apple"></i> macOS Guide
-                            </span>
-                        </div>
+                        <span class="category-badge macos">
+                            <i class="fab fa-apple" aria-hidden="true"></i> macOS Guide
+                        </span>
                         <h2 class="blog-card-title">How to Supercharge macOS Hot Corners: Custom Actions, Edge Zones &amp; Power Tools</h2>
                         <p class="blog-card-excerpt">
-                            Stop settling for Apple's 4 static hot corners. Discover how Zones&amp;Corners unlocks 8 perimeter zones, 76 built-in actions, a Spaces App Switcher with Clean RAM, OCR, Trigger Delays, and Ignored Apps.
+                            Stop settling for Apple's 4 static hot corners. Discover how Zones&amp;Corners unlocks 8
+                            perimeter zones, 76 built-in actions, a Spaces App Switcher with Clean RAM, OCR, Trigger
+                            Delays, and Ignored Apps.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 7 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 7 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
             <!-- Card: Solar Roofs for Electric Cars -->
-            <article class="blog-post-card">
-                <a href="why-electric-cars-need-solar-roofs-vipv-grid-resilience.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/solar-ev-hero-cover.jpg" alt="Electric vehicle with solar roof charging under sunlight" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="hardware energy">
+                <a href="why-electric-cars-need-solar-roofs-vipv-grid-resilience.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/solar-ev-hero-cover.jpg"
+                            alt="Electric vehicle with solar roof charging under sunlight"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge energy" style="margin-bottom: 0.5rem;">
-                                <i class="fas fa-solar-panel"></i> Clean Tech &amp; Hardware
-                            </span>
-                        </div>
+                        <span class="category-badge energy">
+                            <i class="fas fa-solar-panel" aria-hidden="true"></i> Clean Tech &amp; Hardware
+                        </span>
                         <h2 class="blog-card-title">Why Every Electric Car Needs a Solar Roof: Smaller Batteries &amp; Grid Resilience</h2>
                         <p class="blog-card-excerpt">
-                            Break the EV weight-battery paradox. Discover how vehicle-integrated solar roofs deliver off-grid commuter range, shave peak grid stress, and enable bidirectional V2G emergency power.
+                            Break the EV weight-battery paradox. Discover how vehicle-integrated solar roofs deliver
+                            off-grid commuter range, shave peak grid stress, and enable bidirectional V2G emergency power.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 10 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 10 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
             <!-- Card: Blast Liquid Logic -->
-            <article class="blog-post-card">
-                <a href="how-to-master-tile-popping-puzzles-blast-liquid-logic.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/promo-play.jpg" alt="How to master tile popping puzzles in Blast" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="game android">
+                <a href="how-to-master-tile-popping-puzzles-blast-liquid-logic.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/promo-play.jpg"
+                            alt="How to master tile popping puzzles in Blast"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge game" style="margin-bottom: 0.5rem;">
-                                <i class="fas fa-gamepad"></i> Mobile Gaming &amp; Strategy
-                            </span>
-                        </div>
+                        <span class="category-badge game">
+                            <i class="fas fa-gamepad" aria-hidden="true"></i> Mobile Gaming &amp; Strategy
+                        </span>
                         <h2 class="blog-card-title">How to Master Tile-Popping Puzzles: Strategy &amp; High-Score Tactics in Blast</h2>
                         <p class="blog-card-excerpt">
-                            Ditch mindless gem swapping. Learn the mathematical laws of SameGame tile collapses, cluster consolidation, and board-clearing foresight in Blast: Liquid Logic.
+                            Ditch mindless gem swapping. Learn the mathematical laws of SameGame tile collapses, cluster
+                            consolidation, and board-clearing foresight in Blast: Liquid Logic.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 8 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 8 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
             <!-- Card: Modern Android Communicator (E91 Flagship) -->
-            <article class="blog-post-card">
-                <a href="modern-android-communicator-qwerty-flagship.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/communicator-hero.jpg" alt="A Modern Nokia E91-Style Android Communicator Flagship" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="hardware android desktop">
+                <a href="modern-android-communicator-qwerty-flagship.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/communicator-hero.jpg"
+                            alt="A Modern Nokia E91-Style Android Communicator Flagship"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge hardware" style="margin-bottom: 0.5rem;">
-                                <i class="fas fa-keyboard"></i> Hardware Concept
-                            </span>
-                        </div>
+                        <span class="category-badge hardware">
+                            <i class="fas fa-keyboard" aria-hidden="true"></i> Hardware Concept
+                        </span>
                         <h2 class="blog-card-title">Bring Back the Communicator: A Modern Nokia E91-Style Android Flagship</h2>
                         <p class="blog-card-excerpt">
-                            Closed: a portrait QWERTY phone for rapid thumb typing. Open: a full landscape keyboard and desktop shell. Why Android needs a true clamshell communicator and how Dextop powers the software.
+                            Closed: a portrait QWERTY phone for rapid thumb typing. Open: a full landscape keyboard and
+                            desktop shell. Why Android needs a true clamshell communicator and how Dextop powers the software.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 9 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 9 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
             <!-- Card: Local AI on Mac & Android -->
-            <article class="blog-post-card">
-                <a href="how-to-run-local-ai-mac-android-offline-llm.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/local-ai-guide-cover.jpg" alt="How to run local AI on Mac and Android" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="ai macos android">
+                <a href="how-to-run-local-ai-mac-android-offline-llm.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/local-ai-guide-cover.jpg"
+                            alt="How to run local AI on Mac and Android"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge ai" style="margin-bottom: 0.5rem;">
-                                <i class="fas fa-brain"></i> AI &amp; Local Computing
-                            </span>
-                        </div>
+                        <span class="category-badge ai">
+                            <i class="fas fa-brain" aria-hidden="true"></i> AI &amp; Local Computing
+                        </span>
                         <h2 class="blog-card-title">How to Run Local AI on Mac &amp; Android: Complete Offline LLM Guide</h2>
                         <p class="blog-card-excerpt">
-                            Zero cloud latency, zero data telemetry. Learn how to run quantized models on Apple Silicon and Android NPUs with Ollama, LM Studio, and MLC.
+                            Zero cloud latency, zero data telemetry. Learn how to run quantized models on Apple Silicon
+                            and Android NPUs with Ollama, LM Studio, and MLC.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 9 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 9 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
             <!-- Card: AI Prompt Staging -->
-            <article class="blog-post-card">
-                <a href="mastering-ai-prompt-staging-clipboard-scratchpad.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/prompt-staging-cover.jpg" alt="Mastering AI prompt staging with clipboard scratchpad" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="ai macos">
+                <a href="mastering-ai-prompt-staging-clipboard-scratchpad.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/prompt-staging-cover.jpg"
+                            alt="Mastering AI prompt staging with clipboard scratchpad"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge ai" style="margin-bottom: 0.5rem;">
-                                <i class="fas fa-terminal"></i> AI Workflows
-                            </span>
-                        </div>
+                        <span class="category-badge ai">
+                            <i class="fas fa-terminal" aria-hidden="true"></i> AI Workflows
+                        </span>
                         <h2 class="blog-card-title">Mastering AI Prompt Staging: Why Power Users Need a Clipboard Scratchpad</h2>
                         <p class="blog-card-excerpt">
-                            Stop losing context to accidental submissions and single clipboards. Learn the 5-part prompt staging framework on macOS with Paste Box.
+                            Stop losing context to accidental submissions and single clipboards. Learn the 5-part prompt
+                            staging framework on macOS with Paste Box.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 8 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 8 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
             <!-- Card: Volume Buttons Extended -->
-            <article class="blog-post-card">
-                <a href="how-to-remap-volume-buttons-android-custom-shortcuts.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/volume-promo2.png" alt="How to remap volume buttons on Android" class="blog-card-thumb">
+            <article class="blog-post-card" data-categories="android">
+                <a href="how-to-remap-volume-buttons-android-custom-shortcuts.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/volume-promo2.png"
+                            alt="How to remap volume buttons on Android"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge android" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-android"></i> Android Customization
-                            </span>
-                        </div>
+                        <span class="category-badge">
+                            <i class="fab fa-android" aria-hidden="true"></i> Android Customization
+                        </span>
                         <h2 class="blog-card-title">How to Remap Volume Buttons on Android: Custom Shortcuts Without Root</h2>
                         <p class="blog-card-excerpt">
-                            Skip music tracks with screen off, toggle flashlight, and navigate back using physical buttons—100% root-free and zero ADB.
+                            Skip music tracks with screen off, toggle flashlight, and navigate back using physical
+                            buttons&mdash;100% root-free and zero ADB.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 8 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 8 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
-            <!-- Card 1: DesktopPlus (macOS Spaces) -->
-            <article class="blog-post-card">
-                <a href="how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" style="text-decoration: none; color: inherit;">
-                    <img src="../landing-assets/spaceman-example.jpg" alt="macOS virtual desktops menu bar indicator" class="blog-card-thumb">
+            <!-- Card: DesktopPlus (macOS Spaces) -->
+            <article class="blog-post-card" data-categories="macos desktop">
+                <a href="how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../landing-assets/spaceman-example.jpg"
+                            alt="macOS virtual desktops menu bar indicator"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge macos" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-apple"></i> macOS
-                            </span>
-                        </div>
+                        <span class="category-badge macos">
+                            <i class="fab fa-apple" aria-hidden="true"></i> macOS
+                        </span>
                         <h2 class="blog-card-title">How to See &amp; Switch macOS Virtual Desktops from the Menu Bar</h2>
                         <p class="blog-card-excerpt">
-                            Stop guessing which Space you are on. Learn how to display a persistent desktop indicator in your top menu bar and jump between workspaces with 1-click simplicity.
+                            Stop guessing which Space you are on. Learn how to display a persistent desktop indicator in
+                            your top menu bar and jump between workspaces with 1-click simplicity.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 6 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 6 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
-            <!-- Card 2: Paste Box (macOS Clipboard & Scratchpad) -->
-            <article class="blog-post-card">
-                <a href="best-clipboard-manager-scratchpad-macos.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/all-copies_2880_1800.jpg" alt="macOS clipboard history manager and scratchpad" class="blog-card-thumb">
+            <!-- Card: Paste Box (macOS Clipboard & Scratchpad) -->
+            <article class="blog-post-card" data-categories="macos">
+                <a href="best-clipboard-manager-scratchpad-macos.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/all-copies_2880_1800.jpg"
+                            alt="macOS clipboard history manager and scratchpad"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge macos" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-apple"></i> macOS
-                            </span>
-                        </div>
+                        <span class="category-badge macos">
+                            <i class="fab fa-apple" aria-hidden="true"></i> macOS
+                        </span>
                         <h2 class="blog-card-title">The Best Clipboard Manager &amp; Persistent Scratchpad for macOS</h2>
                         <p class="blog-card-excerpt">
-                            Combine searchable clipboard history with an always-ready persistent scratchpad. Draft notes, clean formatting, and assemble LLM prompts 100% locally.
+                            Combine searchable clipboard history with an always-ready persistent scratchpad. Draft notes,
+                            clean formatting, and assemble LLM prompts 100% locally.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 7 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 7 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
-            <!-- Card 3: Macro Spotlight (Private Android Search) -->
-            <article class="blog-post-card">
-                <a href="fastest-private-offline-spotlight-search-android.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/spotlight-promo.png" alt="Spotlight search for Android" class="blog-card-thumb">
+            <!-- Card: Macro Spotlight (Private Android Search) -->
+            <article class="blog-post-card" data-categories="android">
+                <a href="fastest-private-offline-spotlight-search-android.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/spotlight-promo.png"
+                            alt="Spotlight search for Android"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge android" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-android"></i> Privacy &amp; Search
-                            </span>
-                        </div>
+                        <span class="category-badge">
+                            <i class="fab fa-android" aria-hidden="true"></i> Privacy &amp; Search
+                        </span>
                         <h2 class="blog-card-title">How to Get Apple Spotlight &amp; GNOME Search on Android (100% Offline)</h2>
                         <p class="blog-card-excerpt">
-                            Find apps, contacts, and files with zero cloud latency. Desktop-grade instant search featuring zero internet permissions, unit conversions, and Quick Settings tile.
+                            Find apps, contacts, and files with zero cloud latency. Desktop-grade instant search
+                            featuring zero internet permissions, unit conversions, and Quick Settings tile.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 6 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 6 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
-            <!-- Card 4: Swipe Stop (Touch Lock) -->
-            <article class="blog-post-card">
-                <a href="how-to-freeze-screen-stop-swiping-photos-android.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/swipe-stop-promo2.jpg" alt="Freeze screen when sharing photos on Android" class="blog-card-thumb">
+            <!-- Card: Swipe Stop (Touch Lock) -->
+            <article class="blog-post-card" data-categories="android">
+                <a href="how-to-freeze-screen-stop-swiping-photos-android.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/swipe-stop-promo2.jpg"
+                            alt="Freeze screen when sharing photos on Android"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge android" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-android"></i> Privacy &amp; Security
-                            </span>
-                        </div>
+                        <span class="category-badge">
+                            <i class="fab fa-android" aria-hidden="true"></i> Privacy &amp; Security
+                        </span>
                         <h2 class="blog-card-title">How to Freeze Your Screen &amp; Stop Friends from Swiping Your Photos</h2>
                         <p class="blog-card-excerpt">
-                            Prevent awkward photo-sharing snooping. Lock touch gestures with 1 tap before handing your phone over, and unfreeze instantly with your fingerprint.
+                            Prevent awkward photo-sharing snooping. Lock touch gestures with 1 tap before handing your
+                            phone over, and unfreeze instantly with your fingerprint.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 6 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 6 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
-            <!-- Card 5: App Stopper (Android Bloatware) -->
-            <article class="blog-post-card">
-                <a href="how-to-stop-android-apps-running-in-background-without-adb.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/app-stopper-pomo.png" alt="Stop Android apps from running in background" class="blog-card-thumb">
+            <!-- Card: App Stopper (Android Bloatware) -->
+            <article class="blog-post-card" data-categories="android">
+                <a href="how-to-stop-android-apps-running-in-background-without-adb.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/app-stopper-pomo.png"
+                            alt="Stop Android apps from running in background"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge android" style="margin-bottom: 0.5rem;">
-                                <i class="fab fa-android"></i> Android Optimization
-                            </span>
-                        </div>
+                        <span class="category-badge">
+                            <i class="fab fa-android" aria-hidden="true"></i> Android Optimization
+                        </span>
                         <h2 class="blog-card-title">How to Stop Android Apps from Running in the Background (Without ADB)</h2>
                         <p class="blog-card-excerpt">
-                            Rogue background services and carrier bloatware secretly chew through battery and RAM. Discover a safe, automated way to stop apps without bricking your phone with ADB.
+                            Rogue background services and carrier bloatware secretly chew through battery and RAM.
+                            Discover a safe, automated way to stop apps without bricking your phone with ADB.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 7 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 7 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
             </article>
 
-            <!-- Card 6: Dextop (Turn Phone into Desktop) -->
-            <article class="blog-post-card">
-                <a href="how-to-turn-android-phone-into-desktop-workstation.html" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/images/dextop-promo2.png" alt="Turn Android phone into desktop workstation" class="blog-card-thumb">
+            <!-- Card: Dextop (Turn Phone into Desktop) -->
+            <article class="blog-post-card" data-categories="desktop android">
+                <a href="how-to-turn-android-phone-into-desktop-workstation.html" class="blog-card-link">
+                    <div class="blog-thumb-wrap">
+                        <img src="../assets/images/dextop-promo2.png"
+                            alt="Turn Android phone into desktop workstation"
+                            class="blog-card-thumb" loading="lazy" decoding="async">
+                    </div>
                     <div class="blog-card-body">
-                        <div>
-                            <span class="article-category-badge desktop" style="margin-bottom: 0.5rem;">
-                                <i class="fas fa-desktop"></i> Productivity
-                            </span>
-                        </div>
+                        <span class="category-badge desktop">
+                            <i class="fas fa-desktop" aria-hidden="true"></i> Productivity
+                        </span>
                         <h2 class="blog-card-title">How to Turn Any Android Phone into a Desktop Workstation (DeX Alternative)</h2>
                         <p class="blog-card-excerpt">
-                            You don't need a $1,200 flagship or laptop. Learn how Dextop turns any Android phone or tablet into a full landscape workstation with dedicated desktop shortcuts.
+                            You don't need a $1,200 flagship or laptop. Learn how Dextop turns any Android phone or
+                            tablet into a full landscape workstation with dedicated desktop shortcuts.
                         </p>
                         <div class="blog-card-footer">
-                            <span><i class="far fa-clock"></i> 8 min read</span>
-                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right"></i></span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> 8 min read</span>
+                            <span class="blog-card-cta">Read Guide <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </a>
@@ -460,31 +1389,135 @@
 
         </section>
 
-        <!-- Newsletter / Community Section -->
-        <section style="margin-top: 5rem; background: var(--bg-card); padding: clamp(1.75rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem); border-radius: 20px; border: 1px solid var(--glass-border); text-align: center;">
-            <h2 style="margin-bottom: 1rem; color: #ffffff;">Have an App Idea or Problem to Solve?</h2>
-            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem;">
-                GiantTurtle Studio crafts carefully engineered software for mobile and desktop ecosystems. Let us know what tools you want to see built next.
+        <!-- EMPTY SEARCH/FILTER STATE -->
+        <div id="empty-state" class="empty-state" role="status">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <h3>No matching guides found</h3>
+            <p>Try a different keyword or switch back to viewing all categories.</p>
+            <button type="button" id="reset-filters-btn" class="btn-primary-cta">
+                <i class="fas fa-undo" aria-hidden="true"></i> Reset Filters
+            </button>
+        </div>
+
+        <!-- COMMUNITY CTA BANNER -->
+        <section class="community-banner">
+            <h2>Have an App Idea or Problem to Solve?</h2>
+            <p>
+                GiantTurtle Studio crafts carefully engineered software for mobile and desktop ecosystems. Let us know
+                what tools you want to see built next.
             </p>
-            <a href="mailto:giant2turtle@gmail.com?subject=Idea%20from%20GiantTurtle%20Blog" class="btn-primary-cta" style="display: inline-flex;">
-                <i class="fas fa-envelope"></i> Send Us an Email
+            <a href="mailto:giant2turtle@gmail.com?subject=Idea%20from%20GiantTurtle%20Blog" class="btn-primary-cta">
+                <i class="fas fa-envelope" aria-hidden="true"></i> Send Us an Email
             </a>
         </section>
 
     </main>
 
+    <!-- FOOTER -->
     <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Built with passion for the mobile and desktop ecosystem.</p>
-            <div class="footer-links">
-                <a href="../index.html">All Apps</a> &bull;
-                <a href="blog_main.html">Blog Home</a> &bull;
-                <a href="../privacy-policy.html">Privacy Policy</a> &bull;
-                <a href="../refund-policy.html">Refund Policy</a>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-pill" style="height: 30px; padding: 2px 5px; border-radius: 8px;">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" style="height: 24px;" width="30" height="24" loading="lazy">
+                </span>
+                <span>GiantTurtle Studio</span>
             </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Built with passion for the mobile and desktop ecosystem.</p>
+            <ul class="footer-links">
+                <li><a href="../index.html">All Apps</a></li>
+                <li><a href="blog_main.html">Blog Home</a></li>
+                <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="../refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
+    <script>
+        // Navbar scroll backdrop
+        const nav = document.getElementById('main-nav');
+        const updateNav = () => nav.classList.toggle('scrolled', window.scrollY > 32);
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+
+        // Live category filtering + search
+        const cards = Array.from(document.querySelectorAll('.blog-post-card'));
+        const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+        const searchInput = document.getElementById('blog-search');
+        const searchClear = document.getElementById('search-clear');
+        const resultsStatus = document.getElementById('results-status');
+        const emptyState = document.getElementById('empty-state');
+        const resetBtn = document.getElementById('reset-filters-btn');
+
+        let activeFilter = 'all';
+
+        // Compute accurate counts for each category pill automatically
+        const totalCount = cards.length;
+        filterButtons.forEach((btn) => {
+            const cat = btn.dataset.filter;
+            const badge = btn.querySelector('.filter-count');
+            if (!badge) return;
+            if (cat === 'all') {
+                badge.textContent = String(totalCount);
+            } else {
+                const count = cards.filter((c) => (c.dataset.categories || '').split(/\s+/).includes(cat)).length;
+                badge.textContent = String(count);
+            }
+        });
+
+        const applyFilters = () => {
+            const query = searchInput.value.trim().toLowerCase();
+            searchClear.classList.toggle('visible', query.length > 0);
+
+            let visibleCount = 0;
+            cards.forEach((card) => {
+                const cats = (card.dataset.categories || '').split(/\s+/);
+                const matchesCategory = activeFilter === 'all' || cats.includes(activeFilter);
+                const searchableText = card.textContent.toLowerCase();
+                const matchesQuery = !query || searchableText.includes(query);
+
+                const show = matchesCategory && matchesQuery;
+                card.classList.toggle('is-hidden', !show);
+                if (show) visibleCount += 1;
+            });
+
+            const label = visibleCount === 1 ? 'guide' : 'guides';
+            resultsStatus.innerHTML = `Showing <strong>${visibleCount}</strong> of ${totalCount} ${label}`;
+            emptyState.classList.toggle('visible', visibleCount === 0);
+        };
+
+        filterButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                activeFilter = btn.dataset.filter;
+                filterButtons.forEach((other) => {
+                    const isActive = other === btn;
+                    other.classList.toggle('active', isActive);
+                    other.setAttribute('aria-pressed', String(isActive));
+                });
+                applyFilters();
+            });
+        });
+
+        searchInput.addEventListener('input', applyFilters);
+
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            applyFilters();
+            searchInput.focus();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            activeFilter = 'all';
+            filterButtons.forEach((btn) => {
+                const isAll = btn.dataset.filter === 'all';
+                btn.classList.toggle('active', isAll);
+                btn.setAttribute('aria-pressed', String(isAll));
+            });
+            applyFilters();
+        });
+
+        applyFilters();
+    </script>
 </body>
 
 </html>

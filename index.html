@@ -36,7 +36,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#070b10">
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -71,476 +71,1841 @@
     }
     </script>
 
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ========== RESET & TOKENS ========== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --clr-bg: #070b10;
+            --clr-surface: #0e151f;
+            --clr-surface-raised: #15202e;
+
+            /* GiantTurtle Signature Emerald & Ocean-Teal Palette */
+            --clr-primary: #3DDC84;
+            --clr-primary-hover: #2ebc6f;
+            --clr-primary-ink: #06140c;
+            --clr-primary-glow: rgba(61, 220, 132, 0.28);
+            --clr-teal: #2dd4bf;
+            --clr-cyan: #38bdf8;
+            --clr-teal-glow: rgba(45, 212, 191, 0.16);
+
+            --clr-text: #eef4f8;
+            --clr-text-muted: #9eb0c3;
+            --clr-text-dim: #6e8094;
+            --clr-border: rgba(226, 240, 255, 0.08);
+            --clr-glass-border: rgba(226, 240, 255, 0.13);
+
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-display: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            letter-spacing: -0.025em;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--clr-primary);
+            outline-offset: 3px;
+        }
+
+        section[id] {
+            scroll-margin-top: 88px;
+        }
+
+        /* ========== AMBIENT BACKGROUND ========== */
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(61, 220, 132, 0.07) 1px, transparent 1px);
+            background-size: 32px 32px;
+            -webkit-mask-image: radial-gradient(ellipse 88% 72% at 50% 18%, #000 22%, transparent 100%);
+            mask-image: radial-gradient(ellipse 88% 72% at 50% 18%, #000 22%, transparent 100%);
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            width: 860px;
+            height: 860px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(61, 220, 132, 0.18) 0%, rgba(45, 212, 191, 0.08) 40%, transparent 70%);
+            top: -320px;
+            right: -180px;
+            animation: ambientFloat 24s ease-in-out infinite;
+        }
+
+        .ambient-bg::after {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.13) 0%, rgba(45, 212, 191, 0.08) 42%, transparent 70%);
+            bottom: -240px;
+            left: -200px;
+            animation: ambientFloat 28s ease-in-out infinite reverse;
+        }
+
+        @keyframes ambientFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(45px, -30px) scale(1.06);
+            }
+
+            66% {
+                transform: translate(-30px, 40px) scale(0.96);
+            }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 14px 28px;
+            transition: background var(--transition-smooth), backdrop-filter var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(7, 11, 16, 0.85);
+            -webkit-backdrop-filter: blur(22px) saturate(1.4);
+            backdrop-filter: blur(22px) saturate(1.4);
+            border-bottom-color: var(--clr-glass-border);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+        }
+
+        .nav-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .nav-logo-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 3px 6px;
+            height: 38px;
+            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-logo-pill img {
+            height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-brand span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.12rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--clr-text-muted);
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 99px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-links .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--clr-primary);
+            color: var(--clr-primary-ink);
+            font-weight: 700;
+            font-size: 0.86rem;
+            padding: 8px 16px;
+            margin-left: 6px;
+            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.26);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-links .nav-cta:hover {
+            background: var(--clr-primary-hover);
+            color: #000000;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(61, 220, 132, 0.42);
+        }
+
+        /* ========== SHARED LAYOUT ========== */
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--clr-teal);
+            margin-bottom: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--clr-primary), var(--clr-cyan));
+            border-radius: 2px;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            padding: 136px 28px 64px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--clr-primary);
+            padding: 7px 16px;
+            border-radius: 99px;
+            background: rgba(61, 220, 132, 0.1);
+            border: 1px solid rgba(61, 220, 132, 0.28);
+            margin-bottom: 24px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--clr-primary);
+            box-shadow: 0 0 10px rgba(61, 220, 132, 0.85);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.78);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.09;
+            letter-spacing: -0.035em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--clr-teal) 45%, var(--clr-primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2.2vw, 1.24rem);
+            color: var(--clr-text-muted);
+            max-width: 640px;
+            margin: 0 auto 28px;
+            line-height: 1.68;
+        }
+
+        .btn-primary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(180deg, #4ce591 0%, var(--clr-primary) 55%, #30c874 100%);
+            color: var(--clr-primary-ink);
+            font-family: var(--font-body);
+            font-size: 0.98rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            text-decoration: none;
+            box-shadow:
+                0 12px 30px var(--clr-primary-glow),
+                0 2px 6px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            transition: transform 0.22s ease, box-shadow 0.25s ease, filter 0.22s ease;
+        }
+
+        .btn-primary-cta:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            color: #000000;
+            box-shadow:
+                0 16px 38px rgba(61, 220, 132, 0.46),
+                0 4px 12px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55);
+        }
+
+        .btn-secondary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.045);
+            color: var(--clr-text);
+            font-family: var(--font-body);
+            font-size: 0.96rem;
+            font-weight: 600;
+            border: 1px solid var(--clr-glass-border);
+            border-radius: 14px;
+            text-decoration: none;
+            transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+        }
+
+        .btn-secondary-cta:hover {
+            background: rgba(45, 212, 191, 0.12);
+            border-color: rgba(45, 212, 191, 0.42);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .hero-metrics {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 28px;
+            margin-top: 0;
+            padding: 14px 26px;
+            border-radius: 16px;
+            background: rgba(14, 21, 31, 0.72);
+            border: 1px solid var(--clr-border);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            font-size: 0.88rem;
+            color: var(--clr-text-muted);
+        }
+
+        .hero-metric {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-metric i {
+            color: var(--clr-primary);
+            font-size: 0.9rem;
+        }
+
+        .hero-metric strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* ========== CAPABILITIES ("WE BUILD") ========== */
+        .capabilities-section {
+            padding: 20px 0 72px;
+        }
+
+        .capabilities-panel {
+            background: linear-gradient(155deg, rgba(21, 32, 46, 0.72) 0%, rgba(14, 21, 31, 0.88) 100%);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .capabilities-panel h2 {
+            font-size: clamp(1.5rem, 3.2vw, 2rem);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .capabilities-panel p {
+            max-width: 640px;
+            margin: 0 auto 26px;
+            color: var(--clr-text-muted);
+            font-size: 1rem;
+        }
+
+        .capability-chips {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .capability-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 18px;
+            border-radius: 99px;
+            background: rgba(61, 220, 132, 0.08);
+            border: 1px solid rgba(61, 220, 132, 0.25);
+            color: var(--clr-text);
+            font-size: 0.94rem;
+            font-weight: 600;
+        }
+
+        .capability-chip i {
+            color: var(--clr-primary);
+            font-size: 0.9rem;
+        }
+
+        .capability-chip--cta {
+            text-decoration: none;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px dashed rgba(61, 220, 132, 0.6);
+            color: var(--clr-primary);
+            transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        .capability-chip--cta:hover {
+            background: var(--clr-primary);
+            border-color: var(--clr-primary);
+            color: var(--clr-primary-ink);
+            transform: translateY(-2px);
+        }
+
+        .capability-chip--cta:hover i {
+            color: var(--clr-primary-ink);
+        }
+
+        /* ========== PROJECT CATEGORY HEADERS ========== */
+        .projects-section {
+            padding: 20px 0 40px;
+        }
+
+        .category-block {
+            margin-bottom: 76px;
+        }
+
+        .category-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .category-header h2 {
+            font-size: clamp(1.6rem, 3.6vw, 2.15rem);
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .category-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--clr-text-muted);
+            padding: 6px 14px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--clr-border);
+        }
+
+        .category-meta i {
+            color: var(--clr-teal);
+        }
+
+        /* ========== APP CARDS GRID ========== */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr));
+            gap: 24px;
+        }
+
+        .apps-grid > * {
+            min-width: 0;
+        }
+
+        .app-card {
+            background: linear-gradient(180deg, rgba(21, 32, 46, 0.72) 0%, rgba(14, 21, 31, 0.94) 100%);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+
+        .app-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(61, 220, 132, 0.45);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(61, 220, 132, 0.12);
+        }
+
+        .app-card-img-link {
+            display: block;
+            width: 100%;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: #0a1019;
+            aspect-ratio: 16 / 9;
+        }
+
+        .app-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s var(--transition-smooth);
+        }
+
+        .app-card:hover .app-image {
+            transform: scale(1.035);
+        }
+
+        .app-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .app-card h3 {
+            font-size: 1.32rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin: 0;
+        }
+
+        .card-title-link {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .app-card:hover .card-title-link {
+            color: var(--clr-primary);
+        }
+
+        .card-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            background: rgba(61, 220, 132, 0.12);
+            color: var(--clr-primary);
+            border: 1px solid rgba(61, 220, 132, 0.28);
+        }
+
+        .pill-badge--macos {
+            background: rgba(167, 139, 250, 0.14);
+            color: #c4b5fd;
+            border-color: rgba(167, 139, 250, 0.32);
+        }
+
+        .pill-badge--hot {
+            background: rgba(249, 115, 22, 0.14);
+            color: #fdba74;
+            border-color: rgba(249, 115, 22, 0.34);
+        }
+
+        .pill-badge--linux {
+            background: rgba(56, 189, 248, 0.14);
+            color: #7dd3fc;
+            border-color: rgba(56, 189, 248, 0.32);
+        }
+
+        .pill-badge--ai {
+            background: rgba(236, 72, 153, 0.14);
+            color: #f9a8d4;
+            border-color: rgba(236, 72, 153, 0.32);
+        }
+
+        .app-description {
+            color: var(--clr-text-muted);
+            font-size: 0.94rem;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex-grow: 1;
+        }
+
+        .app-links {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .store-btn {
+            flex: 1 1 120px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s, background 0.2s, border-color 0.2s;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-playstore {
+            background: linear-gradient(180deg, #4ce591 0%, var(--clr-primary) 65%, #30c874 100%);
+            color: var(--clr-primary-ink);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 6px 18px rgba(61, 220, 132, 0.22);
+        }
+
+        .btn-playstore:hover {
+            color: #000000;
+            box-shadow: 0 10px 24px rgba(61, 220, 132, 0.36);
+        }
+
+        .btn-appstore {
+            background: #f4f7fb;
+            color: #09101a;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-appstore:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 10px 24px rgba(255, 255, 255, 0.18);
+        }
+
+        .btn-gnome {
+            background: rgba(56, 189, 248, 0.14);
+            color: #e0f2fe;
+            border: 1px solid rgba(56, 189, 248, 0.38);
+        }
+
+        .btn-gnome:hover {
+            background: #38bdf8;
+            border-color: #38bdf8;
+            color: #06131d;
+        }
+
+        .more-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            color: var(--clr-teal);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding-top: 14px;
+            border-top: 1px solid var(--clr-border);
+            transition: color 0.2s;
+        }
+
+        .more-btn .arrow {
+            transition: transform 0.22s ease;
+        }
+
+        .app-card:hover .more-btn {
+            color: var(--clr-primary);
+        }
+
+        .app-card:hover .more-btn .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Wide horizontal card for single Desktop App (Workspaces Organizer) */
+        .app-card--wide {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 28px;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .app-card--wide .app-card-img-link {
+            margin-bottom: 0;
+        }
+
+        .app-card--wide .app-card-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .app-card--wide .app-links {
+            max-width: 260px;
+        }
+
+        /* ========== GUIDES SECTION ========== */
+        .guides-section {
+            padding: 76px 0;
+            margin-top: 28px;
+            border-top: 1px solid var(--clr-border);
+            border-bottom: 1px solid var(--clr-border);
+            background: linear-gradient(180deg, rgba(45, 212, 191, 0.035) 0%, rgba(7, 11, 16, 0) 100%);
+        }
+
+        .section-header-center {
+            text-align: center;
+            max-width: 660px;
+            margin: 0 auto 44px;
+        }
+
+        .section-header-center h2 {
+            font-size: clamp(1.75rem, 4vw, 2.4rem);
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .section-header-center p {
+            color: var(--clr-text-muted);
+            font-size: 1.02rem;
+        }
+
+        .guides-cta-wrap {
+            text-align: center;
+            margin-top: 38px;
+        }
+
+        /* ========== CONTACT & OPEN SOURCE BENTO ========== */
+        .closing-section {
+            padding: 80px 0 32px;
+        }
+
+        .closing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .closing-grid > * {
+            min-width: 0;
+        }
+
+        .closing-card {
+            background: linear-gradient(155deg, rgba(21, 32, 46, 0.78) 0%, rgba(14, 21, 31, 0.94) 100%);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: var(--radius-lg);
+            padding: 36px 34px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 22px;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+        }
+
+        .closing-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(61, 220, 132, 0.4);
+        }
+
+        .closing-card--contact {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .closing-card--support {
+            background:
+                radial-gradient(circle at top right, rgba(61, 220, 132, 0.14) 0%, transparent 55%),
+                linear-gradient(155deg, rgba(21, 32, 46, 0.85) 0%, rgba(12, 18, 28, 0.96) 100%);
+        }
+
+        .closing-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--clr-primary);
+            background: rgba(61, 220, 132, 0.12);
+            border: 1px solid rgba(61, 220, 132, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .closing-card h2 {
+            font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .closing-card p {
+            color: var(--clr-text-muted);
+            font-size: 0.98rem;
+            line-height: 1.62;
+        }
+
+        .contact-email-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(61, 220, 132, 0.1);
+            border: 1px solid rgba(61, 220, 132, 0.32);
+            color: var(--clr-primary);
+            font-weight: 600;
+            font-size: 0.96rem;
+            width: fit-content;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .closing-card--contact:hover .contact-email-pill {
+            background: var(--clr-primary);
+            color: var(--clr-primary-ink);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid var(--clr-border);
+            padding: 40px 28px 48px;
+            margin-top: 56px;
+            background: rgba(0, 0, 0, 0.26);
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .footer-copy {
+            color: var(--clr-text-dim);
+            font-size: 0.88rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px 18px;
+            flex-wrap: wrap;
+            list-style: none;
+            font-size: 0.88rem;
+        }
+
+        .footer-links a {
+            color: var(--clr-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--clr-primary);
+        }
+
+        /* ========== BACK TO TOP ========== */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 46px;
+            height: 46px;
+            background: rgba(14, 21, 31, 0.88);
+            border: 1px solid var(--clr-glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--clr-text);
+            text-decoration: none;
+            font-size: 1.05rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.25s, transform 0.25s, background 0.2s, color 0.2s, border-color 0.2s;
+            z-index: 90;
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--clr-primary);
+            border-color: var(--clr-primary);
+            color: var(--clr-primary-ink);
+            transform: translateY(-3px);
+        }
+
+        /* ========== PROGRESSIVE REVEAL ========== */
+        .js-reveal .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .js-reveal .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .app-card--wide,
+            .closing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-card--wide .app-links {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .nav {
+                padding: 12px 18px;
+            }
+
+            .nav-links li.nav-hide-mobile {
+                display: none;
+            }
+
+            .hero {
+                padding: 110px 18px 48px;
+            }
+
+            .capabilities-panel {
+                padding: 28px 20px;
+            }
+
+            .closing-card {
+                padding: 26px 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-logo-pill {
+                height: 34px;
+            }
+
+            .nav-logo-pill img {
+                height: 26px;
+            }
+
+            .nav-brand span {
+                font-size: 1rem;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 13px;
+                font-size: 0.8rem;
+            }
+
+            .hero-metrics {
+                padding: 14px 16px;
+                gap: 10px 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .ambient-bg::before,
+            .ambient-bg::after,
+            .hero-badge .pulse-dot {
+                animation: none;
+            }
+
+            .js-reveal .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('js-reveal');
+        }
+    </script>
 </head>
 
 <body>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo">
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <span class="nav-logo-pill">
+                    <img src="assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo" width="38" height="30">
+                </span>
                 <span>GiantTurtle</span>
             </a>
+
             <ul class="nav-links">
                 <li><a href="#projects">Apps</a></li>
                 <li><a href="blog/blog_main.html">Blog</a></li>
-                <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li>
+                    <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="nav-cta">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero" style="padding-bottom: 2rem;">
-        <div class="container">
-            <h1>Carefully crafted apps. Your ideas, developed.</h1>
-            <p>Premium mobile software and games development focusing on performance, privacy, and user
-                experience.</p>
-            <!-- social links removed from header and moved to contact/support area -->
-        </div>
-    </header>
+    <main>
+        <!-- HERO -->
+        <header class="hero">
+            <div class="hero-inner">
+                <div class="hero-badge reveal">
+                    <span class="pulse-dot" aria-hidden="true"></span>
+                    GiantTurtle Studio
+                </div>
 
-    <div class="container">
+                <h1 class="reveal">
+                    Carefully crafted apps.<br>
+                    <span class="gradient-text">Your ideas, developed.</span>
+                </h1>
 
-        <section id="about" style="text-align: center; margin-bottom: 4rem;">
-            <h2 style="margin-bottom: 1.5rem;">We build:</h2>
-            <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">Robust, scalable mobile and desktop
-                applications using native technologies to create seamless user experiences.</p>
+                <p class="hero-subtitle reveal">
+                    Premium mobile and desktop software and games focusing on performance, privacy, and seamless user
+                    experience.
+                </p>
 
-            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem;">
-                <div class="install-badge" style="font-size: 1.06rem; padding: 0.38rem 0.94rem; gap: 0.5rem;"><i
-                        class="fas fa-university"></i> Finacial Services Apps</div>
-                <div class="install-badge" style="font-size: 1.06rem; padding: 0.38rem 0.94rem; gap: 0.5rem;"><i
-                        class="fas fa-briefcase"></i> Job Platforms</div>
-                <div class="install-badge" style="font-size: 1.06rem; padding: 0.38rem 0.94rem; gap: 0.5rem;"><i
-                        class="fas fa-car"></i> Ride Sharing Apps</div>
-                <div class="install-badge" style="font-size: 1.06rem; padding: 0.38rem 0.94rem; gap: 0.5rem;"><i
-                        class="fas fa-tools"></i>Professional Utility Apps</div>
-                <div class="install-badge" style="font-size: 1.06rem; padding: 0.38rem 0.94rem; gap: 0.5rem;"><i
-                        class="fas fa-gamepad"></i> Games</div>
-                <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="action-badge"
-                    style="font-size: 1.06rem; padding: 0.38rem 0.94rem; gap: 0.5rem;"><i class="fas fa-plus"></i>Or
-                    Tell
-                    us
-                    what app you want to build</a>
+                <div class="hero-metrics reveal">
+                    <span class="hero-metric">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i> <strong>Privacy-First</strong> Architecture
+                    </span>
+                    <span class="hero-metric">
+                        <i class="fas fa-microchip" aria-hidden="true"></i> <strong>Native</strong> Performance
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- CAPABILITIES ("WE BUILD") -->
+        <section id="about" class="capabilities-section">
+            <div class="container">
+                <div class="capabilities-panel reveal">
+                    <div class="section-label">What We Build</div>
+                    <h2>Native Software Across Mobile &amp; Desktop</h2>
+                    <p>
+                        Robust, scalable mobile and desktop applications using native technologies to create seamless
+                        user experiences.
+                    </p>
+
+                    <div class="capability-chips">
+                        <span class="capability-chip"><i class="fas fa-university" aria-hidden="true"></i> Financial Services Apps</span>
+                        <span class="capability-chip"><i class="fas fa-briefcase" aria-hidden="true"></i> Job Platforms</span>
+                        <span class="capability-chip"><i class="fas fa-car" aria-hidden="true"></i> Ride Sharing Apps</span>
+                        <span class="capability-chip"><i class="fas fa-tools" aria-hidden="true"></i> Professional Utility Apps</span>
+                        <span class="capability-chip"><i class="fas fa-gamepad" aria-hidden="true"></i> Games</span>
+                        <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea"
+                            class="capability-chip capability-chip--cta">
+                            <i class="fas fa-plus" aria-hidden="true"></i> Or tell us what app you want to build
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="projects">
-            <h2 style="text-align: center; margin-bottom: 3rem; font-size: clamp(1.65rem, 5vw, 2.2rem);">Featured</h2>
-            
-            <div class="featured-grid" style="margin-bottom: 4rem;">
-                <!-- DesktopPlus -->
-                <div class="app-card" data-href="spaceman-landing.html">
-                    <a href="spaceman-landing.html" class="app-card-img-link" aria-label="DesktopPlus for macOS">
-                        <img src="landing-assets/spaceman-example.jpg" alt="DesktopPlus - macOS virtual desktops menu bar utility" class="app-image">
-                    </a>
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;"><a href="spaceman-landing.html" class="card-title-link">DesktopPlus</a></h3>
-                        <div class="install-badge"><i class="fab fa-apple"></i> macOS</div>
+        <!-- PROJECTS -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+
+                <!-- FEATURED -->
+                <div class="category-block">
+                    <div class="category-header reveal">
+                        <div>
+                            <div class="section-label">Spotlight Releases</div>
+                            <h2>Featured</h2>
+                        </div>
+                        <span class="category-meta">
+                            <i class="fas fa-star" aria-hidden="true"></i> 5 Flagship Apps &amp; Games
+                        </span>
                     </div>
-                    <p class="app-description">A lightweight macOS utility that lives in your menu bar. Always know which desktop you're on—and switch between them with a single click. A great way to multitask on MacBook Neo, MacBook Air and Pro.</p>
-                    <div class="app-links">
-                        <a href="landing-assets/DesktopPlus.dmg" download class="store-btn btn-appstore"><i
-                                class="fab fa-apple"></i> Download for macOS</a>
+
+                    <div class="apps-grid">
+                        <!-- DesktopPlus -->
+                        <article class="app-card reveal" data-href="spaceman-landing.html">
+                            <a href="spaceman-landing.html" class="app-card-img-link" aria-label="DesktopPlus for macOS">
+                                <img src="landing-assets/spaceman-example.jpg"
+                                    alt="DesktopPlus - macOS virtual desktops menu bar utility" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="spaceman-landing.html" class="card-title-link">DesktopPlus</a></h3>
+                                <span class="pill-badge pill-badge--macos"><i class="fab fa-apple" aria-hidden="true"></i> macOS</span>
+                            </div>
+                            <p class="app-description">
+                                A lightweight macOS utility that lives in your menu bar. Always know which desktop you're
+                                on&mdash;and switch between them with a single click. A great way to multitask on MacBook
+                                Neo, MacBook Air and Pro.
+                            </p>
+                            <div class="app-links">
+                                <a href="landing-assets/DesktopPlus.dmg" download class="store-btn btn-appstore">
+                                    <i class="fab fa-apple" aria-hidden="true"></i> Download for macOS
+                                </a>
+                            </div>
+                            <a href="spaceman-landing.html" class="more-btn">
+                                <span>Explore DesktopPlus for macOS</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Paste Box -->
+                        <article class="app-card reveal" data-href="paste-box.html">
+                            <a href="paste-box.html" class="app-card-img-link" aria-label="Paste Box for macOS">
+                                <img src="assets/images/all-copies_2880_1800.jpg"
+                                    alt="Paste Box - Persistent macOS scratchpad and clipboard manager" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="paste-box.html" class="card-title-link">Paste Box</a></h3>
+                                <span class="pill-badge pill-badge--macos"><i class="fab fa-apple" aria-hidden="true"></i> macOS</span>
+                            </div>
+                            <p class="app-description">
+                                Minimalist, persistent scratchpad and clipboard history manager for macOS. A great way to
+                                manage text on MacBook Neo, MacBook Air and Pro.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://apps.apple.com/us/app/paste-box-scratchpad/id6782422301"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-appstore">
+                                    <i class="fab fa-apple" aria-hidden="true"></i> App Store
+                                </a>
+                            </div>
+                            <a href="paste-box.html" class="more-btn">
+                                <span>Explore Paste Box for macOS</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Zones&Corners -->
+                        <article class="app-card reveal" data-href="zones-and-corners.html">
+                            <a href="zones-and-corners.html" class="app-card-img-link" aria-label="Zones&amp;Corners for macOS">
+                                <img src="assets/images/supercorners-hero.jpg"
+                                    alt="Zones&amp;Corners - Supercharge Mac hot corners and edge zones" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="zones-and-corners.html" class="card-title-link">Zones&amp;Corners</a></h3>
+                                <span class="pill-badge pill-badge--macos"><i class="fab fa-apple" aria-hidden="true"></i> macOS</span>
+                            </div>
+                            <p class="app-description">
+                                Supercharge your Mac with 8 Hot Corners and Edge Zones, 76 built-in actions, Spaces App
+                                Switcher + Clean RAM, Vision OCR, Shortcuts, and AppleScripts. 14-day free trial.
+                            </p>
+                            <div class="app-links">
+                                <a href="assets/apps/Zones%26Corners.dmg" download="Zones&amp;Corners.dmg"
+                                    class="store-btn btn-appstore">
+                                    <i class="fab fa-apple" aria-hidden="true"></i> Download for macOS
+                                </a>
+                            </div>
+                            <a href="zones-and-corners.html" class="more-btn">
+                                <span>Explore Zones&amp;Corners for macOS</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Blast -->
+                        <article class="app-card reveal" data-href="blast-landing.html">
+                            <a href="blast-landing.html" class="app-card-img-link" aria-label="Blast Puzzle Game">
+                                <img src="assets/images/promo-play.jpg" alt="Blast - Liquid logic puzzle game"
+                                    class="app-image" loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="blast-landing.html" class="card-title-link">Blast</a></h3>
+                                <span class="pill-badge pill-badge--hot"><i class="fas fa-fire" aria-hidden="true"></i> Trending</span>
+                            </div>
+                            <p class="app-description">
+                                Classic tile-popping fun with a modern twist. Blast through levels by matching colors in
+                                this addictively simple yet challenging puzzle game. Master your strategy to clear the
+                                board and achieve high scores.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.liquidlogic"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                                <a href="https://apps.apple.com/us/app/the-blast/id6785248553"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-appstore">
+                                    <i class="fab fa-apple" aria-hidden="true"></i> App Store
+                                </a>
+                            </div>
+                            <a href="blast-landing.html" class="more-btn">
+                                <span>Play Blast Puzzle Game</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Dextop -->
+                        <article class="app-card reveal" data-href="dextop.html">
+                            <a href="dextop.html" class="app-card-img-link" aria-label="Dextop Desktop Workstation for Android">
+                                <img src="assets/images/dextop-promo2.png"
+                                    alt="Dextop - Android desktop workstation interface" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="dextop.html" class="card-title-link">Dextop</a></h3>
+                                <span class="pill-badge"><i class="fas fa-download" aria-hidden="true"></i> 300k+ Installs</span>
+                            </div>
+                            <p class="app-description">
+                                Transform your phone into a productivity powerhouse. Dextop provides a native landscape
+                                interface with separate shortcuts, giving you a true desktop experience on your Android
+                                device.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.dextop"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                            </div>
+                            <a href="dextop.html" class="more-btn">
+                                <span>Explore Dextop Workstation</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
                     </div>
-                    <a href="spaceman-landing.html" class="more-btn">Explore DesktopPlus for macOS &rarr;</a>
                 </div>
 
-                <!-- Paste Box -->
-                <div class="app-card" data-href="paste-box.html">
-                    <a href="paste-box.html" class="app-card-img-link" aria-label="Paste Box for macOS">
-                        <img src="assets/images/all-copies_2880_1800.jpg" alt="Paste Box - Persistent macOS scratchpad and clipboard manager" class="app-image">
-                    </a>
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;"><a href="paste-box.html" class="card-title-link">Paste Box</a></h3>
-                        <div class="install-badge"><i class="fab fa-apple"></i> macOS</div>
+                <!-- MOBILE APPS -->
+                <div class="category-block">
+                    <div class="category-header reveal">
+                        <div>
+                            <div class="section-label">Android Ecosystem</div>
+                            <h2>Mobile Apps</h2>
+                        </div>
+                        <span class="category-meta">
+                            <i class="fab fa-android" aria-hidden="true"></i> 5 Privacy &amp; Utility Tools
+                        </span>
                     </div>
-                    <p class="app-description">Minimalist, persistent scratchpad and clipboard history manager for
-                        macOS. A great way to manage text on MacBook Neo, MacBook Air and Pro.</p>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/us/app/paste-box-scratchpad/id6782422301"
-                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a>
+
+                    <div class="apps-grid">
+                        <!-- Dextop Core -->
+                        <article class="app-card reveal" data-href="dextop-core.html">
+                            <a href="dextop-core.html" class="app-card-img-link" aria-label="Dextop Core for Android">
+                                <img src="assets/images/dextop-core-feature.png"
+                                    alt="Dextop Core - Native landscape Android experience" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="dextop-core.html" class="card-title-link">Dextop Core</a></h3>
+                                <span class="pill-badge"><i class="fab fa-android" aria-hidden="true"></i> Android</span>
+                            </div>
+                            <p class="app-description">
+                                A lightweight version of Dextop with native landscape mode and no launcher capabilities,
+                                built for devices with manufacturer restrictions.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.dextop.lite"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                            </div>
+                            <a href="dextop-core.html" class="more-btn">
+                                <span>Explore Dextop Core</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Macro Spotlight -->
+                        <article class="app-card reveal" data-href="macro-spotlight.html">
+                            <a href="macro-spotlight.html" class="app-card-img-link" aria-label="Macro Spotlight Search for Android">
+                                <img src="assets/images/spotlight-promo.png"
+                                    alt="Macro Spotlight - Offline instant search for Android" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="macro-spotlight.html" class="card-title-link">Macro Spotlight</a></h3>
+                                <span class="pill-badge"><i class="fab fa-android" aria-hidden="true"></i> Offline</span>
+                            </div>
+                            <p class="app-description">
+                                The fastest, most private search for your Android device. Find apps, contacts, and files
+                                instantly with zero internet permissions. Desktop-class search with widgets and quick
+                                settings integration.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.gianturtle.localsearch"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                            </div>
+                            <a href="macro-spotlight.html" class="more-btn">
+                                <span>Explore Macro Spotlight Search</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Volume Buttons Extended -->
+                        <article class="app-card reveal" data-href="volume-buttons-extended.html">
+                            <a href="volume-buttons-extended.html" class="app-card-img-link" aria-label="Volume Buttons Extended for Android">
+                                <img src="assets/images/volume-promo2.png"
+                                    alt="Volume Buttons Extended - Hardware key custom shortcuts" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="volume-buttons-extended.html" class="card-title-link">Volume Buttons Extended</a></h3>
+                                <span class="pill-badge"><i class="fab fa-android" aria-hidden="true"></i> Android</span>
+                            </div>
+                            <p class="app-description">
+                                Use volume buttons to control your phone. Map them to various functions like showing
+                                notifications, have a physical back button, and more with high customization.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                            </div>
+                            <a href="volume-buttons-extended.html" class="more-btn">
+                                <span>Explore Volume Buttons Extended</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- Swipe Stop -->
+                        <article class="app-card reveal" data-href="swipe-stop.html">
+                            <a href="swipe-stop.html" class="app-card-img-link" aria-label="Swipe Stop Privacy Screen Freeze">
+                                <img src="assets/images/swipe-stop-promo2.jpg"
+                                    alt="Swipe Stop - Freeze screen when sharing phone" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="swipe-stop.html" class="card-title-link">Swipe Stop</a></h3>
+                                <span class="pill-badge"><i class="fas fa-shield-alt" aria-hidden="true"></i> Privacy</span>
+                            </div>
+                            <p class="app-description">
+                                Protect your privacy with Swipe Stop. The easiest way to freeze your screen when sharing
+                                your phone!
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.quickfreeze"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                            </div>
+                            <a href="swipe-stop.html" class="more-btn">
+                                <span>Explore Swipe Stop Privacy</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
+
+                        <!-- App Stopper -->
+                        <article class="app-card reveal" data-href="app-stopper.html">
+                            <a href="app-stopper.html" class="app-card-img-link" aria-label="App Stopper for Android">
+                                <img src="assets/images/app-stopper-pomo.png"
+                                    alt="App Stopper - Stop background apps without ADB" class="app-image"
+                                    loading="lazy" decoding="async">
+                            </a>
+                            <div class="app-card-top">
+                                <h3><a href="app-stopper.html" class="card-title-link">App Stopper</a></h3>
+                                <span class="pill-badge"><i class="fab fa-android" aria-hidden="true"></i> Battery</span>
+                            </div>
+                            <p class="app-description">
+                                App Stopper is the easiest way to stop apps from running in the background and consuming
+                                resources, saving battery and improving performance. Perfect for quickly stopping
+                                misbehaving apps or keeping your phone running smoothly.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.giantturtle.automaticappstopper"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-playstore">
+                                    <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+                                </a>
+                            </div>
+                            <a href="app-stopper.html" class="more-btn">
+                                <span>Explore App Stopper for Android</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </article>
                     </div>
-                    <a href="paste-box.html" class="more-btn">Explore Paste Box for macOS &rarr;</a>
                 </div>
 
-                <!-- Zones&Corners -->
-                <div class="app-card" data-href="zones-and-corners.html">
-                    <a href="zones-and-corners.html" class="app-card-img-link" aria-label="Zones&amp;Corners for macOS">
-                        <img src="assets/images/supercorners-hero.jpg" alt="Zones&amp;Corners - Supercharge Mac hot corners and edge zones" class="app-image">
-                    </a>
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;"><a href="zones-and-corners.html" class="card-title-link">Zones&amp;Corners</a></h3>
-                        <div class="install-badge"><i class="fab fa-apple"></i> macOS</div>
+                <!-- DESKTOP APPS (LINUX / OPEN SOURCE) -->
+                <div class="category-block">
+                    <div class="category-header reveal">
+                        <div>
+                            <div class="section-label">Linux &amp; Open Source</div>
+                            <h2>Desktop Apps</h2>
+                        </div>
+                        <span class="category-meta">
+                            <i class="fab fa-linux" aria-hidden="true"></i> GNOME Shell Extension
+                        </span>
                     </div>
-                    <p class="app-description">Supercharge your Mac with 8 Hot Corners and Edge Zones, 76 built-in actions, Spaces App Switcher + Clean RAM, Vision OCR, Shortcuts, and AppleScripts. 14-day free trial.</p>
-                    <div class="app-links">
-                        <a href="landing-assets/ZonesCorners.dmg" download class="store-btn btn-appstore"><i
-                                class="fab fa-apple"></i> Download for macOS</a>
-                    </div>
-                    <a href="zones-and-corners.html" class="more-btn">Explore Zones&amp;Corners for macOS &rarr;</a>
+
+                    <article class="app-card app-card--wide reveal" data-href="workspaces-organizer.html">
+                        <a href="workspaces-organizer.html" class="app-card-img-link" aria-label="Workspaces Organizer GNOME Extension">
+                            <img src="assets/images/promo-workspaces organizer.jpg"
+                                alt="Workspaces Organizer - GNOME Shell workspaces indicator" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-content">
+                            <div class="app-card-top">
+                                <h3><a href="workspaces-organizer.html" class="card-title-link">Workspaces Organizer</a></h3>
+                                <div class="card-badges">
+                                    <span class="pill-badge pill-badge--linux"><i class="fab fa-linux" aria-hidden="true"></i> Linux</span>
+                                    <span class="pill-badge"><i class="fab fa-osi" aria-hidden="true"></i> Open Source</span>
+                                </div>
+                            </div>
+                            <p class="app-description">
+                                Horizontal workspaces indicator for GNOME. Shows opened apps in each workspace, switch
+                                with a scroll, and move windows with drag-and-drop.
+                            </p>
+                            <div class="app-links">
+                                <a href="https://extensions.gnome.org/extension/8766/workspaces-organizer/"
+                                    target="_blank" rel="noopener noreferrer" class="store-btn btn-gnome">
+                                    <i class="fab fa-linux" aria-hidden="true"></i> GNOME Extensions
+                                </a>
+                            </div>
+                            <a href="workspaces-organizer.html" class="more-btn">
+                                <span>Explore Workspaces Organizer</span>
+                                <span class="arrow" aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </article>
                 </div>
 
-                <!-- Blast -->
-                <div class="app-card" data-href="blast-landing.html">
-                    <a href="blast-landing.html" class="app-card-img-link" aria-label="Blast Puzzle Game">
-                        <img src="assets/images/promo-play.jpg" alt="Blast - Liquid logic puzzle game" class="app-image">
-                    </a>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;"><a href="blast-landing.html" class="card-title-link">Blast</a></h3>
-                        <div class="install-badge"><i class="fas fa-fire"></i> Trending</div>
-                    </div>
-                    <p class="app-description">Classic tile-popping fun with a modern twist. Blast through levels by
-                        matching colors in this addictively simple yet challenging puzzle game. Master your strategy to
-                        clear the board and achieve high scores.</p>
-                    <div class="app-links">
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.liquidlogic"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                        <a href="https://apps.apple.com/us/app/the-blast/id6785248553" class="store-btn btn-appstore"><i
-                                class="fab fa-apple"></i> App Store</a>
-                    </div>
-                    <a href="blast-landing.html" class="more-btn">Play Blast Puzzle Game &rarr;</a>
+            </div>
+        </section>
+
+        <!-- GUIDES & ARTICLES SECTION -->
+        <section id="guides" class="guides-section">
+            <div class="container">
+                <div class="section-header-center reveal">
+                    <div class="section-label">Knowledge Hub</div>
+                    <h2>Guides &amp; Optimization Tutorials</h2>
+                    <p>
+                        Explore engineering insights, power-user tricks, and operating system optimizations written by
+                        our team.
+                    </p>
                 </div>
 
-                <!-- Dextop -->
-                <div class="app-card" data-href="dextop.html">
-                    <a href="dextop.html" class="app-card-img-link" aria-label="Dextop Desktop Workstation for Android">
-                        <img src="assets/images/dextop-promo2.png" alt="Dextop - Android desktop workstation interface" class="app-image">
+                <div class="apps-grid">
+                    <article class="app-card reveal" data-href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html">
+                        <a href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html" class="app-card-img-link"
+                            aria-label="Supercharge macOS Hot Corners Guide">
+                            <img src="assets/images/supercorners-blog-cover.jpg"
+                                alt="Supercharge macOS Hot Corners with Zones&amp;Corners" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html" class="card-title-link">Supercharge Hot Corners</a></h3>
+                            <span class="pill-badge pill-badge--macos"><i class="fab fa-apple" aria-hidden="true"></i> macOS Guide</span>
+                        </div>
+                        <p class="app-description">
+                            How to expand macOS Hot Corners with 8 screen edge zones, 76 built-in actions, Spaces App
+                            Switcher, Vision OCR, Trigger Delay, and Ignored Apps.
+                        </p>
+                        <a href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+
+                    <article class="app-card reveal" data-href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html">
+                        <a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="app-card-img-link"
+                            aria-label="macOS Desktop Switcher Guide">
+                            <img src="landing-assets/spaceman-example.jpg"
+                                alt="macOS virtual desktops menu bar indicator" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="card-title-link">macOS Desktop Switcher</a></h3>
+                            <span class="pill-badge pill-badge--macos"><i class="fab fa-apple" aria-hidden="true"></i> macOS Guide</span>
+                        </div>
+                        <p class="app-description">
+                            How to see and switch macOS virtual desktops directly from the menu bar with 1-click
+                            simplicity and zero gesture fatigue.
+                        </p>
+                        <a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+
+                    <article class="app-card reveal" data-href="blog/how-to-stop-android-apps-running-in-background-without-adb.html">
+                        <a href="blog/how-to-stop-android-apps-running-in-background-without-adb.html" class="app-card-img-link"
+                            aria-label="Stop Background Apps Guide">
+                            <img src="assets/images/app-stopper-pomo.png"
+                                alt="Stop Android apps from running in background" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/how-to-stop-android-apps-running-in-background-without-adb.html" class="card-title-link">Stop Background Apps</a></h3>
+                            <span class="pill-badge"><i class="fab fa-android" aria-hidden="true"></i> Android Guide</span>
+                        </div>
+                        <p class="app-description">
+                            How to stop aggressive background bloatware and save battery without risky ADB terminal
+                            commands or rooting.
+                        </p>
+                        <a href="blog/how-to-stop-android-apps-running-in-background-without-adb.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+
+                    <article class="app-card reveal" data-href="blog/how-to-turn-android-phone-into-desktop-workstation.html">
+                        <a href="blog/how-to-turn-android-phone-into-desktop-workstation.html" class="app-card-img-link"
+                            aria-label="Android Desktop Workstation Guide">
+                            <img src="assets/images/dextop-promo2.png"
+                                alt="Turn Android phone into desktop workstation" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/how-to-turn-android-phone-into-desktop-workstation.html" class="card-title-link">Android Desktop Workstation</a></h3>
+                            <span class="pill-badge pill-badge--linux"><i class="fas fa-desktop" aria-hidden="true"></i> Productivity</span>
+                        </div>
+                        <p class="app-description">
+                            The complete guide to turning any Android smartphone or tablet into a full landscape
+                            workstation with Dextop.
+                        </p>
+                        <a href="blog/how-to-turn-android-phone-into-desktop-workstation.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+
+                    <article class="app-card reveal" data-href="blog/how-to-run-local-ai-mac-android-offline-llm.html">
+                        <a href="blog/how-to-run-local-ai-mac-android-offline-llm.html" class="app-card-img-link"
+                            aria-label="Run Local AI Offline Guide">
+                            <img src="assets/images/local-ai-guide-cover.jpg"
+                                alt="Run local AI on Mac and Android" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/how-to-run-local-ai-mac-android-offline-llm.html" class="card-title-link">Run Local AI Offline</a></h3>
+                            <span class="pill-badge pill-badge--ai"><i class="fas fa-brain" aria-hidden="true"></i> AI &amp; Privacy</span>
+                        </div>
+                        <p class="app-description">
+                            Complete guide to running fast, private, 100% offline LLMs on Apple Silicon and Android
+                            smartphones with zero telemetry.
+                        </p>
+                        <a href="blog/how-to-run-local-ai-mac-android-offline-llm.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+
+                    <article class="app-card reveal" data-href="blog/mastering-ai-prompt-staging-clipboard-scratchpad.html">
+                        <a href="blog/mastering-ai-prompt-staging-clipboard-scratchpad.html" class="app-card-img-link"
+                            aria-label="AI Prompt Staging Guide">
+                            <img src="assets/images/prompt-staging-cover.jpg"
+                                alt="Mastering AI prompt staging" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/mastering-ai-prompt-staging-clipboard-scratchpad.html" class="card-title-link">AI Prompt Staging</a></h3>
+                            <span class="pill-badge pill-badge--ai"><i class="fas fa-terminal" aria-hidden="true"></i> AI Workflows</span>
+                        </div>
+                        <p class="app-description">
+                            How power users assemble complex LLM prompts using a persistent menu bar scratchpad and
+                            clipboard history on macOS.
+                        </p>
+                        <a href="blog/mastering-ai-prompt-staging-clipboard-scratchpad.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+
+                    <article class="app-card reveal" data-href="blog/how-to-remap-volume-buttons-android-custom-shortcuts.html">
+                        <a href="blog/how-to-remap-volume-buttons-android-custom-shortcuts.html" class="app-card-img-link"
+                            aria-label="Remap Volume Buttons Guide">
+                            <img src="assets/images/volume-promo2.png"
+                                alt="Remap Android volume buttons" class="app-image"
+                                loading="lazy" decoding="async">
+                        </a>
+                        <div class="app-card-top">
+                            <h3><a href="blog/how-to-remap-volume-buttons-android-custom-shortcuts.html" class="card-title-link">Remap Volume Buttons</a></h3>
+                            <span class="pill-badge"><i class="fab fa-android" aria-hidden="true"></i> Customization</span>
+                        </div>
+                        <p class="app-description">
+                            Control media with screen off, toggle the flashlight, and trigger back navigation without
+                            rooting or ADB.
+                        </p>
+                        <a href="blog/how-to-remap-volume-buttons-android-custom-shortcuts.html" class="more-btn">
+                            <span>Read Tutorial</span>
+                            <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </article>
+                </div>
+
+                <div class="guides-cta-wrap reveal">
+                    <a href="blog/blog_main.html" class="btn-primary-cta">
+                        <i class="fas fa-book-open" aria-hidden="true"></i> Browse All Guides on Our Blog &rarr;
                     </a>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;"><a href="dextop.html" class="card-title-link">Dextop</a></h3>
-                        <div class="install-badge"><i class="fas fa-download"></i> 300k+ Installs</div>
-                    </div>
-                    <p class="app-description">Transform your phone into a productivity powerhouse. Dextop provides a
-                        native landscape interface with separate shortcuts, giving you a true
-                        desktop experience on your Android device.</p>
-                    <div class="app-links">
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.dextop"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                        <!-- <a href="https://apps.apple.com/app/dextop/id111111111" class="store-btn btn-appstore"><i
-                                class="fab fa-apple"></i> App Store</a> -->
-                    </div>
-                    <a href="dextop.html" class="more-btn">Explore Dextop Workstation &rarr;</a>
                 </div>
             </div>
+        </section>
 
-            <h2 style="text-align: center; margin-bottom: 2rem;">Mobile Apps</h2>
-            <div class="featured-grid" style="margin-bottom: 4rem;">
-                <!-- Dextop Core -->
-                <div class="app-card" data-href="dextop-core.html">
-                    <a href="dextop-core.html" class="app-card-img-link" aria-label="Dextop Core for Android">
-                        <img src="assets/images/dextop-core-feature.png" alt="Dextop Core - Native landscape Android launcher" class="app-image">
+        <!-- CONTACT & OPEN SOURCE SUPPORT -->
+        <section class="closing-section" id="contact">
+            <div class="container">
+                <div class="closing-grid">
+                    <a href="mailto:giant2turtle@gmail.com" class="closing-card closing-card--contact reveal">
+                        <div>
+                            <div class="closing-icon" aria-hidden="true">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h2>Get in Touch</h2>
+                            <p>
+                                Have an app idea, partnership inquiry, or feedback on our tools? Send us an email
+                                directly &mdash; we read every message.
+                            </p>
+                        </div>
+                        <span class="contact-email-pill">
+                            <i class="fas fa-envelope" aria-hidden="true"></i> giant2turtle@gmail.com
+                        </span>
                     </a>
-                    <h3><a href="dextop-core.html" class="card-title-link">Dextop Core</a></h3>
-                    <p class="app-description">A lightweight version of Dextop with native landscape mode and no
-                        launcher capabilities, built for devices with manufacturer restrictions.</p>
-                    <div class="app-links">
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.dextop.lite"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                    </div>
-                    <a href="dextop-core.html" class="more-btn">Explore Dextop Core &rarr;</a>
-                </div>
 
-                <!-- Macro Spotlight -->
-                <div class="app-card" data-href="macro-spotlight.html">
-                    <a href="macro-spotlight.html" class="app-card-img-link" aria-label="Macro Spotlight Search for Android">
-                        <img src="assets/images/spotlight-promo.png" alt="Macro Spotlight - Offline instant search for Android" class="app-image">
-                    </a>
-                    <h3><a href="macro-spotlight.html" class="card-title-link">Macro Spotlight</a></h3>
-                    <p class="app-description">The fastest, most private search for your Android device. Find apps,
-                        contacts, and files instantly with zero internet permissions. Desktop-class search with widgets
-                        and quick settings integration.</p>
-                    <div class="app-links">
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.localsearch"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                        <!-- <a href="https://apps.apple.com/app/macro-spotlight/id222222222"
-                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a> -->
-                    </div>
-                    <a href="macro-spotlight.html" class="more-btn">Explore Macro Spotlight Search &rarr;</a>
-                </div>
-
-                <!-- Volume Buttons Extended -->
-                <div class="app-card" data-href="volume-buttons-extended.html">
-                    <a href="volume-buttons-extended.html" class="app-card-img-link" aria-label="Volume Buttons Extended for Android">
-                        <img src="assets/images/volume-promo2.png" alt="Volume Buttons Extended - Hardware key custom shortcuts" class="app-image">
-                    </a>
-                    <h3><a href="volume-buttons-extended.html" class="card-title-link">Volume Buttons Extended</a></h3>
-                    <p class="app-description">Use volume buttons to control your phone. Map them to various functions
-                        like showing notifications, have a physical back button, and more with high customization.</p>
-                    <div class="app-links">
-
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                        <!-- <a href="https://apps.apple.com/app/volume-buttons-extended/id333333333"
-                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a> -->
-                    </div>
-                    <a href="volume-buttons-extended.html" class="more-btn">Explore Volume Buttons Extended &rarr;</a>
-                </div>
-
-                <!-- Swipe Stop -->
-                <div class="app-card" data-href="swipe-stop.html">
-                    <a href="swipe-stop.html" class="app-card-img-link" aria-label="Swipe Stop Privacy Screen Freeze">
-                        <img src="assets/images/swipe-stop-promo2.jpg" alt="Swipe Stop - Freeze screen when sharing phone" class="app-image">
-                    </a>
-                    <h3><a href="swipe-stop.html" class="card-title-link">Swipe Stop</a></h3>
-                    <p class="app-description">Protect your privacy with Swipe Stop.
-                        The easiest way to freeze your screen when sharing your phone!
-                    </p>
-                    <div class="app-links">
-
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.quickfreeze"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                        <!-- <a href="https://apps.apple.com/app/volume-buttons-extended/id333333333"
-                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a> -->
-                    </div>
-                    <a href="swipe-stop.html" class="more-btn">Explore Swipe Stop Privacy &rarr;</a>
-                </div>
-
-                <!-- App Stopper -->
-                <div class="app-card" data-href="app-stopper.html">
-                    <a href="app-stopper.html" class="app-card-img-link" aria-label="App Stopper for Android">
-                        <img src="assets/images/app-stopper-pomo.png" alt="App Stopper - Stop background apps without ADB" class="app-image">
-                    </a>
-                    <h3><a href="app-stopper.html" class="card-title-link">App Stopper</a></h3>
-                    <p class="app-description">App Stopper is the easiest way to stop apps from running in the
-                        background and consuming resources, saving battery and improving performance. Perfect for
-                        quickly stopping misbehaving apps or just keeping your phone running smoothly.
-                    </p>
-                    <div class="app-links">
-
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.automaticappstopper"
-                            class="store-btn btn-playstore"><i class="fab fa-google-play"></i> Play Store</a>
-                        <!-- <a href="https://apps.apple.com/app/volume-buttons-extended/id333333333"
-                            class="store-btn btn-appstore"><i class="fab fa-apple"></i> App Store</a> -->
-                    </div>
-                    <a href="app-stopper.html" class="more-btn">Explore App Stopper for Android &rarr;</a>
-                </div>
-
-            </div>
-
-            <h2 style="text-align: center; margin-bottom: 2rem;">Desktop Apps</h2>
-            <div class="featured-grid">
-                <!-- Workspaces Organizer -->
-                <div class="app-card" data-href="workspaces-organizer.html">
-                    <a href="workspaces-organizer.html" class="app-card-img-link" aria-label="Workspaces Organizer GNOME Extension">
-                        <img src="assets/images/promo-workspaces organizer.jpg" alt="Workspaces Organizer - GNOME Shell workspaces indicator" class="app-image">
-                    </a>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;"><a href="workspaces-organizer.html" class="card-title-link">Workspaces Organizer</a></h3>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                            <div class="install-badge"><i class="fab fa-linux"></i> Linux</div>
-                            <div class="install-badge"><i class="fab fa-osi"></i> Open Source</div>
+                    <div class="closing-card closing-card--support reveal" id="support">
+                        <div>
+                            <div class="closing-icon" aria-hidden="true">
+                                <i class="fab fa-linux"></i>
+                            </div>
+                            <h2>Support Our Open Source Contributions</h2>
+                            <p>
+                                Help us keep building high-quality, privacy-respecting niche tools, Linux desktop
+                                extensions, and mobile games.
+                            </p>
+                        </div>
+                        <div>
+                            <a href="https://extensions.gnome.org/accounts/profile/markomisk"
+                                target="_blank" rel="noopener noreferrer" class="btn-secondary-cta">
+                                <i class="fab fa-linux" aria-hidden="true"></i> View on GNOME Shell Extensions &rarr;
+                            </a>
                         </div>
                     </div>
-                    <p class="app-description">Horizontal workspaces indicator for GNOME. Shows opened apps in each
-                        workspace, switch with a scroll, and move windows with drag-and-drop.</p>
-                    <div class="app-links">
-                        <a href="https://extensions.gnome.org/extension/8766/workspaces-organizer/" class="store-btn"
-                            style="background: #24292e; color: #fff; border-color: transparent;"><i
-                                class="fab fa-linux"></i> GNOME Extensions</a>
-                    </div>
-                    <a href="workspaces-organizer.html" class="more-btn">Explore Workspaces Organizer &rarr;</a>
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- Guides & Articles Section for SEO & Knowledge Hub -->
-        <section id="guides" style="margin-top: 6rem; margin-bottom: 4rem;">
-            <h2 style="text-align: center; margin-bottom: 1rem; font-size: clamp(1.65rem, 5vw, 2.2rem);">Guides &amp; Optimization Tutorials</h2>
-            <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 3rem;">
-                Explore engineering insights, power-user tricks, and operating system optimizations written by our team.
-            </p>
-
-            <div class="featured-grid" style="margin-bottom: 2rem;">
-                <div class="app-card" data-href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html">
-                    <img src="assets/images/supercorners-blog-cover.jpg" alt="Supercharge macOS Hot Corners with Zones&amp;Corners" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">Supercharge Hot Corners</h3>
-                        <div class="install-badge"><i class="fab fa-apple"></i> macOS Guide</div>
-                    </div>
-                    <p class="app-description">How to expand macOS Hot Corners with 8 screen edge zones, 76 built-in actions, Spaces App Switcher, Vision OCR, Trigger Delay, and Ignored Apps.</p>
-                    <a href="blog/how-to-supercharge-macos-hot-corners-actions-guide.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-
-                <div class="app-card" data-href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html">
-                    <img src="landing-assets/spaceman-example.jpg" alt="macOS virtual desktops menu bar indicator" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">macOS Desktop Switcher</h3>
-                        <div class="install-badge"><i class="fab fa-apple"></i> macOS Guide</div>
-                    </div>
-                    <p class="app-description">How to see and switch macOS virtual desktops directly from the menu bar with 1-click simplicity and zero gesture fatigue.</p>
-                    <a href="blog/how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-
-                <div class="app-card" data-href="blog/how-to-stop-android-apps-running-in-background-without-adb.html">
-                    <img src="assets/images/app-stopper-pomo.png" alt="Stop Android apps from running in background" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">Stop Background Apps</h3>
-                        <div class="install-badge"><i class="fab fa-android"></i> Android Guide</div>
-                    </div>
-                    <p class="app-description">How to stop aggressive background bloatware and save battery without risky ADB terminal commands or rooting.</p>
-                    <a href="blog/how-to-stop-android-apps-running-in-background-without-adb.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-
-                <div class="app-card" data-href="blog/how-to-turn-android-phone-into-desktop-workstation.html">
-                    <img src="assets/images/dextop-promo2.png" alt="Turn Android phone into desktop workstation" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">Android Desktop Workstation</h3>
-                        <div class="install-badge"><i class="fas fa-desktop"></i> Productivity</div>
-                    </div>
-                    <p class="app-description">The complete guide to turning any Android smartphone or tablet into a full landscape workstation with Dextop.</p>
-                    <a href="blog/how-to-turn-android-phone-into-desktop-workstation.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-
-                <div class="app-card" data-href="blog/how-to-run-local-ai-mac-android-offline-llm.html">
-                    <img src="assets/images/local-ai-guide-cover.jpg" alt="Run local AI on Mac and Android" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">Run Local AI Offline</h3>
-                        <div class="install-badge"><i class="fas fa-brain"></i> AI &amp; Privacy</div>
-                    </div>
-                    <p class="app-description">Complete guide to running fast, private, 100% offline LLMs on Apple Silicon and Android smartphones with zero telemetry.</p>
-                    <a href="blog/how-to-run-local-ai-mac-android-offline-llm.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-
-                <div class="app-card" data-href="blog/mastering-ai-prompt-staging-clipboard-scratchpad.html">
-                    <img src="assets/images/prompt-staging-cover.jpg" alt="Mastering AI prompt staging" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">AI Prompt Staging</h3>
-                        <div class="install-badge"><i class="fas fa-terminal"></i> AI Workflows</div>
-                    </div>
-                    <p class="app-description">How power users assemble complex LLM prompts using a persistent menu bar scratchpad and clipboard history on macOS.</p>
-                    <a href="blog/mastering-ai-prompt-staging-clipboard-scratchpad.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-
-                <div class="app-card" data-href="blog/how-to-remap-volume-buttons-android-custom-shortcuts.html">
-                    <img src="assets/images/volume-promo2.png" alt="Remap Android volume buttons" class="app-image">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0;">Remap Volume Buttons</h3>
-                        <div class="install-badge"><i class="fab fa-android"></i> Customization</div>
-                    </div>
-                    <p class="app-description">Control media with screen off, toggle the flashlight, and trigger back navigation without rooting or ADB.</p>
-                    <a href="blog/how-to-remap-volume-buttons-android-custom-shortcuts.html" class="more-btn">Read Tutorial &rarr;</a>
-                </div>
-            </div>
-
-            <div style="text-align: center;">
-                <a href="blog/blog_main.html" class="action-badge" style="font-size: 1.05rem; padding: 0.6rem 1.5rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-book-open"></i> Browse All Guides on Our Blog &rarr;
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" style="text-align: center; margin-top: 6rem; margin-bottom: 4rem;">
-            <h2 style="margin-bottom: 2rem;">Get in Touch</h2>
-            <div class="contact-grid">
-                <a href="mailto:giant2turtle@gmail.com" class="contact-card">
-                    <div class="icon-box">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email Us</h3>
-                    <p>giant2turtle@gmail.com</p>
-                </a>
-                <!-- <a href="tel:+12345678900" class="contact-card">
-                    <div class="icon-box">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <h3>Call Us</h3>
-                    <p>+1 234 567 8900</p>
-                </a> -->
-            </div>
-        </section>
-
-        <!-- Place store & profile links between contact and support -->
-        <div style="text-align: center; margin: 2rem 0;">
-            <!-- <a href="https://play.google.com/store/apps/dev?id=6972914289887334381" class="store-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--primary); color: #0a0000; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; margin-right: 0.5rem; text-decoration: none;">
-                <i class="fab fa-google-play"></i>
-                <span>Play Store</span>
-            </a> -->
-            <!-- <a href="https://github.com/giantturtle" class="store-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--primary); color: #090000; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; text-decoration: none;">
-                <i class="fab fa-apple"></i>
-                <span>AppStore</span>
-            </a> -->
-        </div>
-
-        <section id="support"
-            style="text-align: center; margin-top: 6rem; background: var(--bg-card); padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2rem); border-radius: 20px; border: 1px solid var(--glass-border);">
-            <h2>Support Our open source contributions</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Help us keep building high-quality,
-                niche tools and games.</p>
-            <!-- <a href="https://www.buymeacoffee.com/giantturtle" class="store-btn"
-                style="display: inline-flex; width: auto; background: #ff813f; padding: 1rem 2rem; font-size: 1rem;">
-                <i class="fas fa-coffee"></i> Support on Buy Me A Coffee
-            </a> -->
-            <a href="https://extensions.gnome.org/accounts/profile/markomisk" class="store-btn"
-                style="display: inline-flex; width: auto; max-width: 100%; background: #24292e; color: #fff; padding: 1rem 1.25rem; font-size: 1rem; text-decoration: none;">
-                <i class="fab fa-desktop" style="margin-right: 0.5rem;"></i>View on GNOME shell extensions
-            </a>
-
-            <!-- <a href="https://github.com/giantturtle" class="store-btn" style="display: inline-flex; width: auto; margin-left: 1rem; background: #24292e; color: #fff; padding: 1rem 1.25rem; font-size: 1rem; text-decoration: none;">
-                <i class="fab fa-github" style="margin-right: 0.5rem;"></i> View on GitHub 
-            </a> -->
-        </section>
-
-    </div>
-
+    <!-- FOOTER -->
     <footer>
-        <div class="container">
-            <p>&copy; <span id="year"></span> GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.</p>
-            <div class="footer-links">
-                <a href="#projects">All Apps</a> &bull;
-                <a href="blog/blog_main.html">Blog &amp; Guides</a> &bull;
-                <a href="privacy-policy.html">Privacy Policy</a> &bull;
-                <a href="refund-policy.html">Refund Policy</a>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-pill" style="height: 30px; padding: 2px 5px; border-radius: 8px;">
+                    <img src="assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" style="height: 24px;" width="30" height="24" loading="lazy">
+                </span>
+                <span>GiantTurtle Studio</span>
             </div>
+            <p class="footer-copy">
+                &copy; <span id="year">2026</span> GiantTurtle Studio. Built with passion for mobile and desktop ecosystems.
+            </p>
+            <ul class="footer-links">
+                <li><a href="#projects">All Apps</a></li>
+                <li><a href="blog/blog_main.html">Blog &amp; Guides</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#" id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 
     <script>
         // Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Make project cards clickable while keeping internal links working
+        // Navbar scroll backdrop & Back to Top button
+        const nav = document.getElementById('main-nav');
+        const backToTopButton = document.getElementById('backToTop');
+        const onScroll = () => {
+            const y = window.scrollY;
+            nav.classList.toggle('scrolled', y > 32);
+            backToTopButton.classList.toggle('visible', y > 360);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Make project & guide cards clickable while keeping internal links working
         document.querySelectorAll('.app-card[data-href]').forEach((card) => {
             card.addEventListener('click', (event) => {
                 const interactiveElement = event.target.closest('a, button, input, select, textarea, [role="button"]');
                 if (interactiveElement) {
                     return;
                 }
-
                 window.location.href = card.dataset.href;
             });
         });
 
-        // Back to Top Button
-        const backToTopButton = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-
-        backToTopButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        // Progressive scroll reveal
+        if (document.documentElement.classList.contains('js-reveal') && 'IntersectionObserver' in window) {
+            const revealEls = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.06, rootMargin: '0px 0px -16px 0px' }
+            );
+            revealEls.forEach((el) => observer.observe(el));
+        } else {
+            document.documentElement.classList.remove('js-reveal');
+        }
     </script>
-
 </body>
 
 </html>
