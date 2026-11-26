@@ -1004,6 +1004,12 @@ body.theme-macos .tldr-box,
     color: var(--article-accent);
 }
 
+.card-tag--amber {
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(245, 158, 11, 0.36);
+    color: #fbbf24;
+}
+
 .info-card h3,
 .info-card h4 {
     margin: 0 0 0.4rem;
@@ -1337,6 +1343,66 @@ body.theme-macos .styled-table td.col-highlight {
 .app-cta-banner--compact {
     padding: 1.35rem 1.5rem;
     margin: 1.65rem 0;
+}
+
+.edition-cta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.85rem 0;
+}
+
+.edition-cta-card {
+    background:
+        radial-gradient(circle at top left, rgba(61, 220, 132, 0.12) 0%, transparent 56%),
+        linear-gradient(155deg, rgba(21, 32, 46, 0.9) 0%, rgba(11, 17, 26, 0.96) 100%);
+    border: 1px solid rgba(61, 220, 132, 0.3);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
+}
+
+.edition-cta-card--core {
+    background:
+        radial-gradient(circle at top left, rgba(245, 158, 11, 0.14) 0%, transparent 56%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.1) 0%, transparent 56%),
+        linear-gradient(155deg, rgba(21, 32, 46, 0.9) 0%, rgba(11, 17, 26, 0.96) 100%);
+    border-color: rgba(245, 158, 11, 0.36);
+}
+
+.edition-cta-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.55rem;
+}
+
+.edition-cta-card h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.18rem;
+    color: #ffffff;
+}
+
+.edition-cta-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--clr-text-muted);
+}
+
+.edition-cta-card .app-cta-buttons {
+    gap: 0.6rem;
+}
+
+.edition-cta-card .btn-primary-cta,
+.edition-cta-card .btn-secondary-cta {
+    padding: 0.64rem 1.05rem;
+    font-size: 0.86rem;
 }
 
 .app-cta-banner.macos-banner {
@@ -1904,7 +1970,8 @@ footer.site-footer {
     .compare-split,
     .steps-grid,
     .screenshot-grid,
-    .screenshot-grid--3 {
+    .screenshot-grid--3,
+    .edition-cta-grid {
         grid-template-columns: 1fr;
     }
 
