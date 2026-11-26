@@ -42,12 +42,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#070b10">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="blog.css">
@@ -123,10 +123,10 @@
             },
             {
               "@type": "Question",
-              "name": "Can kids accidentally exit videos or make calls when using Swipe Stop?",
+              "name": "What if someone presses the physical power button while frozen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. When Swipe Stop is engaged, all touch inputs, navigation bars, and gesture triggers are completely frozen. Toddlers can hold or touch the screen without pausing the video or switching apps."
+                "text": "Pressing the power button simply turns the screen off into standard Android lock mode. To access the phone again, your standard lock screen security (PIN, fingerprint, or password) is enforced."
               }
             },
             {
@@ -145,17 +145,26 @@
 </head>
 
 <body>
+    <div class="reading-progress" aria-hidden="true"></div>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="../index.html" class="nav-logo">
-                <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo">
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="nav-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo" width="38" height="30">
+                </span>
                 <span>GiantTurtle</span>
             </a>
             <ul class="nav-links">
                 <li><a href="../index.html#projects">Apps</a></li>
-                <li><a href="blog_main.html">Blog</a></li>
-                <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li><a href="blog_main.html" class="nav-active">Blog</a></li>
+                <li>
+                    <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="nav-cta">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -165,120 +174,140 @@
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <a href="../index.html">Home</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <a href="blog_main.html">Blog</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <span class="current">Stop People Swiping Photos</span>
         </nav>
 
         <!-- Article Header -->
         <header class="article-header">
             <span class="article-category-badge android">
-                <i class="fab fa-android"></i> Privacy &amp; Screen Protection
+                <i class="fab fa-android" aria-hidden="true"></i> Privacy &amp; Screen Protection
             </span>
             <h1 class="article-title">How to Freeze Your Screen &amp; Stop Friends from Swiping Your Photos on Android</h1>
             <p class="article-lead">
-                We've all experienced that split second of panic: you hand your phone to a friend or family member to show them ONE specific photo, and their thumb instinctively starts swiping through your entire camera roll. Here is how to lock your touch screen and protect your privacy.
+                Handing someone your phone to show one picture shouldn't end with them scrolling your camera roll. Lock touch input in a single tap and unfreeze it with your fingerprint.
             </p>
 
             <div class="article-meta-bar">
                 <div class="article-meta-item">
-                    <i class="fas fa-user-edit"></i>
+                    <i class="fas fa-user-edit" aria-hidden="true"></i>
                     <span>GiantTurtle Team</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     <time datetime="2026-10-04">October 4, 2026</time>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-clock"></i>
-                    <span>6 min read</span>
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>4 min read</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-fingerprint"></i>
+                    <i class="fas fa-fingerprint" aria-hidden="true"></i>
                     <span>Biometric Unlock &bull; Zero Ads</span>
                 </div>
             </div>
         </header>
 
         <!-- Featured Graphic -->
-        <figure>
-            <img src="../assets/images/swipe-stop-promo2.jpg" alt="Swipe Stop touch lock screen freeze on Android phone" class="article-featured-image">
-            <figcaption class="img-caption">Swipe Stop allows you to share photos with confidence by freezing touch input until unlocked with your biometrics.</figcaption>
+        <figure class="screenshot-figure">
+            <div class="screenshot-stage screenshot-stage--wide">
+                <img src="../assets/images/swipe-stop-promo2.jpg"
+                    alt="Swipe Stop touch lock screen freeze on Android phone"
+                    width="512" height="250" fetchpriority="high">
+            </div>
+            <figcaption class="img-caption">Freeze touch input with one tap before handing your phone over—unlock securely with biometrics when you get it back.</figcaption>
         </figure>
 
-        <!-- Table of Contents -->
-        <nav class="toc-box" aria-label="Table of contents">
-            <div class="toc-title">
-                <i class="fas fa-list-ul"></i> Quick Navigation
+        <!-- TL;DR Summary -->
+        <aside class="tldr-box" aria-label="Article summary">
+            <div class="tldr-header">
+                <i class="fas fa-bolt" aria-hidden="true"></i> Quick Takeaway
             </div>
-            <ul class="toc-list">
-                <li><a href="#the-universal-phone-sharing-anxiety">1. The Universal "Photo Sharing Anxiety"</a></li>
-                <li><a href="#why-android-app-pinning-is-not-enough">2. Why Android's Built-in "App Pinning" Falls Short</a></li>
-                <li><a href="#the-solution-swipe-stop">3. The Solution: How Swipe Stop Freezes Your Screen</a></li>
-                <li><a href="#three-everyday-use-cases">4. 3 Everyday Scenarios Where Screen Freeze is Essential</a></li>
-                <li><a href="#how-to-setup-and-use">5. Step-by-Step: How to Use Swipe Stop</a></li>
-                <li><a href="#comparison-table">6. Feature Comparison: App Pinning vs. Swipe Stop</a></li>
-                <li><a href="#frequently-asked-questions">7. Frequently Asked Questions</a></li>
+            <ul class="tldr-list">
+                <li><strong>Android App Pinning isn't enough:</strong> It locks the app, not touch gestures—people can still swipe through every photo in your gallery.</li>
+                <li><strong>True 1-tap touch freeze:</strong> <a href="../swipe-stop.html">Swipe Stop</a> blocks all swipes, taps, and back gestures while keeping the screen lit.</li>
+                <li><strong>Instant biometric unlock:</strong> Unfreeze with your fingerprint, face scan, or PIN—100% ad-free and offline.</li>
+            </ul>
+        </aside>
+
+        <!-- Compact Jump Nav -->
+        <nav class="toc-pills" aria-label="Table of contents">
+            <div class="toc-pills-label">
+                <i class="fas fa-compass" aria-hidden="true"></i> Jump to section
+            </div>
+            <ul class="toc-pills-list">
+                <li><a href="#why-app-pinning-fails">Why App Pinning Fails</a></li>
+                <li><a href="#the-solution-swipe-stop">How Swipe Stop Works</a></li>
+                <li><a href="#three-everyday-use-cases">3 Everyday Uses</a></li>
+                <li><a href="#how-to-setup-and-use">4-Step Setup</a></li>
+                <li><a href="#comparison-table">Comparison</a></li>
+                <li><a href="#frequently-asked-questions">FAQ</a></li>
             </ul>
         </nav>
 
         <!-- Article Content -->
         <article class="article-content">
 
-            <h2 id="the-universal-phone-sharing-anxiety">1. The Universal "Photo Sharing Anxiety"</h2>
+            <h2 id="why-app-pinning-fails"><span class="section-num">01</span>Why Android's Built-in "App Pinning" Falls Short</h2>
             <p>
-                Modern smartphones hold the most intimate records of our lives: medical lab results, banking statements, personal conversations, relationship moments, and candid screenshots.
+                Your camera roll holds private moments, banking screenshots, and personal messages. Yet when you hand over your phone to show one vacation picture or QR ticket, muscle memory makes people instinctively <strong>swipe left or right</strong>.
             </p>
             <p>
-                Yet every week, we find ourselves handing our unlocked devices to other people:
-            </p>
-            <ul>
-                <li>Showing a vacation picture to a colleague at work.</li>
-                <li>Showing a funny meme or dog video to your parents.</li>
-                <li>Passing your phone to a barista or ticket collector to scan a QR code or barcode.</li>
-                <li>Handing your phone to a child in the car to watch a cartoon.</li>
-            </ul>
-            <p>
-                Almost universally, human curiosity (or sheer accidental muscle memory) causes people to <strong>swipe left or right</strong>. Suddenly, someone you barely know is looking at private photos you never intended to share.
+                Android's built-in <strong>App Pinning</strong> (<em>Settings &gt; Security</em>) only stops someone from leaving an app. Inside Google Photos or Samsung Gallery, <strong>every swipe, pinch, and delete button stays completely active</strong>—and turning it on takes several clumsy taps through Recent Apps.
             </p>
 
             <div class="callout warning">
                 <div class="callout-header">
-                    <i class="fas fa-exclamation-triangle"></i> The Awkward Hover
+                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> End "The Awkward Hover"
                 </div>
                 <p>
-                    Up until now, the only defense has been "the awkward hover"—holding your phone with a death-grip while tilting it toward your friend's face so their fingers cannot touch the glass. It feels antisocial, awkward, and uncomfortable.
+                    Without a touch lock, the only workaround is holding your phone with a death-grip while tilting it toward someone's face. A real touch freeze lets you hand your phone over relaxed and worry-free.
                 </p>
             </div>
 
-            <h2 id="why-android-app-pinning-is-not-enough">2. Why Android's Built-in "App Pinning" Falls Short</h2>
+            <h2 id="the-solution-swipe-stop"><span class="section-num">02</span>The Solution: Freeze Touch Input with Swipe Stop</h2>
             <p>
-                Android has a built-in feature in <em>Settings &gt; Security</em> called <strong>App Pinning</strong> (Screen Pinning). While useful for preventing someone from leaving an app, it does <strong>not</strong> solve the photo privacy problem:
-            </p>
-            <ul>
-                <li>App Pinning prevents the user from going back to the home screen, but <strong>all touch gestures inside the app remain completely active</strong>!</li>
-                <li>A pinned Google Photos or Samsung Gallery app still allows the viewer to swipe through every single photo, delete albums, or open shared memories.</li>
-                <li>Setting up App Pinning is clumsy, requiring navigating into the Recent Apps overview and tapping small submenu icons.</li>
-            </ul>
-
-            <h2 id="the-solution-swipe-stop">3. The Solution: How Swipe Stop Freezes Your Screen</h2>
-            <p>
-                The real solution is straightforward: you want the picture or video to remain brightly illuminated on screen, but <strong>completely disable touch input</strong> until you take the phone back.
-            </p>
-            <p>
-                That is the exact superpower provided by <a href="../swipe-stop.html"><strong>Swipe Stop</strong></a> by GiantTurtle Studio.
+                <a href="../swipe-stop.html"><strong>Swipe Stop</strong></a> by GiantTurtle Studio acts as the true Guided Access touch lock Android never shipped—keeping your photo or video brightly visible while ignoring every finger on the glass.
             </p>
 
-            <!-- Product CTA Banner -->
-            <div class="app-cta-banner">
-                <img src="../assets/images/swipe-stop-promo2.jpg" alt="Swipe Stop Icon" class="app-cta-icon">
+            <div class="card-grid card-grid--3">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-hand-paper" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">1-Tap</span>
+                    </div>
+                    <h3>Instant Touch Freeze</h3>
+                    <p>Blocks all swipes, taps, and system navigation gestures while keeping the current screen visible.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-fingerprint" aria-hidden="true"></i></span>
+                        <span class="card-tag">Secure</span>
+                    </div>
+                    <h3>Biometric Unlock</h3>
+                    <p>Restore normal touch control immediately with your fingerprint, face unlock, or device PIN.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-sun" aria-hidden="true"></i></span>
+                        <span class="card-tag">Awake</span>
+                    </div>
+                    <h3>Keeps Screen Lit</h3>
+                    <p>Prevents your display from dimming or timing out while friends look closely at a photo.</p>
+                </div>
+            </div>
+
+            <!-- Mid-Article Compact CTA -->
+            <div class="app-cta-banner app-cta-banner--compact">
+                <img src="../assets/images/swipe-stop-promo1.png" alt="Swipe Stop App Icon" class="app-cta-icon" width="72" height="72" loading="lazy" decoding="async">
                 <div class="app-cta-content">
                     <h3>Swipe Stop: Screen Freeze for Android</h3>
-                    <p>Freeze touch input with 1 tap. Prevent accidental or snooping swipes. Unlock securely with your fingerprint or face scan. 100% ad-free.</p>
+                    <p>Freeze touch input in 1 tap and unlock with biometrics. Lightweight, offline, and 100% ad-free.</p>
                     <div class="app-cta-buttons">
                         <a href="https://play.google.com/store/apps/details?id=com.giantturtle.quickfreeze" target="_blank" rel="noopener" class="btn-primary-cta">
-                            <i class="fab fa-google-play"></i> Get on Google Play
+                            <i class="fab fa-google-play" aria-hidden="true"></i> Get on Google Play
                         </a>
                         <a href="../swipe-stop.html" class="btn-secondary-cta">
                             Learn More &rarr;
@@ -287,174 +316,171 @@
                 </div>
             </div>
 
-            <p>Swipe Stop delivers complete peace of mind with three core features:</p>
-            <ul>
-                <li><strong>Instant Touch Freeze:</strong> Locks touch input and gesture navigation with a single tap, keeping the active image or video visible.</li>
-                <li><strong>Biometric Unlock:</strong> When you get your phone back, unlock the screen instantly using your standard device fingerprint or face scan—just like unlocking your phone!</li>
-                <li><strong>Keeps Screen Awake:</strong> Prevents the display from timing out or dimming while friends inspect the picture.</li>
-            </ul>
-
-            <div class="gallery" style="display: flex; gap: 1rem; overflow-x: auto; margin: 2rem 0; padding-bottom: 1rem;">
-                <img src="../assets/images/swipe-stop1.png" alt="Swipe Stop Freeze Setup" style="max-height: 380px; width: auto; border-radius: 12px;">
-                <img src="../assets/images/swipe-stop2.png" alt="Swipe Stop Touch Lock Active" style="max-height: 380px; width: auto; border-radius: 12px;">
-                <img src="../assets/images/swipe-stop3.png" alt="Swipe Stop Biometrics Unfreeze" style="max-height: 380px; width: auto; border-radius: 12px;">
+            <!-- 3-Up Clean Screenshot Showcase -->
+            <div class="screenshot-grid screenshot-grid--3 screenshot-grid--phones">
+                <figure class="screenshot-card">
+                    <img src="../assets/images/swipe-stop1.png" alt="Swipe Stop setup instructions with Light and Dark modes" width="512" height="451" loading="lazy" decoding="async">
+                    <figcaption>Quick setup with Light &amp; Dark themes and Keep Screen On toggle.</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="../assets/images/swipe-stop3.png" alt="Swipe Stop active touch freeze overlay while sharing phone" width="288" height="512" loading="lazy" decoding="async">
+                    <figcaption>Touch stays completely frozen while handing over your phone.</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="../assets/images/swipe-stop2.png" alt="Swipe Stop biometric unfreeze prompt and notification toggle" width="512" height="451" loading="lazy" decoding="async">
+                    <figcaption>Unfreeze with biometrics, PIN, or the notification action.</figcaption>
+                </figure>
             </div>
 
-            <h2 id="three-everyday-use-cases">4. 3 Everyday Scenarios Where Screen Freeze is Essential</h2>
-
-            <h3>1. Showing Photos &amp; Memes to Friends</h3>
-            <p>
-                Open your favorite photo, engage Swipe Stop, and hand the phone over with zero hesitation. They can hold the device comfortably, admire the image, and even touch the glass—the photo stays locked in place.
-            </p>
-
-            <h3>2. Toddler &amp; Kid Video Lock</h3>
-            <p>
-                Toddlers love clutching the phone by the screen while watching cartoons. On standard Android, a single stray thumb touch pauses the video, opens Chrome, or triggers emergency dialers. With Swipe Stop, touch input is completely inactive, letting kids enjoy their video without interruption.
-            </p>
-
-            <h3>3. Watching Movies in Bed or Gym Workouts</h3>
-            <p>
-                Ever watched Netflix or YouTube in bed or on a treadmill, only for a loose blanket, hand repositioning, or sweat droplet to accidentally fast-forward the video? Engaging Swipe Stop prevents ghost touches and accidental playback pauses.
-            </p>
-
-            <h2 id="how-to-setup-and-use">5. Step-by-Step: How to Use Swipe Stop</h2>
-            <div class="step-card">
-                <div class="step-badge">1</div>
-                <h4>Download Swipe Stop from Google Play</h4>
-                <p>
-                    Install <a href="https://play.google.com/store/apps/details?id=com.giantturtle.quickfreeze" target="_blank" rel="noopener">Swipe Stop from the Google Play Store</a>. It is lightweight, contains zero ads, and respects your privacy.
-                </p>
+            <h2 id="three-everyday-use-cases"><span class="section-num">03</span>3 Everyday Scenarios Where Screen Freeze Shines</h2>
+            <div class="card-grid card-grid--3">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-images" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Showing Photos &amp; Tickets</h3>
+                    <p>Share a photo, meme, or QR boarding pass without worrying about accidental swipes or snooping thumbs.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-child" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Toddler Video Lock</h3>
+                    <p>Let kids hold the phone during cartoons without pausing playback, exiting YouTube, or dialing contacts.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-bed" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Watching in Bed or Gym</h3>
+                    <p>Prevent stray blanket taps, palm rests, or sweat drops from scrubbing timelines or pausing movies.</p>
+                </div>
             </div>
 
-            <div class="step-card">
-                <div class="step-badge">2</div>
-                <h4>Open Any Photo, Video, or Document</h4>
-                <p>
-                    Navigate to the photo, boarding pass, concert ticket, or video you wish to share.
-                </p>
+            <h2 id="how-to-setup-and-use"><span class="section-num">04</span>How to Use Swipe Stop in 4 Quick Steps</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-badge">1</div>
+                    <div class="step-card-body">
+                        <h4>Install Swipe Stop</h4>
+                        <p>Download <a href="https://play.google.com/store/apps/details?id=com.giantturtle.quickfreeze" target="_blank" rel="noopener">Swipe Stop on Google Play</a> and add its Quick Settings tile.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">2</div>
+                    <div class="step-card-body">
+                        <h4>Open Your Content</h4>
+                        <p>Pull up the photo, video, concert ticket, or document you want to display.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">3</div>
+                    <div class="step-card-body">
+                        <h4>Tap to Freeze</h4>
+                        <p>Tap the Quick Settings tile or floating trigger. Touch locks instantly while the screen stays bright.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">4</div>
+                    <div class="step-card-body">
+                        <h4>Unfreeze with Biometrics</h4>
+                        <p>When you get your phone back, unlock normally via fingerprint, face scan, or PIN.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="step-card">
-                <div class="step-badge">3</div>
-                <h4>Trigger Screen Freeze</h4>
-                <p>
-                    Tap the floating freeze trigger or Quick Settings tile. The touch layer is immediately frozen while the display remains illuminated. Hand your phone over with complete confidence!
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-badge">4</div>
-                <h4>Unfreeze with Your Fingerprint</h4>
-                <p>
-                    When you get your phone back, touch the fingerprint sensor or enter your device PIN to restore normal touch interactions instantly.
-                </p>
-            </div>
-
-            <h2 id="comparison-table">6. Feature Comparison: App Pinning vs. Swipe Stop</h2>
+            <h2 id="comparison-table"><span class="section-num">05</span>App Pinning vs. Swipe Stop</h2>
             <div class="table-wrapper">
                 <table class="styled-table">
                     <thead>
                         <tr>
                             <th>Security Feature</th>
-                            <th>Stock Android App Pinning</th>
-                            <th>Swipe Stop</th>
+                            <th>Android App Pinning</th>
+                            <th class="col-highlight">Swipe Stop</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Touch Gestures Disabled</strong></td>
-                            <td><span class="badge-poor"><i class="fas fa-times"></i> No (Free to swipe photos)</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 100% Touch Frozen</span></td>
+                            <td><strong>Touch Gestures Blocked</strong></td>
+                            <td><span class="badge-poor"><i class="fas fa-times" aria-hidden="true"></i> No (Free to swipe)</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> 100% Touch Frozen</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Gallery Snooping Prevention</strong></td>
-                            <td><span class="badge-poor">Fails completely</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Total Protection</span></td>
+                            <td><strong>Gallery Privacy</strong></td>
+                            <td><span class="badge-poor">Fails inside app</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Total Protection</span></td>
                         </tr>
                         <tr>
                             <td><strong>Biometric Unfreeze</strong></td>
                             <td>PIN or pattern only</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Fingerprint / Face / PIN</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Fingerprint / Face / PIN</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Display Kept Awake</strong></td>
-                            <td>Follows system timeout (15-30s)</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Screen stays on while locked</span></td>
+                            <td><strong>Keeps Display Awake</strong></td>
+                            <td>System timeout (15–30s)</td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Stays awake while locked</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Ad-Free &amp; Lightweight</strong></td>
-                            <td>System default</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Zero Ads &bull; Battery friendly</span></td>
+                            <td><strong>Ad-Free &amp; Offline</strong></td>
+                            <td>Built-in</td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Zero Ads &bull; Battery Friendly</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="frequently-asked-questions">7. Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+            <h2 id="frequently-asked-questions"><span class="section-num">06</span>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>How do you lock your Android screen on one photo so people can't swipe?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>With <strong>Swipe Stop</strong>, tap the freeze tile before handing your phone over. All touch interactions—swiping, tapping, and back gestures—are disabled while the photo remains visible. Unlock it with your fingerprint when you take it back.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            With <strong>Swipe Stop</strong>, you can freeze touch input with a single tap before handing your phone over. All touch interactions (swiping, tapping, back gestures) are disabled while the photo remains visible on screen. Unlock it with your fingerprint when you take it back.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Does Android have an equivalent to iOS Guided Access?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Stock Android's App Pinning only keeps someone inside an app—it still lets them swipe photos and press buttons. <strong>Swipe Stop</strong> fills that gap by disabling all touch input until you authenticate.</p>
+                    </div>
+                </details>
+
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>What if someone presses the physical power button while frozen?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Pressing the power button puts the phone into standard Android lock mode. Your regular lock screen security (PIN, fingerprint, or password) is required to unlock it again.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            Pressing the power button simply turns the screen off into standard Android lock mode. To access the phone again, your standard lock screen security (PIN, fingerprint, or password) is enforced.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Does Swipe Stop contain advertisements?</span>
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Does Swipe Stop have ads, and which Android phones are supported?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Swipe Stop has <strong>zero ads</strong>, works completely offline, and runs on Samsung, Google Pixel, Xiaomi, Motorola, and other devices on Android 9 through Android 15+.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            No. Swipe Stop is completely free of banner ads, popups, and intrusive interruptions, ensuring an uninterrupted and professional user experience.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Does it work on Samsung, Google Pixel, and Xiaomi phones?</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>
-                            Yes. Swipe Stop is compatible with all modern Android smartphones and tablets running Android 9 through Android 15+.
-                        </p>
-                    </div>
-                </div>
+                </details>
             </div>
 
-            <!-- Conclusion & CTA -->
-            <h2>Your Screen. Your Rules.</h2>
-            <p>
-                Never suffer from photo-sharing anxiety again. Protect your personal moments and share with complete peace of mind with Swipe Stop.
-            </p>
-
-            <div class="app-cta-banner" style="margin-top: 2.5rem;">
-                <img src="../assets/images/swipe-stop-promo2.jpg" alt="Swipe Stop Icon" class="app-cta-icon">
+            <!-- Closing CTA -->
+            <div class="app-cta-banner">
+                <img src="../assets/images/swipe-stop-promo1.png" alt="Swipe Stop Icon" class="app-cta-icon" width="72" height="72" loading="lazy" decoding="async">
                 <div class="app-cta-content">
-                    <h3>Get Swipe Stop on Google Play</h3>
-                    <p>Free, ad-free, and lightweight touch lock utility for all Android devices.</p>
+                    <h3>Your Screen. Your Rules.</h3>
+                    <p>Share photos and hand your phone to friends or kids with total peace of mind—free and ad-free on Google Play.</p>
                     <div class="app-cta-buttons">
                         <a href="https://play.google.com/store/apps/details?id=com.giantturtle.quickfreeze" target="_blank" rel="noopener" class="btn-primary-cta">
-                            <i class="fab fa-google-play"></i> Install from Play Store
+                            <i class="fab fa-google-play" aria-hidden="true"></i> Install from Play Store
                         </a>
                         <a href="../swipe-stop.html" class="btn-secondary-cta">
                             View App Page
@@ -467,30 +493,34 @@
 
         <!-- Author Bio Box -->
         <section class="author-card">
-            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar">
+            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar" width="60" height="60" loading="lazy" decoding="async">
             <div class="author-info">
                 <h4>Written by GiantTurtle Studio</h4>
                 <div class="author-title">Android Systems &amp; Privacy Engineering</div>
                 <p class="author-bio">
-                    GiantTurtle Studio builds specialized mobile and desktop tools that prioritize speed, privacy, and user sovereignty over hardware without invasive bloat or unnecessary subscriptions.
+                    GiantTurtle Studio builds lightweight mobile and desktop tools focused on speed, privacy, and control over your own hardware—without bloat or subscriptions.
                 </p>
             </div>
         </section>
 
         <!-- Related Guides -->
         <section class="related-posts">
-            <h3>Explore More Optimization Guides</h3>
+            <h3>Explore More Guides</h3>
             <div class="related-grid">
                 <a href="how-to-stop-android-apps-running-in-background-without-adb.html" class="related-card">
-                    <span class="article-category-badge android" style="margin-bottom: 0.5rem;"><i class="fab fa-android"></i> Android Optimization</span>
-                    <h4>How to Stop Android Apps from Running in the Background Without ADB</h4>
-                    <p>Reclaim battery life and memory by freezing rogue background bloatware safely without risky developer commands.</p>
+                    <div>
+                        <span class="article-category-badge android" style="margin-bottom: 0.5rem;"><i class="fab fa-android" aria-hidden="true"></i> Android Optimization</span>
+                        <h4>How to Stop Android Apps from Running in the Background Without ADB</h4>
+                        <p>Reclaim battery life and memory by stopping rogue background bloatware safely without risky commands.</p>
+                    </div>
                     <span class="related-link">Read Guide &rarr;</span>
                 </a>
                 <a href="fastest-private-offline-spotlight-search-android.html" class="related-card">
-                    <span class="article-category-badge android" style="margin-bottom: 0.5rem;"><i class="fab fa-android"></i> Privacy Search</span>
-                    <h4>How to Get Apple Spotlight &amp; GNOME Search on Android</h4>
-                    <p>Find apps, contacts, and files with zero latency and zero internet permissions using Macro Spotlight.</p>
+                    <div>
+                        <span class="article-category-badge android" style="margin-bottom: 0.5rem;"><i class="fab fa-android" aria-hidden="true"></i> Privacy Search</span>
+                        <h4>How to Get Apple Spotlight &amp; GNOME Search on Android</h4>
+                        <p>Find apps, contacts, and files with zero latency and zero internet permissions using Macro Spotlight.</p>
+                    </div>
                     <span class="related-link">Read Guide &rarr;</span>
                 </a>
             </div>
@@ -498,12 +528,38 @@
 
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-pill footer-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" width="28" height="22" loading="lazy" decoding="async">
+                </span>
+                <span>GiantTurtle Studio</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+            <ul class="footer-links">
+                <li><a href="../index.html">All Apps</a></li>
+                <li><a href="blog_main.html">Blog Home</a></li>
+                <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="../refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
+    <script>
+        const nav = document.getElementById('main-nav');
+        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline: scroll()');
+        const updateOnScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 24);
+            if (!supportsScrollTimeline) {
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+                document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+            }
+        };
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+        updateOnScroll();
+    </script>
 </body>
 
 </html>

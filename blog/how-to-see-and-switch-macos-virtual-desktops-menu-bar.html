@@ -43,91 +43,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#070b10">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="blog.css">
-
-    <style>
-        /* Page-scoped framing for DesktopPlus portrait & popover screenshots */
-        .article-screenshot-figure {
-            margin: 2.25rem auto;
-            text-align: center;
-        }
-
-        .article-screenshot-stage {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            padding: 12px;
-            border-radius: 20px;
-            background: linear-gradient(155deg, rgba(124, 106, 239, 0.12), rgba(18, 18, 42, 0.72));
-            border: 1px solid rgba(124, 106, 239, 0.25);
-            box-shadow:
-                0 22px 48px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            max-width: 100%;
-        }
-
-        .article-screenshot-stage img,
-        .article-content .article-screenshot-stage img {
-            margin: 0;
-            border: none;
-            box-shadow: none;
-            border-radius: 12px;
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            display: block;
-        }
-
-        .article-screenshot-stage--portrait img,
-        .article-content .article-screenshot-stage--portrait img {
-            max-height: 460px;
-        }
-
-        .article-screenshot-stage--landscape img,
-        .article-content .article-screenshot-stage--landscape img {
-            max-width: min(560px, 100%);
-        }
-
-        .style-pill-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.65rem;
-            margin: 1.25rem 0 1.75rem;
-        }
-
-        .style-pill-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.42rem 0.95rem;
-            border-radius: 999px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            background: rgba(124, 106, 239, 0.14);
-            border: 1px solid rgba(124, 106, 239, 0.34);
-            color: #c4b5fd;
-        }
-
-        .verified-subnote {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 0.84rem;
-            color: var(--text-muted);
-            margin-top: 0.85rem;
-        }
-
-        .verified-subnote i {
-            color: #3DDC84;
-        }
-    </style>
 
     <!-- Structured Data (Schema.org TechArticle, BreadcrumbList, FAQPage) -->
     <script type="application/ld+json">
@@ -229,18 +153,27 @@
     </script>
 </head>
 
-<body>
+<body class="theme-macos">
+    <div class="reading-progress" aria-hidden="true"></div>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="../index.html" class="nav-logo">
-                <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo">
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="nav-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo" width="38" height="30">
+                </span>
                 <span>GiantTurtle</span>
             </a>
             <ul class="nav-links">
                 <li><a href="../index.html#projects">Apps</a></li>
-                <li><a href="blog_main.html">Blog</a></li>
-                <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li><a href="blog_main.html" class="nav-active">Blog</a></li>
+                <li>
+                    <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="nav-cta">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -250,171 +183,165 @@
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <a href="../index.html">Home</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <a href="blog_main.html">Blog</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <span class="current">macOS Menu Bar Desktop Switcher</span>
         </nav>
 
         <!-- Article Header -->
         <header class="article-header">
             <span class="article-category-badge macos">
-                <i class="fab fa-apple"></i> macOS Productivity Guide
+                <i class="fab fa-apple" aria-hidden="true"></i> macOS Productivity Guide
             </span>
             <h1 class="article-title">How to See &amp; Switch macOS Virtual Desktops from the Menu Bar</h1>
             <p class="article-lead">
-                Stop guessing which macOS Space you're working in. Learn how to display a persistent virtual desktop indicator in your menu bar, jump between workspaces with a click, launch Workspace App Presets, and manage open or recently closed apps effortlessly.
+                Stop guessing which macOS Space you're on. Keep a live virtual desktop indicator in your menu bar, jump to any workspace in one click, launch Workspace App Presets, and clean lingering RAM usage.
             </p>
 
             <div class="article-meta-bar">
                 <div class="article-meta-item">
-                    <i class="fas fa-user-edit"></i>
+                    <i class="fas fa-user-edit" aria-hidden="true"></i>
                     <span>GiantTurtle Team</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     <time datetime="2026-11-24">Updated Nov 24, 2026</time>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-clock"></i>
-                    <span>7 min read</span>
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>5 min read</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-tag"></i>
+                    <i class="fas fa-tag" aria-hidden="true"></i>
                     <span>macOS 15.0+ &bull; DesktopPlus v1.0.8</span>
                 </div>
             </div>
         </header>
 
         <!-- Featured Graphic -->
-        <figure class="article-screenshot-figure">
-            <div class="article-screenshot-stage article-screenshot-stage--portrait">
+        <figure class="screenshot-figure">
+            <div class="screenshot-stage screenshot-stage--portrait">
                 <img src="../landing-assets/spaceman-example.jpg"
                     alt="DesktopPlus showing opened-app virtual desktop indicators, Recent Apps, and System Memory monitor in the macOS menu bar"
-                    width="810" height="1102">
+                    width="810" height="1102" fetchpriority="high">
             </div>
-            <figcaption class="img-caption">DesktopPlus displays your active macOS desktops right in the menu bar, alongside an integrated app overview, Recent Apps, and live System Memory monitor.</figcaption>
+            <figcaption class="img-caption">DesktopPlus puts your active macOS Spaces right in the menu bar—alongside per-desktop apps, Recent Apps, and live System Memory.</figcaption>
         </figure>
 
-        <!-- Table of Contents -->
-        <nav class="toc-box" aria-label="Table of contents">
-            <div class="toc-title">
-                <i class="fas fa-list-ul"></i> Quick Navigation
+        <!-- TL;DR Summary -->
+        <aside class="tldr-box" aria-label="Article summary">
+            <div class="tldr-header">
+                <i class="fas fa-bolt" aria-hidden="true"></i> Quick Takeaway
             </div>
-            <ul class="toc-list">
-                <li><a href="#the-problem-with-macos-spaces">1. The Problem with Default macOS Spaces</a></li>
-                <li><a href="#why-native-shortcuts-fall-short">2. Why Native Gestures and Shortcuts Cause Fatigue</a></li>
-                <li><a href="#the-solution-desktopplus">3. The Solution: A Persistent Menu Bar Space Indicator</a></li>
-                <li><a href="#how-to-setup-desktopplus">4. Step-by-Step Setup Tutorial</a></li>
-                <li><a href="#customizing-styles">5. Customizing Display Styles &amp; Preferences</a></li>
-                <li><a href="#workspace-presets-recent-apps">6. Workspace App Presets, Quick Launch &amp; Recent Apps</a></li>
-                <li><a href="#comparison-table">7. Feature Comparison: Apple Default vs. DesktopPlus</a></li>
-                <li><a href="#extra-power-tools">8. Bonus Tools: Integrated Task Manager &amp; Residual Process Cleaner</a></li>
-                <li><a href="#frequently-asked-questions">9. Frequently Asked Questions</a></li>
+            <ul class="tldr-list">
+                <li><strong>End Space blindness:</strong> macOS hides which virtual desktop you're on; <a href="../spaceman-landing.html">DesktopPlus</a> keeps a persistent indicator in your menu bar with 4 display modes.</li>
+                <li><strong>One-click workflows:</strong> Jump straight to any Space, restore saved <strong>Workspace App Presets</strong>, and reopen recently closed apps from the hot-zone popover.</li>
+                <li><strong>Native &amp; Apple-Notarized:</strong> Built in Swift/SwiftUI for macOS 15.0+ with no SIP disabling—14-day free trial, then a one-time purchase.</li>
+            </ul>
+        </aside>
+
+        <!-- Compact Jump Nav -->
+        <nav class="toc-pills" aria-label="Table of contents">
+            <div class="toc-pills-label">
+                <i class="fas fa-compass" aria-hidden="true"></i> Jump to section
+            </div>
+            <ul class="toc-pills-list">
+                <li><a href="#the-problem-with-macos-spaces">The Spaces Problem</a></li>
+                <li><a href="#how-to-setup-desktopplus">60-Second Setup</a></li>
+                <li><a href="#customizing-styles">4 Display Modes</a></li>
+                <li><a href="#workspace-presets-recent-apps">Presets &amp; Recent Apps</a></li>
+                <li><a href="#extra-power-tools">Task Manager &amp; RAM</a></li>
+                <li><a href="#comparison-table">Comparison</a></li>
+                <li><a href="#frequently-asked-questions">FAQ</a></li>
             </ul>
         </nav>
 
         <!-- Article Content -->
         <article class="article-content">
 
-            <h2 id="the-problem-with-macos-spaces">1. The Problem with Default macOS Spaces</h2>
+            <h2 id="the-problem-with-macos-spaces"><span class="section-num">01</span>Why Default macOS Spaces Breaks Flow</h2>
             <p>
-                macOS Spaces (Apple's implementation of virtual desktops) is one of the most powerful multitasking features on the Mac. Whether you are working on a MacBook Neo, MacBook Air, MacBook Pro, or an external workstation, dividing your work across multiple virtual desktops lets you keep code editors, communication tools, design canvases, and research tabs cleanly organized—even without external displays.
-            </p>
-            <p>
-                However, macOS has a frustrating design oversight that has bugged power users for over a decade: <strong>macOS never tells you which Space you are currently on, or what is sitting on the next and previous screens.</strong>
-            </p>
-            <p>
-                Once you switch to a desktop, there is zero persistent visual feedback in the menu bar or Dock indicating whether you are on Desktop 1, Desktop 3, or Desktop 5. You are forced to rely on memory or constantly trigger Mission Control just to re-orient yourself.
+                Virtual desktops (Spaces) are fantastic for separating code editors, browsers, chats, and design apps on any MacBook or external monitor. Yet Apple leaves out one crucial detail: <strong>macOS never tells you which Space you're on—or what's sitting on adjacent desktops.</strong>
             </p>
 
-            <div class="callout warning">
-                <div class="callout-header">
-                    <i class="fas fa-exclamation-triangle"></i> The "Context Blindness" Tax
+            <div class="card-grid card-grid--3">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon info-card-icon--warn"><i class="fas fa-hand-paper" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Swipe Fatigue</h3>
+                    <p>Three- or four-finger trackpad swipes get tiring over an 8-hour day, and feel clunky with an external desk mouse.</p>
                 </div>
-                <p>
-                    Studies on developer and knowledge worker productivity indicate that micro-interruptions—such as bringing up Mission Control to check where a browser window lives—break cognitive flow state and cost up to 15 to 25 minutes of regained focus every day.
-                </p>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon info-card-icon--warn"><i class="fas fa-exchange-alt" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Sequential Sliding</h3>
+                    <p><kbd>Ctrl</kbd> + arrows force you to step through every Space in between—watching three animations just to jump from Desktop 1 to 4.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon info-card-icon--warn"><i class="fas fa-eye-slash" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Context Blindness</h3>
+                    <p>Even with <kbd>Ctrl + 1</kbd> shortcuts mapped, there's zero visual cue showing which number holds which apps until you trigger Mission Control.</p>
+                </div>
             </div>
 
-            <h2 id="why-native-shortcuts-fall-short">2. Why Native Gestures and Shortcuts Cause Fatigue</h2>
+            <h2 id="how-to-setup-desktopplus"><span class="section-num">02</span>The Solution: DesktopPlus in 60 Seconds</h2>
             <p>
-                Apple gives you three default ways to navigate between virtual desktops, but each comes with serious ergonomic drawbacks:
-            </p>
-            <ul>
-                <li><strong>Three- or Four-Finger Trackpad Swipes:</strong> Smooth on a laptop trackpad, but repetitive swiping across an 8-hour workday causes fatigue—and if you use an external mouse at a desk, horizontal switching is clunky or requires custom button mapping.</li>
-                <li><strong>Ctrl + Left/Right Arrow:</strong> Sequential navigation means jumping from Desktop 1 to Desktop 4 requires pressing the shortcut three times in a row and sitting through three full-screen sliding animations.</li>
-                <li><strong>Ctrl + Number Keys:</strong> Apple allows mapping <kbd>Ctrl + 1</kbd>, <kbd>Ctrl + 2</kbd>, etc., in <em>System Settings &gt; Keyboard &gt; Keyboard Shortcuts &gt; Mission Control</em>. Even then, you still have no visual cue showing which number holds which apps.</li>
-            </ul>
-
-            <h2 id="the-solution-desktopplus">3. The Solution: A Persistent Menu Bar Space Indicator</h2>
-            <p>
-                The ideal workflow is simple: your top menu bar should always show your open virtual desktops, clearly highlight the active one, show what is open on adjacent screens, and let you <strong>jump directly to any Space with a single click</strong>—while still working seamlessly with native macOS swipe gestures.
-            </p>
-            <p>
-                This is exactly what <a href="../spaceman-landing.html"><strong>DesktopPlus</strong></a> delivers. Built natively with Swift and SwiftUI (no Electron, no background daemons, no performance overhead), DesktopPlus stays out of your way while giving you instant visibility and control over your desktops, open apps, presets, and memory on <strong>macOS 15.0 and later</strong>.
+                <a href="../spaceman-landing.html"><strong>DesktopPlus</strong></a> keeps your open Spaces visible in the top menu bar, shows what's running on each screen, and lets you jump directly with one click—while keeping native trackpad swipes intact. Built natively in Swift &amp; SwiftUI (zero Electron bloat) for <strong>macOS 15.0+</strong>.
             </p>
 
-            <!-- Product CTA Banner Inline -->
-            <div class="app-cta-banner macos-banner">
-                <img src="../landing-assets/app-icon.png" alt="DesktopPlus Icon" class="app-cta-icon" width="90" height="90">
+            <!-- Mid-Article macOS CTA -->
+            <div class="app-cta-banner macos-banner app-cta-banner--compact">
+                <img src="../landing-assets/app-icon.png" alt="DesktopPlus Icon" class="app-cta-icon" width="72" height="72" loading="lazy" decoding="async">
                 <div class="app-cta-content">
                     <h3>DesktopPlus for macOS</h3>
-                    <p>See your desktops at a glance, switch with one click, launch Workspace App Presets, revisit Recent Apps, and clean residual processes. Free 14-day trial (all unlocked, no payment info), then one-time purchase.</p>
+                    <p>Menu bar Space indicator, Workspace App Presets, Recent Apps, and 1-click Residual Process cleanup. 14-day free trial (all unlocked, no card), then one-time purchase.</p>
                     <div class="app-cta-buttons">
                         <a href="../landing-assets/DesktopPlus.dmg" download class="btn-primary-cta">
-                            <i class="fab fa-apple"></i> Free Download for macOS (.dmg)
+                            <i class="fab fa-apple" aria-hidden="true"></i> Free Download (.dmg)
                         </a>
                         <a href="../spaceman-landing.html" class="btn-secondary-cta">
                             Explore Features &rarr;
                         </a>
                     </div>
                     <div class="verified-subnote">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Verified by Apple (Notarized) &bull; Requires macOS 15.0 or later</span>
+                        <i class="fas fa-check-circle" aria-hidden="true"></i>
+                        <span>Verified by Apple (Notarized) &bull; Requires macOS 15.0+</span>
                     </div>
                 </div>
             </div>
 
-            <h2 id="how-to-setup-desktopplus">4. Step-by-Step Setup Tutorial</h2>
-            <p>Getting DesktopPlus running on your Mac takes less than 60 seconds:</p>
-
-            <div class="step-card">
-                <div class="step-badge">1</div>
-                <h4>Download and Install the Apple-Notarized Disk Image</h4>
-                <p>
-                    Download the latest release of <a href="../landing-assets/DesktopPlus.dmg" download>DesktopPlus (.dmg)</a> (macOS 15.0 or later). DesktopPlus is signed with an Apple Developer ID and notarized by Apple, so it installs cleanly—just open the DMG and drag <strong>DesktopPlus.app</strong> into your <code>/Applications</code> folder.
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-badge">2</div>
-                <h4>Launch &amp; Grant Accessibility Permissions</h4>
-                <p>
-                    Open DesktopPlus from Spotlight (<kbd>Cmd + Space</kbd>) or Applications. When prompted, grant Accessibility permission under <em>System Settings &gt; Privacy &amp; Security &gt; Accessibility</em> so DesktopPlus can detect and switch Spaces safely without modifying system files.
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-badge">3</div>
-                <h4>Pick Your Style &amp; Enable Launch at Login</h4>
-                <p>
-                    Your active desktops appear immediately in your menu bar. Click any space indicator to jump straight to it, and enable <strong>Launch DesktopPlus at login</strong> in Preferences so it starts silently every time you log in.
-                </p>
-            </div>
-
-            <figure class="article-screenshot-figure">
-                <div class="article-screenshot-stage article-screenshot-stage--portrait">
-                    <img src="../landing-assets/preferences.jpg"
-                        alt="DesktopPlus preferences panel showing launch at login, style selector, hot zone popup, active space color, border opacity, and wider desktop boxes"
-                        width="924" height="1102" loading="lazy">
+            <div class="steps-stack">
+                <div class="step-card">
+                    <div class="step-badge">1</div>
+                    <div class="step-card-body">
+                        <h4>Install the Apple-Notarized Disk Image</h4>
+                        <p>Download <a href="../landing-assets/DesktopPlus.dmg" download>DesktopPlus.dmg</a> and drag <strong>DesktopPlus.app</strong> into <code>/Applications</code>. Signed and notarized by Apple—zero Gatekeeper workarounds.</p>
+                    </div>
                 </div>
-                <figcaption class="img-caption">DesktopPlus Preferences: configure indicator style, Hot zone popup, drag-to-menu-bar window moving, Active space color, Border opacity, and Launch at login.</figcaption>
-            </figure>
+                <div class="step-card">
+                    <div class="step-badge">2</div>
+                    <div class="step-card-body">
+                        <h4>Grant Accessibility Permission</h4>
+                        <p>Open DesktopPlus via Spotlight (<kbd>Cmd + Space</kbd>) and enable it in <em>System Settings &gt; Privacy &amp; Security &gt; Accessibility</em> so it can detect and switch Spaces safely.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">3</div>
+                    <div class="step-card-body">
+                        <h4>Pick Your Style &amp; Launch at Login</h4>
+                        <p>Click any Space in the menu bar to switch instantly, and toggle <strong>Launch DesktopPlus at login</strong> in Preferences.</p>
+                    </div>
+                </div>
+            </div>
 
-            <h2 id="customizing-styles">5. Customizing Display Styles &amp; Preferences</h2>
+            <h2 id="customizing-styles"><span class="section-num">03</span>4 Display Modes &amp; Fine-Tuned Preferences</h2>
             <p>
-                Every workspace has its own visual rhythm. DesktopPlus includes <strong>four carefully crafted display modes</strong> so your menu bar indicator blends naturally into macOS:
+                Match your menu bar density—especially around the MacBook notch—with four native indicator styles:
             </p>
 
             <div class="style-pill-row" aria-label="DesktopPlus display modes">
@@ -424,215 +351,195 @@
                 <span class="style-pill-chip">Opened Apps</span>
             </div>
 
-            <ul>
-                <li><strong>Rectangles:</strong> Clean, minimal rectangular tiles that clearly highlight your active Space while keeping your menu bar distraction-free.</li>
-                <li><strong>Numbers:</strong> Compact numeric indicators (<code>1</code>, <code>2</code>, <code>3</code>…)—great when you want minimal horizontal width around the MacBook camera notch.</li>
-                <li><strong>Rectangles + Numbers:</strong> Combines framed desktop boxes with crisp space numbers so you can scan desktop positions instantly.</li>
-                <li><strong>Opened Apps:</strong> Shows the icons of open applications right inside each desktop box, letting you see at a glance what is running on your current, previous, and next Spaces before switching.</li>
-            </ul>
-
-            <figure class="article-screenshot-figure">
-                <div class="article-screenshot-stage article-screenshot-stage--landscape">
-                    <img src="../landing-assets/different-styles.jpg"
-                        alt="Comparison of DesktopPlus display styles including Opened Apps, Rectangles, Numbers, and Rectangles with Numbers"
-                        width="581" height="433" loading="lazy">
+            <div class="card-grid">
+                <div class="info-card">
+                    <h4>Rectangles &amp; Numbers</h4>
+                    <p>Choose minimalist tiles, compact <code>1 2 3</code> labels for notch-friendly width, or framed <strong>Rectangles + Numbers</strong> for instant spatial scanning.</p>
                 </div>
-                <figcaption class="img-caption">The four DesktopPlus display modes—from Opened Apps with optional pronounced borders down to compact Rectangles and Numbers.</figcaption>
-            </figure>
+                <div class="info-card">
+                    <h4>Opened Apps + Custom Polish</h4>
+                    <p>Show live app icons inside each desktop box, tune <strong>Active space color</strong> and <strong>Border opacity</strong>, or enable <strong>drag-to-menu-bar window moving</strong>.</p>
+                </div>
+            </div>
 
-            <p>
-                Beyond display modes, the Preferences panel lets you fine-tune appearance and behavior without clutter: pick a custom <strong>Active space color</strong>, adjust <strong>Border opacity</strong> for more pronounced outlines, enable <strong>Wider desktop boxes</strong>, toggle the <strong>Hot zone popup</strong>, or even enable <strong>Move window to desktop when dragged to menu bar</strong>.
-            </p>
+            <!-- 2-Up Visual Showcase: Styles + Preferences -->
+            <div class="screenshot-grid">
+                <figure class="screenshot-card">
+                    <img src="../landing-assets/different-styles.jpg" alt="Comparison of DesktopPlus display styles including Opened Apps, Rectangles, Numbers, and Rectangles with Numbers" width="581" height="433" loading="lazy" decoding="async">
+                    <figcaption>Four display modes—from live Opened Apps icons down to compact numbers.</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="../landing-assets/preferences.jpg" alt="DesktopPlus preferences panel showing launch at login, style selector, hot zone popup, and appearance options" width="924" height="1102" loading="lazy" decoding="async">
+                    <figcaption>Preferences: hot zone popup, active color, border opacity, and wider boxes.</figcaption>
+                </figure>
+            </div>
 
             <div class="callout tip">
                 <div class="callout-header">
-                    <i class="fas fa-lightbulb"></i> Pro-Tip: Preventing macOS from Rearranging Your Spaces
+                    <i class="fas fa-lightbulb" aria-hidden="true"></i> Pro-Tip: Lock Your Space Order
                 </div>
                 <p>
-                    By default, macOS dynamically reorders your virtual desktops based on most recent use, which disrupts spatial muscle memory. To lock your Spaces in permanent order, open <strong>System Settings &gt; Desktop &amp; Dock</strong>, scroll to <strong>Mission Control</strong>, and toggle <strong>OFF</strong> <em>"Automatically rearrange Spaces based on most recent use"</em>.
+                    By default, macOS shuffles your Spaces by most recent use. Open <strong>System Settings &gt; Desktop &amp; Dock &gt; Mission Control</strong> and toggle <strong>OFF</strong> <em>"Automatically rearrange Spaces based on most recent use"</em> to preserve muscle memory.
                 </p>
             </div>
 
-            <h2 id="workspace-presets-recent-apps">6. Workspace App Presets, Quick Launch &amp; Recent Apps</h2>
-            <p>
-                In <strong>DesktopPlus v1.0.8</strong>, menu bar space navigation goes beyond switching windows—it helps you launch and recover complete workflows in a single click.
-            </p>
+            <h2 id="workspace-presets-recent-apps"><span class="section-num">04</span>Workspace App Presets &amp; Recent Apps (v1.0.8)</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">1-Click Launch</span>
+                    </div>
+                    <h3>Workspace App Presets</h3>
+                    <p>Save snapshots of your currently open apps into reusable presets—restore an entire coding, design, or writing setup in one click.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-history" aria-hidden="true"></i></span>
+                        <span class="card-tag">Hot Zone</span>
+                    </div>
+                    <h3>Recent Apps Recovery</h3>
+                    <p>Accidentally quit an app? Reopen your most recently closed apps straight from the hot zone popover without digging through Spotlight.</p>
+                </div>
+            </div>
 
-            <h3>Workspace App Presets &amp; Quick Launch</h3>
-            <p>
-                Instead of manually opening the same four or five apps every time you switch between coding, design, writing, or client calls, <strong>Workspace App Presets &amp; Quick Launch</strong> lets you save custom snapshots of your currently open applications into reusable presets. Whenever you need that setup again, pick your preset from the menu to instantly restore and launch the entire multi-app workflow with a single click.
-            </p>
-
-            <figure class="article-screenshot-figure">
-                <div class="article-screenshot-stage article-screenshot-stage--landscape">
+            <figure class="screenshot-figure">
+                <div class="screenshot-stage screenshot-stage--landscape">
                     <img src="../landing-assets/presets.jpg"
                         alt="DesktopPlus menu showing per-desktop app control, Close All on this Desktop, Presets submenu, and Caffeinate toggle"
-                        width="706" height="564" loading="lazy">
+                        width="706" height="564" loading="lazy" decoding="async">
                 </div>
-                <figcaption class="img-caption">Access Workspace App Presets, per-desktop app controls, and Caffeinate directly from your menu bar popover.</figcaption>
+                <figcaption class="img-caption">Trigger Workspace App Presets, per-desktop Close All, and Caffeinate straight from the menu bar.</figcaption>
             </figure>
 
-            <h3>Recent Apps in the Hot Zone Popover</h3>
+            <h2 id="extra-power-tools"><span class="section-num">05</span>Built-In Task Manager &amp; Residual Process Cleaner</h2>
             <p>
-                Closed an app to clear clutter and immediately realized you need it back? DesktopPlus now displays a <strong>Recent Apps</strong> list right inside the hot zone popover (shown in the top screenshot above), showing your most recently closed apps so you can reopen them in one click without digging through Spotlight or the Applications folder.
+                Heavy browsers and IDEs often leave lingering background helper processes eating memory—especially noticeable on 8GB and 16GB Macs. DesktopPlus builds an <strong>Integrated Task Manager</strong> right into the popover: inspect apps grouped by desktop, monitor per-app and live <strong>System Memory</strong>, toggle <strong>Caffeinate</strong> or <strong>Sleep</strong>, and clear lingering <strong>Residual Processes</strong> with a single click.
             </p>
 
-            <h2 id="comparison-table">7. Feature Comparison: Apple Default vs. DesktopPlus</h2>
-            <p>Here is how the default macOS Spaces workflow compares to running DesktopPlus in your menu bar:</p>
+            <figure class="screenshot-figure">
+                <div class="screenshot-stage screenshot-stage--landscape">
+                    <img src="../landing-assets/clean-ram.jpg"
+                        alt="DesktopPlus Residual Processes panel showing lingering process and one-click Clean All button"
+                        width="622" height="313" loading="lazy" decoding="async">
+                </div>
+                <figcaption class="img-caption">Spot lingering background processes left by closed apps and reclaim RAM in one click.</figcaption>
+            </figure>
 
+            <h2 id="comparison-table"><span class="section-num">06</span>Apple Default vs. DesktopPlus</h2>
             <div class="table-wrapper">
                 <table class="styled-table">
                     <thead>
                         <tr>
                             <th>Multitasking Feature</th>
-                            <th>macOS Default (Apple)</th>
-                            <th>DesktopPlus (v1.0.8)</th>
+                            <th>macOS Default</th>
+                            <th class="col-highlight">DesktopPlus (v1.0.8)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Active Space Indicator</strong></td>
-                            <td><span class="badge-poor"><i class="fas fa-times"></i> None</span> (Hidden)</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Always Visible in Menu Bar</span></td>
+                            <td><span class="badge-poor"><i class="fas fa-times" aria-hidden="true"></i> Hidden</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Always Visible in Menu Bar</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Switching Mechanism</strong></td>
-                            <td>Gestures or sequential arrows</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 1-Click Switch + Native Swipes</span></td>
+                            <td><strong>Switching Speed</strong></td>
+                            <td>Sequential swipes / arrows</td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> 1-Click Direct Jump + Swipes</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Indicator Display Modes</strong></td>
+                            <td><strong>Display Modes</strong></td>
                             <td>N/A</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Rectangles, Numbers, Combined &amp; Opened Apps</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Rectangles, Numbers, Combined &amp; Opened Apps</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Workspace App Presets &amp; Quick Launch</strong></td>
-                            <td><span class="badge-poor"><i class="fas fa-times"></i> Manual app launching</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 1-Click Saved Workflow Snapshots</span></td>
+                            <td><strong>Workspace App Presets</strong></td>
+                            <td><span class="badge-poor"><i class="fas fa-times" aria-hidden="true"></i> Manual launching</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> 1-Click Saved Snapshots</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Recent Apps &amp; Per-Desktop Task Manager</strong></td>
-                            <td>Dock / Activity Monitor only</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Hot Zone Popover + Per-App RAM &amp; Close</span></td>
+                            <td><strong>Task Manager &amp; RAM</strong></td>
+                            <td>Activity Monitor only</td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Per-Desktop Apps, Recent Apps &amp; Residual Cleaner</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Residual Process &amp; RAM Cleanup</strong></td>
-                            <td>Manual via Activity Monitor</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 1-Click Residual Process Cleaner</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Architecture &amp; Verification</strong></td>
-                            <td>Built into WindowServer</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Native Swift &amp; SwiftUI &bull; Apple Notarized</span></td>
+                            <td><strong>Architecture</strong></td>
+                            <td>WindowServer</td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Native Swift/SwiftUI &bull; Apple Notarized</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="extra-power-tools">8. Bonus Tools: Integrated Task Manager &amp; Residual Process Cleaner</h2>
-            <p>
-                Running heavy IDEs, browsers, and background utilities on MacBooks—especially 8GB and 16GB unified memory models—often leaves memory tight and stray helper processes running even after you quit an app.
-            </p>
-            <p>
-                DesktopPlus includes an <strong>Integrated Task Manager</strong> right inside the menu bar popover. You can view opened apps grouped by desktop, check each app's memory usage, close individual apps or click <em>Close All</em>, toggle <strong>Caffeinate</strong> or <strong>Sleep</strong>, and watch live <strong>System Memory</strong> usage without ever opening Activity Monitor.
-            </p>
-            <p>
-                When lingering background processes remain after closing apps, DesktopPlus detects those <strong>Residual Processes</strong> and lets you clean them with a single click to reclaim RAM instantly and keep your Mac snappy.
-            </p>
-
-            <figure class="article-screenshot-figure">
-                <div class="article-screenshot-stage article-screenshot-stage--landscape">
-                    <img src="../landing-assets/clean-ram.jpg"
-                        alt="DesktopPlus Residual Processes panel showing lingering Terminal process and one-click Clean All button"
-                        width="622" height="313" loading="lazy">
-                </div>
-                <figcaption class="img-caption">Detect and clear lingering residual processes left behind by closed apps to free up RAM with one click.</figcaption>
-            </figure>
-
-            <h2 id="frequently-asked-questions">9. Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+            <h2 id="frequently-asked-questions"><span class="section-num">07</span>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>Can you see which macOS Space you are on without opening Mission Control?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Apple doesn't include a menu bar Space indicator. With <strong>DesktopPlus</strong>, your active virtual desktops remain visible in the menu bar as <strong>Rectangles</strong>, <strong>Numbers</strong>, <strong>Rectangles + Numbers</strong>, or <strong>Opened Apps</strong> icons.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            Apple does not natively provide a menu bar desktop indicator. With <strong>DesktopPlus</strong>, your active virtual desktops remain visible in the top menu bar using your choice of <strong>Rectangles</strong>, <strong>Numbers</strong>, <strong>Rectangles + Numbers</strong>, or <strong>Opened Apps</strong> icons.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>What are Workspace App Presets &amp; Quick Launch?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Workspace App Presets let you snapshot your currently open apps into named presets and relaunch complete multi-app workflows with a single click whenever you switch projects.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            Workspace App Presets let you save custom snapshots of your currently open applications into reusable presets. Whenever you want to jump back into a specific project setup, you can restore and launch the complete multi-app workflow with a single click.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Does DesktopPlus require disabling System Integrity Protection (SIP), and is it verified by Apple?</span>
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Does DesktopPlus require disabling SIP, and is it verified by Apple?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>No—DesktopPlus never requires disabling SIP, kernel extensions, or system tweaks. It's built natively in Swift/SwiftUI, signed with an Apple Developer ID, and <strong>Apple Notarized</strong>.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            No—DesktopPlus never requires disabling SIP, installing kernel extensions, or modifying system binaries. It is written natively in Swift and SwiftUI, signed with an Apple Developer ID, and checked by Apple as an <strong>Apple Notarized Application</strong>.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
-                        <span>What macOS versions and Macs are supported?</span>
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Which macOS versions and Macs are supported?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>DesktopPlus requires <strong>macOS 15.0 (Sequoia) or later</strong> and runs natively on MacBook Neo, MacBook Air, MacBook Pro, and desktop Macs—both single-screen and multi-monitor.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            DesktopPlus requires <strong>macOS 15.0 or later</strong> and is built to make multitasking effortless on MacBook Neo, MacBook Air, MacBook Pro, and desktop Macs—both on single built-in displays and with external monitors.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>Is DesktopPlus free or a subscription?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>DesktopPlus includes a <strong>14-day free trial</strong> with all features unlocked and no payment info required, followed by a simple <strong>one-time purchase</strong>—no recurring subscription.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            DesktopPlus is <strong>free to try for 14 days</strong> with all features unlocked and no payment info required. After the trial, you can keep it with a simple <strong>one-time purchase</strong>—no recurring subscription.
-                        </p>
-                    </div>
-                </div>
+                </details>
             </div>
 
-            <!-- Conclusion & CTA -->
-            <h2>Take Control of Your Mac Desktops Today</h2>
-            <p>
-                Multitasking on a Mac should feel effortless, not disorienting. By combining a persistent menu bar Space indicator, customizable styles, Workspace App Presets, Recent Apps, and one-click residual process cleanup, DesktopPlus turns macOS virtual desktops into a fast, cohesive workspace.
-            </p>
-
-            <div class="app-cta-banner macos-banner" style="margin-top: 2.5rem;">
-                <img src="../landing-assets/app-icon.png" alt="DesktopPlus Icon" class="app-cta-icon" width="90" height="90">
+            <!-- Closing CTA -->
+            <div class="app-cta-banner macos-banner">
+                <img src="../landing-assets/app-icon.png" alt="DesktopPlus Icon" class="app-cta-icon" width="72" height="72" loading="lazy" decoding="async">
                 <div class="app-cta-content">
-                    <h3>Try DesktopPlus for macOS</h3>
-                    <p>Free to try for 14 days, all unlocked, no payment info—then a one-time purchase. Built natively with Swift &amp; SwiftUI for macOS 15.0 and later.</p>
+                    <h3>Take Control of Your Mac Desktops Today</h3>
+                    <p>Free 14-day trial (all unlocked, no card), then a one-time purchase. Native Swift &amp; SwiftUI for macOS 15.0+.</p>
                     <div class="app-cta-buttons">
                         <a href="../landing-assets/DesktopPlus.dmg" download class="btn-primary-cta">
-                            <i class="fab fa-apple"></i> Free Download for macOS (.dmg)
+                            <i class="fab fa-apple" aria-hidden="true"></i> Free Download for macOS (.dmg)
                         </a>
                         <a href="../spaceman-landing.html" class="btn-secondary-cta">
                             Visit DesktopPlus Page &rarr;
                         </a>
                     </div>
                     <div class="verified-subnote">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-check-circle" aria-hidden="true"></i>
                         <span>Apple Notarized Application &bull; Signed with Apple Developer ID</span>
                     </div>
                 </div>
@@ -642,30 +549,34 @@
 
         <!-- Author Bio Box -->
         <section class="author-card">
-            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar">
+            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar" width="60" height="60" loading="lazy" decoding="async">
             <div class="author-info">
                 <h4>Written by GiantTurtle Studio</h4>
                 <div class="author-title">macOS &amp; Mobile Systems Engineering</div>
                 <p class="author-bio">
-                    GiantTurtle Studio designs high-performance utilities, productivity tools, and games for macOS, Android, and Linux with a steadfast focus on native speed, privacy, and zero telemetry.
+                    GiantTurtle Studio builds native utilities, productivity tools, and games for macOS, Android, and Linux with a focus on speed, privacy, and zero telemetry.
                 </p>
             </div>
         </section>
 
         <!-- Related Guides -->
         <section class="related-posts">
-            <h3>Explore More Optimization Guides</h3>
+            <h3>Explore More Guides</h3>
             <div class="related-grid">
-                <a href="how-to-stop-android-apps-running-in-background-without-adb.html" class="related-card">
-                    <span class="article-category-badge android" style="margin-bottom: 0.5rem;"><i class="fab fa-android"></i> Android Optimization</span>
-                    <h4>How to Stop Android Apps from Running in the Background Without ADB</h4>
-                    <p>Reclaim battery life and memory by freezing rogue background bloatware safely without risky developer commands.</p>
+                <a href="how-to-supercharge-macos-hot-corners-actions-guide.html" class="related-card">
+                    <div>
+                        <span class="article-category-badge macos" style="margin-bottom: 0.5rem;"><i class="fab fa-apple" aria-hidden="true"></i> macOS Guide</span>
+                        <h4>How to Supercharge macOS Hot Corners: Custom Actions &amp; Edge Zones</h4>
+                        <p>Turn all 4 corners and 4 screen edges into a custom automation launchpad with 76 built-in actions.</p>
+                    </div>
                     <span class="related-link">Read Guide &rarr;</span>
                 </a>
-                <a href="how-to-turn-android-phone-into-desktop-workstation.html" class="related-card">
-                    <span class="article-category-badge desktop" style="margin-bottom: 0.5rem;"><i class="fas fa-desktop"></i> Desktop &amp; Productivity</span>
-                    <h4>How to Turn Any Android Phone into a Desktop Workstation</h4>
-                    <p>The ultimate Samsung DeX alternative: transform your phone or tablet into a full landscape multitasking desktop.</p>
+                <a href="best-clipboard-manager-scratchpad-macos.html" class="related-card">
+                    <div>
+                        <span class="article-category-badge macos" style="margin-bottom: 0.5rem;"><i class="fab fa-apple" aria-hidden="true"></i> macOS Productivity</span>
+                        <h4>The Best Clipboard Manager &amp; Persistent Scratchpad for macOS</h4>
+                        <p>Pair searchable clipboard history with an always-ready local menu bar scratchpad.</p>
+                    </div>
                     <span class="related-link">Read Guide &rarr;</span>
                 </a>
             </div>
@@ -673,12 +584,38 @@
 
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-pill footer-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" width="28" height="22" loading="lazy" decoding="async">
+                </span>
+                <span>GiantTurtle Studio</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+            <ul class="footer-links">
+                <li><a href="../index.html">All Apps</a></li>
+                <li><a href="blog_main.html">Blog Home</a></li>
+                <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="../refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
+    <script>
+        const nav = document.getElementById('main-nav');
+        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline: scroll()');
+        const updateOnScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 24);
+            if (!supportsScrollTimeline) {
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+                document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+            }
+        };
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+        updateOnScroll();
+    </script>
 </body>
 
 </html>

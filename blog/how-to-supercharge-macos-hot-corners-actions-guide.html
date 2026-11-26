@@ -44,12 +44,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#070b10">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="blog.css">
@@ -144,74 +144,29 @@
       ]
     }
     </script>
-
-    <style>
-        .app-cta-banner .btn-primary-cta.btn-download-verified {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 0.75rem 1.5rem;
-            text-align: center;
-        }
-
-        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-main-text {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            line-height: 1.25;
-        }
-
-        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-main-text svg {
-            flex-shrink: 0;
-        }
-
-        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-verified-text {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            font-size: 0.74rem;
-            font-weight: 600;
-            color: rgba(10, 14, 20, 0.85);
-            line-height: 1.2;
-            letter-spacing: 0.01em;
-        }
-
-        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-verified-text .apple-icon {
-            width: 12px;
-            height: 12px;
-            fill: #0a0e14;
-            flex-shrink: 0;
-            display: inline-block;
-        }
-
-        .app-cta-banner .btn-primary-cta.btn-download-verified .btn-verified-text .check-icon {
-            width: 12px;
-            height: 12px;
-            color: #052e16;
-            stroke-width: 3;
-            flex-shrink: 0;
-            display: inline-block;
-        }
-    </style>
 </head>
 
-<body>
+<body class="theme-macos">
+    <div class="reading-progress" aria-hidden="true"></div>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="../index.html" class="nav-logo">
-                <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo">
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="nav-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo" width="38" height="30">
+                </span>
                 <span>GiantTurtle</span>
             </a>
             <ul class="nav-links">
                 <li><a href="../index.html#projects">Apps</a></li>
-                <li><a href="blog_main.html">Blog</a></li>
-                <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li><a href="blog_main.html" class="nav-active">Blog</a></li>
+                <li>
+                    <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="nav-cta">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -221,107 +176,170 @@
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <a href="../index.html">Home</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <a href="blog_main.html">Blog</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <span class="current">Supercharge macOS Hot Corners</span>
         </nav>
 
         <!-- Article Header -->
         <header class="article-header">
             <span class="article-category-badge macos">
-                <i class="fab fa-apple"></i> macOS Productivity Guide
+                <i class="fab fa-apple" aria-hidden="true"></i> macOS Productivity Guide
             </span>
             <h1 class="article-title">How to Supercharge macOS Hot Corners: Custom Actions, Edge Zones &amp; Power Tools</h1>
             <p class="article-lead">
-                Stop settling for Apple's four static hot corners. Learn how to transform your screen perimeter into a custom command and utility launchpad with 8 trigger zones, 76 built-in actions, Spaces App Switcher, Vision OCR, and delay controls.
+                Move beyond Apple's 4 static corners. Turn your entire Mac display perimeter into an 8-zone launchpad packed with 76 actions, Spaces App Switcher, Vision OCR, and misfire-proof delay controls.
             </p>
 
             <div class="article-meta-bar">
                 <div class="article-meta-item">
-                    <i class="fas fa-user-edit"></i>
+                    <i class="fas fa-user-edit" aria-hidden="true"></i>
                     <span>GiantTurtle Team</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     <time datetime="2026-11-12">November 12, 2026</time>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-clock"></i>
-                    <span>7 min read</span>
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>5 min read</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-tag"></i>
+                    <i class="fas fa-tag" aria-hidden="true"></i>
                     <span>macOS 13+ &bull; Ventura &bull; Sonoma &bull; Sequoia</span>
                 </div>
             </div>
         </header>
 
         <!-- Featured Graphic -->
-        <figure>
-            <img src="../assets/images/supercorners-blog-cover.jpg" alt="Supercharge macOS Hot Corners with Zones&amp;Corners Edge Zones" class="article-featured-image">
-            <figcaption class="img-caption">Zones&amp;Corners turns all four screen corners plus four edge zones into custom action and utility triggers.</figcaption>
+        <figure class="screenshot-figure">
+            <div class="screenshot-stage screenshot-stage--wide">
+                <img src="../assets/images/supercorners-blog-cover.jpg"
+                    alt="Zones&amp;Corners macOS interface showing Super Zones configuration along display edges"
+                    width="1852" height="1036" fetchpriority="high">
+            </div>
+            <figcaption class="img-caption">Zones&amp;Corners turns all 4 corners plus 4 edge zones into instant triggers for actions, utilities, and automations.</figcaption>
         </figure>
 
-        <!-- Table of Contents -->
-        <nav class="toc-box" aria-label="Table of contents">
-            <div class="toc-title">
-                <i class="fas fa-list-ul"></i> Quick Navigation
+        <!-- TL;DR Summary -->
+        <aside class="tldr-box" aria-label="Article summary">
+            <div class="tldr-header">
+                <i class="fas fa-bolt" aria-hidden="true"></i> Quick Takeaway
             </div>
-            <ul class="toc-list">
-                <li><a href="#the-problem-with-macos-hot-corners">1. The Frustration with Default macOS Hot Corners</a></li>
-                <li><a href="#the-solution-zones-and-corners">2. The Solution: Zones&amp;Corners for macOS</a></li>
-                <li><a href="#screen-edge-zones">3. Screen Edge Zones: Beyond Just the 4 Corners</a></li>
-                <li><a href="#preventing-accidental-triggers">4. Preventing Accidental Triggers &amp; Avoiding Conflicts</a></li>
-                <li><a href="#built-in-power-tools">5. Built-In Power Tools Beyond Simple Triggers</a></li>
-                <li><a href="#setup-tutorial">6. Step-by-Step Setup Tutorial</a></li>
-                <li><a href="#feature-comparison">7. Feature Comparison: Apple Default vs. Zones&amp;Corners</a></li>
-                <li><a href="#frequently-asked-questions">8. Frequently Asked Questions</a></li>
+            <ul class="tldr-list">
+                <li><strong>8 slots instead of 4:</strong> <a href="../zones-and-corners.html">Zones&amp;Corners</a> adds Top, Bottom, Left, and Right <strong>Edge Zones</strong> alongside all four screen corners.</li>
+                <li><strong>76 actions + power tools:</strong> Launch apps, Apple Shortcuts, Vision OCR, Screen Color Picker, and a Spaces-grouped App Switcher with Clean RAM.</li>
+                <li><strong>Zero misfires:</strong> Prevent accidental triggers with a 0–5s Trigger Delay Timer, separate sensitivity sliders, and an Ignored Applications list.</li>
+            </ul>
+        </aside>
+
+        <!-- Compact Jump Nav -->
+        <nav class="toc-pills" aria-label="Table of contents">
+            <div class="toc-pills-label">
+                <i class="fas fa-compass" aria-hidden="true"></i> Jump to section
+            </div>
+            <ul class="toc-pills-list">
+                <li><a href="#the-problem-with-macos-hot-corners">Why Defaults Fall Short</a></li>
+                <li><a href="#screen-edge-zones">8 Zones &amp; 76 Actions</a></li>
+                <li><a href="#built-in-power-tools">Built-In Power Tools</a></li>
+                <li><a href="#preventing-accidental-triggers">Preventing Misfires</a></li>
+                <li><a href="#setup-tutorial">3-Step Setup</a></li>
+                <li><a href="#feature-comparison">Comparison</a></li>
+                <li><a href="#frequently-asked-questions">FAQ</a></li>
             </ul>
         </nav>
 
         <!-- Article Content -->
         <article class="article-content">
 
-            <h2 id="the-problem-with-macos-hot-corners">1. The Frustration with Default macOS Hot Corners</h2>
+            <h2 id="the-problem-with-macos-hot-corners"><span class="section-num">01</span>Why Apple's Default Hot Corners Fall Short</h2>
             <p>
-                Apple introduced Hot Corners in macOS decades ago as an effortless way to access system views by flicking your mouse into the corners of your display. On paper, it is brilliant: screen corners are infinite targets under <strong>Fitts's Law</strong> because your cursor cannot overshoot the edge of the physical display.
+                Under <strong>Fitts's Law</strong>, screen edges and corners are the fastest targets on any display because your pointer can't overshoot them. Yet Apple's built-in Hot Corners have barely evolved in decades:
             </p>
-            <p>
-                In practice, however, default macOS Hot Corners have remained virtually unchanged and suffer from three critical flaws:
-            </p>
-            <ul>
-                <li><strong>Only 4 Fixed Corners:</strong> Modern displays—from 14-inch Liquid Retina MacBook screens to large external monitors—offer immense perimeter space, yet Apple restricts you to only four corner triggers.</li>
-                <li><strong>Severely Limited Action Catalog:</strong> Apple only allows a handful of preset actions (Mission Control, Show Desktop, Notification Center, Launchpad, Quick Note, Lock Screen, Display Sleep). You cannot launch an app, trigger a custom keyboard shortcut, run an Apple Shortcut, extract on-screen text, or execute a script.</li>
-                <li><strong>No Delay Timer or App Exclusions:</strong> Moving your cursor toward the Apple logo, menu bar, or browser close button triggers corners immediately on hover unless you hold a modifier key every single time—and Apple offers no way to automatically pause triggers while games or specific apps are active.</li>
-            </ul>
 
-            <div class="callout warning">
-                <div class="callout-header">
-                    <i class="fas fa-exclamation-triangle"></i> The Accidental Trigger Penalty
+            <div class="card-grid card-grid--3">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon info-card-icon--warn"><i class="fas fa-expand" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Only 4 Corners</h3>
+                    <p>All four display edges sit completely unused—wasting huge perimeter real estate on modern MacBooks and monitors.</p>
                 </div>
-                <p>
-                    Because standard macOS hot corners fire immediately with zero hover delay and no app exclusion list, users often abandon the feature altogether after accidentally locking their screen or triggering Mission Control while reaching for a browser tab.
-                </p>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon info-card-icon--warn"><i class="fas fa-list" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Tiny Action List</h3>
+                    <p>You're stuck with a handful of presets—no app launching, custom hotkeys, Apple Shortcuts, OCR, or scripts.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon info-card-icon--warn"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Accidental Triggers</h3>
+                    <p>Zero hover delay and no app exclusions mean reaching for a browser tab or menu can lock your screen by mistake.</p>
+                </div>
             </div>
 
-            <h2 id="the-solution-zones-and-corners">2. The Solution: Zones&amp;Corners for macOS</h2>
+            <h2 id="screen-edge-zones"><span class="section-num">02</span>Meet Zones&amp;Corners: 8 Perimeter Slots &amp; 76 Actions</h2>
             <p>
-                To solve these limitations, <a href="../zones-and-corners.html"><strong>Zones&amp;Corners</strong></a> expands macOS corner interaction into a complete screen-perimeter utility. Built natively in Swift and SwiftUI for <strong>macOS 13.0 (Ventura) or later</strong>, Zones&amp;Corners runs quietly from your menu bar with zero Dock clutter.
-            </p>
-            <p>
-                Instead of stopping at four static defaults, Zones&amp;Corners combines <strong>8 trigger slots</strong> with <strong>76 built-in actions across 7 categories</strong>, custom automation templates, built-in power utilities, trigger delay safeguards, and visual/audio feedback.
+                Built natively in Swift and SwiftUI for <strong>macOS 13.0 (Ventura) or later</strong>, <a href="../zones-and-corners.html"><strong>Zones&amp;Corners</strong></a> lives quietly in your menu bar and doubles your trigger slots by adding four <strong>Screen Edge Zones</strong> alongside all four corners—backed by <strong>76 built-in actions across 7 categories</strong>.
             </p>
 
-            <!-- Inline Product CTA Banner -->
-            <div class="app-cta-banner macos-banner">
-                <div class="app-cta-content" style="width: 100%;">
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-arrow-up" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">Top Edge</span>
+                    </div>
+                    <h3>Spotlight &amp; App Switcher</h3>
+                    <p>Flick upward to trigger the visual Spaces App Switcher, Spotlight Search, or Control Center.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-arrow-down" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">Bottom Edge</span>
+                    </div>
+                    <h3>Window Maximize &amp; Notes</h3>
+                    <p>Maximize windows (with or without hiding the Dock), toggle Notification Center, or open <a href="../paste-box.html">Paste Box</a>.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+                        <span class="card-tag">Left Edge</span>
+                    </div>
+                    <h3>Previous Space &amp; Shortcuts</h3>
+                    <p>Glide left to jump to your <em>Previous Desktop</em> Space, reveal your desktop, or fire an Apple Shortcut.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                        <span class="card-tag">Right Edge</span>
+                    </div>
+                    <h3>Next Space, OCR &amp; Color</h3>
+                    <p>Jump to your <em>Next Desktop</em> Space, grab on-screen text with Vision OCR, or sample a color swatch.</p>
+                </div>
+            </div>
+
+            <figure class="screenshot-figure">
+                <div class="screenshot-stage screenshot-stage--landscape">
+                    <img src="../assets/images/supercorners-actions.jpg"
+                        alt="Zones&amp;Corners Actions catalog displaying searchable System Actions and App Actions with star Favorites"
+                        width="1323" height="999" loading="lazy" decoding="async">
+                </div>
+                <figcaption class="img-caption">Browse 76 searchable actions across 7 categories—and star extras to trigger anytime from the menu bar Favorites list.</figcaption>
+            </figure>
+
+            <!-- Mid-Article Compact CTA -->
+            <div class="app-cta-banner macos-banner app-cta-banner--compact">
+                <div class="app-cta-content">
                     <h3>Zones&amp;Corners for macOS</h3>
-                    <p>Unlock 8 screen zones, 76 built-in actions, Spaces App Switcher with Clean RAM, OCR, Color Picker, and Trigger Delays. Free demo, no card required.</p>
+                    <p>8 screen zones, 76 built-in actions, Spaces App Switcher + Clean RAM, Vision OCR, Color Picker, and Trigger Delays. Free demo, no card required.</p>
                     <div class="app-cta-buttons">
                         <a href="../assets/apps/Zones%26Corners.dmg" download="Zones&amp;Corners.dmg" class="btn-primary-cta btn-download-verified">
                             <span class="btn-main-text">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                     <polyline points="7 10 12 15 17 10" />
@@ -342,203 +360,220 @@
                             </span>
                         </a>
                         <a href="../zones-and-corners.html" class="btn-secondary-cta">
-                            View App Landing Page &rarr;
+                            View App Page &rarr;
                         </a>
                     </div>
                 </div>
             </div>
 
-            <h2 id="screen-edge-zones">3. Screen Edge Zones: Beyond Just the 4 Corners</h2>
+            <h2 id="built-in-power-tools"><span class="section-num">03</span>Built-In Power Tools Beyond Simple Triggers</h2>
             <p>
-                Fitts's Law applies not only to the corners of your screen, but to the borders as well. Zones&amp;Corners introduces <strong>Edge Zones</strong> located along each border of your display:
+                Zones&amp;Corners ships dedicated native macOS utilities ready to bind to any corner, edge zone, or Favorite:
             </p>
-            <ul>
-                <li><strong>Top Edge Zone:</strong> Ideal for opening Spotlight Search, Control Center, or launching the visual App Switcher.</li>
-                <li><strong>Bottom Edge Zone:</strong> Perfect for toggling Notification Center, maximizing windows (with or without hiding the Dock), or launching notes and scratchpads such as <a href="../paste-box.html">Paste Box</a>.</li>
-                <li><strong>Left Edge Zone:</strong> Move left to jump to your <em>Previous Desktop</em> Space, reveal your desktop, or fire an Apple Shortcut.</li>
-                <li><strong>Right Edge Zone:</strong> Move right to switch to the <em>Next Desktop</em> Space, extract on-screen text with OCR, pick a screen color, or open Safari Reader Mode.</li>
-            </ul>
 
-            <h2 id="preventing-accidental-triggers">4. Preventing Accidental Triggers &amp; Avoiding Conflicts</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-window-restore" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">Spaces + RAM</span>
+                    </div>
+                    <h3>Visual App Switcher &amp; Clean RAM</h3>
+                    <p>Groups open apps by macOS Space in MRU order, displays live per-app RAM and system memory pressure, closes individual or all apps, and cleans residual processes.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-font" aria-hidden="true"></i></span>
+                        <span class="card-tag">Vision OCR</span>
+                    </div>
+                    <h3>On-Screen Text Extractor</h3>
+                    <p>Drag over any image, PDF, or video frame to copy recognized text immediately, backed by a floating 20-item <em>Recent Extractions</em> history.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-eye-dropper" aria-hidden="true"></i></span>
+                        <span class="card-tag">Design</span>
+                    </div>
+                    <h3>Screen Color Picker + Swatches</h3>
+                    <p>Sample any pixel in Hex, RGB, RGBA, HSL, or HSLA with a floating <em>Recent Colors</em> history panel storing up to 20 swatches.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-terminal" aria-hidden="true"></i></span>
+                        <span class="card-tag">Automation</span>
+                    </div>
+                    <h3>Templates, Tiling &amp; Text Count</h3>
+                    <p>Run Apple Shortcuts, AppleScripts, Terminal commands, simulated hotkeys, window maximization, or instant clipboard word/character/reading-time counts.</p>
+                </div>
+            </div>
+
+            <figure class="screenshot-figure">
+                <div class="screenshot-stage screenshot-stage--landscape">
+                    <img src="../assets/images/supercorners-action-sets.jpg"
+                        alt="Zones&amp;Corners Visual App Switcher grouped by Desktop 1, 2, 3 with per-app RAM usage and Residual Processes Clean All button"
+                        width="978" height="903" loading="lazy" decoding="async">
+                </div>
+                <figcaption class="img-caption">The built-in Spaces App Switcher shows apps per desktop, live memory usage, and one-click Residual Processes cleanup.</figcaption>
+            </figure>
+
+            <h2 id="preventing-accidental-triggers"><span class="section-num">04</span>Misfire-Proof Controls &amp; Conflict Protection</h2>
             <p>
-                Preventing unintended triggers shouldn't require awkward finger gymnastics every time you move your pointer. Zones&amp;Corners puts practical safeguards directly inside <strong>Settings</strong>:
+                No more holding modifier keys just to keep corners from firing unexpectedly. Dial in exact behavior inside <strong>Settings</strong>:
             </p>
-            <ul>
-                <li><strong>Trigger Delay Timer (0–5.0s):</strong> Require the cursor to linger briefly inside a corner or edge zone before firing, so normal cursor passes toward browser tabs or the menu bar do not misfire.</li>
-                <li><strong>Separate Sensitivity Sliders:</strong> Tune <em>Corner Trigger Sensitivity</em> (3–10) and <em>Zone Trigger Sensitivity</em> (3–8) independently to match your display resolution and pointer speed.</li>
-                <li><strong>Ignored Applications:</strong> Add full-screen games, creative tools, or code editors to your <em>Ignored Applications</em> list so triggers automatically pause whenever those apps are active in the foreground.</li>
-                <li><strong>System Hot Corner Conflict Detection:</strong> Zones&amp;Corners automatically inspects existing macOS System Hot Corners and protects occupied slots from accidental collisions.</li>
-            </ul>
+
+            <div class="card-grid">
+                <div class="info-card">
+                    <h4>Trigger Delay &amp; Sensitivity</h4>
+                    <p>Set a <strong>Trigger Delay Timer (0–5.0s)</strong> so brief cursor brush-pasts are ignored, and tune <em>Corner</em> (3–10) and <em>Zone</em> (3–8) sensitivity sliders independently.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Ignored Apps &amp; Conflict Guard</h4>
+                    <p>Auto-pause triggers inside full-screen games or creative tools via <strong>Ignored Applications</strong>, while built-in conflict checks protect your existing macOS System Hot Corners.</p>
+                </div>
+            </div>
+
+            <!-- 2-Up Settings Showcase -->
+            <div class="screenshot-grid">
+                <figure class="screenshot-card">
+                    <img src="../assets/images/supercorners-activation.jpg" alt="Zones&amp;Corners Settings showing Launch at Login and Corner and Zone Trigger Sensitivity sliders" width="1303" height="986" loading="lazy" decoding="async">
+                    <figcaption>Independent Corner &amp; Zone Trigger Sensitivity sliders.</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="../assets/images/supercorners-feedback.jpg" alt="Zones&amp;Corners Settings showing Ignored Applications, Visual Overlay color and duration, Sound effects, and Color Picker format" width="1474" height="1122" loading="lazy" decoding="async">
+                    <figcaption>Ignored Applications, 8-color visual overlays, and 14 macOS sound cues.</figcaption>
+                </figure>
+            </div>
 
             <div class="callout tip">
                 <div class="callout-header">
-                    <i class="fas fa-lightbulb"></i> Pro-Tip: Menu Bar Favorites
+                    <i class="fas fa-lightbulb" aria-hidden="true"></i> Pro-Tip: Menu Bar Favorites
                 </div>
                 <p>
-                    Want instant access to extra tools beyond your 8 screen slots? Open the <strong>Actions</strong> tab, click the star icon on your favorite actions, and trigger them anytime directly from the <strong>Favorites</strong> submenu in the Zones&amp;Corners menu bar icon.
+                    Need quick access to more than 8 actions? Click the star icon on any action in the <strong>Actions</strong> tab to trigger it anytime from the <strong>Favorites</strong> submenu in your menu bar.
                 </p>
             </div>
 
-            <h2 id="built-in-power-tools">5. Built-In Power Tools Beyond Simple Triggers</h2>
-            <p>
-                Unlike basic hot-corner wrappers, Zones&amp;Corners ships dedicated on-screen utilities ready to bind to any corner, edge zone, or Favorite:
-            </p>
-            <ul>
-                <li><strong>Visual App Switcher &amp; Clean RAM:</strong> Displays open apps grouped by <em>macOS Spaces/Desktops</em> in Most Recently Used order, lets you switch or close individual apps or <em>Close All</em>, shows live per-app memory usage and system memory pressure, and cleans residual background processes with <em>Clean RAM</em>.</li>
-                <li><strong>Text Extractor (Vision OCR) + History:</strong> Select any region of an image, PDF, or video on screen to copy recognized text immediately, with an optional floating <em>Recent Extractions</em> panel storing up to 20 items.</li>
-                <li><strong>Screen Color Picker + Swatch History:</strong> Sample colors from anywhere on screen in <em>Hex, RGB, RGBA, HSL, or HSLA</em>, alongside a floating <em>Recent Colors</em> history panel storing up to 20 swatches.</li>
-                <li><strong>Clipboard Text Count, Window Tiling &amp; Templates:</strong> View word, character, sentence, and paragraph counts with estimated reading/speaking times for your clipboard text, use window actions like <em>Toggle Dock and Maximize Window</em> or <em>Close Window with Confirmation</em>, or configure Templates to launch apps, open URLs/files/folders, run Apple Shortcuts, simulate hotkeys, execute AppleScripts, or run Terminal commands.</li>
-            </ul>
-
-            <h2 id="setup-tutorial">6. Step-by-Step Setup Tutorial</h2>
-            <p>Getting started with Zones&amp;Corners on your Mac takes just a few minutes:</p>
-
-            <div class="step-card">
-                <div class="step-badge">1</div>
-                <h4>Download &amp; Install the Notarized DMG</h4>
-                <p>
-                    Download <a href="../landing-assets/ZonesCorners.dmg" download>ZonesCorners.dmg</a>, open the disk image, and drag <strong>Zones&amp;Corners</strong> into your <code>/Applications</code> folder. Because the app is signed and notarized with an Apple Developer ID, no Terminal commands or Gatekeeper bypasses are needed. Launch the <strong>free demo</strong> right away—no payment info required.
-                </p>
+            <h2 id="setup-tutorial"><span class="section-num">05</span>Setup in 3 Quick Steps</h2>
+            <div class="steps-stack">
+                <div class="step-card">
+                    <div class="step-badge">1</div>
+                    <div class="step-card-body">
+                        <h4>Install the Apple-Notarized DMG</h4>
+                        <p>Download <a href="../assets/apps/Zones%26Corners.dmg" download="Zones&amp;Corners.dmg">Zones&amp;Corners.dmg</a> and drag <strong>Zones&amp;Corners</strong> to <code>/Applications</code>. Signed and notarized—launch the free demo immediately with no payment info.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">2</div>
+                    <div class="step-card-body">
+                        <h4>Grant Accessibility Permission</h4>
+                        <p>Enable Zones&amp;Corners in <em>System Settings &gt; Privacy &amp; Security &gt; Accessibility</em> (plus standard Screen Recording or Automation prompts only if you use OCR, Color Picker, or scripting).</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">3</div>
+                    <div class="step-card-body">
+                        <h4>Assign Slots &amp; Tune Feedback</h4>
+                        <p>Open <strong>Corners</strong> or <strong>Zones</strong> from the menu bar to assign actions, then customize Trigger Delay, Ignored Apps, visual overlays, and sound feedback in <strong>Settings</strong>.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="step-card">
-                <div class="step-badge">2</div>
-                <h4>Complete Onboarding &amp; Grant Accessibility Permissions</h4>
-                <p>
-                    Launch Zones&amp;Corners and walk through the brief welcome tour. When prompted, open <strong>System Settings &gt; Privacy &amp; Security &gt; Accessibility</strong> and toggle Zones&amp;Corners ON so it can detect corner/edge positions, manage windows, and simulate hotkeys (approve standard Screen Recording or Automation prompts as well if you use capture, OCR, Color Picker, or scripting actions).
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-badge">3</div>
-                <h4>Assign Your 8 Slots, Trigger Delay &amp; Feedback</h4>
-                <p>
-                    Open the <strong>Corners</strong> or <strong>Zones</strong> tab from the menu bar icon, click any slot, and choose from 76 built-in actions or templates. Then open <strong>Settings</strong> to dial in your <strong>Trigger Delay Timer</strong>, sensitivity sliders, <strong>Ignored Applications</strong>, <strong>Visual Overlay</strong> color (8 choices + duration), and <strong>Sound</strong> feedback (14 macOS system sounds).
-                </p>
-            </div>
-
-            <h2 id="feature-comparison">7. Feature Comparison: Apple Default vs. Zones&amp;Corners</h2>
-            <p>Here is how the default macOS Hot Corners experience compares to Zones&amp;Corners:</p>
-
+            <h2 id="feature-comparison"><span class="section-num">06</span>Apple Default vs. Zones&amp;Corners</h2>
             <div class="table-wrapper">
                 <table class="styled-table">
                     <thead>
                         <tr>
                             <th>Capability</th>
-                            <th>macOS Default (Apple)</th>
-                            <th>Zones&amp;Corners Utility</th>
+                            <th>macOS Default</th>
+                            <th class="col-highlight">Zones&amp;Corners</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Trigger Locations</strong></td>
+                            <td><strong>Trigger Slots</strong></td>
                             <td>4 Corners only</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 8 Zones (4 Corners + 4 Screen Edges)</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> 8 Slots (4 Corners + 4 Edges)</span></td>
                         </tr>
                         <tr>
                             <td><strong>Built-In Actions</strong></td>
-                            <td>Handful of system presets</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 76 actions across 7 categories + Favorites</span></td>
+                            <td>Handful of presets</td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> 76 Actions + Menu Bar Favorites</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Apps, Shortcuts &amp; Scripts</strong></td>
-                            <td><span class="badge-poor"><i class="fas fa-times"></i> Quick Note only</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Apps, URLs, Shortcuts, Hotkeys, AppleScript &amp; Terminal</span></td>
+                            <td><strong>Custom Automations</strong></td>
+                            <td><span class="badge-poor"><i class="fas fa-times" aria-hidden="true"></i> Quick Note only</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Apps, URLs, Shortcuts, Hotkeys &amp; Scripts</span></td>
                         </tr>
                         <tr>
                             <td><strong>Built-In Power Tools</strong></td>
-                            <td><span class="badge-poor"><i class="fas fa-times"></i> None</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Spaces App Switcher + Clean RAM, OCR, Color Picker</span></td>
+                            <td><span class="badge-poor"><i class="fas fa-times" aria-hidden="true"></i> None</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Spaces Switcher + Clean RAM, OCR, Color Picker</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Accidental Trigger Controls</strong></td>
-                            <td><span class="badge-poor">⚠️ Manual modifier hold only</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Trigger Delay Timer (0–5s), sensitivity sliders &amp; Ignored Apps</span></td>
+                            <td><strong>Misfire Safeguards</strong></td>
+                            <td><span class="badge-poor">Modifier hold only</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> 0–5s Delay, Sensitivity Sliders &amp; Ignored Apps</span></td>
                         </tr>
                         <tr>
-                            <td><strong>System Conflict Detection</strong></td>
-                            <td>N/A</td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> Detects &amp; protects occupied System Hot Corners</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Visual &amp; Sound Feedback</strong></td>
-                            <td><span class="badge-poor"><i class="fas fa-times"></i> No</span></td>
-                            <td><span class="badge-good"><i class="fas fa-check"></i> 8-color on-screen overlay &amp; 14 system sound effects</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Availability</strong></td>
-                            <td>Integrated in macOS</td>
-                            <td><span class="badge-good">Free demo (macOS 13+)</span></td>
+                            <td><strong>Feedback &amp; Conflicts</strong></td>
+                            <td><span class="badge-poor">None</span></td>
+                            <td class="col-highlight"><span class="badge-good"><i class="fas fa-check" aria-hidden="true"></i> Conflict Guard + 8-Color Overlay &amp; 14 Sounds</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="frequently-asked-questions">8. Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+            <h2 id="frequently-asked-questions"><span class="section-num">07</span>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>Can you trigger macOS Shortcuts and AppleScripts from Hot Corners?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Yes. Zones&amp;Corners includes configurable Template actions for Apple Shortcuts, AppleScripts, Terminal commands, simulated hotkeys, launching apps, and opening folders, files, or URLs.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            Yes. Zones&amp;Corners includes configurable Template actions for running Apple Shortcuts, AppleScripts, Terminal commands, simulated key combinations, launching apps, and opening folders, files, or websites.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>How do you prevent accidental Hot Corner triggers on Mac?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Set a <strong>Trigger Delay Timer</strong> (0–5.0s), dial in separate corner and edge sensitivity sliders, and add apps like games or design tools to <strong>Ignored Applications</strong> so triggers auto-pause while they're active.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            In Zones&amp;Corners Settings, you can configure a <strong>Trigger Delay Timer</strong> (from 0 to 5.0 seconds) so brief cursor brush-pasts do not activate, tune separate sensitivity sliders for corners and edge zones, and add specific apps to <strong>Ignored Applications</strong> so triggers pause whenever those apps are active.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>Will Zones&amp;Corners conflict with Apple's built-in Hot Corners?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>No. Zones&amp;Corners automatically detects existing macOS System Hot Corners, prevents accidental slot collisions in the grid, and lets you review them during onboarding.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            No. Zones&amp;Corners automatically checks for existing macOS System Hot Corners, prevents accidental conflicts in the configuration grid, and helps you review them during onboarding.
-                        </p>
-                    </div>
-                </div>
+                </details>
 
-                <div class="faq-card">
-                    <div class="faq-question">
-                        <i class="fas fa-question-circle"></i>
+                <details class="faq-details" name="faq">
+                    <summary>
                         <span>Does Zones&amp;Corners require disabling System Integrity Protection (SIP)?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>No. It runs purely in user space via standard macOS Accessibility APIs (plus Screen Recording or Automation only if you use capture, OCR, color-picker, or scripting actions)—zero SIP changes or kernel extensions.</p>
                     </div>
-                    <div class="faq-answer">
-                        <p>
-                            No. Zones&amp;Corners runs entirely in user space using standard macOS Accessibility APIs (and standard Screen Recording or Automation prompts only when you trigger capture, OCR, color-picker, or scripting actions). It requires no SIP modification or kernel extensions.
-                        </p>
-                    </div>
-                </div>
+                </details>
             </div>
 
-            <!-- Conclusion CTA -->
-            <h2>Supercharge Your Mac Workflow Today</h2>
-            <p>
-                Your screen perimeter is the fastest target on your display. By upgrading from Apple's four static hot corners to Zones&amp;Corners, you turn every corner and screen edge into an instant command center backed by practical power tools and clean safeguards.
-            </p>
-
-            <div class="app-cta-banner macos-banner" style="margin-top: 2.5rem;">
-                <div class="app-cta-content" style="width: 100%;">
-                    <h3>Try Zones&amp;Corners for macOS</h3>
-                    <p>Free demo with no payment info required. Compatible with macOS 13.0 (Ventura) or later.</p>
+            <!-- Closing CTA -->
+            <div class="app-cta-banner macos-banner">
+                <div class="app-cta-content">
+                    <h3>Supercharge Your Mac Screen Perimeter</h3>
+                    <p>Free demo with no payment info required. Native Swift &amp; SwiftUI for macOS 13.0 (Ventura) or later.</p>
                     <div class="app-cta-buttons">
                         <a href="../assets/apps/Zones%26Corners.dmg" download="Zones&amp;Corners.dmg" class="btn-primary-cta btn-download-verified">
                             <span class="btn-main-text">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                     <polyline points="7 10 12 15 17 10" />
@@ -569,30 +604,34 @@
 
         <!-- Author Bio Box -->
         <section class="author-card">
-            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar">
+            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar" width="60" height="60" loading="lazy" decoding="async">
             <div class="author-info">
                 <h4>Written by GiantTurtle Studio</h4>
                 <div class="author-title">macOS &amp; Mobile Systems Engineering</div>
                 <p class="author-bio">
-                    GiantTurtle Studio designs high-performance utilities, productivity tools, and games for macOS, Android, and Linux with a steadfast focus on native speed, privacy, and zero telemetry.
+                    GiantTurtle Studio designs native utilities, productivity tools, and games for macOS, Android, and Linux with a steadfast focus on speed, privacy, and zero telemetry.
                 </p>
             </div>
         </section>
 
         <!-- Related Guides -->
         <section class="related-posts">
-            <h3>Explore More macOS &amp; Productivity Guides</h3>
+            <h3>Explore More Guides</h3>
             <div class="related-grid">
                 <a href="how-to-see-and-switch-macos-virtual-desktops-menu-bar.html" class="related-card">
-                    <span class="article-category-badge macos" style="margin-bottom: 0.5rem;"><i class="fab fa-apple"></i> macOS Guide</span>
-                    <h4>How to See &amp; Switch macOS Virtual Desktops from the Menu Bar</h4>
-                    <p>Stop guessing which Space you're on. Put an interactive virtual desktop switcher right in your macOS menu bar for effortless multitasking.</p>
+                    <div>
+                        <span class="article-category-badge macos" style="margin-bottom: 0.5rem;"><i class="fab fa-apple" aria-hidden="true"></i> macOS Guide</span>
+                        <h4>How to See &amp; Switch macOS Virtual Desktops from the Menu Bar</h4>
+                        <p>Put an interactive Space indicator, Workspace App Presets, and RAM cleaner right in your menu bar.</p>
+                    </div>
                     <span class="related-link">Read Guide &rarr;</span>
                 </a>
                 <a href="best-clipboard-manager-scratchpad-macos.html" class="related-card">
-                    <span class="article-category-badge macos" style="margin-bottom: 0.5rem;"><i class="fab fa-apple"></i> macOS Guide</span>
-                    <h4>The Best Clipboard Manager &amp; Persistent Scratchpad for macOS</h4>
-                    <p>Never lose copied text, code snippets, or thoughts again with a privacy-first, local clipboard manager and persistent scratchpad.</p>
+                    <div>
+                        <span class="article-category-badge macos" style="margin-bottom: 0.5rem;"><i class="fab fa-apple" aria-hidden="true"></i> macOS Guide</span>
+                        <h4>The Best Clipboard Manager &amp; Persistent Scratchpad for macOS</h4>
+                        <p>Never lose copied text, code snippets, or drafts again with a 100% local clipboard manager and scratchpad.</p>
+                    </div>
                     <span class="related-link">Read Guide &rarr;</span>
                 </a>
             </div>
@@ -600,12 +639,38 @@
 
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-pill footer-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" width="28" height="22" loading="lazy" decoding="async">
+                </span>
+                <span>GiantTurtle Studio</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+            <ul class="footer-links">
+                <li><a href="../index.html">All Apps</a></li>
+                <li><a href="blog_main.html">Blog Home</a></li>
+                <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="../refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
+    <script>
+        const nav = document.getElementById('main-nav');
+        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline: scroll()');
+        const updateOnScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 24);
+            if (!supportsScrollTimeline) {
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+                document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+            }
+        };
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+        updateOnScroll();
+    </script>
 </body>
 
 </html>

@@ -43,12 +43,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0a0e14">
+    <meta name="theme-color" content="#070b10">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="blog.css">
@@ -146,17 +146,26 @@
 </head>
 
 <body>
+    <div class="reading-progress" aria-hidden="true"></div>
+    <div class="ambient-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="../index.html" class="nav-logo">
-                <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo">
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="nav-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Logo" width="38" height="30">
+                </span>
                 <span>GiantTurtle</span>
             </a>
             <ul class="nav-links">
                 <li><a href="../index.html#projects">Apps</a></li>
-                <li><a href="blog_main.html">Blog</a></li>
-                <li><a href="mailto:giant2turtle@gmail.com">Contact</a></li>
+                <li><a href="blog_main.html" class="nav-active">Blog</a></li>
+                <li>
+                    <a href="mailto:giant2turtle@gmail.com?subject=App%20Development%20Idea" class="nav-cta">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -166,309 +175,372 @@
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <a href="../index.html">Home</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <a href="blog_main.html">Blog</a>
-            <span class="separator"><i class="fas fa-chevron-right"></i></span>
+            <span class="separator"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             <span class="current">Remap Android Volume Buttons</span>
         </nav>
 
         <!-- Article Header -->
         <header class="article-header">
             <span class="article-category-badge android">
-                <i class="fab fa-android"></i> Android Customization &amp; Hardware
+                <i class="fab fa-android" aria-hidden="true"></i> Android Customization &amp; Hardware
             </span>
             <h1 class="article-title">How to Remap Volume Buttons on Android: Custom Hardware Shortcuts Without Root</h1>
             <p class="article-lead">
-                Touchscreens are great, but nothing beats the tactile reliability of a physical click. Learn how to transform your Android phone's volume rocker into a pocket media controller, flashlight switch, and physical back button without rooting your phone or using ADB terminal commands.
+                Nothing beats the tactile reliability of a physical click. Turn your volume rocker into a pocket music controller, instant flashlight switch, and physical back button—with zero root or ADB.
             </p>
 
             <div class="article-meta-bar">
                 <div class="article-meta-item">
-                    <i class="fas fa-user-edit"></i>
+                    <i class="fas fa-user-edit" aria-hidden="true"></i>
                     <span>GiantTurtle Team</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     <time datetime="2026-10-04">October 4, 2026</time>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-clock"></i>
-                    <span>8 min read</span>
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>4 min read</span>
                 </div>
                 <div class="article-meta-item">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
                     <span>Zero Root &bull; Zero ADB</span>
                 </div>
             </div>
         </header>
 
         <!-- Featured Graphic -->
-        <figure>
-            <img src="../assets/images/volume-promo2.png" alt="Remap Android volume buttons to custom actions, media controls, and navigation" class="article-featured-image">
-            <figcaption class="img-caption">Transform single taps, double taps, and long presses on your physical volume keys into instant system shortcuts.</figcaption>
+        <figure class="screenshot-figure">
+            <div class="screenshot-stage screenshot-stage--wide">
+                <img src="../assets/images/volume-promo2.png"
+                    alt="Remap Android volume buttons to custom actions, media controls, and navigation"
+                    width="512" height="250" fetchpriority="high">
+            </div>
+            <figcaption class="img-caption">Turn single presses, double presses, triple presses, and long holds on your volume keys into instant shortcuts.</figcaption>
         </figure>
 
-        <!-- Table of Contents -->
-        <nav class="toc-box" aria-label="Table of contents">
-            <div class="toc-title">
-                <i class="fas fa-list-ul"></i> Quick Navigation
+        <!-- TL;DR Summary -->
+        <aside class="tldr-box" aria-label="Article summary">
+            <div class="tldr-header">
+                <i class="fas fa-bolt" aria-hidden="true"></i> Quick Takeaway
             </div>
-            <ul class="toc-list">
-                <li><a href="#why-tactile-buttons-matter">1. Why Tactile Hardware Controls Still Beat Touchscreens</a></li>
-                <li><a href="#top-hardware-shortcuts">2. The 4 Most Useful Hardware Shortcuts You Can Create</a></li>
-                <li><a href="#accessibility-vs-root">3. How It Works: Accessibility Services vs. Risky Root &amp; ADB</a></li>
-                <li><a href="#setup-guide">4. Step-by-Step Setup Guide with Volume Buttons Extended</a></li>
-                <li><a href="#battery-and-oem-settings">5. Preventing Battery Drain &amp; Fixing Aggressive OEM Battery Killers</a></li>
-                <li><a href="#security-and-transparency">6. Security &amp; Permissions Transparency</a></li>
-                <li><a href="#frequently-asked-questions">7. Frequently Asked Questions</a></li>
+            <ul class="tldr-list">
+                <li><strong>Keep normal volume intact:</strong> Leave single-clicks for audio volume and bind double-press or long-press gestures to custom shortcuts.</li>
+                <li><strong>Safe Accessibility API:</strong> <a href="../volume-buttons-extended.html">Volume Buttons Extended</a> needs no root, no ADB, and won't break banking apps.</li>
+                <li><strong>~0% standby drain:</strong> Event-driven key listening sleeps silently until you click—just whitelist it from aggressive OEM battery killers.</li>
+            </ul>
+        </aside>
+
+        <!-- Compact Jump Nav -->
+        <nav class="toc-pills" aria-label="Table of contents">
+            <div class="toc-pills-label">
+                <i class="fas fa-compass" aria-hidden="true"></i> Jump to section
+            </div>
+            <ul class="toc-pills-list">
+                <li><a href="#why-tactile-buttons-matter">Why Physical Keys Win</a></li>
+                <li><a href="#top-hardware-shortcuts">4 Best Shortcuts</a></li>
+                <li><a href="#setup-guide">3-Step Setup</a></li>
+                <li><a href="#reliability-and-privacy">Battery &amp; Privacy</a></li>
+                <li><a href="#frequently-asked-questions">FAQ</a></li>
             </ul>
         </nav>
 
         <!-- Article Content -->
         <article class="article-content">
 
-            <h2 id="why-tactile-buttons-matter">1. Why Tactile Hardware Controls Still Beat Touchscreens</h2>
+            <h2 id="why-tactile-buttons-matter"><span class="section-num">01</span>Why Tactile Controls Still Beat Touchscreens</h2>
             <p>
-                As mobile phone manufacturers continually strip away physical hardware—headphone jacks, notification LEDs, home buttons, and dedicated camera shutters—we have been forced to rely almost entirely on glass touch displays.
-            </p>
-            <p>
-                While flexible, touchscreens have fundamental ergonomic limitations:
-            </p>
-            <ul>
-                <li><strong>No Tactile Feedback:</strong> You cannot feel where a software button is without looking directly at the screen. You cannot skip a song or check a notification while keeping your eyes on the road, trail, or gym weights.</li>
-                <li><strong>One-Handed Ergonomics:</strong> As screens have ballooned to 6.7 inches and larger, reaching the top of the display to pull down notifications or reaching the bottom navigation bar causes thumb strain. Physical volume buttons sit naturally right where your index finger or thumb rests.</li>
-                <li><strong>Glove &amp; Wet Weather Usability:</strong> Capacitive touchscreens glitch in rainy conditions or when wearing winter or motorcycle gloves. Physical hardware keys register every single click flawlessly.</li>
-            </ul>
-
-            <h2 id="top-hardware-shortcuts">2. The 4 Most Useful Hardware Shortcuts You Can Create</h2>
-            <p>
-                By distinguishing between single clicks, double clicks, and long presses on the Volume Up and Down rockers, you can configure actions that feel like built-in flagship features:
+                Touchscreens are flexible, but physical side keys still win whenever looking at or stretching across a 6.7-inch display isn't practical:
             </p>
 
-            <div class="step-card">
-                <div class="step-badge">1</div>
-                <h4>Pocket Music Control (Screen-Off Skipping)</h4>
-                <p>
-                    When listening to Spotify, YouTube Music, Apple Music, or audiobooks while walking, commuting, or running, pulling out your phone to unlock it and skip a track is a hassle.
-                </p>
-                <p>
-                    Configure a <strong>Long Press on Volume Up</strong> to skip to the next track, and a <strong>Long Press on Volume Down</strong> to restart or play the previous track. Your phone stays tucked safely in your pocket or running belt.
-                </p>
+            <div class="card-grid card-grid--3">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-eye-slash" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Eyes-Free Control</h3>
+                    <p>Feel the rocker in your pocket to skip tracks or toggle the flashlight while walking, running, or commuting.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-hand-pointer" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>One-Handed Reach</h3>
+                    <p>Volume keys sit right under your finger—no awkward thumb gymnastics to pull down notifications or hit Back.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-cloud-rain" aria-hidden="true"></i></span>
+                    </div>
+                    <h3>Gloves &amp; Rain</h3>
+                    <p>Capacitive screens glitch in wet weather or winter gloves; mechanical buttons register every click cleanly.</p>
+                </div>
             </div>
 
-            <div class="step-card">
-                <div class="step-badge">2</div>
-                <h4>Instant Tactical Flashlight</h4>
-                <p>
-                    Navigating a dark hallway or searching for dropped keys shouldn't require turning on your screen, blinding your adjusted night vision, and swiping open the Quick Settings tile.
-                </p>
-                <p>
-                    Assign a <strong>Double Click on Volume Up</strong> to toggle the camera LED flashlight on and off instantly—even when the device is locked.
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-badge">3</div>
-                <h4>Physical "Back" and "Home" Navigation</h4>
-                <p>
-                    If you struggle with edge-swipe back gestures or your bottom touch digitizer is unresponsive, mapping a <strong>Double Click on Volume Down</strong> to trigger the system <code>Back</code> action creates an effortless physical navigation button.
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-badge">4</div>
-                <h4>One-Handed Notification Shade Drop</h4>
-                <p>
-                    Map a rapid double-tap or simultaneous button press to expand your Android notification shade and Quick Settings without reaching your thumb to the very top bezel.
-                </p>
-            </div>
-
-            <h2 id="accessibility-vs-root">3. How It Works: Accessibility Services vs. Risky Root &amp; ADB</h2>
+            <h2 id="top-hardware-shortcuts"><span class="section-num">02</span>The 4 Most Useful Hardware Shortcuts</h2>
             <p>
-                Historically, intercepting hardware button events on Android required rooting your device or running complex ADB commands from a desktop computer via USB cable. Rooting introduces significant vulnerabilities: it trips SafetyNet/Play Integrity, breaks banking apps, blocks Netflix HD streaming, and risks bricking your phone during system updates.
-            </p>
-            <p>
-                Modern Android handles this cleanly through the <strong>Android Accessibility API</strong>:
-            </p>
-            <ul>
-                <li>When granted permission, the app registers a low-level listener for <code>KeyEvent.KEYCODE_VOLUME_UP</code> and <code>KeyEvent.KEYCODE_VOLUME_DOWN</code>.</li>
-                <li>When you press a volume key, the app checks if you performed a single tap, double tap, or long press.</li>
-                <li>If a custom trigger is detected, the custom action is executed immediately; if it's a regular single press, the key event is passed through to the system audio engine so your volume adjusts normally.</li>
-                <li><strong>No System Partitions are Modified:</strong> Your device remains 100% stock, fully secure, and compatible with banking applications.</li>
-            </ul>
-
-            <h2 id="setup-guide">4. Step-by-Step Setup Guide with Volume Buttons Extended</h2>
-            <p>
-                The cleanest, most responsive utility for hardware key mapping is <strong><a href="../volume-buttons-extended.html">Volume Buttons Extended</a></strong> by GiantTurtle Studio.
+                By separating single clicks from double clicks, triple clicks, and long holds, your volume rocker unlocks flagship-grade shortcuts:
             </p>
 
-            <div class="step-card">
-                <div class="step-badge">1</div>
-                <h4>Install the App from Google Play</h4>
-                <p>
-                    Download and launch <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture" target="_blank" rel="noopener">Volume Buttons Extended</a>.
-                </p>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-music" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">Long Press</span>
+                    </div>
+                    <h3>Pocket Music Skipping</h3>
+                    <p>Hold <strong>Volume Up</strong> for next track and <strong>Volume Down</strong> for previous track on Spotify, YouTube Music, or podcasts—even with the screen off.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-lightbulb" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">Double Click</span>
+                    </div>
+                    <h3>Instant Tactical Flashlight</h3>
+                    <p>Double-click <strong>Volume Up</strong> to toggle the camera LED immediately in dark hallways—no blinding lock screen required.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+                        <span class="card-tag">Double Click</span>
+                    </div>
+                    <h3>Physical Back &amp; Recents</h3>
+                    <p>Bind <strong>Volume Down</strong> to trigger system <code>Back</code>, <code>Home</code>, or <code>Recents</code>—ideal for one-handed use or broken touch zones.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+                        <span class="card-tag">Custom</span>
+                    </div>
+                    <h3>Notification Shade &amp; Apps</h3>
+                    <p>Drop the notification panel or launch Camera, Voice Recorder, or Calculator in one click without stretching to the top bezel.</p>
+                </div>
             </div>
 
-            <div class="step-card">
-                <div class="step-badge">2</div>
-                <h4>Enable Accessibility Service</h4>
-                <p>
-                    Tap <strong>Enable Accessibility Service</strong> on the welcome screen. In your Android Settings, locate <strong>Volume Buttons Extended</strong> under Downloaded Apps, and toggle the switch to <strong>On</strong>. Confirm the system security prompt.
-                </p>
+            <h2 id="setup-guide"><span class="section-num">03</span>Setup in 3 Steps (No Root or ADB)</h2>
+            <p>
+                Unlike risky root mods that trip Play Integrity and break banking apps, <a href="../volume-buttons-extended.html"><strong>Volume Buttons Extended</strong></a> uses Android's official <strong>Accessibility API</strong> to listen for <code>KEYCODE_VOLUME_UP</code> and <code>KEYCODE_VOLUME_DOWN</code> cleanly in user space.
+            </p>
+
+            <div class="steps-stack">
+                <div class="step-card">
+                    <div class="step-badge">1</div>
+                    <div class="step-card-body">
+                        <h4>Install Volume Buttons Extended</h4>
+                        <p>Download <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture" target="_blank" rel="noopener">Volume Buttons Extended from Google Play</a> and open it.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">2</div>
+                    <div class="step-card-body">
+                        <h4>Enable the Accessibility Service</h4>
+                        <p>Tap <strong>Enable Accessibility Service</strong>, locate <strong>Volume Buttons Extended</strong> under Downloaded Apps in Android Settings, and toggle it <strong>On</strong>.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-badge">3</div>
+                    <div class="step-card-body">
+                        <h4>Assign Your Button Triggers</h4>
+                        <p>Pick <strong>Volume Up</strong> or <strong>Volume Down</strong>, choose Single, Double, Triple, or Long Press, and assign media controls, flashlight, navigation, or direct app launches. Optionally enable <em>Pause when media is playing</em>.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="step-card">
-                <div class="step-badge">3</div>
-                <h4>Map Your Buttons</h4>
-                <p>
-                    Tap on <strong>Volume Up</strong> or <strong>Volume Down</strong>, select your trigger (Single Click, Double Click, or Long Press), and assign your desired action:
-                </p>
-                <ul>
-                    <li>Media controls (Next Track, Previous Track, Play/Pause)</li>
-                    <li>Flashlight Toggle</li>
-                    <li>Navigation (Back, Home, Recent Apps)</li>
-                    <li>Direct App Launch (Launch Camera, Voice Recorder, or Calculator)</li>
-                </ul>
+            <!-- 2-Up Dark & Light UI Showcase -->
+            <div class="screenshot-grid screenshot-grid--phones">
+                <figure class="screenshot-card">
+                    <img src="../assets/images/volume-promo3.png" alt="Volume Buttons Extended dark mode interface showing permissions and button mapping" width="230" height="512" loading="lazy" decoding="async">
+                    <figcaption>Dark Mode: live permission status and quick trigger mapping.</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="../assets/images/volume-promo4.png" alt="Volume Buttons Extended light mode interface with single, double, and triple press actions" width="230" height="512" loading="lazy" decoding="async">
+                    <figcaption>Light Mode: separate controls for Volume Up &amp; Down presses.</figcaption>
+                </figure>
             </div>
 
-            <!-- High Converting App CTA Banner -->
-            <div class="app-cta-banner">
-                <img src="../assets/images/volume-promo2.png" alt="Volume Buttons Extended App" class="app-cta-icon" style="background: rgba(0,0,0,0.5);">
+            <!-- Mid-Article Compact CTA -->
+            <div class="app-cta-banner app-cta-banner--compact">
+                <img src="../assets/images/volume-promo.png" alt="Volume Buttons Extended Icon" class="app-cta-icon" width="72" height="72" loading="lazy" decoding="async">
                 <div class="app-cta-content">
                     <h3>Get Volume Buttons Extended for Android</h3>
-                    <p>
-                        Hardware buttons, infinite possibilities. Remap your volume rocker to skip songs with screen off, toggle flashlight, drop notifications, and navigate back—no root or ADB required.
-                    </p>
+                    <p>Skip songs with screen off, toggle your flashlight, and add physical navigation buttons—zero root or ADB.</p>
                     <div class="app-cta-buttons">
-                        <a href="../volume-buttons-extended.html" class="btn-primary-cta">
-                            <i class="fas fa-sliders-h"></i> Explore App Details
+                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture" class="btn-primary-cta" target="_blank" rel="noopener">
+                            <i class="fab fa-google-play" aria-hidden="true"></i> Install from Google Play
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture" class="btn-secondary-cta" target="_blank" rel="noopener">
-                            <i class="fab fa-google-play"></i> Install from Google Play
+                        <a href="../volume-buttons-extended.html" class="btn-secondary-cta">
+                            Explore App Details &rarr;
                         </a>
                     </div>
                 </div>
             </div>
 
-            <h2 id="battery-and-oem-settings">5. Preventing Battery Drain &amp; Fixing Aggressive OEM Battery Killers</h2>
-            <p>
-                Android manufacturers like Samsung (One UI), Xiaomi (HyperOS / MIUI), and OnePlus (OxygenOS) include aggressive background app killers designed to prolong battery life. Occasionally, these processes may mistakenly sleep your accessibility service after several hours of inactivity.
-            </p>
+            <h2 id="reliability-and-privacy"><span class="section-num">04</span>Reliability, Battery &amp; Privacy</h2>
 
             <div class="callout tip">
                 <div class="callout-header">
-                    <i class="fas fa-check-circle"></i> Recommended Whitelist Settings
+                    <i class="fas fa-check-circle" aria-hidden="true"></i> Prevent OEM Battery Killers (Samsung, Xiaomi, OnePlus)
                 </div>
-                <p>
-                    To guarantee instant button response 24/7 without delays:
-                </p>
+                <p>Aggressive background killers can put Accessibility services to sleep after hours of idle time. Keep button triggers instant 24/7 with one quick tweak:</p>
                 <ol>
-                    <li>Go to <strong>Settings &gt; Apps &gt; Volume Buttons Extended &gt; Battery</strong> and set it to <strong>"Unrestricted"</strong>.</li>
-                    <li>On Xiaomi / HyperOS devices: Enable <strong>Autostart</strong> in app info and lock the app in the recent apps view.</li>
-                    <li>On Samsung devices: Add Volume Buttons Extended to <strong>"Never sleeping apps"</strong> under Device Care.</li>
+                    <li><strong>All Android:</strong> Open <em>Settings &gt; Apps &gt; Volume Buttons Extended &gt; Battery</em> and choose <strong>Unrestricted</strong>.</li>
+                    <li><strong>Xiaomi / HyperOS:</strong> Enable <strong>Autostart</strong> in App Info and lock the app in Recents.</li>
+                    <li><strong>Samsung One UI:</strong> Add it to <strong>Never sleeping apps</strong> inside Device Care.</li>
                 </ol>
             </div>
 
-            <p>
-                Because Volume Buttons Extended is built on an event-driven loop rather than polling sensors, keeping it running draws <strong>virtually 0% battery</strong> while in standby.
-            </p>
-
-            <h2 id="security-and-transparency">6. Security &amp; Permissions Transparency</h2>
-            <p>
-                When enabling an accessibility service, Android displays a standard warning stating that the service can view screen interactions. GiantTurtle Studio designs all applications under strict zero-compromise privacy guidelines:
-            </p>
-            <ul>
-                <li><strong>No Cloud Connections:</strong> The application does not collect, log, or transmit your device usage to any analytics server.</li>
-                <li><strong>Restricted Scope:</strong> Only physical key presses are processed to execute your configured shortcuts. Your on-screen keystrokes, personal chats, and passwords remain entirely untouched.</li>
-            </ul>
-
-            <h2 id="frequently-asked-questions">7. Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Will my volume rocker still adjust volume when I press it?</span>
-                    <i class="fas fa-chevron-down faq-chevron"></i>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-battery-full" aria-hidden="true"></i></span>
+                        <span class="card-tag card-tag--accent">~0% Drain</span>
+                    </div>
+                    <h3>Event-Driven Architecture</h3>
+                    <p>No continuous sensor polling—the service stays asleep until a physical key interrupt fires, using virtually zero standby battery.</p>
                 </div>
-                <div class="faq-answer">
-                    <p>
-                        Yes. By default, single presses pass straight through to the Android sound manager so your volume adjusts as normal. Custom actions are typically bound to double-tap or long-press gestures, giving you shortcuts without compromising standard volume controls.
-                    </p>
+                <div class="info-card">
+                    <div class="info-card-top">
+                        <span class="info-card-icon"><i class="fas fa-user-shield" aria-hidden="true"></i></span>
+                        <span class="card-tag">100% Local</span>
+                    </div>
+                    <h3>Strict Permissions Scope</h3>
+                    <p>Zero cloud analytics or telemetry. Only physical hardware key events are handled—your chats, passwords, and on-screen taps stay untouched.</p>
                 </div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Does screen-off media control work with Spotify, YouTube Music, and Podcasts?</span>
-                    <i class="fas fa-chevron-down faq-chevron"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>
-                        Yes. Volume Buttons Extended dispatches standard Android media intent events (<code>KEYCODE_MEDIA_NEXT</code> and <code>KEYCODE_MEDIA_PREVIOUS</code>), making it compatible with any audio player supporting standard Android media session controls.
-                    </p>
-                </div>
+            <h2 id="frequently-asked-questions"><span class="section-num">05</span>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Do I need root or ADB to remap volume buttons on Android?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>No. Android's Accessibility Service API handles physical key events safely without modifying system partitions, rooting, or connecting to a PC.</p>
+                    </div>
+                </details>
+
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Will my volume rocker still adjust audio volume normally?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Yes. Leave single presses mapped to default volume behavior and bind double-press, triple-press, or long-press actions for custom shortcuts.</p>
+                    </div>
+                </details>
+
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Does screen-off media skipping work with Spotify and YouTube Music?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Yes. Volume Buttons Extended dispatches standard Android media intents (<code>KEYCODE_MEDIA_NEXT</code> and <code>KEYCODE_MEDIA_PREVIOUS</code>), supporting Spotify, YouTube Music, Apple Music, and podcast players.</p>
+                    </div>
+                </details>
+
+                <details class="faq-details" name="faq">
+                    <summary>
+                        <span>Does remapping drain battery—or help if my power button is broken?</span>
+                        <i class="fas fa-chevron-down faq-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-details-body">
+                        <p>Standby battery impact is virtually 0% thanks to event-driven key listening. It's also a lifesaver for phones with broken power buttons—you can bind a volume gesture to lock the screen or open the power menu.</p>
+                    </div>
+                </details>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>What happens if my phone's power button is broken?</span>
-                    <i class="fas fa-chevron-down faq-chevron"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>
-                        Volume Buttons Extended is a popular lifesaver for devices with broken physical buttons. You can map double-clicking a volume key to lock the screen, launch apps, or access system power menus, extending the life of your hardware.
-                    </p>
+            <!-- Closing CTA -->
+            <div class="app-cta-banner">
+                <img src="../assets/images/volume-promo.png" alt="Volume Buttons Extended Icon" class="app-cta-icon" width="72" height="72" loading="lazy" decoding="async">
+                <div class="app-cta-content">
+                    <h3>Upgrade Your Phone's Hardware Keys</h3>
+                    <p>Put your volume rocker to work with tactile media controls, flashlight toggles, and one-handed navigation.</p>
+                    <div class="app-cta-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.giantturtle.advancedgesture" class="btn-primary-cta" target="_blank" rel="noopener">
+                            <i class="fab fa-google-play" aria-hidden="true"></i> Get on Google Play
+                        </a>
+                        <a href="../volume-buttons-extended.html" class="btn-secondary-cta">
+                            View App Page
+                        </a>
+                    </div>
                 </div>
             </div>
 
         </article>
 
-        <!-- Related Posts Section -->
-        <section class="related-posts-section">
-            <h3 class="related-title">Continue Reading</h3>
-            <div class="related-posts-grid">
-                <div class="related-card">
-                    <a href="how-to-stop-android-apps-running-in-background-without-adb.html">
-                        <img src="../assets/images/app-stopper-pomo.png" alt="Stop Background Apps Android" class="related-card-img">
-                        <div class="related-card-body">
-                            <span class="article-category-badge android">Android Optimization</span>
-                            <h4>How to Stop Android Apps from Running in the Background (Without ADB)</h4>
-                            <p>Rogue background bloatware secretly chews through RAM and battery. Learn how to stop them safely.</p>
-                        </div>
-                    </a>
-                </div>
+        <!-- Author Bio Box -->
+        <section class="author-card">
+            <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" class="author-avatar" width="60" height="60" loading="lazy" decoding="async">
+            <div class="author-info">
+                <h4>Written by GiantTurtle Studio</h4>
+                <div class="author-title">Android Systems &amp; Utility Engineering</div>
+                <p class="author-bio">
+                    GiantTurtle Studio builds lightweight mobile and desktop utilities that unlock hardware ergonomics with zero root, zero bloat, and zero tracking.
+                </p>
+            </div>
+        </section>
 
-                <div class="related-card">
-                    <a href="how-to-turn-android-phone-into-desktop-workstation.html">
-                        <img src="../assets/images/dextop-promo2.png" alt="Android Desktop Workstation" class="related-card-img">
-                        <div class="related-card-body">
-                            <span class="article-category-badge desktop">Productivity</span>
-                            <h4>How to Turn Any Android Phone into a Desktop Workstation (DeX Alternative)</h4>
-                            <p>Transform your mobile device into a full landscape workstation with dedicated desktop shortcuts.</p>
-                        </div>
-                    </a>
-                </div>
+        <!-- Related Guides -->
+        <section class="related-posts">
+            <h3>Explore More Guides</h3>
+            <div class="related-grid">
+                <a href="how-to-stop-android-apps-running-in-background-without-adb.html" class="related-card">
+                    <div>
+                        <span class="article-category-badge android" style="margin-bottom: 0.5rem;"><i class="fab fa-android" aria-hidden="true"></i> Android Optimization</span>
+                        <h4>How to Stop Android Apps from Running in the Background (Without ADB)</h4>
+                        <p>Reclaim RAM and battery life by safely stopping rogue background bloatware without developer commands.</p>
+                    </div>
+                    <span class="related-link">Read Guide &rarr;</span>
+                </a>
+                <a href="how-to-turn-android-phone-into-desktop-workstation.html" class="related-card">
+                    <div>
+                        <span class="article-category-badge desktop" style="margin-bottom: 0.5rem;"><i class="fas fa-desktop" aria-hidden="true"></i> Productivity</span>
+                        <h4>How to Turn Any Android Phone into a Desktop Workstation (DeX Alternative)</h4>
+                        <p>Transform your phone or tablet into a full landscape workstation with dedicated desktop shortcuts.</p>
+                    </div>
+                    <span class="related-link">Read Guide &rarr;</span>
+                </a>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 GiantTurtle Studio. Built with passion for the mobile and desktop ecosystem. &bull; <a href="blog_main.html" style="color: var(--primary); text-decoration: none;">Blog Home</a></p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-pill footer-logo-pill">
+                    <img src="../assets/images/giantturtle-logo.jpg" alt="GiantTurtle Studio" width="28" height="22" loading="lazy" decoding="async">
+                </span>
+                <span>GiantTurtle Studio</span>
+            </div>
+            <p class="footer-copy">&copy; 2026 GiantTurtle Studio. Crafted for productivity and privacy.</p>
+            <ul class="footer-links">
+                <li><a href="../index.html">All Apps</a></li>
+                <li><a href="blog_main.html">Blog Home</a></li>
+                <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="../refund-policy.html">Refund Policy</a></li>
+            </ul>
         </div>
     </footer>
 
-    <!-- Interactive FAQ Accordion Script -->
     <script>
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-            });
-        });
+        const nav = document.getElementById('main-nav');
+        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline: scroll()');
+        const updateOnScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 24);
+            if (!supportsScrollTimeline) {
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+                document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+            }
+        };
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+        updateOnScroll();
     </script>
-
 </body>
 
 </html>
